@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import laz.plasmine.registry.PMRegistry;
+import laz.plasmine.registry.render.TileEntityRender;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemGroup;
@@ -39,36 +40,29 @@ public class Plasmine {
 
 		MinecraftForge.EVENT_BUS.register(this);
 		PMRegistry.init(bus);
-		
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {
-		LOGGER.info("HELLO FROM PREINIT");
-		LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
 	}
 
 	private void doClientStuff(final FMLClientSetupEvent event) {
-		LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
+		TileEntityRender.init();
 	}
 
 	private void enqueueIMC(final InterModEnqueueEvent event) {
 	}
 
 	private void processIMC(final InterModProcessEvent event) {
-		LOGGER.info("Got IMC {}",
-				event.getIMCStream().map(m -> m.getMessageSupplier().get()).collect(Collectors.toList()));
 	}
 
 	@SubscribeEvent
 	public void onServerStarting(FMLServerStartingEvent event) {
-		LOGGER.info("HELLO from server starting");
 	}
 
 	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 	public static class RegistryEvents {
 		@SubscribeEvent
 		public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
-			LOGGER.info("HELLO from Register Block");
 		}
 	}
 }

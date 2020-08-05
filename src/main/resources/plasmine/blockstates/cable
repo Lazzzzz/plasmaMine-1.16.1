@@ -1,0 +1,14 @@
+{
+	"variants": 
+	{
+		"north=false": 
+		{
+			"model": "plasmine:block/cable_all"
+		},
+
+		"south=true": 
+		{
+			"model": "plasmine:block/cable_one"
+		}
+	}
+}

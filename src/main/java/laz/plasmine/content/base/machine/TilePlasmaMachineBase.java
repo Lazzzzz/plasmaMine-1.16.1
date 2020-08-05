@@ -1,23 +1,23 @@
-package laz.plasmine.content.base;
-
-import laz.plasmine.api.PlasmaHelper;
+package laz.plasmine.content.base.machine;
 
 import static laz.plasmine.util.direction.DirectionUtils.getPosDirection;
+
+import laz.plasmine.api.PlasmaHelper;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.renderer.texture.ITickable;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 
-public class TilePlasmaMachineBase extends TileEntity implements ITickable {
+public class TilePlasmaMachineBase extends TileEntity implements ITickableTileEntity {
 
 	private PlasmaHelper plasma;
 	private int timeTransfere;
 	private boolean canTransfer;
 
-	private BlockPos[] connected = new BlockPos[6];
+	protected BlockPos[] connected = new BlockPos[6];
 
 	public TilePlasmaMachineBase(TileEntityType<?> tileEntityTypeIn, int maxCapacity, int rate, float efficiency,
 			int time, boolean transfer) {
@@ -36,8 +36,8 @@ public class TilePlasmaMachineBase extends TileEntity implements ITickable {
 			}
 		}
 	}
-
-	private void getConnectedMachine() {
+	
+	public void getConnectedMachine() {
 		for (int i = 0; i < 6; i++) {
 			connected[i] = null;
 			BlockPos aroundPos = getPosDirection(pos, Direction.byIndex(i));

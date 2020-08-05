@@ -60,10 +60,10 @@ public class PlasmaHelper {
 	}
 	
 	public void displayInfo(PlayerEntity player) {
-		player.sendMessage(new StringTextComponent("- Max Capacity : " + maxCapacity), player.getUniqueID());
-		player.sendMessage(new StringTextComponent("- TransferRate : " + transferRate), player.getUniqueID());
-		player.sendMessage(new StringTextComponent("- Capacity : " 	   + capacity), player.getUniqueID());
-		player.sendMessage(new StringTextComponent("- Efficienct : " + efficiency), player.getUniqueID());
+		player.sendMessage(new StringTextComponent("- Max Capacity : \u00A74" + maxCapacity), player.getUniqueID());
+		player.sendMessage(new StringTextComponent("- TransferRate : \u00A7c" + transferRate), player.getUniqueID());
+		player.sendMessage(new StringTextComponent("- Capacity : \u00A76" 	   + capacity), player.getUniqueID());
+		player.sendMessage(new StringTextComponent("- Efficienct : \u00A7e" + efficiency), player.getUniqueID());
 	}
 	
 }
