@@ -6,14 +6,18 @@ import laz.plasmine.registry.BlockRegistryObjectGroup;
 import laz.plasmine.registry.PMRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
+
+import static laz.plasmine.Plasmine.ITEM_GROUP;
+import static laz.plasmine.registry.PMRegistry.*;
 
 public class PMTilesInit {
 	
-	public static BlockRegistryObjectGroup<Block, BlockItem, TileCableTest> CABLE;//
+	public static BlockRegistryObjectGroup<CableTest, BlockItem, TileCableTest> CABLE;
 	
 	public static void init() {
-		CABLE = PMRegistry.addTileEntity("cable", CableTest::new, TileCableTest::new);
+		CABLE = new BlockRegistryObjectGroup<>("cable", CableTest::new, (block)-> new BlockItem(block,new Item.Properties().group(ITEM_GROUP)),TileCableTest::new).register(BLOCKS,ITEMS,TILE_ENTITIES);
 		
 	}
 

@@ -7,6 +7,6 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 public class TileEntityRender {
 	
 	public static void init() {
-		//ClientRegistry.bindTileEntityRenderer(PMTilesInit.CABLE.getTileEntityType(), CableRender::new);
+		ClientRegistry.bindTileEntityRenderer(PMTilesInit.CABLE.getTileEntityType(), CableRender::new);
 	}
 }
