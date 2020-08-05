@@ -63,7 +63,7 @@ public class PMRegistry {
 		PMBlocksInit.init();
 		PMItemsInit.init();
 		PMTilesInit.init();
-		//register(eventBus);
+		register(eventBus);
 
 	}
 
