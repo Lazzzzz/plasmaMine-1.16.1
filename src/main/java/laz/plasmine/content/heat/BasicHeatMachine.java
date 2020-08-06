@@ -1,19 +1,19 @@
-package laz.plasmine.content.generator;
+package laz.plasmine.content.heat;
 
-import laz.plasmine.content.base.generator.BlockGeneratorBase;
+import laz.plasmine.content.base.heat.BlockHeatMachineBase;
 import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockReader;
 
-public class BasicGenerator extends BlockGeneratorBase {
+public class BasicHeatMachine extends BlockHeatMachineBase{
 
-	public BasicGenerator() {
+	public BasicHeatMachine() {
 		super();
 	}
 	
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return new TileBasicGenerator();
+		return new TileBasicHeatMachine();
 	}
 	
 }

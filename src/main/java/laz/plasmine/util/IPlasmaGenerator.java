@@ -12,13 +12,14 @@ import net.minecraft.world.World;
 
 public interface IPlasmaGenerator {
 	
-	PlasmaHelper getHelper();
+	PlasmaHelper getPlasmaHelper();
 	
-	default void sendEnergy(World world, BlockPos pos, int amount) {
+	default int sendEnergy(World world, BlockPos pos, int amount) {
+		int rest = amount;
 		for (int i = 0; i < 6; i++) {
 			TileEntity tile = world.getTileEntity(DirectionUtils.getPosDirection(pos, Direction.byIndex(i)));
-			if (tile != null && tile instanceof ICable)
-				((TileCableBase) tile).getCableAround(Direction.byIndex(i), amount, 0, new ArrayList<BlockPos>());
+			if (tile != null && tile instanceof ICable) rest = ((TileCableBase) tile).getCableAround(Direction.byIndex(i), amount, 0, new ArrayList<BlockPos>());
 		}
+		return amount - rest;
 	}
 }

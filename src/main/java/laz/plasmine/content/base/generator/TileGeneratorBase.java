@@ -9,16 +9,14 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 
-public class TileGeneratorBase extends TileEntity implements IConnection, ITickableTileEntity, IPlasmaGenerator{
+public class TileGeneratorBase extends TileEntity implements IConnection, ITickableTileEntity, IPlasmaGenerator {
 
 	protected PlasmaHelper plasmaHelper;
-	protected boolean [] connected = new boolean[6];
-	protected int send;
-	
+	protected boolean[] connected = new boolean[6];
+
 	public TileGeneratorBase(TileEntityType<?> tileEntityTypeIn, int maxCapacity, int maxSend) {
 		super(tileEntityTypeIn);
-		plasmaHelper = new PlasmaHelper(maxCapacity);
-		send = maxSend;
+		plasmaHelper = new PlasmaHelper(maxCapacity, maxSend);
 	}
 
 	@Override
@@ -26,12 +24,12 @@ public class TileGeneratorBase extends TileEntity implements IConnection, ITicka
 		if (!world.isRemote) {
 			if (world.getDayTime() % 40 == 0)
 				connectedTo(world, pos, connected);
-			sendEnergy(world, pos, send);
+			plasmaHelper.removePlasma(sendEnergy(world, pos, plasmaHelper.sendPlasma()));
 		}
 	}
 
 	@Override
-	public PlasmaHelper getHelper() {
+	public PlasmaHelper getPlasmaHelper() {
 		return plasmaHelper;
 	}
 
@@ -46,5 +44,5 @@ public class TileGeneratorBase extends TileEntity implements IConnection, ITicka
 		plasmaHelper.read(p_230337_2_);
 		super.func_230337_a_(p_230337_1_, p_230337_2_);
 	}
-	
+
 }

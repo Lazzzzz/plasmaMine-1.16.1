@@ -4,7 +4,7 @@ import laz.plasmine.api.PlasmaHelper;
 
 public interface IPlasmaMachine {
 	
-	PlasmaHelper getHelper();
+	PlasmaHelper getPlasmaHelper();
 	
 	int receiveEnergy(int amount);
 	

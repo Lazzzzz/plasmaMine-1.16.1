@@ -3,7 +3,7 @@ package laz.plasmine.content.base.cable;
 import java.util.List;
 
 import laz.plasmine.Constante;
-import laz.plasmine.content.base.machine.TilePlasmaMachineBase;
+import laz.plasmine.content.base.plasma.TilePlasmaMachineBase;
 import laz.plasmine.util.ICable;
 import laz.plasmine.util.IConnection;
 import laz.plasmine.util.direction.DirectionUtils;

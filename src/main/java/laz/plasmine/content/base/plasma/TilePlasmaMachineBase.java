@@ -1,4 +1,4 @@
-package laz.plasmine.content.base.machine;
+package laz.plasmine.content.base.plasma;
 
 import laz.plasmine.api.PlasmaHelper;
 import laz.plasmine.util.IConnection;
@@ -20,10 +20,12 @@ public class TilePlasmaMachineBase extends TileEntity implements ITickableTileEn
 	}
 
 	@Override
-	public void tick() {}
+	public void tick() {
+		
+	}
 
 	
-	public PlasmaHelper getHelper() {
+	public PlasmaHelper getPlasmaHelper() {
 		return plasmaHelper;
 	}
 

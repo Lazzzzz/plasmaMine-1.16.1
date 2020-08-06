@@ -1,15 +1,14 @@
 package laz.plasmine.content.base.cable;
 
+import static laz.plasmine.Constante.MACHINE_PARTICLES;
+
 import java.util.Random;
 
-import laz.plasmine.content.base.machine.PlasmaMachineBlockBase;
+import laz.plasmine.content.base.plasma.BlockPlasmaMachineBase;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SixWayBlock;
 import net.minecraft.entity.Entity;
-import net.minecraft.particles.BasicParticleType;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.DamageSource;
@@ -20,7 +19,7 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-public class CableBase extends PlasmaMachineBlockBase {
+public class BlockCableBase extends BlockPlasmaMachineBase {
 
 	public static final BooleanProperty NORTH = SixWayBlock.NORTH;
 	public static final BooleanProperty EAST = SixWayBlock.EAST;
@@ -31,7 +30,7 @@ public class CableBase extends PlasmaMachineBlockBase {
 
 	VoxelShape SHAPE = VoxelShapes.create(0.125, 0.125f, 0.125f, 0.875f, 0.875f, 0.875f);
 
-	public CableBase() {
+	public BlockCableBase() {
 		super();
 
 		this.setDefaultState(this.stateContainer.getBaseState().with(NORTH, Boolean.valueOf(false))
@@ -48,32 +47,31 @@ public class CableBase extends PlasmaMachineBlockBase {
 
 	public void spawnParticles(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
 		
-		BasicParticleType particle = ParticleTypes.CLOUD;
 		int proba = 50;
 		
 		if (stateIn.get(UP))
 			if (rand.nextInt(proba) == 0)
-				worldIn.addParticle(particle, pos.getX() + rand.nextFloat(), pos.getY() + 1,
+				worldIn.addParticle(MACHINE_PARTICLES, pos.getX() + rand.nextFloat(), pos.getY() + 1,
 						pos.getZ() + rand.nextFloat(), 0, 0, 0);
 		if (stateIn.get(DOWN))
 			if (rand.nextInt(proba) == 0)
-				worldIn.addParticle(particle, pos.getX() + rand.nextFloat(), pos.getY(),
+				worldIn.addParticle(MACHINE_PARTICLES, pos.getX() + rand.nextFloat(), pos.getY(),
 						pos.getZ() + rand.nextFloat(), 0, 0, 0);
 		if (stateIn.get(NORTH))
 			if (rand.nextInt(proba) == 0)
-				worldIn.addParticle(particle, pos.getX() + rand.nextFloat(), pos.getY() + rand.nextFloat(),
+				worldIn.addParticle(MACHINE_PARTICLES, pos.getX() + rand.nextFloat(), pos.getY() + rand.nextFloat(),
 						pos.getZ(), 0, 0, 0);
 		if (stateIn.get(SOUTH))
 			if (rand.nextInt(proba) == 0)
-				worldIn.addParticle(particle, pos.getX() + rand.nextFloat(), pos.getY() + rand.nextFloat(),
+				worldIn.addParticle(MACHINE_PARTICLES, pos.getX() + rand.nextFloat(), pos.getY() + rand.nextFloat(),
 						pos.getZ() + 1, 0, 0, 0);
 		if (stateIn.get(WEST))
 			if (rand.nextInt(proba) == 0)
-				worldIn.addParticle(particle, pos.getX(), pos.getY() + rand.nextFloat(),
+				worldIn.addParticle(MACHINE_PARTICLES, pos.getX(), pos.getY() + rand.nextFloat(),
 						pos.getZ() + rand.nextFloat(), 0, 0, 0);
 		if (stateIn.get(EAST))
 			if (rand.nextInt(proba) == 0)
-				worldIn.addParticle(particle, pos.getX() + 1, pos.getY() + rand.nextFloat(),
+				worldIn.addParticle(MACHINE_PARTICLES, pos.getX() + 1, pos.getY() + rand.nextFloat(),
 						pos.getZ() + rand.nextFloat(), 0, 0, 0);
 	}
 
