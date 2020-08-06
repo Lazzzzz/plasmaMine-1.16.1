@@ -1,4 +1,4 @@
-package laz.plasmine.content.base.machine;
+package laz.plasmine.content.base.generator;
 
 import laz.plasmine.registry.init.PMItemsInit;
 import net.minecraft.block.Block;
@@ -13,9 +13,9 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
-public class PlasmaMachineBlockBase extends Block {
+public class GeneratorBlockBase extends Block {
 
-	public PlasmaMachineBlockBase() {
+	public GeneratorBlockBase() {
 		super(Block.Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).hardnessAndResistance(3, 15)
 				.sound(SoundType.METAL).harvestLevel(0));
 	}
@@ -30,7 +30,7 @@ public class PlasmaMachineBlockBase extends Block {
 			Hand handIn, BlockRayTraceResult hit) {
 		if (!worldIn.isRemote) {
 			if (player.getHeldItemMainhand().getItem() == PMItemsInit.DEBUG.get()) {
-				((TilePlasmaMachineBase) worldIn.getTileEntity(pos)).getHelper().displayInfo(player);
+				((TileGeneratorBase) worldIn.getTileEntity(pos)).getHelper().displayInfo(player);
 				return ActionResultType.SUCCESS;
 			} else return ActionResultType.FAIL;
 		}

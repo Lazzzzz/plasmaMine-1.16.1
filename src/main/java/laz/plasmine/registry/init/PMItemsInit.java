@@ -2,7 +2,7 @@ package laz.plasmine.registry.init;
 
 import static laz.plasmine.registry.PMRegistry.addItemClass;
 
-import laz.plasmine.content.debug.DebugStick;
+import laz.plasmine.content.items.DebugStick;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 

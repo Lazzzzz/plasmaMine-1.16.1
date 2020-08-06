@@ -7,6 +7,7 @@ import java.util.function.Supplier;
 import javax.annotation.Nonnull;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -74,5 +75,9 @@ public class BlockRegistryObjectGroup<B extends Block, I extends Item, T extends
     @Override
     public B get() {
         return this.getBlock();
+    }
+    
+    public BlockState getDefaultState() {
+        return this.getBlock().getDefaultState();
     }
 }

@@ -2,15 +2,12 @@ package laz.plasmine;
 
 import static laz.plasmine.Plasmine.MOD_ID;
 
-import java.util.stream.Collectors;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import laz.plasmine.registry.PMRegistry;
 import laz.plasmine.registry.render.TileEntityRender;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;

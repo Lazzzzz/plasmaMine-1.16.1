@@ -1,40 +1,38 @@
-package laz.plasmine.content.base.machine;
+package laz.plasmine.content.base.generator;
 
 import laz.plasmine.api.PlasmaHelper;
 import laz.plasmine.util.IConnection;
-import laz.plasmine.util.IPlasmaMachine;
+import laz.plasmine.util.IPlasmaGenerator;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 
-public class TilePlasmaMachineBase extends TileEntity implements ITickableTileEntity, IPlasmaMachine, IConnection {
+public class TileGeneratorBase extends TileEntity implements IConnection, ITickableTileEntity, IPlasmaGenerator{
 
 	protected PlasmaHelper plasmaHelper;
 	protected boolean [] connected = new boolean[6];
+	protected int send;
 	
-	public TilePlasmaMachineBase(TileEntityType<?> tileEntityTypeIn, int maxCapacity) {
+	public TileGeneratorBase(TileEntityType<?> tileEntityTypeIn, int maxCapacity, int maxSend) {
 		super(tileEntityTypeIn);
 		plasmaHelper = new PlasmaHelper(maxCapacity);
+		send = maxSend;
 	}
 
 	@Override
-	public void tick() {}
+	public void tick() {
+		if (!world.isRemote) {
+			if (world.getDayTime() % 40 == 0)
+				connectedTo(world, pos, connected);
+			sendEnergy(world, pos, send);
+		}
+	}
 
-	
+	@Override
 	public PlasmaHelper getHelper() {
 		return plasmaHelper;
-	}
-
-	@Override
-	public int receiveEnergy(int amount) {
-		return plasmaHelper.addPlasma(amount);
-	}
-
-	@Override
-	public int spaceLeft() {
-		return plasmaHelper.getCapacityLeft();
 	}
 
 	@Override
@@ -48,5 +46,5 @@ public class TilePlasmaMachineBase extends TileEntity implements ITickableTileEn
 		plasmaHelper.read(p_230337_2_);
 		super.func_230337_a_(p_230337_1_, p_230337_2_);
 	}
-
+	
 }

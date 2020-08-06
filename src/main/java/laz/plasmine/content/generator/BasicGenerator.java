@@ -1,19 +1,19 @@
-package laz.plasmine.content.test;
+package laz.plasmine.content.generator;
 
-import laz.plasmine.content.base.cable.CableBase;
+import laz.plasmine.content.base.generator.GeneratorBlockBase;
 import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockReader;
 
-public class CableTest extends CableBase {
+public class BasicGenerator extends GeneratorBlockBase {
 
-	public CableTest() {
+	public BasicGenerator() {
 		super();
 	}
 	
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return new TileCableTest();
+		return new TileBasicGenerator();
 	}
 	
 }

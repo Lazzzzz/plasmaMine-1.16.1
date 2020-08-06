@@ -1,4 +1,4 @@
-package laz.plasmine.content.debug;
+package laz.plasmine.content.items;
 
 import static laz.plasmine.Plasmine.ITEM_GROUP;
 
