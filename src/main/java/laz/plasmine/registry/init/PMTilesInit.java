@@ -5,49 +5,59 @@ import static laz.plasmine.registry.PMRegistry.BLOCKS;
 import static laz.plasmine.registry.PMRegistry.ITEMS;
 import static laz.plasmine.registry.PMRegistry.TILE_ENTITIES;
 
-import laz.plasmine.content.cable.CableT1;
-import laz.plasmine.content.cable.TileCableT1;
-import laz.plasmine.content.convertor.BasicConvertor;
-import laz.plasmine.content.convertor.TileBasicConvertor;
-import laz.plasmine.content.generator.BasicGenerator;
-import laz.plasmine.content.generator.TileBasicGenerator;
-import laz.plasmine.content.heat.BasicHeatMachine;
-import laz.plasmine.content.heat.TileBasicHeatMachine;
-import laz.plasmine.content.plasma.BasicMachine;
-import laz.plasmine.content.plasma.TileBasicMachine;
+import laz.plasmine.content.tiles.cable.BlockBasicPlasmaCable;
+import laz.plasmine.content.tiles.cable.TileBasicPlasmaCable;
+import laz.plasmine.content.tiles.convertor.BlockBasicConvertor;
+import laz.plasmine.content.tiles.convertor.TileBasicConvertor;
+import laz.plasmine.content.tiles.generator.BasicGenerator;
+import laz.plasmine.content.tiles.generator.TileBasicGenerator;
+import laz.plasmine.content.tiles.heat.sedimentcollector.BlockSedimentCollector;
+import laz.plasmine.content.tiles.heat.sedimentcollector.TileSedimentCollector;
+import laz.plasmine.content.tiles.heat.sedimentcrystalizer.BlockSedimentCrystalizer;
+import laz.plasmine.content.tiles.heat.sedimentcrystalizer.TileSedimentCrystalizer;
+import laz.plasmine.content.tiles.heat.sedimentextractor.BlockSedimentExtractor;
+import laz.plasmine.content.tiles.heat.sedimentextractor.TileSedimentExtractor;
 import laz.plasmine.registry.BlockRegistryObjectGroup;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 
 public class PMTilesInit {
 
-	public static BlockRegistryObjectGroup<CableT1, BlockItem, TileCableT1> PLASMA_CABLE_T1;
+	public static BlockRegistryObjectGroup<BlockBasicPlasmaCable, BlockItem, TileBasicPlasmaCable> BASIC_PLASMA_CABLE;
 	public static BlockRegistryObjectGroup<BasicGenerator, BlockItem, TileBasicGenerator> BASIC_GENERATOR;
-	public static BlockRegistryObjectGroup<BasicMachine, BlockItem, TileBasicMachine> BASIC_MACHINE;
-	public static BlockRegistryObjectGroup<BasicConvertor, BlockItem, TileBasicConvertor> BASIC_CONVERTOR;
-	public static BlockRegistryObjectGroup<BasicHeatMachine, BlockItem, TileBasicHeatMachine> BASIC_HEAT_MACHINE;
+	
+	public static BlockRegistryObjectGroup<BlockSedimentCollector, BlockItem, TileSedimentCollector> SEDIMENT_COLLECTOR;
+	public static BlockRegistryObjectGroup<BlockSedimentExtractor, BlockItem, TileSedimentExtractor> SEDIMENT_EXTRACTOR;
+	public static BlockRegistryObjectGroup<BlockSedimentCrystalizer, BlockItem, TileSedimentCrystalizer> SEDIMENT_CRYSTALIZER;
+	
+	public static BlockRegistryObjectGroup<BlockBasicConvertor, BlockItem, TileBasicConvertor> BASIC_CONVERTOR;
 	
 	public static void init() {
-		PLASMA_CABLE_T1 = new BlockRegistryObjectGroup<>("plasma_pipe_t1", CableT1::new,
-				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)), TileCableT1::new)
+		
+		BASIC_PLASMA_CABLE = new BlockRegistryObjectGroup<>("basic_plasma_cable", BlockBasicPlasmaCable::new,
+				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)), TileBasicPlasmaCable::new)
 						.register(BLOCKS, ITEMS, TILE_ENTITIES);
 		
 		BASIC_GENERATOR = new BlockRegistryObjectGroup<>("basic_generator", BasicGenerator::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)), TileBasicGenerator::new)
 						.register(BLOCKS, ITEMS, TILE_ENTITIES);
 		
-		BASIC_MACHINE = new BlockRegistryObjectGroup<>("basic_machine", BasicMachine::new,
-				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)), TileBasicMachine::new)
-				.register(BLOCKS, ITEMS, TILE_ENTITIES);
-		
-		BASIC_CONVERTOR = new BlockRegistryObjectGroup<>("basic_convertor", BasicConvertor::new,
+		BASIC_CONVERTOR = new BlockRegistryObjectGroup<>("basic_convertor", BlockBasicConvertor::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)), TileBasicConvertor::new)
-				.register(BLOCKS, ITEMS, TILE_ENTITIES);
+						.register(BLOCKS, ITEMS, TILE_ENTITIES);
 		
-		BASIC_HEAT_MACHINE = new BlockRegistryObjectGroup<>("basic_heat_machine", BasicHeatMachine::new,
-				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)), TileBasicHeatMachine::new)
-				.register(BLOCKS, ITEMS, TILE_ENTITIES);
-
+		SEDIMENT_COLLECTOR = new BlockRegistryObjectGroup<>("sediment_collector", BlockSedimentCollector::new,
+				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)), TileSedimentCollector::new)
+						.register(BLOCKS, ITEMS, TILE_ENTITIES);
+		
+		SEDIMENT_EXTRACTOR = new BlockRegistryObjectGroup<>("sediment_extractor", BlockSedimentExtractor::new,
+				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)), TileSedimentExtractor::new)
+						.register(BLOCKS, ITEMS, TILE_ENTITIES);
+		
+		SEDIMENT_CRYSTALIZER = new BlockRegistryObjectGroup<>("sediment_crystalizer", BlockSedimentCrystalizer::new,
+				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)), TileSedimentCrystalizer::new)
+						.register(BLOCKS, ITEMS, TILE_ENTITIES);
+		
 	}
 
 }

@@ -1,6 +1,6 @@
 package laz.plasmine.content.base.plasma;
 
-import laz.plasmine.registry.init.PMItemsInit;
+import laz.plasmine.util.ICanWrench;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
-public class BlockPlasmaMachineBase extends Block {
+public class BlockPlasmaMachineBase extends Block implements ICanWrench {
 
 	public BlockPlasmaMachineBase() {
 		super(Block.Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).hardnessAndResistance(3, 15)
@@ -28,13 +28,7 @@ public class BlockPlasmaMachineBase extends Block {
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
 			Hand handIn, BlockRayTraceResult hit) {
-		if (!worldIn.isRemote) {
-			if (player.getHeldItemMainhand().getItem() == PMItemsInit.DEBUG.get()) {
-				((TilePlasmaMachineBase) worldIn.getTileEntity(pos)).getPlasmaHelper().displayInfo(player);
-				return ActionResultType.SUCCESS;
-			} else return ActionResultType.FAIL;
-		}
-		return ActionResultType.SUCCESS;
+		return ActionResultType.FAIL;
 	}
 	
 

@@ -1,17 +1,21 @@
 package laz.plasmine.content.base.cable;
 
-import static laz.plasmine.Constante.MACHINE_PARTICLES;
+import static laz.plasmine.api.Constante.MACHINE_PARTICLES;
 
 import java.util.Random;
 
 import laz.plasmine.content.base.plasma.BlockPlasmaMachineBase;
+import laz.plasmine.util.ICable;
+import laz.plasmine.util.ICanWrench;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SixWayBlock;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -19,7 +23,7 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-public class BlockCableBase extends BlockPlasmaMachineBase {
+public class BlockCableBase extends BlockPlasmaMachineBase implements ICanWrench {
 
 	public static final BooleanProperty NORTH = SixWayBlock.NORTH;
 	public static final BooleanProperty EAST = SixWayBlock.EAST;

@@ -1,6 +1,0 @@
-{
-    "parent": "plasmine:block/template/side_cable",
-    "textures": {
-        "cable": "minecraft:block/glass"
-    }
-}

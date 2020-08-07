@@ -10,3 +10,4 @@ public interface ICable {
 	int getCableAround(Direction from, int amount, int iterration, List<BlockPos> passed);
 	
 }
+

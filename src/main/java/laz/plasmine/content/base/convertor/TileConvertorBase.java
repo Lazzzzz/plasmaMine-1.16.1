@@ -65,6 +65,11 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 	@Override
 	public void onOverHeat() {
 	}
+	
+	@Override
+	public Direction heatInOut(BlockState state) {
+		return state.get(BlockConvertorBase.FACING);
+	}
 
 	@Override
 	public HeatHelper getHeatHelper() {

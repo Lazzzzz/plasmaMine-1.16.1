@@ -8,14 +8,13 @@
 			"from": [2, 2, 0],
 			"to": [14, 14, 2],
 			"rotation": {"angle": 0, "axis": "y", "origin": [10, 10, 8]},
-			"color": 4,
 			"faces": {
-				"north": {"uv": [0, 0, 12, 12], "texture": "#missing"},
-				"east": {"uv": [0, 0, 2, 12], "texture": "#missing"},
-				"south": {"uv": [0, 0, 12, 12], "texture": "#missing"},
-				"west": {"uv": [0, 0, 2, 12], "texture": "#missing"},
-				"up": {"uv": [0, 0, 12, 2], "texture": "#missing"},
-				"down": {"uv": [0, 0, 12, 2], "texture": "#missing"}
+				"north": {"uv": [0, 0, 6, 6], "texture": "#cable"},
+				"east": {"uv": [6, 0, 7, 6], "texture": "#cable"},
+				"south": {"uv": [0, 0, 6, 6], "texture": "#cable"},
+				"west": {"uv": [6, 0, 7, 6], "texture": "#cable"},
+				"up": {"uv": [7, 7, 13, 8], "texture": "#cable"},
+				"down": {"uv": [7, 7, 13, 8], "texture": "#cable"}
 			}
 		}
 	]

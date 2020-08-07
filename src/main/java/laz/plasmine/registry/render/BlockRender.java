@@ -10,6 +10,6 @@ public class BlockRender {
 		RenderType cutout = RenderType.getCutout();
 		RenderType opaque = RenderType.getTranslucent();
 		
-		RenderTypeLookup.setRenderLayer(PMTilesInit.PLASMA_CABLE_T1.get(), opaque);
+		RenderTypeLookup.setRenderLayer(PMTilesInit.BASIC_PLASMA_CABLE.get(), opaque);
 	}
 }

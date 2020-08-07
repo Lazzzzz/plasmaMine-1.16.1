@@ -1,6 +1,5 @@
 package laz.plasmine.api;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.StringTextComponent;

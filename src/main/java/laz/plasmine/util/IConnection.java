@@ -25,6 +25,5 @@ public interface IConnection {
 				connected[i] = ((IConnection) tile).getConnectionFace(Direction.byIndex(i).getOpposite());
 		}
 		updateState(world, pos);
-
 	}
 }

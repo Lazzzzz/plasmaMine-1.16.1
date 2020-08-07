@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "": { "model": "plasmine:block/convertor/basic_convertor" }
+    }
+}

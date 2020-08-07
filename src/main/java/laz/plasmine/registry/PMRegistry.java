@@ -8,6 +8,7 @@ import java.util.function.Supplier;
 
 import laz.plasmine.registry.init.PMBlocksInit;
 import laz.plasmine.registry.init.PMItemsInit;
+import laz.plasmine.registry.init.PMSoundInit;
 import laz.plasmine.registry.init.PMTilesInit;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
@@ -16,11 +17,10 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.SpawnEggItem;
-import net.minecraft.particles.ParticleType;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -32,10 +32,7 @@ public class PMRegistry {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
 	public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = DeferredRegister
 			.create(ForgeRegistries.TILE_ENTITIES, MOD_ID);
-	public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister
-			.create(ForgeRegistries.PARTICLE_TYPES, MOD_ID);
-	public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES,
-			MOD_ID);
+	public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MOD_ID);
 	public static final DeferredRegister<ContainerType<?>> PM_CONTAINER = DeferredRegister
 			.create(ForgeRegistries.CONTAINERS, MOD_ID);
 
@@ -53,9 +50,8 @@ public class PMRegistry {
 		BLOCKS.register(eventBus);
 		ITEMS.register(eventBus);
 		TILE_ENTITIES.register(eventBus);
-		FEATURES.register(eventBus);
-		PARTICLE_TYPES.register(eventBus);
 		PM_CONTAINER.register(eventBus);
+		SOUNDS.register(eventBus);
 
 	}
 
@@ -63,6 +59,7 @@ public class PMRegistry {
 		PMBlocksInit.init();
 		PMItemsInit.init();
 		PMTilesInit.init();
+		PMSoundInit.init();
 		register(eventBus);
 
 	}

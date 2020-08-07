@@ -1,0 +1,30 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"texture_size": [128, 128],
+	"textures": {
+		"0": "plasmine:blocks/convertor/basic_convertor"
+	},
+	"elements": [
+		{
+			"from": [2, 2, 0],
+			"to": [14, 14, 4],
+			"rotation": {"angle": 45, "axis": "z", "origin": [8, 8, 2]},
+			"faces": {
+				"north": {"uv": [8.625, 5.25, 10.125, 6.75], "texture": "#0"},
+				"east": {"uv": [8.125, 5.25, 8.625, 6.75], "texture": "#0"},
+				"south": {"uv": [10.625, 5.25, 12.125, 6.75], "texture": "#0"},
+				"west": {"uv": [10.125, 5.25, 10.625, 6.75], "texture": "#0"},
+				"up": {"uv": [10.125, 5.25, 8.625, 4.75], "texture": "#0"},
+				"down": {"uv": [11.625, 4.75, 10.125, 5.25], "texture": "#0"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "bone5",
+			"origin": [0, 8, -7],
+			"children": [0]
+		}
+	]
+}
