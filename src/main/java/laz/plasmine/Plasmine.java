@@ -5,7 +5,10 @@ import static laz.plasmine.Plasmine.MOD_ID;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import laz.plasmine.network.PacketHandler;
 import laz.plasmine.registry.PMRegistry;
+import laz.plasmine.registry.render.BlockRender;
+import laz.plasmine.registry.render.GuiRender;
 import laz.plasmine.registry.render.TileEntityRender;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemGroup;
@@ -40,10 +43,13 @@ public class Plasmine {
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {
+		PacketHandler.registerMessages();
 	}
 
 	private void doClientStuff(final FMLClientSetupEvent event) {
 		TileEntityRender.init();
+		GuiRender.init();
+		BlockRender.init();
 	}
 
 	private void enqueueIMC(final InterModEnqueueEvent event) {

@@ -2,8 +2,8 @@ package laz.plasmine.api;
 
 public class PlasmaToHeatConvertion {
 
-	public static float transformPlasmaToHeat(int plasma) {
-		return plasma * 0.5f;
+	public static float transformPlasmaToHeat(HeatHelper heatHelper, int amount, float efficiency) {
+		return amount * heatHelper.getThermalFactor() * efficiency;
 	}
 	
 }

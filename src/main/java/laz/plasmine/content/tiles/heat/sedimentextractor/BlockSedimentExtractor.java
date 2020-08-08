@@ -7,9 +7,13 @@ import net.minecraft.world.IBlockReader;
 
 public class BlockSedimentExtractor extends BlockHeatMachineBase {
 
+	public BlockSedimentExtractor() {
+		super(500, 0.4f);
+	}
+
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return new TileSedimentExtractor();
+		return new TileSedimentExtractor(maxCelcius, thermo);
 	}
 	
 }

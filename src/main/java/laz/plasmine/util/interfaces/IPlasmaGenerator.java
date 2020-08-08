@@ -1,4 +1,4 @@
-package laz.plasmine.util;
+package laz.plasmine.util.interfaces;
 
 import java.util.ArrayList;
 
@@ -25,4 +25,8 @@ public interface IPlasmaGenerator {
 		}
 		return amount - rest;
 	}
+	
+	int produceEnergy();
+	
+	void setWorkingState(boolean working);
 }

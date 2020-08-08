@@ -1,4 +1,4 @@
-package laz.plasmine.util;
+package laz.plasmine.util.interfaces;
 
 public interface IDrawable {
 	

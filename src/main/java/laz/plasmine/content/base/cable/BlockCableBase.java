@@ -5,17 +5,14 @@ import static laz.plasmine.api.Constante.MACHINE_PARTICLES;
 import java.util.Random;
 
 import laz.plasmine.content.base.plasma.BlockPlasmaMachineBase;
-import laz.plasmine.util.ICable;
-import laz.plasmine.util.ICanWrench;
+import laz.plasmine.util.interfaces.ICanWrench;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SixWayBlock;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -32,27 +29,33 @@ public class BlockCableBase extends BlockPlasmaMachineBase implements ICanWrench
 	public static final BooleanProperty UP = SixWayBlock.UP;
 	public static final BooleanProperty DOWN = SixWayBlock.DOWN;
 
-	VoxelShape SHAPE = VoxelShapes.create(0.125, 0.125f, 0.125f, 0.875f, 0.875f, 0.875f);
+	public static final BooleanProperty WORKING = BooleanProperty.create("working");
+
+	VoxelShape SHAPE = VoxelShapes.create(0.25, 0.25, 0.25, 1 - 0.25, 1 - 0.25, 1 - 0.25);
 
 	public BlockCableBase() {
 		super();
 
-		this.setDefaultState(this.stateContainer.getBaseState().with(NORTH, Boolean.valueOf(false))
-				.with(EAST, Boolean.valueOf(false)).with(SOUTH, Boolean.valueOf(false))
-				.with(WEST, Boolean.valueOf(false)).with(DOWN, Boolean.valueOf(false))
-				.with(UP, Boolean.valueOf(false)));
+		this.setDefaultState(this.stateContainer.getBaseState()
+				.with(NORTH, Boolean.valueOf(false))
+				.with(EAST, Boolean.valueOf(false))
+				.with(SOUTH, Boolean.valueOf(false))
+				.with(WEST, Boolean.valueOf(false))
+				.with(DOWN, Boolean.valueOf(false))
+				.with(UP, Boolean.valueOf(false))
+				.with(WORKING, Boolean.valueOf(false)));
 
 	}
 
 	@Override
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-		spawnParticles(stateIn, worldIn, pos, rand);
+		if (stateIn.get(WORKING)) spawnParticles(stateIn, worldIn, pos, rand);
 	}
 
 	public void spawnParticles(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-		
+
 		int proba = 50;
-		
+
 		if (stateIn.get(UP))
 			if (rand.nextInt(proba) == 0)
 				worldIn.addParticle(MACHINE_PARTICLES, pos.getX() + rand.nextFloat(), pos.getY() + 1,
@@ -81,7 +84,7 @@ public class BlockCableBase extends BlockPlasmaMachineBase implements ICanWrench
 
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		builder.add(DOWN, UP, NORTH, SOUTH, WEST, EAST);
+		builder.add(DOWN, UP, NORTH, SOUTH, WEST, EAST, WORKING);
 	}
 
 	@Override

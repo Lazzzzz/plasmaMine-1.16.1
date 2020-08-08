@@ -1,18 +1,20 @@
 package laz.plasmine.event;
 
+import java.util.Random;
+
 import laz.plasmine.registry.init.PMItemsInit;
 import laz.plasmine.registry.init.PMSoundInit;
-import laz.plasmine.util.ICanWrench;
+import laz.plasmine.util.interfaces.ICanWrench;
 import net.minecraft.block.BlockState;
-import net.minecraft.command.impl.PlaySoundCommand;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class WrenchEvent {
+
+	static Random RANDOM = new Random();
 
 	public static void update(World world, PlayerEntity player, BlockPos pos, Direction dir) {
 		if (player.getHeldItemMainhand().getItem() == PMItemsInit.WRENCH.get()) {
@@ -25,4 +27,5 @@ public class WrenchEvent {
 			}
 		}
 	}
+
 }

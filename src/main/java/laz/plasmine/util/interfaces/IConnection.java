@@ -1,4 +1,4 @@
-package laz.plasmine.util;
+package laz.plasmine.util.interfaces;
 
 import static laz.plasmine.util.direction.DirectionUtils.getPosDirection;
 

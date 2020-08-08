@@ -2,7 +2,7 @@ package laz.plasmine.client.draw;
 
 import org.lwjgl.opengl.GL11;
 
-import laz.plasmine.util.IDrawable;
+import laz.plasmine.util.interfaces.IDrawable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;

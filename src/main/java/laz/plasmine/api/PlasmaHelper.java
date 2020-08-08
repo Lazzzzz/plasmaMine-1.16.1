@@ -22,6 +22,14 @@ public class PlasmaHelper {
 	public int getCapacity() {
 		return capacity;
 	}
+	
+	public int getMaxCapacity() {
+		return maxCapacity;
+	}
+	
+	public void setCapacity(int amount) {
+		capacity = amount;
+	}
 
 	public int getCapacityLeft() {
 		return maxCapacity - getCapacity();

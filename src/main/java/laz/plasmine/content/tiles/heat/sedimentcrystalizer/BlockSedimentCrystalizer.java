@@ -7,9 +7,13 @@ import net.minecraft.world.IBlockReader;
 
 public class BlockSedimentCrystalizer extends BlockHeatMachineBase {
 
+	public BlockSedimentCrystalizer() {
+		super(700, 0.6f);
+	}
+
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return new TileSedimentCrystalizer();
+		return new TileSedimentCrystalizer(maxCelcius, thermo);
 	}
 	
 }

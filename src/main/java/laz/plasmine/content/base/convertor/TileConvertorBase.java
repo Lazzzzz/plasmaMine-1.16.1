@@ -5,7 +5,7 @@ import static laz.plasmine.util.direction.DirectionUtils.getPosDirection;
 
 import laz.plasmine.api.HeatHelper;
 import laz.plasmine.content.base.plasma.TilePlasmaMachineBase;
-import laz.plasmine.util.IHeatMachine;
+import laz.plasmine.util.interfaces.IHeatMachine;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
@@ -16,24 +16,37 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 
 	protected HeatHelper heatHelper;
 	protected int amountToConvertPerTick;
+	protected float efficiency;
 
 	public TileConvertorBase(TileEntityType<?> tileEntityTypeIn, int maxCapacity, int maxCelcius, float thermo,
-			int convert) {
+			int convert, float efficiency) {
 		super(tileEntityTypeIn, maxCapacity);
 		heatHelper = new HeatHelper(maxCelcius, thermo);
 		amountToConvertPerTick = convert;
+		this.efficiency = efficiency;
 
 	}
 
 	@Override
 	public void tick() {
 		if (!world.isRemote) {
-			heatHelper.addCelcius(transformPlasmaToHeat(plasmaHelper.removePlasma(amountToConvertPerTick)));
-			heatAround();
-			heatHelper.coolDown(world, pos);
+
+			boolean isWorking = heatHelper.isWorkingCelcius(world, pos);
+			setWorkingState(world, pos, world.getBlockState(pos), isWorking);
+			float heat = 0;
+			if (isTileConnect()) {
+				heat = transformPlasmaToHeat(heatHelper, plasmaHelper.removePlasma(amountToConvertPerTick), efficiency);
+
+				heatHelper.addCelcius(heat);
+				if (isWorking)
+					heatAround();
+			}
+			if (heat == 0)
+				heatHelper.coolDown(world, pos);
 			if (heatHelper.isOverHeating())
 				onOverHeat();
 		}
+
 	}
 
 	@Override
@@ -47,8 +60,12 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 		TileEntity tile = world.getTileEntity(getPosDirection(pos, dir));
 		if (tile instanceof IHeatMachine) {
 			getHeatHelper().transferHeat(((IHeatMachine) tile).getHeatHelper());
-			;
 		}
+	}
+
+	public boolean isTileConnect() {
+		TileEntity tile = world.getTileEntity(getPosDirection(pos, heatInOut(world.getBlockState(pos))));
+		return tile instanceof IHeatMachine;
 	}
 
 	@Override
@@ -59,13 +76,13 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 
 	@Override
 	public boolean getConnectionFace(Direction face) {
-		return face != heatInOut(world.getBlockState(pos));
+		return face == heatInOut(world.getBlockState(pos)).getOpposite();
 	}
 
 	@Override
 	public void onOverHeat() {
 	}
-	
+
 	@Override
 	public Direction heatInOut(BlockState state) {
 		return state.get(BlockConvertorBase.FACING);
@@ -75,5 +92,4 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 	public HeatHelper getHeatHelper() {
 		return heatHelper;
 	}
-
 }

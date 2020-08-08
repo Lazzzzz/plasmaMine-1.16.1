@@ -6,7 +6,7 @@ import static laz.plasmine.Plasmine.MOD_ID;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import laz.plasmine.registry.init.PMBlocksInit;
+import laz.plasmine.registry.init.PMContainersInit;
 import laz.plasmine.registry.init.PMItemsInit;
 import laz.plasmine.registry.init.PMSoundInit;
 import laz.plasmine.registry.init.PMTilesInit;
@@ -52,11 +52,10 @@ public class PMRegistry {
 		TILE_ENTITIES.register(eventBus);
 		PM_CONTAINER.register(eventBus);
 		SOUNDS.register(eventBus);
-
 	}
 
 	public static void init(IEventBus eventBus) {
-		PMBlocksInit.init();
+		PMContainersInit.init();
 		PMItemsInit.init();
 		PMTilesInit.init();
 		PMSoundInit.init();

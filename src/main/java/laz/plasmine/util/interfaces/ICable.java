@@ -1,4 +1,4 @@
-package laz.plasmine.util;
+package laz.plasmine.util.interfaces;
 
 import java.util.List;
 

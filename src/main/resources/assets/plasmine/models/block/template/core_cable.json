@@ -1,14 +1,16 @@
 {
 	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
 	"textures": {
-		"particle": "#cable",
-		"cable": "#cable"
+		"particle": "texture",
+		"cable": "texture"
 	},
 	"elements": [
 		{
 			"name": "central part, no sides connected",
-			"from": [2, 2, 2],
-			"to": [14, 14, 14],
+			"from": [5, 5, 5],
+			"to": [11, 11, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [11, 11, 11]},
 			"faces": {
 				"north": {"uv": [0, 0, 3, 3], "texture": "#cable"},
 				"east": {"uv": [0, 0, 3, 3], "texture": "#cable"},

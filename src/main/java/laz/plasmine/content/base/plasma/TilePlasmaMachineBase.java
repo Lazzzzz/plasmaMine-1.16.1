@@ -1,8 +1,8 @@
 package laz.plasmine.content.base.plasma;
 
 import laz.plasmine.api.PlasmaHelper;
-import laz.plasmine.util.IConnection;
-import laz.plasmine.util.IPlasmaMachine;
+import laz.plasmine.util.interfaces.IConnection;
+import laz.plasmine.util.interfaces.IPlasmaMachine;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
@@ -20,10 +20,7 @@ public class TilePlasmaMachineBase extends TileEntity implements ITickableTileEn
 	}
 
 	@Override
-	public void tick() {
-		
-	}
-
+	public void tick() {}
 	
 	public PlasmaHelper getPlasmaHelper() {
 		return plasmaHelper;
@@ -50,5 +47,6 @@ public class TilePlasmaMachineBase extends TileEntity implements ITickableTileEn
 		plasmaHelper.read(p_230337_2_);
 		super.func_230337_a_(p_230337_1_, p_230337_2_);
 	}
+
 
 }
