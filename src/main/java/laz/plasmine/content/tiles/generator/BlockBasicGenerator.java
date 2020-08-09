@@ -2,7 +2,7 @@ package laz.plasmine.content.tiles.generator;
 
 import java.util.List;
 
-import laz.plasmine.content.base.generator.BlockGeneratorBase;
+import laz.plasmine.api.base.generator.BlockGeneratorBase;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;

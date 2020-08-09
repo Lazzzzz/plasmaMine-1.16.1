@@ -1,6 +1,6 @@
 package laz.plasmine.content.tiles.cable;
 
-import laz.plasmine.content.base.cable.BlockCableBase;
+import laz.plasmine.api.base.cable.BlockCableBase;
 import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockReader;

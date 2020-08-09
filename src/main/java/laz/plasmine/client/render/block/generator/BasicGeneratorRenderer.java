@@ -4,8 +4,8 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
 import laz.plasmine.Plasmine;
+import laz.plasmine.api.base.generator.BlockGeneratorBase;
 import laz.plasmine.client.models.block.generator.BasicGeneratorModel;
-import laz.plasmine.content.base.generator.BlockGeneratorBase;
 import laz.plasmine.content.tiles.generator.BlockBasicGenerator;
 import laz.plasmine.content.tiles.generator.TileBasicGenerator;
 import net.minecraft.block.BlockState;

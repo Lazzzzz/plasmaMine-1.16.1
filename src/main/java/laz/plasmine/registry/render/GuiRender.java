@@ -1,7 +1,7 @@
 package laz.plasmine.registry.render;
 
-import laz.plasmine.client.container.heat.SedimentCollectorScreen;
-import laz.plasmine.client.container.plasma.BasicGeneratorScreen;
+import laz.plasmine.client.screen.heat.SedimentCollectorScreen;
+import laz.plasmine.client.screen.plasma.BasicGeneratorScreen;
 import laz.plasmine.registry.init.PMContainersInit;
 import net.minecraft.client.gui.ScreenManager;
 

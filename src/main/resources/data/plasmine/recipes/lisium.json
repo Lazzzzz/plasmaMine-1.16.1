@@ -1,0 +1,7 @@
+{
+  "type": "plasmine:sediment_collector",
+  "chance": 0.5,
+  "result": "plasmine:lisium_chunk",
+  "temp": 100,
+  "time": 100
+}

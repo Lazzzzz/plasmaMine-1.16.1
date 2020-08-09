@@ -1,6 +1,6 @@
 package laz.plasmine.content.tiles.generator;
 
-import laz.plasmine.content.base.container.ContainerPlasma;
+import laz.plasmine.api.base.container.ContainerPlasma;
 import laz.plasmine.registry.init.PMContainersInit;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -25,7 +25,6 @@ public class ContainerBasicGenerator extends ContainerPlasma {
 	public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.inventorySlots.get(index);
-		System.out.println(index);
 		if (index > 35) {
 			if (!this.mergeItemStack(slot.getStack(), 0, 36, false)) {
 				return itemstack;

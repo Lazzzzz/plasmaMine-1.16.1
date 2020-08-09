@@ -1,6 +1,6 @@
 package laz.plasmine.content.tiles.cable;
 
-import laz.plasmine.content.base.cable.TileCableBase;
+import laz.plasmine.api.base.cable.TileCableBase;
 import laz.plasmine.registry.init.PMTilesInit;
 
 public class TileBasicPlasmaCable extends TileCableBase {

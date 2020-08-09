@@ -40,8 +40,7 @@ public class PMTilesInit {
 
 		BASIC_GENERATOR = new BlockRegistryObjectGroup<>("basic_generator", BlockBasicGenerator::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
-				() -> new TileBasicGenerator(BlockBasicGenerator.maxCapacity, BlockBasicGenerator.rate,
-						BlockBasicGenerator.production)).register(BLOCKS, ITEMS, TILE_ENTITIES);
+				() -> new TileBasicGenerator(2000, 20, 1)).register(BLOCKS, ITEMS, TILE_ENTITIES);
 
 		BASIC_CONVERTOR = new BlockRegistryObjectGroup<>("basic_convertor", BlockBasicConvertor::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)), TileBasicConvertor::new)
@@ -49,17 +48,17 @@ public class PMTilesInit {
 
 		SEDIMENT_COLLECTOR = new BlockRegistryObjectGroup<>("sediment_collector", BlockSedimentCollector::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
-				() -> new TileSedimentCollector(BlockSedimentCollector.maxCelcius, BlockSedimentCollector.thermo))
+				() -> new TileSedimentCollector(500, 0.4f))
 						.register(BLOCKS, ITEMS, TILE_ENTITIES);
 
 		SEDIMENT_EXTRACTOR = new BlockRegistryObjectGroup<>("sediment_extractor", BlockSedimentExtractor::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
-				() -> new TileSedimentExtractor(BlockSedimentExtractor.maxCelcius, BlockSedimentExtractor.thermo))
+				() -> new TileSedimentExtractor(500, 0.4f))
 						.register(BLOCKS, ITEMS, TILE_ENTITIES);
 
 		SEDIMENT_CRYSTALIZER = new BlockRegistryObjectGroup<>("sediment_crystalizer", BlockSedimentCrystalizer::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
-				() -> new TileSedimentCrystalizer(BlockSedimentCrystalizer.maxCelcius, BlockSedimentCrystalizer.thermo))
+				() -> new TileSedimentCrystalizer(700, 0.6f))
 						.register(BLOCKS, ITEMS, TILE_ENTITIES);
 
 	}

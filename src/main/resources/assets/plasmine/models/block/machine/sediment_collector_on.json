@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "plasmine:blocks/machine/sedimentscollector/sendiment_collector_side",
+        "down": "plasmine:blocks/machine/sedimentscollector/sendiment_collector_side",
+        "up": "plasmine:blocks/machine/sedimentscollector/sendiment_collector_side",
+        "north": "plasmine:blocks/machine/sedimentscollector/sendiment_collector_face_on",
+        "east": "plasmine:blocks/machine/sedimentscollector/sendiment_collector_side",
+		"south": "plasmine:blocks/machine/sedimentscollector/sendiment_collector_side_heat",
+		"west": "plasmine:blocks/machine/sedimentscollector/sendiment_collector_side"
+    }
+}

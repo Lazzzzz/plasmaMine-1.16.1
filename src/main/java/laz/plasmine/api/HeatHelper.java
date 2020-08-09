@@ -8,11 +8,11 @@ public class HeatHelper {
 
 	private float maxCelcius = 0;
 	private float celcius = 0;
-	private float thermo_conductivity = 0;
+	private float thermoConductivity = 0;
 
 	public HeatHelper(float maxCelcius, float thermo_conductivity) {
 		this.maxCelcius = maxCelcius;
-		this.thermo_conductivity = thermo_conductivity;
+		this.thermoConductivity = thermo_conductivity;
 	}
 
 	public void addCelcius(float amount) {
@@ -22,17 +22,17 @@ public class HeatHelper {
 	public void setCelcius(float amount) {
 		celcius = amount;
 	}
-	
+
 	public boolean isOverHeating() {
 		return celcius > maxCelcius;
 	}
 
-	private void removeHeat(float amount) {
+	public void removeHeat(float amount) {
 		celcius -= amount;
 	}
 
 	public void transferHeat(HeatHelper helper) {
-		float amount = thermo_conductivity * getThermalFactor() * 20;
+		float amount = thermoConductivity * getThermalFactor() * 20;
 		if (celcius > helper.celcius + amount) {
 			removeHeat(amount - 0.1f);
 			helper.addCelcius(amount);
@@ -45,11 +45,9 @@ public class HeatHelper {
 
 	public void coolDown(World world, BlockPos pos) {
 		float minTemp = getMinTemp(world, pos);
-		if (world.getDayTime() % 5 == 0) {
-			removeHeat(thermo_conductivity);
-			if (celcius < minTemp)
-				celcius = minTemp;
-		}
+		removeHeat(thermoConductivity / 5);
+		if (celcius < minTemp)
+			celcius = minTemp;
 	}
 
 	public float getMinTemp(World world, BlockPos pos) {
@@ -75,9 +73,13 @@ public class HeatHelper {
 	public float getCelcius() {
 		return celcius;
 	}
-	
+
 	public float getMaxCelcius() {
 		return maxCelcius;
+	}
+	
+	public float getThermoConductivity() {
+		return thermoConductivity;
 	}
 
 }

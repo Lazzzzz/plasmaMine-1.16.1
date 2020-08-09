@@ -1,6 +1,6 @@
 package laz.plasmine.content.tiles.generator;
 
-import laz.plasmine.content.base.generator.TileGeneratorBase;
+import laz.plasmine.api.base.generator.TileGeneratorBase;
 import laz.plasmine.registry.init.PMTilesInit;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

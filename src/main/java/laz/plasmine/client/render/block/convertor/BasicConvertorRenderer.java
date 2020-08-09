@@ -4,8 +4,9 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
 import laz.plasmine.Plasmine;
+import laz.plasmine.api.HeatHelper;
+import laz.plasmine.api.base.generator.BlockGeneratorBase;
 import laz.plasmine.client.models.block.convertor.BasicConvertorModel;
-import laz.plasmine.content.base.generator.BlockGeneratorBase;
 import laz.plasmine.content.tiles.convertor.TileBasicConvertor;
 import laz.plasmine.content.tiles.generator.BlockBasicGenerator;
 import net.minecraft.block.BlockState;
@@ -28,13 +29,12 @@ public class BasicConvertorRenderer extends TileEntityRenderer<TileBasicConverto
 	}
 
 	@Override
-	public void render(TileBasicConvertor tileEntityIn, float partialTicks, MatrixStack matrixStackIn,
+	public void render(TileBasicConvertor tile, float partialTicks, MatrixStack matrixStackIn,
 			IRenderTypeBuffer buffer, int combinedLightIn, int combinedOverlayIn) {
 
-		World world = tileEntityIn.getWorld();
-		BlockPos pos = tileEntityIn.getPos();
+		World world = tile.getWorld();
+		BlockPos pos = tile.getPos();
 		BlockState state = world.getBlockState(pos);
-
 		matrixStackIn.push();
 
 		if (state.get(BlockGeneratorBase.WORKING)) model.animation((int) world.getDayTime(), partialTicks);
@@ -44,7 +44,7 @@ public class BasicConvertorRenderer extends TileEntityRenderer<TileBasicConverto
 
 		matrixStackIn.translate(0.5D, -0.5D, 0.5D);
 		IVertexBuilder ivertexbuilder = buffer.getBuffer(RenderType.func_239267_e_(TEXTURE));
-		model.render(matrixStackIn, ivertexbuilder, combinedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+		model.render(matrixStackIn, ivertexbuilder, combinedLightIn, OverlayTexture.NO_OVERLAY, 1.0f , 1f, 1f, 1.0F);
 		matrixStackIn.pop();
 	}
 }

@@ -8,6 +8,7 @@ import java.util.function.Supplier;
 
 import laz.plasmine.registry.init.PMContainersInit;
 import laz.plasmine.registry.init.PMItemsInit;
+import laz.plasmine.registry.init.PMRecipesSerializer;
 import laz.plasmine.registry.init.PMSoundInit;
 import laz.plasmine.registry.init.PMTilesInit;
 import net.minecraft.block.Block;
@@ -17,6 +18,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.SpawnEggItem;
+import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.SoundEvent;
@@ -35,6 +37,8 @@ public class PMRegistry {
 	public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MOD_ID);
 	public static final DeferredRegister<ContainerType<?>> PM_CONTAINER = DeferredRegister
 			.create(ForgeRegistries.CONTAINERS, MOD_ID);
+	public static final DeferredRegister<IRecipeSerializer<?>> PM_SERIALIZER = DeferredRegister
+			.create(ForgeRegistries.RECIPE_SERIALIZERS, MOD_ID);
 
 	public static int SIMPLE_INT = 0;
 	public static int ITEMLIST_INT = 0;
@@ -52,6 +56,7 @@ public class PMRegistry {
 		TILE_ENTITIES.register(eventBus);
 		PM_CONTAINER.register(eventBus);
 		SOUNDS.register(eventBus);
+		PM_SERIALIZER.register(eventBus);
 	}
 
 	public static void init(IEventBus eventBus) {
@@ -59,6 +64,7 @@ public class PMRegistry {
 		PMItemsInit.init();
 		PMTilesInit.init();
 		PMSoundInit.init();
+		PMRecipesSerializer.init();
 		register(eventBus);
 
 	}

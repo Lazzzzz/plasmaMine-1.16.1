@@ -1,6 +1,6 @@
 package laz.plasmine.content.tiles.heat.sedimentextractor;
 
-import laz.plasmine.content.base.heat.TileHeatMachineBase;
+import laz.plasmine.api.base.heat.TileHeatMachineBase;
 import laz.plasmine.registry.init.PMTilesInit;
 
 public class TileSedimentExtractor extends TileHeatMachineBase {

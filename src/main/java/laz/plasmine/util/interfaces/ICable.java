@@ -7,7 +7,7 @@ import net.minecraft.util.math.BlockPos;
 
 public interface ICable {
 	
-	int getCableAround(Direction from, int amount, int iterration, List<BlockPos> passed);
+	List<BlockPos> getCableAround(Direction from_dir, int iterration, List<BlockPos> passed, List<BlockPos> connect);
 	
 }
 
