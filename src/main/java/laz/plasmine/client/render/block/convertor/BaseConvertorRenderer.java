@@ -34,7 +34,7 @@ public class BaseConvertorRenderer extends TileEntityRenderer<TileConvertorBase>
 		World world = tile.getWorld();
 		BlockPos pos = tile.getPos();
 		BlockState state = world.getBlockState(pos);
-		if (state.get(BlockGeneratorBase.WORKING) && !world.isBlockPowered(pos)) model.animation((int) world.getDayTime(), partialTicks);
+		if (state.get(BlockGeneratorBase.WORKING) && world.isBlockPowered(pos)) model.animation((int) world.getDayTime(), partialTicks);
 		else model.resetState();
 
 		model.rotate(state.get(BlockBasicGenerator.FACING).getOpposite());

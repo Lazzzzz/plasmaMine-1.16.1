@@ -33,7 +33,7 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 			boolean isWorking = heatHelper.isWorkingCelcius(world, pos);
 			setWorkingState(world, pos, world.getBlockState(pos), isWorking);
 			float heat = 0;
-			if (isTileConnect() && !world.isBlockPowered(pos)) {
+			if (isTileConnect() && world.isBlockPowered(pos)) {
 				heat = transformPlasmaToHeat(heatHelper, plasmaHelper.removePlasma(amountToConvertPerTick), efficiency);
 
 				heatHelper.addCelcius(heat);

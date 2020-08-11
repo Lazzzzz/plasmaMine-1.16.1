@@ -4,6 +4,7 @@ import laz.plasmine.api.base.heat.TileHeatMachineBase;
 import laz.plasmine.recipes.sedimentcrystalizer.SedimentCrystalizerRecipe;
 import laz.plasmine.registry.init.PMTilesInit;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.RedstoneBlock;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -31,6 +32,13 @@ public class TileSedimentCrystalizer extends TileHeatMachineBase implements ISid
 	}
 
 	@Override
+	public void tick() {
+		if (!world.isRemote)
+			updatePoweredState(!getStackInSlot(0).isEmpty());
+		super.tick();
+	}
+
+	@Override
 	public ITextComponent getDisplayName() {
 		return new StringTextComponent("sediment crystalizer");
 	}
@@ -55,7 +63,6 @@ public class TileSedimentCrystalizer extends TileHeatMachineBase implements ISid
 	public float consumeHeat() {
 		return heatHelper.getThermoConductivity() / 4;
 	}
-	
 
 	@Override
 	public void onWorking() {
@@ -66,9 +73,13 @@ public class TileSedimentCrystalizer extends TileHeatMachineBase implements ISid
 			timer++;
 			if (timer >= currentMaxTimer) {
 				ItemStack stack = getStackInSlot(1);
-				if (stack == ItemStack.EMPTY) setInventorySlotContents(1, result);
-				else if (stack.getCount() == 64) world.addEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), result));
+				if (stack == ItemStack.EMPTY) {
+					System.out.println("result");
+					setInventorySlotContents(1, result);
+				}
+				else if (stack.getCount() == stack.getMaxStackSize()) world.addEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), result));
 				else stack.grow(1);
+				
 				reset();
 			}
 		}
@@ -78,12 +89,12 @@ public class TileSedimentCrystalizer extends TileHeatMachineBase implements ISid
 		ItemStack in = content.get(0);
 		ItemStack out = getStackInSlot(1);
 		if (in.getItem() == recipe.getItemIn().getItem() && recipe.getTemp() < heatHelper.getCelcius()) {
-			if (out == ItemStack.EMPTY || out.getCount() < 64) {
+			if (out == ItemStack.EMPTY || out.getCount() < out.getMaxStackSize()) {
 				in.shrink(1);
 				result = recipe.getItemOut();
 				timer = 0;
 				currentMaxTimer = recipe.getCookTime();
-				
+
 			}
 		}
 	}
@@ -96,18 +107,20 @@ public class TileSedimentCrystalizer extends TileHeatMachineBase implements ISid
 
 	@Override
 	public int[] getSlotsForFace(Direction side) {
-		return new int [] {0,1};
+		return new int[] { 0, 1 };
 	}
 
 	@Override
 	public boolean canInsertItem(int index, ItemStack itemStackIn, Direction direction) {
-		if (index == 0) return true;
+		if (index == 0)
+			return true;
 		return false;
 	}
 
 	@Override
 	public boolean canExtractItem(int index, ItemStack stack, Direction direction) {
-		if (index == 1) return true;
+		if (index == 1)
+			return true;
 		return false;
 	}
 }

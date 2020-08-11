@@ -43,7 +43,7 @@ public class TileSedimentCollector extends TileHeatMachineBase {
 				if (stack.isEmpty()) {
 					setInventorySlotContents(i, out);
 					break;
-				} else if (stack.isItemEqual(out) && stack.getCount() < 64) {
+				} else if (stack.isItemEqual(out) && stack.getCount() < stack.getMaxStackSize()) {
 					stack.grow(1);
 					break;
 				}

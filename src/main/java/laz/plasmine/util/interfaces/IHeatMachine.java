@@ -35,5 +35,5 @@ public interface IHeatMachine {
 				world.setBlockState(pos, state.with(BlockGeneratorBase.WORKING, false));
 		}
 	}
-
+	
 }

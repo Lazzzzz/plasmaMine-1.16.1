@@ -2,6 +2,7 @@ package laz.plasmine.api.base.cable;
 
 import static laz.plasmine.util.direction.DirectionUtils.getPosDirection;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import laz.plasmine.api.Constante;
@@ -21,7 +22,11 @@ import net.minecraft.world.World;
 
 public class TileCableBase extends TileEntity implements ITickableTileEntity, ICable, IConnection {
 
-	protected boolean[] connected = new boolean[6];
+	protected boolean  [] connected = new boolean[6];
+	protected BlockPos [] outputs = new BlockPos [6];
+	
+	protected List<BlockPos> NETWORK = new ArrayList<BlockPos>(); 
+	
 	protected int maxTime = 30;
 	protected int timer = 0;
 	protected boolean working = false;

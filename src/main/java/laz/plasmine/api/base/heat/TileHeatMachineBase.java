@@ -3,6 +3,7 @@ package laz.plasmine.api.base.heat;
 import java.util.List;
 
 import laz.plasmine.api.HeatHelper;
+import laz.plasmine.api.base.generator.BlockGeneratorBase;
 import laz.plasmine.network.PacketHandler;
 import laz.plasmine.network.helpers.HeatHelperPacket;
 import laz.plasmine.util.interfaces.IHeatMachine;
@@ -20,7 +21,9 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkDirection;
 
 public class TileHeatMachineBase extends TileEntity
@@ -40,6 +43,7 @@ public class TileHeatMachineBase extends TileEntity
 	@Override
 	public void tick() {
 		if (!world.isRemote) {
+			if (world.getDayTime() % 20 == 0) {world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);}
 			sendData();
 			if (heatHelper.isWorkingCelcius(world, pos)) setWorkingState(world, pos, world.getBlockState(pos), true);
 			else setWorkingState(world, pos, world.getBlockState(pos), false);
@@ -157,6 +161,17 @@ public class TileHeatMachineBase extends TileEntity
 		} else {
 			return !(player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D,
 					(double) this.pos.getZ() + 0.5D) > 64.0D);
+		}
+	}
+	
+	protected void updatePoweredState(boolean powered) {
+		BlockState state = world.getBlockState(pos);
+		if (powered) {
+			if (state.get(BlockHeatMachineBase.POWER) == false)
+				world.setBlockState(pos, state.with(BlockHeatMachineBase.POWER, true));
+		} else {
+			if (state.get(BlockHeatMachineBase.POWER) == true)
+				world.setBlockState(pos, state.with(BlockHeatMachineBase.POWER, false));
 		}
 	}
 }

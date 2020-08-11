@@ -28,39 +28,41 @@ public class BlockHeatMachineBase extends Block implements ICanWrench {
 
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 	public static final BooleanProperty WORKING = BooleanProperty.create("working");
-	
+	public static final BooleanProperty POWER = BooleanProperty.create("power");
+
 	public int maxCelcius;
 	public float thermo;
-	
+
 	public BlockHeatMachineBase(int maxCelcius, float thermo) {
 		super(Block.Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).hardnessAndResistance(3, 15)
 				.sound(SoundType.METAL).harvestLevel(0));
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(WORKING, Boolean.valueOf(false)));
-		
+		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH)
+				.with(WORKING, Boolean.valueOf(false)).with(POWER, Boolean.valueOf(false)));
+
 		this.maxCelcius = maxCelcius;
 		this.thermo = thermo;
 	}
 
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		builder.add(FACING, WORKING);
+		builder.add(FACING, WORKING, POWER);
 	}
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
 	}
-	
+
 	@Override
 	public boolean hasTileEntity(BlockState state) {
 		return true;
 	}
-	
+
 	@Override
 	public void addInformation(ItemStack stack, IBlockReader worldIn, List<ITextComponent> tooltip,
 			ITooltipFlag flagIn) {
 		HeatInformationBase.info(maxCelcius, thermo, tooltip);
 	}
-	
+
 	@Override
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
@@ -70,6 +72,16 @@ public class BlockHeatMachineBase extends Block implements ICanWrench {
 			}
 		}
 		super.onReplaced(state, worldIn, pos, newState, isMoving);
-		
+
 	}
+
+	public boolean canProvidePower(BlockState state) {
+		return true;
+	}
+	
+	public int getWeakPower(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
+		if (blockState.get(BlockHeatMachineBase.POWER) && side == blockState.get(BlockHeatMachineBase.FACING)) return 15;
+		return 0;
+	}
+	
 }

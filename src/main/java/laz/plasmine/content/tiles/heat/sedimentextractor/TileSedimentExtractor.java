@@ -3,6 +3,7 @@ package laz.plasmine.content.tiles.heat.sedimentextractor;
 import laz.plasmine.api.base.heat.TileHeatMachineBase;
 import laz.plasmine.recipes.sediementextractor.SedimentExtractorRecipe;
 import laz.plasmine.registry.init.PMTilesInit;
+import laz.plasmine.util.direction.DirectionUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -36,6 +37,12 @@ public class TileSedimentExtractor extends TileHeatMachineBase implements ISided
 	}
 
 	@Override
+	public void tick() {
+		if (!world.isRemote) updatePoweredState(!getStackInSlot(0).isEmpty() && !getStackInSlot(1).isEmpty());
+		super.tick();
+	}
+	
+	@Override
 	public CompoundNBT write(CompoundNBT compound) {
 		compound.put("result", result.serializeNBT());
 		compound.putInt("recipetimer", timer);
@@ -60,9 +67,10 @@ public class TileSedimentExtractor extends TileHeatMachineBase implements ISided
 				ItemStack stack = getStackInSlot(2);
 				if (stack == ItemStack.EMPTY) {
 					setInventorySlotContents(2, result);
-				}
-				else if (stack.getCount() == 64) world.addEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), result));
-				else stack.grow(1);
+				} else if (stack.getCount() == stack.getMaxStackSize())
+					world.addEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), result));
+				else
+					stack.grow(1);
 				reset();
 			}
 		}
@@ -74,7 +82,7 @@ public class TileSedimentExtractor extends TileHeatMachineBase implements ISided
 		ItemStack out = getStackInSlot(2);
 		if (in1.getItem() == recipe.getItemIn1().getItem() && in2.getItem() == recipe.getItemIn2().getItem()
 				&& recipe.getTemp() < heatHelper.getCelcius()) {
-			if (out == ItemStack.EMPTY || out.getCount() < 64) {
+			if (out == ItemStack.EMPTY || out.getCount() < out.getMaxStackSize()) {
 				in1.shrink(1);
 				in2.shrink(1);
 				result = recipe.getItemOut();
@@ -100,8 +108,8 @@ public class TileSedimentExtractor extends TileHeatMachineBase implements ISided
 
 	@Override
 	public boolean canInsertItem(int index, ItemStack itemStackIn, Direction direction) {
-		if (index != 2)
-			return true;
+		if (index == 0 && direction == Direction.UP) return true;
+		else if (index == 1 && DirectionUtils.isSide(direction)) return true; 
 		return false;
 	}
 
