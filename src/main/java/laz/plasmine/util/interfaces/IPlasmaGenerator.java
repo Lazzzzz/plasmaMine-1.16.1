@@ -1,11 +1,13 @@
 package laz.plasmine.util.interfaces;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import laz.plasmine.api.PlasmaHelper;
-import laz.plasmine.api.base.cable.TileCableBase;
-import laz.plasmine.util.direction.DirectionUtils;
+import laz.plasmine.api.base.heat.TileHeatMachineBase;
+import laz.plasmine.api.base.plasma.TilePlasmaMachineBase;
+import laz.plasmine.content.tiles.generator.BlockBasicGenerator;
+import laz.plasmine.util.DirectionUtils;
+import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -16,23 +18,20 @@ public interface IPlasmaGenerator {
 	PlasmaHelper getPlasmaHelper();
 
 	default int sendEnergy(World world, BlockPos pos, int amount) {
-		List<BlockPos> connectedTile = new ArrayList<BlockPos>();
 		if (amount > 0) {
-			for (int i = 0; i < 6; i++) {
-				TileEntity tile = world.getTileEntity(DirectionUtils.getPosDirection(pos, Direction.byIndex(i)));
-				if (tile != null && tile instanceof ICable)
-					connectedTile = ((TileCableBase) tile).getCableAround(Direction.byIndex(i), 0,
-							new ArrayList<BlockPos>(), new ArrayList<BlockPos>());
-			}
-			if (connectedTile.size() > 0) {
-				int amountEach = (amount + 1) / (connectedTile.size());
-				for (int i = 0; i < connectedTile.size(); i++) {
-					amount -= ((IPlasmaMachine) world.getTileEntity(connectedTile.get(i))).receiveEnergy(amountEach);
+			BlockState state = world.getBlockState(pos);
+			TileEntity tile = world.getTileEntity(DirectionUtils.getPosDirection(pos, state.get(BlockBasicGenerator.FACING).getOpposite()));
+			if (tile instanceof ICable) {
+				List<BlockPos> outputs = ((ICable) tile).getNetwork();
+				if (outputs.size() > 0) {
+					int amountEach = (amount + 1) / (outputs.size());
+					for (int i = 0; i < outputs.size(); i++) {
+						amount -= ((IPlasmaMachine) world.getTileEntity(outputs.get(i))).receiveEnergy(amountEach);
+					}
 				}
 			}
 		}
-		
-		if (connectedTile.size() == 0) return 0;
+
 		return amount;
 	}
 

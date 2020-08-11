@@ -2,22 +2,33 @@ package laz.plasmine.api.base.cable;
 
 import static laz.plasmine.api.Constante.MACHINE_PARTICLES;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import laz.plasmine.api.base.plasma.BlockPlasmaMachineBase;
+import laz.plasmine.util.DirectionUtils;
+import laz.plasmine.util.interfaces.ICable;
 import laz.plasmine.util.interfaces.ICanWrench;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SixWayBlock;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
 public class BlockCableBase extends BlockPlasmaMachineBase implements ICanWrench {
@@ -36,20 +47,17 @@ public class BlockCableBase extends BlockPlasmaMachineBase implements ICanWrench
 	public BlockCableBase() {
 		super();
 
-		this.setDefaultState(this.stateContainer.getBaseState()
-				.with(NORTH, Boolean.valueOf(false))
-				.with(EAST, Boolean.valueOf(false))
-				.with(SOUTH, Boolean.valueOf(false))
-				.with(WEST, Boolean.valueOf(false))
-				.with(DOWN, Boolean.valueOf(false))
-				.with(UP, Boolean.valueOf(false))
+		this.setDefaultState(this.stateContainer.getBaseState().with(NORTH, Boolean.valueOf(false))
+				.with(EAST, Boolean.valueOf(false)).with(SOUTH, Boolean.valueOf(false))
+				.with(WEST, Boolean.valueOf(false)).with(DOWN, Boolean.valueOf(false)).with(UP, Boolean.valueOf(false))
 				.with(WORKING, Boolean.valueOf(false)));
 
 	}
 
 	@Override
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-		if (stateIn.get(WORKING)) spawnParticles(stateIn, worldIn, pos, rand);
+		if (stateIn.get(WORKING))
+			spawnParticles(stateIn, worldIn, pos, rand);
 	}
 
 	public void spawnParticles(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
@@ -83,6 +91,15 @@ public class BlockCableBase extends BlockPlasmaMachineBase implements ICanWrench
 	}
 
 	@Override
+	public void onNeighborChange(BlockState state, IWorldReader world, BlockPos pos, BlockPos neighbor) {
+		if (!world.isRemote()) {
+			TileCableBase tile = (TileCableBase) world.getTileEntity(pos);
+			tile.updateNetwork(null, new ArrayList<BlockPos>(), null, 3);
+		}
+		super.onNeighborChange(state, world, pos, neighbor);
+	}
+
+	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(DOWN, UP, NORTH, SOUTH, WEST, EAST, WORKING);
 	}
@@ -90,7 +107,8 @@ public class BlockCableBase extends BlockPlasmaMachineBase implements ICanWrench
 	@Override
 	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
 		if (!worldIn.isRemote) {
-			if (state.get(WORKING)) entityIn.attackEntityFrom(new DamageSource("heat"), 3);
+			if (state.get(WORKING))
+				entityIn.attackEntityFrom(new DamageSource("heat"), 3);
 		}
 	}
 
@@ -114,4 +132,5 @@ public class BlockCableBase extends BlockPlasmaMachineBase implements ICanWrench
 	public VoxelShape getRaytraceShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		return SHAPE;
 	}
+
 }

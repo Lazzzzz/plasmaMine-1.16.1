@@ -3,7 +3,7 @@ package laz.plasmine.content.tiles.heat.sedimentextractor;
 import laz.plasmine.api.base.heat.TileHeatMachineBase;
 import laz.plasmine.recipes.sediementextractor.SedimentExtractorRecipe;
 import laz.plasmine.registry.init.PMTilesInit;
-import laz.plasmine.util.direction.DirectionUtils;
+import laz.plasmine.util.DirectionUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;

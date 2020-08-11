@@ -1,6 +1,6 @@
 package laz.plasmine.util.interfaces;
 
-import static laz.plasmine.util.direction.DirectionUtils.getPosDirection;
+import static laz.plasmine.util.DirectionUtils.getPosDirection;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;

@@ -5,7 +5,7 @@ import java.util.List;
 import laz.plasmine.api.base.heat.BlockHeatMachineBase;
 import laz.plasmine.api.base.heat.TileHeatMachineBase;
 import laz.plasmine.registry.init.PMTilesInit;
-import laz.plasmine.util.direction.DirectionUtils;
+import laz.plasmine.util.DirectionUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.entity.Entity;

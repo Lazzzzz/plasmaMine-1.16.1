@@ -4,7 +4,7 @@ import java.util.Random;
 
 import laz.plasmine.api.Constante;
 import laz.plasmine.api.base.heat.BlockHeatMachineBase;
-import laz.plasmine.util.direction.DirectionUtils;
+import laz.plasmine.util.DirectionUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;

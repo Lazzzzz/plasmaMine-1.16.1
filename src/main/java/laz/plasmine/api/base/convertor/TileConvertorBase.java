@@ -1,7 +1,7 @@
 package laz.plasmine.api.base.convertor;
 
 import static laz.plasmine.api.PlasmaToHeatConvertion.transformPlasmaToHeat;
-import static laz.plasmine.util.direction.DirectionUtils.getPosDirection;
+import static laz.plasmine.util.DirectionUtils.getPosDirection;
 
 import laz.plasmine.api.HeatHelper;
 import laz.plasmine.api.base.plasma.TilePlasmaMachineBase;

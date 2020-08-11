@@ -1,4 +1,4 @@
-package laz.plasmine.util.direction;
+package laz.plasmine.util;
 
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
