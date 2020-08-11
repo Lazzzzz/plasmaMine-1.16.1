@@ -2,6 +2,7 @@ package laz.plasmine.content.tiles.heat.sedimentcollector;
 
 import laz.plasmine.api.base.container.ContainerHeat;
 import laz.plasmine.api.base.heat.TileHeatMachineBase;
+import laz.plasmine.api.container.OutputSlot;
 import laz.plasmine.registry.init.PMContainersInit;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -21,7 +22,7 @@ public class ContainerSedimentCollector extends ContainerHeat {
 
 		for (int i = 0; i < 3; ++i) {
 			for (int j = 0; j < 8; ++j) {
-				this.addSlot(new Slot(tile, j + i * 8, 26 + j * 18, 14 + i * 18));
+				this.addSlot(new OutputSlot(tile, j + i * 8, 26 + j * 18, 10 + i * 18));
 			}
 		}
 	}

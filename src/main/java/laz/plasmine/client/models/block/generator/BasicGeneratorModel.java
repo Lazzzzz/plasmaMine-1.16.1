@@ -70,7 +70,7 @@ public class BasicGeneratorModel extends Model implements ITileModel {
 
 	@Override
 	public void animation(int tick, float partialtick) {
-		bone.rotateAngleZ = tick * (float)Math.PI * -0.1F * 0.2f;
+		bone.rotateAngleZ = tick * (float)Math.PI * -0.1F * 0.3f;
 	}
 
 	@Override

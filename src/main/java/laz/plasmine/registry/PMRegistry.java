@@ -6,6 +6,7 @@ import static laz.plasmine.Plasmine.MOD_ID;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import laz.plasmine.registry.init.PMBlocksInit;
 import laz.plasmine.registry.init.PMContainersInit;
 import laz.plasmine.registry.init.PMItemsInit;
 import laz.plasmine.registry.init.PMRecipesSerializer;
@@ -45,9 +46,13 @@ public class PMRegistry {
 	public static int BIOMES_INT = 0;
 	public static int TILE_INT = 0;
 
+	@SuppressWarnings("unchecked")
 	public static final BlockRegistryObjectGroup<Block, BlockItem, ?>[] SIMPLE = new BlockRegistryObjectGroup[2000];
+	@SuppressWarnings("unchecked")
 	public static final RegistryObject<Item>[] ITEMLIST = new RegistryObject[1000];
+	@SuppressWarnings("unchecked")
 	public static final RegistryObject<Biome>[] BIOMELIST = new RegistryObject[150];
+	@SuppressWarnings("unchecked")
 	public static final BlockRegistryObjectGroup<Block, BlockItem, TileEntity>[] TILES = new BlockRegistryObjectGroup[500];
 
 	public static void register(IEventBus eventBus) {
@@ -62,6 +67,7 @@ public class PMRegistry {
 	public static void init(IEventBus eventBus) {
 		PMContainersInit.init();
 		PMItemsInit.init();
+		PMBlocksInit.init();
 		PMTilesInit.init();
 		PMSoundInit.init();
 		PMRecipesSerializer.init();

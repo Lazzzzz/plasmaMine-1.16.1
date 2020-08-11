@@ -16,22 +16,23 @@ public interface IPlasmaGenerator {
 	PlasmaHelper getPlasmaHelper();
 
 	default int sendEnergy(World world, BlockPos pos, int amount) {
+		List<BlockPos> connectedTile = new ArrayList<BlockPos>();
 		if (amount > 0) {
-			List<BlockPos> connectedTile = new ArrayList<BlockPos>();
 			for (int i = 0; i < 6; i++) {
 				TileEntity tile = world.getTileEntity(DirectionUtils.getPosDirection(pos, Direction.byIndex(i)));
 				if (tile != null && tile instanceof ICable)
 					connectedTile = ((TileCableBase) tile).getCableAround(Direction.byIndex(i), 0,
 							new ArrayList<BlockPos>(), new ArrayList<BlockPos>());
-
 			}
 			if (connectedTile.size() > 0) {
-				int amountEach = amount / (connectedTile.size());
+				int amountEach = (amount + 1) / (connectedTile.size());
 				for (int i = 0; i < connectedTile.size(); i++) {
 					amount -= ((IPlasmaMachine) world.getTileEntity(connectedTile.get(i))).receiveEnergy(amountEach);
 				}
 			}
 		}
+		
+		if (connectedTile.size() == 0) return 0;
 		return amount;
 	}
 

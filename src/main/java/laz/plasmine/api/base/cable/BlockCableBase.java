@@ -90,7 +90,7 @@ public class BlockCableBase extends BlockPlasmaMachineBase implements ICanWrench
 	@Override
 	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
 		if (!worldIn.isRemote) {
-			entityIn.attackEntityFrom(new DamageSource("heat"), 3);
+			if (state.get(WORKING)) entityIn.attackEntityFrom(new DamageSource("heat"), 3);
 		}
 	}
 

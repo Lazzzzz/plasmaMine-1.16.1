@@ -3,10 +3,10 @@ package laz.plasmine.content.tiles.heat.sedimentcollector;
 import java.util.Random;
 
 import laz.plasmine.api.base.heat.BlockHeatMachineBase;
+import laz.plasmine.registry.init.PMItemsInit;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.particles.RedstoneParticleData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
@@ -31,7 +31,7 @@ public class BlockSedimentCollector extends BlockHeatMachineBase {
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
 			Hand handIn, BlockRayTraceResult hit) {
-		if (!worldIn.isRemote) {
+		if (!worldIn.isRemote && player.getHeldItemMainhand().getItem() != PMItemsInit.WRENCH.get()) {
 			TileEntity te = worldIn.getTileEntity(pos);
 			if (te instanceof TileSedimentCollector) {
 				NetworkHooks.openGui((ServerPlayerEntity) player, (TileSedimentCollector) te, pos);

@@ -1,0 +1,20 @@
+{
+	"type": "plasmine:sediment_extractor",
+	"input1": 
+	{
+		"item": "plasmine:lisium_sediment"
+	},
+
+	"input2": 
+	{
+		"item": "plasmine:lisium_sediment"
+	},
+
+	"result": 
+	{
+		"item": "plasmine:lisium_chunk"
+	},
+
+	"temp": 100,
+	"time": 0
+}

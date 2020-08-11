@@ -1,0 +1,11 @@
+{
+	"type": "plasmine:sediment_collector",
+	"chance": 0.5,
+	"result": 
+	{
+		"item": "plasmine:lisium_sediment"
+	},
+
+	"temp": 100,
+	"time": 0
+}

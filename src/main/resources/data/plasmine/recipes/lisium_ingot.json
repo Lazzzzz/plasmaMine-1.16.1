@@ -1,0 +1,15 @@
+{
+	"type": "plasmine:sediment_crystalizer",
+	"input": 
+	{
+		"item": "plasmine:lisium_chunk"
+	},
+
+	"result": 
+	{
+		"item": "plasmine:lisium_ingot"
+	},
+
+	"temp": 180,
+	"time": 200
+}

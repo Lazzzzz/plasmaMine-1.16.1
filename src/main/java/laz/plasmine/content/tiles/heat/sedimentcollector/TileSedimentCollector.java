@@ -6,7 +6,7 @@ import laz.plasmine.registry.init.PMTilesInit;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
-import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 
@@ -27,21 +27,33 @@ public class TileSedimentCollector extends TileHeatMachineBase {
 	}
 
 	@Override
-	public void tick() {
-		super.tick();
+	public void onWorking() {
+		if (world.getDayTime() % 100 == 0) {
+			float random = world.rand.nextFloat();
+			world.getRecipeManager().getRecipes().stream().filter(recipe -> recipe instanceof SedimentCollectorRecipe)
+					.forEach(e -> produceItem((SedimentCollectorRecipe) e, random));
+		}
 	}
 
-	@Override
-	public void onWorking() {
-		if (world.getDayTime() % 20 == 0) {
-			world.getRecipeManager().getRecipes().stream().filter(recipe -> recipe instanceof IRecipe)
-					.forEach(e -> System.out.println(e));
+	private void produceItem(SedimentCollectorRecipe recipe, float rand) {
+		if (recipe.getChance() > rand && recipe.getTemp() < heatHelper.getCelcius()) {
+			for (int i = 0; i < size; i++) {
+				ItemStack stack = getStackInSlot(i);
+				ItemStack out = recipe.getItemOut().copy();
+				if (stack.isEmpty()) {
+					setInventorySlotContents(i, out);
+					break;
+				} else if (stack.isItemEqual(out) && stack.getCount() < 64) {
+					stack.grow(1);
+					break;
+				}
+			}
 		}
 	}
 
 	@Override
 	public float consumeHeat() {
-		return heatHelper.getThermoConductivity() / 10;
+		return heatHelper.getThermoConductivity() / 5;
 	}
 
 }

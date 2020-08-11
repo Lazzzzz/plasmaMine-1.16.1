@@ -16,8 +16,8 @@ public abstract class AbstractPlasmineRecipe implements IRecipe<IInventory> {
     public AbstractPlasmineRecipe(IRecipeType<?> type, ResourceLocation id, int temp, int time) {
         this.type = type;
         this.id = id;
-        this.time = temp;
-        this.temp = time;
+        this.time = time;
+        this.temp = temp;
     }
 
     public int getTemp() {

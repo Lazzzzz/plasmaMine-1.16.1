@@ -1,6 +1,6 @@
 package laz.plasmine;
 
-import net.minecraft.block.Blocks;
+import laz.plasmine.registry.init.PMItemsInit;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
@@ -12,6 +12,7 @@ public class PMGroup extends ItemGroup {
 
     @Override
     public ItemStack createIcon() {
-        return new ItemStack(Blocks.IRON_BLOCK);
+        return new ItemStack(PMItemsInit.WRENCH.get());
     }
+    
 }

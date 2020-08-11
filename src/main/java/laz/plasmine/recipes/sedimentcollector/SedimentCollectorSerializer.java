@@ -4,14 +4,11 @@ import javax.annotation.Nullable;
 
 import com.google.gson.JsonObject;
 
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.ShapedRecipe;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
@@ -44,7 +41,9 @@ public class SedimentCollectorSerializer extends ForgeRegistryEntry<IRecipeSeria
 	@Override
 	public void write(PacketBuffer buffer, SedimentCollectorRecipe recipe) {
 		buffer.writeFloat(recipe.getChance());
+		
 		buffer.writeItemStack(recipe.getItemOut());
+		
 		buffer.writeInt(recipe.getTemp());
 		buffer.writeInt(recipe.getCookTime());
 	}

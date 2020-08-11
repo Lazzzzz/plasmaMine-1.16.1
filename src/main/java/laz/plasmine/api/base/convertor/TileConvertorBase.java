@@ -30,7 +30,6 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 	@Override
 	public void tick() {
 		if (!world.isRemote) {
-
 			boolean isWorking = heatHelper.isWorkingCelcius(world, pos);
 			setWorkingState(world, pos, world.getBlockState(pos), isWorking);
 			float heat = 0;

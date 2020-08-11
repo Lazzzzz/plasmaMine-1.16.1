@@ -14,10 +14,8 @@ import laz.plasmine.client.screen.DrawBaseGui;
 import laz.plasmine.content.tiles.heat.sedimentcollector.ContainerSedimentCollector;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.FurnaceContainer;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.ITextProperties;
-import net.minecraft.util.text.StringTextComponent;
 
 public class SedimentCollectorScreen extends ContainerScreen<ContainerSedimentCollector> {
 
@@ -30,15 +28,15 @@ public class SedimentCollectorScreen extends ContainerScreen<ContainerSedimentCo
 	protected void func_230450_a_(MatrixStack p_230450_1_, float p_230450_2_, int p_230450_3_, int p_230450_4_) {
 		TileHeatMachineBase tile = this.container.getTile();
 		HeatHelper helper = tile.getHeatHelper();
-		DrawBaseGui.drawGui(guiLeft, guiTop);
+		DrawBaseGui.drawGui(p_230450_1_, this.field_230712_o_, guiLeft, guiTop, " °C", (int) helper.getCelcius(), 12976128);
 		HEAT_LOGO.draw(guiLeft + 5, guiTop + 60, 9, 17);
 		HEAT_BAR.drawPartial(guiLeft + 2, guiTop + 2, 16, 56, 0,
 				1 - ((float) helper.getCelcius() / helper.getMaxCelcius()), 1f, 1f);
 		renderToolTip(p_230450_1_, new ArrayList<ITextProperties>(), p_230450_3_, p_230450_3_, this.field_230712_o_);
-		
+
 		for (int i = 0; i < 3; ++i) {
 			for (int j = 0; j < 8; ++j) {
-				BASE_SLOT.draw(guiLeft + 26 + j * 18, guiTop + 14 + i * 18, 16, 16);
+				BASE_SLOT.draw(guiLeft + 26 + j * 18, guiTop + 10 + i * 18, 16, 16);
 			}
 		}
 	}
@@ -50,6 +48,7 @@ public class SedimentCollectorScreen extends ContainerScreen<ContainerSedimentCo
 	}
 
 	@Override
-	protected void func_230451_b_(MatrixStack p_230451_1_, int p_230451_2_, int p_230451_3_) {}
+	protected void func_230451_b_(MatrixStack p_230451_1_, int p_230451_2_, int p_230451_3_) {
+	}
 
 }

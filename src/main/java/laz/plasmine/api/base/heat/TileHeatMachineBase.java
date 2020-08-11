@@ -43,11 +43,10 @@ public class TileHeatMachineBase extends TileEntity
 			sendData();
 			if (heatHelper.isWorkingCelcius(world, pos)) setWorkingState(world, pos, world.getBlockState(pos), true);
 			else setWorkingState(world, pos, world.getBlockState(pos), false);
-			
-			if (world.getBlockState(pos).get(BlockHeatMachineBase.WORKING))
-				onWorking();
-				heatHelper.removeHeat(consumeHeat());
-			
+
+			if (world.getBlockState(pos).get(BlockHeatMachineBase.WORKING)) onWorking();
+			heatHelper.removeHeat(consumeHeat());
+
 			heatHelper.coolDown(world, pos);
 			if (heatHelper.isOverHeating())
 				onOverHeat();
@@ -111,13 +110,14 @@ public class TileHeatMachineBase extends TileEntity
 
 	@Override
 	public boolean isEmpty() {
-		return content.get(0).getCount() == 0;
+		return false;
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int index) {
 		if (index > size - 1)
 			return ItemStack.EMPTY;
+		
 		return content.get(index);
 	}
 
@@ -139,7 +139,7 @@ public class TileHeatMachineBase extends TileEntity
 		if (index > size - 1)
 			return ItemStack.EMPTY;
 		ItemStack stack = content.get(index).copy();
-		clear();
+		content.set(index, ItemStack.EMPTY);
 		return stack;
 	}
 

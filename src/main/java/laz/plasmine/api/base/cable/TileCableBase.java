@@ -61,9 +61,8 @@ public class TileCableBase extends TileEntity implements ITickableTileEntity, IC
 
 	@Override
 	public List<BlockPos> getCableAround(Direction from_dir, int iterration, List<BlockPos> passed, List<BlockPos> connect) {
-
-		if (iterration == Constante.MAX_CABLE_ITERRATION)
-			return connect;
+				
+		if (iterration == Constante.MAX_CABLE_ITERRATION) return connect;
 
 		working = true;
 

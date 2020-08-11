@@ -50,6 +50,7 @@ public class TileGeneratorBase extends TileEntity
 			int energy;
 			if (world.isBlockPowered(pos)) energy = 0;
 			else energy	= produceEnergy();
+			
 			setWorkingState(energy > 0);
 			plasmaHelper.addPlasma(energy);
 			plasmaHelper.removePlasma(sendEnergy(world, pos, plasmaHelper.sendPlasma()));
@@ -126,7 +127,7 @@ public class TileGeneratorBase extends TileEntity
 
 	@Override
 	public boolean isEmpty() {
-		return content.get(0).getCount() == 0;
+		return false;
 	}
 
 	@Override
@@ -154,7 +155,7 @@ public class TileGeneratorBase extends TileEntity
 		if (index > size - 1)
 			return ItemStack.EMPTY;
 		ItemStack stack = content.get(index).copy();
-		clear();
+		content.set(index, ItemStack.EMPTY);
 		return stack;
 	}
 

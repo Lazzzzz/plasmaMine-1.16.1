@@ -3,6 +3,7 @@ package laz.plasmine.content.tiles.generator;
 import java.util.List;
 
 import laz.plasmine.api.base.generator.BlockGeneratorBase;
+import laz.plasmine.registry.init.PMItemsInit;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -25,7 +26,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 public class BlockBasicGenerator extends BlockGeneratorBase {
-	
+
 	VoxelShape SHAPE = VoxelShapes.or(VoxelShapes.create(0.0625f, 0, 0.0625f, 1f - 0.0625f, 0.25f, 1f - 0.0625f),
 			VoxelShapes.create(0.0625f * 2, 0.25f, 0.0625f * 2, 1 - 0.0625f * 2, 1 - 0.0625f, 1 - 0.0625f * 2));
 
@@ -35,30 +36,30 @@ public class BlockBasicGenerator extends BlockGeneratorBase {
 
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return new TileBasicGenerator(2000, 20, 1);
+		return new TileBasicGenerator(this.maxCapacity, this.rate, this.production);
 	}
 
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
 			Hand handIn, BlockRayTraceResult hit) {
-		if (!worldIn.isRemote) {
-			TileEntity te = worldIn.getTileEntity(pos);
-			if (te instanceof TileBasicGenerator) {
-				NetworkHooks.openGui((ServerPlayerEntity) player, (TileBasicGenerator) te, pos);
-				return ActionResultType.SUCCESS;
+		if (!worldIn.isRemote && player.getHeldItemMainhand().getItem() != PMItemsInit.WRENCH.get()) {
+				TileEntity te = worldIn.getTileEntity(pos);
+				if (te instanceof TileBasicGenerator) {
+					NetworkHooks.openGui((ServerPlayerEntity) player, (TileBasicGenerator) te, pos);
+					return ActionResultType.SUCCESS;
+				}
 			}
-		}
 		return ActionResultType.FAIL;
 
 	}
-	
+
 	@Override
 	public void addInformation(ItemStack stack, IBlockReader worldIn, List<ITextComponent> tooltip,
 			ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
-		tooltip.add(new StringTextComponent("Produce plasma when on top of lava and has iron nuggets"));
+		tooltip.add(new StringTextComponent("Produce plasma with iron nuggets"));
 	}
-	
+
 	@Override
 	public BlockRenderType getRenderType(BlockState state) {
 		return BlockRenderType.INVISIBLE;
@@ -84,7 +85,7 @@ public class BlockBasicGenerator extends BlockGeneratorBase {
 	public VoxelShape getRaytraceShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		return SHAPE;
 	}
-	
+
 	@Override
 	public void onWrenchAction(PlayerEntity player, World world, BlockPos pos, BlockState state, Direction dir) {
 		super.onWrenchAction(player, world, pos, state, dir);

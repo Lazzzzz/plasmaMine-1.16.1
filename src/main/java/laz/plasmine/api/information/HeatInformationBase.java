@@ -1,4 +1,4 @@
-package laz.plasmine.client.information;
+package laz.plasmine.api.information;
 
 import java.util.List;
 

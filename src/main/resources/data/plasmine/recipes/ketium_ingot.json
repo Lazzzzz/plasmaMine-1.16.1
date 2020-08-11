@@ -1,0 +1,15 @@
+{
+	"type": "plasmine:sediment_crystalizer",
+	"input": 
+	{
+		"item": "plasmine:ketium_chunk"
+	},
+
+	"result": 
+	{
+		"item": "plasmine:ketium_ingot"
+	},
+
+	"temp": 250,
+	"time": 200
+}

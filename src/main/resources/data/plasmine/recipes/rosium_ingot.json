@@ -1,0 +1,15 @@
+{
+	"type": "plasmine:sediment_crystalizer",
+	"input": 
+	{
+		"item": "plasmine:rosium_chunk"
+	},
+
+	"result": 
+	{
+		"item": "plasmine:rosium_ingot"
+	},
+
+	"temp": 500,
+	"time": 300
+}

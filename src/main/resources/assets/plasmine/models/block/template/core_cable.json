@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"particle": "texture",
-		"cable": "texture"
+		"particle": "#cable",
+		"cable": "#cable"
 	},
 	"elements": [
 		{
@@ -20,5 +20,10 @@
 				"down": {"uv": [0, 0, 3, 3], "texture": "#cable"}
 			}
 		}
-	]
+	],
+	"display": {
+		"gui": {
+			"rotation": [30, 45, 0]
+		}
+	}
 }

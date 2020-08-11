@@ -3,7 +3,7 @@
 	"ambientocclusion": false,
 	"texture_size": [128, 128],
 	"textures": {
-		"0": "plasmine:blocks/convertor/basic_convertor"
+		"0": "plasmine:blocks/convertor"
 	},
 	"elements": [
 		{

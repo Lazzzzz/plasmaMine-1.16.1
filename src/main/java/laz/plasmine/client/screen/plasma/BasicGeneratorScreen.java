@@ -11,7 +11,6 @@ import laz.plasmine.client.screen.DrawBaseGui;
 import laz.plasmine.content.tiles.generator.BlockBasicGenerator;
 import laz.plasmine.content.tiles.generator.ContainerBasicGenerator;
 import laz.plasmine.content.tiles.generator.TileBasicGenerator;
-import net.minecraft.client.gui.screen.HopperScreen;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.text.ITextComponent;
@@ -27,7 +26,7 @@ public class BasicGeneratorScreen extends ContainerScreen<ContainerBasicGenerato
 	protected void func_230450_a_(MatrixStack p_230450_1_, float p_230450_2_, int p_230450_3_, int p_230450_4_) {
 		TileBasicGenerator tile = this.container.getTile();
 		PlasmaHelper helper = tile.getPlasmaHelper();
-		DrawBaseGui.drawGui(guiLeft, guiTop);
+		DrawBaseGui.drawGui(p_230450_1_, this.field_230712_o_, guiLeft, guiTop, " PU", (int) helper.getCapacity(), 3833343);
 		PLASMA_LOGO.draw(guiLeft + 5, guiTop + 60, 9, 17);
 		PLASMA_BAR.drawPartial(guiLeft + 2, guiTop + 2, 16, 56, 0, 1 - ((float) helper.getCapacity() / helper.getMaxCapacity()), 1f, 1f);
 		BASE_SLOT.draw(guiLeft + 80, guiTop + 35, 16, 16);

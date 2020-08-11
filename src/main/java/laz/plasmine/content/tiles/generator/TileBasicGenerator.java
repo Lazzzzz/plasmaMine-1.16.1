@@ -3,7 +3,6 @@ package laz.plasmine.content.tiles.generator;
 import laz.plasmine.api.base.generator.TileGeneratorBase;
 import laz.plasmine.registry.init.PMTilesInit;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -38,16 +37,14 @@ public class TileBasicGenerator extends TileGeneratorBase {
 	@Override
 	public int produceEnergy() {
 		if (plasmaHelper.getCapacity() < plasmaHelper.getMaxCapacity()) {
-			if (cooking > 0) {
-				if (world.getBlockState(pos.down()) == Blocks.LAVA.getDefaultState())
-					return generation;
-			} else {
+			if (cooking > 0)
+				return generation;
+			else {
 				if (content.get(0).getCount() > 0) {
 					decrStackSize(0, 1);
 					cooking = maxCooking;
 					return generation;
 				}
-
 			}
 		}
 		return 0;

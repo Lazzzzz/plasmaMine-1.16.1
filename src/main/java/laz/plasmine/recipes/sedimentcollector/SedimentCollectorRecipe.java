@@ -3,7 +3,6 @@ package laz.plasmine.recipes.sedimentcollector;
 import laz.plasmine.recipes.AbstractPlasmineRecipe;
 import laz.plasmine.registry.init.PMRecipesSerializer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.util.ResourceLocation;

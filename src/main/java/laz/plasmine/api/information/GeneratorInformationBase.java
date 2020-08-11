@@ -1,11 +1,11 @@
-package laz.plasmine.client.information;
+package laz.plasmine.api.information;
 
 import java.util.List;
 
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 
-public class ConvertorInformationBase {
+public class GeneratorInformationBase {
 
 	public static void info(int maxCapcity, int rate, int tick, List<ITextComponent> tooltip) {
 		tooltip.add(new StringTextComponent("\u00A7b - Max capacity :"));
