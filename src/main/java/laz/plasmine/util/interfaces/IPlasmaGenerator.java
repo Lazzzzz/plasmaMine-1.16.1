@@ -21,15 +21,18 @@ public interface IPlasmaGenerator {
 			if (tile instanceof ICable) {
 				List<BlockPos> outputs = ((ICable) tile).getNetwork();
 				if (outputs.size() == 0) return 0;
-				
+
 				if (outputs.size() > 0) {
 					int amountEach = (int) Math.ceil(amount / outputs.size());
 					for (int i = 0; i < outputs.size(); i++) {
 						amount -= ((IPlasmaMachine) world.getTileEntity(outputs.get(i))).receiveEnergy(amountEach);
 					}
 				}
-			} else return 0;
+			} else if (tile instanceof IPlasmaMachine) {
+				amount -= ((IPlasmaMachine) tile).receiveEnergy(amount);
+			}
 		}
+
 		return amount;
 	}
 

@@ -117,4 +117,10 @@ public class ConveyorBelt extends Block implements ICanWrench {
 		if (!world.isRemote)
 			world.setBlockState(pos, state.with(FACING, state.get(FACING).rotateY()));
 	}
+	
+	@Override
+	public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
+		// TODO Auto-generated method stub
+		super.onBlockAdded(state, worldIn, pos, oldState, isMoving);
+	}
 }

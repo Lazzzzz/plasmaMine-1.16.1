@@ -15,20 +15,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 
 public class TileCropBlower extends TileHeatMachineBase {
-	
-	private int maxTime = 20;
-	private int timer = 0;
-	
+
 	public TileCropBlower(int maxCelcius, float thermo) {
 		super(PMTilesInit.CROP_BLOWER.getTileEntityType(), maxCelcius, thermo, 0);
 	}
 
 	@Override
 	public void onWorking() {
-		timer ++;
 		Direction dir = world.getBlockState(pos).get(BlockHeatMachineBase.FACING);
-		if (timer == maxTime) {
-			timer = 0;
+		if (livingtick % 20 == 0) {
 			for (int i = -2; i < 3; i++) {
 				for (int j = -2; j < 3; j++) {
 					BlockPos p = DirectionUtils.getPosFromRot(pos, dir, i, j, 3);
@@ -62,8 +57,11 @@ public class TileCropBlower extends TileHeatMachineBase {
 		List<Entity> entitys = world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(corner[0], corner[1]));
 		for (int i = 0; i < entitys.size(); i++) {
 			Entity entity = entitys.get(i);
-			Vector3d speed = DirectionUtils.getMotion(dir, 0.2f);
-			entity.setMotion(entity.getMotion().x + speed.x, entity.getMotion().y, entity.getMotion().z + speed.z);
+
+			if (entity.func_233570_aj_()) {
+				Vector3d speed = DirectionUtils.getMotion(dir, 0.2f);
+				entity.setMotion(entity.getMotion().x + speed.x, entity.getMotion().y, entity.getMotion().z + speed.z);
+			}
 		}
 	}
 

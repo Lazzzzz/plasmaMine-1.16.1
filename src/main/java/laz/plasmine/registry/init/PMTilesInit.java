@@ -5,6 +5,10 @@ import static laz.plasmine.registry.PMRegistry.BLOCKS;
 import static laz.plasmine.registry.PMRegistry.ITEMS;
 import static laz.plasmine.registry.PMRegistry.TILE_ENTITIES;
 
+import laz.plasmine.content.block.slaves.BlockMachine;
+import laz.plasmine.content.block.slaves.TileMachine;
+import laz.plasmine.content.block.slaves.coils.BlockLisiumCoil;
+import laz.plasmine.content.block.slaves.coils.TileLisiumCoil;
 import laz.plasmine.content.tiles.cable.BlockBasicPlasmaCable;
 import laz.plasmine.content.tiles.cable.TileBasicPlasmaCable;
 import laz.plasmine.content.tiles.convertor.BlockAdvancedConvertor;
@@ -25,6 +29,8 @@ import laz.plasmine.content.tiles.heat.sedimentextractor.BlockSedimentExtractor;
 import laz.plasmine.content.tiles.heat.sedimentextractor.TileSedimentExtractor;
 import laz.plasmine.content.tiles.other.BlockHupper;
 import laz.plasmine.content.tiles.other.TileHupper;
+import laz.plasmine.content.tiles.storage.BlockEnergyStorage;
+import laz.plasmine.content.tiles.storage.TileEnergyStorage;
 import laz.plasmine.registry.BlockRegistryObjectGroup;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -41,13 +47,17 @@ public class PMTilesInit {
 	public static BlockRegistryObjectGroup<BlockSolarConvertor, BlockItem, TileSolarConvertor> SOLAR_CONVERTOR;
 	public static BlockRegistryObjectGroup<BlockBasicConvertor, BlockItem, TileBasicConvertor> BASIC_CONVERTOR;
 	public static BlockRegistryObjectGroup<BlockAdvancedConvertor, BlockItem, TileAdvancedConvertor> ADVANCED_CONVERTOR;
-	
+
 	public static BlockRegistryObjectGroup<BlockCropBlower, BlockItem, TileCropBlower> CROP_BLOWER;
-	
+
+	public static BlockRegistryObjectGroup<BlockMachine, BlockItem, TileMachine> MACHINE_BLOCK;
+	public static BlockRegistryObjectGroup<BlockEnergyStorage, BlockItem, TileEnergyStorage> ENERGY_STORAGE;
+	public static BlockRegistryObjectGroup<BlockLisiumCoil, BlockItem, TileLisiumCoil> LISIUM_COIL;
+
 	public static BlockRegistryObjectGroup<BlockHupper, BlockItem, TileHupper> HUPPER;
 
 	public static void init() {
- 
+
 		// CABLES
 		BASIC_PLASMA_CABLE = new BlockRegistryObjectGroup<>("basic_plasma_cable", BlockBasicPlasmaCable::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)), TileBasicPlasmaCable::new)
@@ -57,12 +67,11 @@ public class PMTilesInit {
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
 				() -> new TileBasicGenerator(2000, 20, 1)).register(BLOCKS, ITEMS, TILE_ENTITIES);
 
-		
 		// CONVERTOR
 		SOLAR_CONVERTOR = new BlockRegistryObjectGroup<>("solar_convertor", BlockSolarConvertor::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
 				() -> new TileSolarConvertor(1, 0.5f)).register(BLOCKS, ITEMS, TILE_ENTITIES);
-		
+
 		BASIC_CONVERTOR = new BlockRegistryObjectGroup<>("basic_convertor", BlockBasicConvertor::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
 				() -> new TileBasicConvertor(2, 0.3f)).register(BLOCKS, ITEMS, TILE_ENTITIES);
@@ -70,7 +79,7 @@ public class PMTilesInit {
 		ADVANCED_CONVERTOR = new BlockRegistryObjectGroup<>("advanced_convertor", BlockAdvancedConvertor::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
 				() -> new TileAdvancedConvertor(5, 0.5f)).register(BLOCKS, ITEMS, TILE_ENTITIES);
-		
+
 		// MACHINE
 		SEDIMENT_COLLECTOR = new BlockRegistryObjectGroup<>("sediment_collector", BlockSedimentCollector::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
@@ -83,14 +92,29 @@ public class PMTilesInit {
 		SEDIMENT_CRYSTALIZER = new BlockRegistryObjectGroup<>("sediment_crystalizer", BlockSedimentCrystalizer::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
 				() -> new TileSedimentCrystalizer(700, 0.2f)).register(BLOCKS, ITEMS, TILE_ENTITIES);
-		
+
 		CROP_BLOWER = new BlockRegistryObjectGroup<>("crop_blower", BlockCropBlower::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
 				() -> new TileCropBlower(500, 0.4f)).register(BLOCKS, ITEMS, TILE_ENTITIES);
+
 		
-		HUPPER = new BlockRegistryObjectGroup<>("hupper", BlockHupper::new,
+		//STORAGE
+		MACHINE_BLOCK = new BlockRegistryObjectGroup<>("machine_block", BlockMachine::new,
+				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)), TileMachine::new)
+				.register(BLOCKS, ITEMS, TILE_ENTITIES);	 
+		
+		ENERGY_STORAGE = new BlockRegistryObjectGroup<>("energy_storage", BlockEnergyStorage::new,
+				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)), TileEnergyStorage::new)
+						.register(BLOCKS, ITEMS, TILE_ENTITIES);		
+		
+		LISIUM_COIL = new BlockRegistryObjectGroup<>("lisium_coil", BlockLisiumCoil::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
-				TileHupper::new).register(BLOCKS, ITEMS, TILE_ENTITIES);
+				TileLisiumCoil::new).register(BLOCKS, ITEMS, TILE_ENTITIES);
+
+		//OTHER
+		HUPPER = new BlockRegistryObjectGroup<>("hupper", BlockHupper::new,
+				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)), TileHupper::new)
+						.register(BLOCKS, ITEMS, TILE_ENTITIES);
 
 	}
 

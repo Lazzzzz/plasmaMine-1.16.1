@@ -21,7 +21,7 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 	public TileConvertorBase(TileEntityType<?> tileEntityTypeIn, int maxCapacity,
 			int convert, float efficiency) {
 		super(tileEntityTypeIn, maxCapacity);
-		amountToConvertPerTick = convert;
+		this.amountToConvertPerTick = convert;
 		this.efficiency = efficiency;
 
 	}
@@ -30,15 +30,18 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 	public void tick() {
 		livingtick ++;
 		if (!world.isRemote) {
-			boolean isWorking = plasmaHelper.getCapacity() > 0 && world.isBlockPowered(pos);
+			boolean isWorking = plasmaHelper.getCapacity() > amountToConvertPerTick && world.isBlockPowered(pos);
 			setWorkingState(world, pos, world.getBlockState(pos), isWorking);
+			
 			float heat = 0;
 			if (isTileConnect() && world.isBlockPowered(pos)) {
 				HeatHelper helper = heatAround();
-				if (helper != null) heat = transformPlasmaToHeat(helper, plasmaHelper.removePlasma(amountToConvertPerTick), efficiency);
-				helper.addCelcius(heat);
+				if (helper != null) {
+					if (plasmaHelper.getCapacity() > amountToConvertPerTick) heat = transformPlasmaToHeat(helper, plasmaHelper.removePlasma(amountToConvertPerTick), efficiency);
+					helper.addCelcius(heat);
+				}
+				
 				if (isWorking) {
-					heatAround();
 					if (world.rand.nextInt(100) == 0) world.playSound(null, pos, PMSoundInit.CONVERTOR_RUNNING.get(), SoundCategory.MASTER, 0.5f, 1f);
 				}
 			}

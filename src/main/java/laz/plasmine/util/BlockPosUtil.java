@@ -1,5 +1,8 @@
 package laz.plasmine.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.BlockPos;
 
@@ -17,9 +20,12 @@ public class BlockPosUtil {
 	}
 
 	public static CompoundNBT writeBlockPos(CompoundNBT compound, BlockPos pos, String id) {
+		if (pos == null) return compound;
+		
 		compound.putInt(id + "_posx", pos.getX());
 		compound.putInt(id + "_posy", pos.getY());
 		compound.putInt(id + "_posz", pos.getZ());
+		
 		return compound;
 	}
 
@@ -29,6 +35,23 @@ public class BlockPosUtil {
 		int z = compound.getInt(id + "_posz");
 
 		return new BlockPos(x, y, z);
+	}
+	
+	public static CompoundNBT writeListBlockPos(CompoundNBT compound, List<BlockPos> l, String id) {
+		for (int i = 0; i < l.size(); i++) {
+			compound = writeBlockPos(compound, l.get(i), id + "_" + i);
+		}
+		compound.putInt(id + "_size", l.size());
+		return compound;
+	}
+	
+	public static  List<BlockPos> readListBlockPos(CompoundNBT compound, String id) {
+		int size = compound.getInt(id + "_size");
+		List<BlockPos> l = new ArrayList<BlockPos>();
+		for (int i = 0; i < size; i++) {
+			l.add(readBlockPos(compound, id + "_" + i));
+		}
+		return l;
 	}
 
 }

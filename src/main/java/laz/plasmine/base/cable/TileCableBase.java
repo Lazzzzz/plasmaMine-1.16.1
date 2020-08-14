@@ -162,11 +162,7 @@ public class TileCableBase extends TileEntity implements ITickableTileEntity, IC
 			compound.putBoolean("connected_" + i, connected[i]);
 		}
 
-		for (int i = 0; i < NETWORK.size(); i++) {
-			compound = BlockPosUtil.writeBlockPos(compound, NETWORK.get(i), "net" + i);
-		}
-
-		compound.putInt("network_size", NETWORK.size());
+		compound = BlockPosUtil.writeListBlockPos(compound, NETWORK, "net");
 		return super.write(compound);
 	}
 
@@ -177,9 +173,7 @@ public class TileCableBase extends TileEntity implements ITickableTileEntity, IC
 			connected[i] = p_230337_2_.getBoolean("connected_" + i);
 		}
 
-		for (int i = 0; i < p_230337_2_.getInt("network_size"); i++) {
-			NETWORK.add(BlockPosUtil.readBlockPos(p_230337_2_, "net" + i));
-		}
+		NETWORK = BlockPosUtil.readListBlockPos(p_230337_2_, "net");
 		super.func_230337_a_(p_230337_1_, p_230337_2_);
 	}
 

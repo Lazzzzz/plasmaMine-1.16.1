@@ -28,7 +28,7 @@ public class TileSedimentCollector extends TileHeatMachineBase {
 
 	@Override
 	public void onWorking() {
-		if (world.getDayTime() % 100 == 0) {
+		if (livingtick % 100 == 0) {
 			float random = world.rand.nextFloat();
 			world.getRecipeManager().getRecipes().stream().filter(recipe -> recipe instanceof SedimentCollectorRecipe)
 					.forEach(e -> produceItem((SedimentCollectorRecipe) e, random));

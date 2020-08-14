@@ -1,0 +1,50 @@
+{
+	"variants": 
+	{
+		"facing=north,working=false": 
+		{
+			"model": "plasmine:block/convertor",
+			"y": 180
+		},
+
+		"facing=south,working=false": 
+		{
+			"model": "plasmine:block/convertor"
+		},
+
+		"facing=west,working=false": 
+		{
+			"model": "plasmine:block/convertor",
+			"y": 90
+		},
+
+		"facing=east,working=false": 
+		{
+			"model": "plasmine:block/convertor",
+			"y": 270
+		},
+
+		"facing=north,working=true": 
+		{
+			"model": "plasmine:block/convertor",
+			"y": 180
+		},
+
+		"facing=south,working=true": 
+		{
+			"model": "plasmine:block/convertor"
+		},
+
+		"facing=west,working=true": 
+		{
+			"model": "plasmine:block/convertor",
+			"y": 90
+		},
+
+		"facing=east,working=true": 
+		{
+			"model": "plasmine:block/convertor",
+			"y": 270
+		}
+	}
+}

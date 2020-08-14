@@ -47,7 +47,7 @@ public class TileGeneratorBase extends TileEntity
 		livingtick ++;
 		if (!world.isRemote) {
 			sendData();
-			if (world.getDayTime() % 40 == 0)
+			if (livingtick % 40 == 0)
 				connectedTo(world, pos, connected);
 			int energy;
 			if (world.isBlockPowered(pos)) energy = 0;
