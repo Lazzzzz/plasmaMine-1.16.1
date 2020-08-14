@@ -1,10 +1,9 @@
 package laz.plasmine.content.tiles.heat.sedimentcrystalizer;
 
-import laz.plasmine.api.base.heat.TileHeatMachineBase;
+import laz.plasmine.base.heat.TileHeatMachineBase;
 import laz.plasmine.recipes.sedimentcrystalizer.SedimentCrystalizerRecipe;
 import laz.plasmine.registry.init.PMTilesInit;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.RedstoneBlock;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;

@@ -1,0 +1,23 @@
+{
+    "variants": {
+        "facing=north,left=false,right=false": { "model": "plasmine:block/transport/conveyor" },
+        "facing=south,left=false,right=false": { "model": "plasmine:block/transport/conveyor", "y": 180 },
+        "facing=west,left=false,right=false": { "model": "plasmine:block/transport/conveyor", "y": 270 },
+        "facing=east,left=false,right=false": { "model": "plasmine:block/transport/conveyor", "y": 90 },
+
+        "facing=north,left=true,right=false": { "model": "plasmine:block/transport/conveyor_left" },
+        "facing=south,left=true,right=false": { "model": "plasmine:block/transport/conveyor_right", "y": 180 },
+        "facing=west,left=true,right=false": { "model": "plasmine:block/transport/conveyor_right", "y": 270 },
+        "facing=east,left=true,right=false": { "model": "plasmine:block/transport/conveyor_left", "y": 90 },
+
+        "facing=north,left=true,right=true": { "model": "plasmine:block/transport/conveyor_left_right" },
+        "facing=south,left=true,right=true": { "model": "plasmine:block/transport/conveyor_left_right", "y": 180 },
+        "facing=west,left=true,right=true": { "model": "plasmine:block/transport/conveyor_left_right", "y": 270 },
+        "facing=east,left=true,right=true": { "model": "plasmine:block/transport/conveyor_left_right", "y": 90 },
+
+        "facing=north,left=false,right=true": { "model": "plasmine:block/transport/conveyor_right" },
+        "facing=south,left=false,right=true": { "model": "plasmine:block/transport/conveyor_left", "y": 180 },
+        "facing=west,left=false,right=true": { "model": "plasmine:block/transport/conveyor_left", "y": 270 },
+        "facing=east,left=false,right=true": { "model": "plasmine:block/transport/conveyor_right", "y": 90 }
+    }
+}

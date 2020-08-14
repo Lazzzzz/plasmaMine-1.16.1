@@ -2,8 +2,8 @@ package laz.plasmine.content.tiles.heat.cropblower;
 
 import java.util.List;
 
-import laz.plasmine.api.base.heat.BlockHeatMachineBase;
-import laz.plasmine.api.base.heat.TileHeatMachineBase;
+import laz.plasmine.base.heat.BlockHeatMachineBase;
+import laz.plasmine.base.heat.TileHeatMachineBase;
 import laz.plasmine.registry.init.PMTilesInit;
 import laz.plasmine.util.DirectionUtils;
 import net.minecraft.block.BlockState;
@@ -15,15 +15,20 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 
 public class TileCropBlower extends TileHeatMachineBase {
-
+	
+	private int maxTime = 20;
+	private int timer = 0;
+	
 	public TileCropBlower(int maxCelcius, float thermo) {
 		super(PMTilesInit.CROP_BLOWER.getTileEntityType(), maxCelcius, thermo, 0);
 	}
 
 	@Override
 	public void onWorking() {
+		timer ++;
 		Direction dir = world.getBlockState(pos).get(BlockHeatMachineBase.FACING);
-		if (world.getDayTime() % 20 == 0) {
+		if (timer == maxTime) {
+			timer = 0;
 			for (int i = -2; i < 3; i++) {
 				for (int j = -2; j < 3; j++) {
 					BlockPos p = DirectionUtils.getPosFromRot(pos, dir, i, j, 3);

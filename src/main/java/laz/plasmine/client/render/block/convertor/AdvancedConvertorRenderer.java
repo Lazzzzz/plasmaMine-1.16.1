@@ -3,7 +3,7 @@ package laz.plasmine.client.render.block.convertor;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
-import laz.plasmine.api.base.convertor.TileConvertorBase;
+import laz.plasmine.base.convertor.TileConvertorBase;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;

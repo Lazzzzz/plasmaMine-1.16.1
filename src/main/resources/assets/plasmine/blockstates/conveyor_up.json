@@ -1,0 +1,13 @@
+{
+    "variants": {
+        "facing=north,top=false": { "model": "plasmine:block/transport/conveyor_up" },
+        "facing=south,top=false": { "model": "plasmine:block/transport/conveyor_up", "y": 180 },
+        "facing=west,top=false": { "model": "plasmine:block/transport/conveyor_up", "y": 270 },
+        "facing=east,top=false": { "model": "plasmine:block/transport/conveyor_up", "y": 90 },
+
+        "facing=north,top=true": { "model": "plasmine:block/transport/conveyor_up_top" },
+        "facing=south,top=true": { "model": "plasmine:block/transport/conveyor_up_top", "y": 180 },
+        "facing=west,top=true": { "model": "plasmine:block/transport/conveyor_up_top", "y": 270 },
+        "facing=east,top=true": { "model": "plasmine:block/transport/conveyor_up_top", "y": 90 }
+    }
+}

@@ -1,19 +1,17 @@
-package laz.plasmine.api.base.cable;
+package laz.plasmine.base.cable;
 
 import static laz.plasmine.util.DirectionUtils.getPosDirection;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import laz.plasmine.api.base.generator.BlockGeneratorBase;
-import laz.plasmine.api.base.plasma.BlockPlasmaMachineBase;
-import laz.plasmine.api.base.plasma.TilePlasmaMachineBase;
+import laz.plasmine.base.generator.BlockGeneratorBase;
+import laz.plasmine.base.plasma.TilePlasmaMachineBase;
 import laz.plasmine.util.BlockPosUtil;
 import laz.plasmine.util.DirectionUtils;
 import laz.plasmine.util.interfaces.ICable;
 import laz.plasmine.util.interfaces.IConnection;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -119,9 +117,9 @@ public class TileCableBase extends TileEntity implements ITickableTileEntity, IC
 
 	@Override
 	public void getSignal(BlockPos p, int flag) {
-		if (flag == 3)
+		if (flag == 3) {
 			resetNetwork();
-
+		}
 		else if (flag == 0)
 			isNew(NETWORK, p);
 
@@ -163,23 +161,22 @@ public class TileCableBase extends TileEntity implements ITickableTileEntity, IC
 		for (int i = 0; i < 6; i++) {
 			compound.putBoolean("connected_" + i, connected[i]);
 		}
-		
+
 		for (int i = 0; i < NETWORK.size(); i++) {
 			compound = BlockPosUtil.writeBlockPos(compound, NETWORK.get(i), "net" + i);
 		}
-		
+
 		compound.putInt("network_size", NETWORK.size());
 		return super.write(compound);
 	}
 
 	@Override
 	public void func_230337_a_(BlockState p_230337_1_, CompoundNBT p_230337_2_) {
-		
-		
+
 		for (int i = 0; i < 6; i++) {
 			connected[i] = p_230337_2_.getBoolean("connected_" + i);
 		}
-		
+
 		for (int i = 0; i < p_230337_2_.getInt("network_size"); i++) {
 			NETWORK.add(BlockPosUtil.readBlockPos(p_230337_2_, "net" + i));
 		}

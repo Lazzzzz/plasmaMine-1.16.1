@@ -1,4 +1,4 @@
-package laz.plasmine.api.base.plasma;
+package laz.plasmine.base.plasma;
 
 import laz.plasmine.util.interfaces.ICanWrench;
 import net.minecraft.block.Block;

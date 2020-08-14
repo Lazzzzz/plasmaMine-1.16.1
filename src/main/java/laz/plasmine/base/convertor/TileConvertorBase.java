@@ -1,27 +1,26 @@
-package laz.plasmine.api.base.convertor;
+package laz.plasmine.base.convertor;
 
 import static laz.plasmine.api.PlasmaToHeatConvertion.transformPlasmaToHeat;
 import static laz.plasmine.util.DirectionUtils.getPosDirection;
 
 import laz.plasmine.api.HeatHelper;
-import laz.plasmine.api.base.plasma.TilePlasmaMachineBase;
+import laz.plasmine.base.plasma.TilePlasmaMachineBase;
+import laz.plasmine.registry.init.PMSoundInit;
 import laz.plasmine.util.interfaces.IHeatMachine;
 import net.minecraft.block.BlockState;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
+import net.minecraft.util.SoundCategory;
 
 public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMachine {
 
-	protected HeatHelper heatHelper;
 	protected int amountToConvertPerTick;
 	protected float efficiency;
 
-	public TileConvertorBase(TileEntityType<?> tileEntityTypeIn, int maxCapacity, int maxCelcius, float thermo,
+	public TileConvertorBase(TileEntityType<?> tileEntityTypeIn, int maxCapacity,
 			int convert, float efficiency) {
 		super(tileEntityTypeIn, maxCapacity);
-		heatHelper = new HeatHelper(maxCelcius, thermo);
 		amountToConvertPerTick = convert;
 		this.efficiency = efficiency;
 
@@ -29,46 +28,34 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 
 	@Override
 	public void tick() {
+		livingtick ++;
 		if (!world.isRemote) {
-			boolean isWorking = heatHelper.isWorkingCelcius(world, pos);
+			boolean isWorking = plasmaHelper.getCapacity() > 0 && world.isBlockPowered(pos);
 			setWorkingState(world, pos, world.getBlockState(pos), isWorking);
 			float heat = 0;
 			if (isTileConnect() && world.isBlockPowered(pos)) {
-				heat = transformPlasmaToHeat(heatHelper, plasmaHelper.removePlasma(amountToConvertPerTick), efficiency);
-
-				heatHelper.addCelcius(heat);
-				if (isWorking)
+				HeatHelper helper = heatAround();
+				if (helper != null) heat = transformPlasmaToHeat(helper, plasmaHelper.removePlasma(amountToConvertPerTick), efficiency);
+				helper.addCelcius(heat);
+				if (isWorking) {
 					heatAround();
+					if (world.rand.nextInt(100) == 0) world.playSound(null, pos, PMSoundInit.CONVERTOR_RUNNING.get(), SoundCategory.MASTER, 0.5f, 1f);
+				}
 			}
-			if (heat == 0) heatHelper.coolDown(world, pos);
-			else if (heatHelper.isOverHeating()) onOverHeat();
 		}
 
 	}
 
-	@Override
-	public CompoundNBT write(CompoundNBT compound) {
-		heatHelper.write(compound);
-		return super.write(compound);
-	}
-
-	public void heatAround() {
+	public HeatHelper heatAround() {
 		Direction dir = heatInOut(world.getBlockState(pos));
 		TileEntity tile = world.getTileEntity(getPosDirection(pos, dir));
-		if (tile instanceof IHeatMachine) {
-			getHeatHelper().transferHeat(((IHeatMachine) tile).getHeatHelper());
-		}
+		if (tile instanceof IHeatMachine) return ((IHeatMachine) tile).getHeatHelper();
+		return null;
 	}
 
 	public boolean isTileConnect() {
 		TileEntity tile = world.getTileEntity(getPosDirection(pos, heatInOut(world.getBlockState(pos))));
 		return tile instanceof IHeatMachine;
-	}
-
-	@Override
-	public void func_230337_a_(BlockState p_230337_1_, CompoundNBT p_230337_2_) {
-		heatHelper.read(p_230337_2_);
-		super.func_230337_a_(p_230337_1_, p_230337_2_);
 	}
 
 	@Override
@@ -87,6 +74,7 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 
 	@Override
 	public HeatHelper getHeatHelper() {
-		return heatHelper;
+		return null;
 	}
+
 }

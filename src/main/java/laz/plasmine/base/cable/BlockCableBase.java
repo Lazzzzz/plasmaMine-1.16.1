@@ -1,29 +1,21 @@
-package laz.plasmine.api.base.cable;
+package laz.plasmine.base.cable;
 
 import static laz.plasmine.api.Constante.MACHINE_PARTICLES;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import laz.plasmine.api.base.plasma.BlockPlasmaMachineBase;
-import laz.plasmine.util.DirectionUtils;
-import laz.plasmine.util.interfaces.ICable;
+import laz.plasmine.base.plasma.BlockPlasmaMachineBase;
 import laz.plasmine.util.interfaces.ICanWrench;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.SixWayBlock;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
@@ -93,8 +85,10 @@ public class BlockCableBase extends BlockPlasmaMachineBase implements ICanWrench
 	@Override
 	public void onNeighborChange(BlockState state, IWorldReader world, BlockPos pos, BlockPos neighbor) {
 		if (!world.isRemote()) {
-			TileCableBase tile = (TileCableBase) world.getTileEntity(pos);
-			tile.updateNetwork(null, new ArrayList<BlockPos>(), null, 3);
+			if (world.getBlockState(neighbor) == Blocks.AIR.getDefaultState()) {
+				TileCableBase tile = (TileCableBase) world.getTileEntity(pos);
+				tile.updateNetwork(null, new ArrayList<BlockPos>(), null, 3);
+			}
 		}
 		super.onNeighborChange(state, world, pos, neighbor);
 	}

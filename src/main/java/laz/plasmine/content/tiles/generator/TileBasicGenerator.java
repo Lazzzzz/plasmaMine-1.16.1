@@ -1,6 +1,7 @@
 package laz.plasmine.content.tiles.generator;
 
-import laz.plasmine.api.base.generator.TileGeneratorBase;
+import laz.plasmine.base.generator.TileGeneratorBase;
+import laz.plasmine.registry.init.PMItemsInit;
 import laz.plasmine.registry.init.PMTilesInit;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -40,7 +41,7 @@ public class TileBasicGenerator extends TileGeneratorBase {
 			if (cooking > 0)
 				return generation;
 			else {
-				if (content.get(0).getCount() > 0) {
+				if (content.get(0).getCount() > 0 && content.get(0).getItem() == PMItemsInit.RAPESEED_FRUIT.get()) {
 					decrStackSize(0, 1);
 					cooking = maxCooking;
 					return generation;

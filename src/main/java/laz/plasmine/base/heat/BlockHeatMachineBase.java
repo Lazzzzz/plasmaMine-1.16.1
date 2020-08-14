@@ -1,9 +1,8 @@
-package laz.plasmine.api.base.generator;
+package laz.plasmine.base.heat;
 
 import java.util.List;
-import java.util.Random;
 
-import laz.plasmine.api.information.GeneratorInformationBase;
+import laz.plasmine.api.information.HeatInformationBase;
 import laz.plasmine.util.interfaces.ICanWrench;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -11,11 +10,9 @@ import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
@@ -27,27 +24,27 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
-public class BlockGeneratorBase extends Block implements ICanWrench {
+public class BlockHeatMachineBase extends Block implements ICanWrench {
 
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 	public static final BooleanProperty WORKING = BooleanProperty.create("working");
+	public static final BooleanProperty POWER = BooleanProperty.create("power");
 
-	public int maxCapacity;
-	public int rate;
-	public int production;
+	public int maxCelcius;
+	public float thermo;
 
-	public BlockGeneratorBase(int maxCapacity, int rate, int production) {
+	public BlockHeatMachineBase(int maxCelcius, float thermo) {
 		super(Block.Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).hardnessAndResistance(3, 15)
 				.sound(SoundType.METAL).harvestLevel(0));
-		this.setDefaultState(
-				this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(WORKING, Boolean.valueOf(false)));
-		this.maxCapacity = maxCapacity;
-		this.rate = rate;
-		this.production = production;
+		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH)
+				.with(WORKING, Boolean.valueOf(false)).with(POWER, Boolean.valueOf(false)));
+
+		this.maxCelcius = maxCelcius;
+		this.thermo = thermo;
 	}
 
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		builder.add(FACING, WORKING);
+		builder.add(FACING, WORKING, POWER);
 	}
 
 	@Override
@@ -61,28 +58,30 @@ public class BlockGeneratorBase extends Block implements ICanWrench {
 	}
 
 	@Override
-	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-		if (stateIn.get(WORKING))
-			worldIn.addParticle(ParticleTypes.CRIT, pos.getX() + rand.nextFloat(), pos.getY() + rand.nextFloat(),
-					pos.getZ() + rand.nextFloat(), 0, 0, 0);
-	}
-
-	@Override
 	public void addInformation(ItemStack stack, IBlockReader worldIn, List<ITextComponent> tooltip,
 			ITooltipFlag flagIn) {
-		GeneratorInformationBase.info(maxCapacity, rate, production, tooltip);
+		HeatInformationBase.info(maxCelcius, thermo, tooltip);
 	}
 
 	@Override
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
 			TileEntity te = worldIn.getTileEntity(pos);
-			if (te instanceof TileGeneratorBase) {
-				InventoryHelper.dropInventoryItems(worldIn, pos, ((TileGeneratorBase) te));
+			if (te instanceof TileHeatMachineBase) {
+				InventoryHelper.dropInventoryItems(worldIn, pos, ((TileHeatMachineBase) te));
 			}
 		}
 		super.onReplaced(state, worldIn, pos, newState, isMoving);
-		
+
 	}
 
+	public boolean canProvidePower(BlockState state) {
+		return true;
+	}
+	
+	public int getWeakPower(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
+		if (blockState.get(BlockHeatMachineBase.POWER) && side == blockState.get(BlockHeatMachineBase.FACING)) return 15;
+		return 0;
+	}
+	
 }

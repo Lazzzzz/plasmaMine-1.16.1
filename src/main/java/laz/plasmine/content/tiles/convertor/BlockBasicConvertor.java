@@ -1,6 +1,6 @@
 	package laz.plasmine.content.tiles.convertor;
 
-import laz.plasmine.api.base.convertor.BlockConvertorBase;
+import laz.plasmine.base.convertor.BlockConvertorBase;
 import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -12,9 +12,7 @@ import net.minecraft.world.IBlockReader;
 public class BlockBasicConvertor extends BlockConvertorBase {
 
 	VoxelShape SHAPE = VoxelShapes.create(0.125, 0.125f, 0.125f, 0.875f, 0.875f, 0.875f);
-	
-	
-	
+		
 	public BlockBasicConvertor() {
 		super(2, 0.3f, 1);
 	}

@@ -1,6 +1,6 @@
 	package laz.plasmine.content.tiles.convertor;
 
-import laz.plasmine.api.base.convertor.BlockConvertorBase;
+import laz.plasmine.base.convertor.BlockConvertorBase;
 import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -21,7 +21,7 @@ public class BlockAdvancedConvertor extends BlockConvertorBase {
 	
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return new TileAdvancedConvertor(this.rate, this.efficiency);
+		return new TileAdvancedConvertor(15, 0.8f);
 	}
 	
 	@Override

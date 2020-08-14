@@ -1,7 +1,8 @@
 package laz.plasmine.content.tiles.generator;
 
-import laz.plasmine.api.base.container.ContainerPlasma;
+import laz.plasmine.base.container.ContainerPlasma;
 import laz.plasmine.registry.init.PMContainersInit;
+import laz.plasmine.registry.init.PMItemsInit;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;
@@ -29,7 +30,7 @@ public class ContainerBasicGenerator extends ContainerPlasma {
 			if (!this.mergeItemStack(slot.getStack(), 0, 36, false)) {
 				return itemstack;
 			}
-		} else if (slot.getStack().getItem() == Items.IRON_NUGGET){
+		} else if (slot.getStack().getItem() == PMItemsInit.RAPESEED_FRUIT.get()){
 			if (!this.mergeItemStack(slot.getStack(), 36, 37, false)) {
 				return itemstack;
 			}

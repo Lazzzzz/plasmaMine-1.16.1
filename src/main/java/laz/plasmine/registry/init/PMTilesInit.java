@@ -9,8 +9,10 @@ import laz.plasmine.content.tiles.cable.BlockBasicPlasmaCable;
 import laz.plasmine.content.tiles.cable.TileBasicPlasmaCable;
 import laz.plasmine.content.tiles.convertor.BlockAdvancedConvertor;
 import laz.plasmine.content.tiles.convertor.BlockBasicConvertor;
+import laz.plasmine.content.tiles.convertor.BlockSolarConvertor;
 import laz.plasmine.content.tiles.convertor.TileAdvancedConvertor;
 import laz.plasmine.content.tiles.convertor.TileBasicConvertor;
+import laz.plasmine.content.tiles.convertor.TileSolarConvertor;
 import laz.plasmine.content.tiles.generator.BlockBasicGenerator;
 import laz.plasmine.content.tiles.generator.TileBasicGenerator;
 import laz.plasmine.content.tiles.heat.cropblower.BlockCropBlower;
@@ -36,6 +38,7 @@ public class PMTilesInit {
 	public static BlockRegistryObjectGroup<BlockSedimentExtractor, BlockItem, TileSedimentExtractor> SEDIMENT_EXTRACTOR;
 	public static BlockRegistryObjectGroup<BlockSedimentCrystalizer, BlockItem, TileSedimentCrystalizer> SEDIMENT_CRYSTALIZER;
 
+	public static BlockRegistryObjectGroup<BlockSolarConvertor, BlockItem, TileSolarConvertor> SOLAR_CONVERTOR;
 	public static BlockRegistryObjectGroup<BlockBasicConvertor, BlockItem, TileBasicConvertor> BASIC_CONVERTOR;
 	public static BlockRegistryObjectGroup<BlockAdvancedConvertor, BlockItem, TileAdvancedConvertor> ADVANCED_CONVERTOR;
 	
@@ -56,6 +59,10 @@ public class PMTilesInit {
 
 		
 		// CONVERTOR
+		SOLAR_CONVERTOR = new BlockRegistryObjectGroup<>("solar_convertor", BlockSolarConvertor::new,
+				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
+				() -> new TileSolarConvertor(1, 0.5f)).register(BLOCKS, ITEMS, TILE_ENTITIES);
+		
 		BASIC_CONVERTOR = new BlockRegistryObjectGroup<>("basic_convertor", BlockBasicConvertor::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
 				() -> new TileBasicConvertor(2, 0.3f)).register(BLOCKS, ITEMS, TILE_ENTITIES);

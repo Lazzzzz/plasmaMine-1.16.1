@@ -6,8 +6,22 @@
 		"sounds": 
 		[
 			{
-				"name" : "plasmine:master/wrench.use",
-				"stream" : true
+				"name": "plasmine:master/wrench.use",
+				"stream": true
+			}
+		]
+	},
+
+	"convertor.running": 
+	{
+		"category": "master",
+		"subtitle": "convertor.running",
+		"sounds": 
+		[
+			{
+				"name": "plasmine:master/convertor.running",
+				"stream": true,
+				"preload": true
 			}
 		]
 	}

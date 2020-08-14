@@ -16,16 +16,18 @@ public class WrenchEvent {
 
 	static Random RANDOM = new Random();
 
-	public static void update(World world, PlayerEntity player, BlockPos pos, Direction dir) {
+	public static boolean update(World world, PlayerEntity player, BlockPos pos, Direction dir) {
 		if (player.getHeldItemMainhand().getItem() == PMItemsInit.WRENCH.get()) {
 			BlockState state = world.getBlockState(pos);
 			if (state.getBlock() instanceof ICanWrench) {
 				if (!world.isRemote) {
 					((ICanWrench) state.getBlock()).onWrenchAction(player, world, pos, state, dir);
 					world.playSound(null, pos, PMSoundInit.WRENCH_USE.get(), SoundCategory.MASTER, 0.5f, 1f);
+					return true;
 				}
 			}
 		}
+		return false;
 	}
 
 }

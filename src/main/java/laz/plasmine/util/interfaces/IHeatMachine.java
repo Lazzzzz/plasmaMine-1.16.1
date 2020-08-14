@@ -1,7 +1,7 @@
 package laz.plasmine.util.interfaces;
 
 import laz.plasmine.api.HeatHelper;
-import laz.plasmine.api.base.generator.BlockGeneratorBase;
+import laz.plasmine.base.generator.BlockGeneratorBase;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;

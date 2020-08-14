@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import laz.plasmine.api.HeatHelper;
-import laz.plasmine.api.base.heat.TileHeatMachineBase;
+import laz.plasmine.base.heat.TileHeatMachineBase;
 import laz.plasmine.client.screen.DrawBaseGui;
 import laz.plasmine.content.tiles.heat.sedimentcrystalizer.ContainerSedimentCrystalizer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;

@@ -1,4 +1,4 @@
-package laz.plasmine.api.base.container;
+package laz.plasmine.base.container;
 
 import java.util.Objects;
 

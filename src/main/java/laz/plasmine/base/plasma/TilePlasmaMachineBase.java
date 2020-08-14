@@ -1,4 +1,4 @@
-package laz.plasmine.api.base.plasma;
+package laz.plasmine.base.plasma;
 
 import laz.plasmine.api.PlasmaHelper;
 import laz.plasmine.util.interfaces.IConnection;
@@ -13,6 +13,7 @@ public class TilePlasmaMachineBase extends TileEntity implements ITickableTileEn
 
 	protected PlasmaHelper plasmaHelper;
 	protected boolean [] connected = new boolean[6];
+	public int livingtick = 0;
 	
 	public TilePlasmaMachineBase(TileEntityType<?> tileEntityTypeIn, int maxCapacity) {
 		super(tileEntityTypeIn);

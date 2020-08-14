@@ -5,9 +5,7 @@ import static laz.plasmine.registry.PMRegistry.addSimpleItem;
 
 import laz.plasmine.api.MaterialGroup;
 import laz.plasmine.content.items.ItemWithInformation;
-import laz.plasmine.content.items.WrenchItem;
 import net.minecraft.item.Item;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.fml.RegistryObject;
 
 public class PMItemsInit {
@@ -22,7 +20,8 @@ public class PMItemsInit {
 	public static MaterialGroup ROSIUM;
 
 	public static void init() {
-		WRENCH = addItemClass("wrench", WrenchItem::new);
+		WRENCH 	   = addItemClass("wrench", () -> new ItemWithInformation(1, "Can rotate and remove machine"));
+		
 		GOLD_WIRE = addSimpleItem("gold_wire", 64);
 		MAGNETIC_WIRE = addSimpleItem("magnetic_wire", 64);
 		RAPESEED_FRUIT = addSimpleItem("rapeseed_fruit", 64);

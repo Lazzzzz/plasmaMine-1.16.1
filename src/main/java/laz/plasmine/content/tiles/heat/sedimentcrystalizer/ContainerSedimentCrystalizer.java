@@ -1,8 +1,8 @@
 package laz.plasmine.content.tiles.heat.sedimentcrystalizer;
 
-import laz.plasmine.api.base.container.ContainerHeat;
-import laz.plasmine.api.base.heat.TileHeatMachineBase;
 import laz.plasmine.api.container.OutputSlot;
+import laz.plasmine.base.container.ContainerHeat;
+import laz.plasmine.base.heat.TileHeatMachineBase;
 import laz.plasmine.registry.init.PMContainersInit;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;

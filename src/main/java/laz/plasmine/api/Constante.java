@@ -5,6 +5,6 @@ import net.minecraft.particles.ParticleTypes;
 
 public class Constante {
 		
-	public static final int MAX_CABLE_ITERRATION = 1000;
+	public static final float CONVEYOR_SPEED = 0.2f;
 	public static final BasicParticleType MACHINE_PARTICLES = ParticleTypes.CLOUD;
 }

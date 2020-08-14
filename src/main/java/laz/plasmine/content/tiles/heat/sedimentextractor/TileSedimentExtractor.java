@@ -1,6 +1,6 @@
 package laz.plasmine.content.tiles.heat.sedimentextractor;
 
-import laz.plasmine.api.base.heat.TileHeatMachineBase;
+import laz.plasmine.base.heat.TileHeatMachineBase;
 import laz.plasmine.recipes.sediementextractor.SedimentExtractorRecipe;
 import laz.plasmine.registry.init.PMTilesInit;
 import laz.plasmine.util.DirectionUtils;
@@ -93,7 +93,7 @@ public class TileSedimentExtractor extends TileHeatMachineBase implements ISided
 
 	@Override
 	public float consumeHeat() {
-		return heatHelper.getThermoConductivity() / 8;
+		return heatHelper.getThermoConductivity() / 4;
 	}
 
 	private void reset() {

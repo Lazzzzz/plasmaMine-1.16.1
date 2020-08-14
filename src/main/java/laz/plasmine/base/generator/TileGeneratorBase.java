@@ -1,12 +1,12 @@
-package laz.plasmine.api.base.heat;
+package laz.plasmine.base.generator;
 
 import java.util.List;
 
-import laz.plasmine.api.HeatHelper;
-import laz.plasmine.api.base.generator.BlockGeneratorBase;
+import laz.plasmine.api.PlasmaHelper;
 import laz.plasmine.network.PacketHandler;
-import laz.plasmine.network.helpers.HeatHelperPacket;
-import laz.plasmine.util.interfaces.IHeatMachine;
+import laz.plasmine.network.helpers.PlasmaHelperPacket;
+import laz.plasmine.util.interfaces.IConnection;
+import laz.plasmine.util.interfaces.IPlasmaGenerator;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -21,63 +21,78 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkDirection;
 
-public class TileHeatMachineBase extends TileEntity
-		implements ITickableTileEntity, IHeatMachine, INamedContainerProvider, IInventory {
+public class TileGeneratorBase extends TileEntity
+		implements IConnection, ITickableTileEntity, IPlasmaGenerator, INamedContainerProvider, IInventory {
 
-	protected HeatHelper heatHelper;
+	protected PlasmaHelper plasmaHelper;
+	protected boolean[] connected = new boolean[6];
+	protected int generation;
 	protected int size;
 	public NonNullList<ItemStack> content;
+	public int livingtick = 0;
 
-	public TileHeatMachineBase(TileEntityType<?> tileEntityTypeIn, float maxCelcius, float thermo, int size) {
+	public TileGeneratorBase(TileEntityType<?> tileEntityTypeIn, int maxCapacity, int maxSend, int generate, int size) {
 		super(tileEntityTypeIn);
-		heatHelper = new HeatHelper(maxCelcius, thermo);
-		this.size = size;
+		plasmaHelper = new PlasmaHelper(maxCapacity, maxSend);
+		generation = generate;
+		this.size = size; 
 		content = NonNullList.withSize(size, ItemStack.EMPTY);
 	}
 
 	@Override
 	public void tick() {
+		livingtick ++;
 		if (!world.isRemote) {
-			if (world.getDayTime() % 20 == 0) {world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);}
 			sendData();
-			if (heatHelper.isWorkingCelcius(world, pos)) setWorkingState(world, pos, world.getBlockState(pos), true);
-			else setWorkingState(world, pos, world.getBlockState(pos), false);
-
-			if (world.getBlockState(pos).get(BlockHeatMachineBase.WORKING)) onWorking();
-			heatHelper.removeHeat(consumeHeat());
-
-			heatHelper.coolDown(world, pos);
-			if (heatHelper.isOverHeating())
-				onOverHeat();
+			if (world.getDayTime() % 40 == 0)
+				connectedTo(world, pos, connected);
+			int energy;
+			if (world.isBlockPowered(pos)) energy = 0;
+			else energy	= produceEnergy();
+			
+			setWorkingState(energy > 0);
+			plasmaHelper.addPlasma(energy);
+			plasmaHelper.removePlasma(sendEnergy(world, pos, plasmaHelper.sendPlasma()));
 		}
 	}
 
 	@Override
+	public PlasmaHelper getPlasmaHelper() {
+		return plasmaHelper;
+	}
+
+	@Override
 	public CompoundNBT write(CompoundNBT compound) {
-		heatHelper.write(compound);
+		plasmaHelper.write(compound);
 		ItemStackHelper.saveAllItems(compound, content);
 		return super.write(compound);
 	}
 
 	@Override
 	public void func_230337_a_(BlockState p_230337_1_, CompoundNBT p_230337_2_) {
-		heatHelper.read(p_230337_2_);
+		plasmaHelper.read(p_230337_2_);
 		ItemStackHelper.loadAllItems(p_230337_2_, content);
 		super.func_230337_a_(p_230337_1_, p_230337_2_);
 	}
 
 	@Override
-	public void onOverHeat() {
+	public int produceEnergy() {
+		return 0;
 	}
 
 	@Override
-	public HeatHelper getHeatHelper() {
-		return heatHelper;
+	public void setWorkingState(boolean working) {
+		BlockState state = world.getBlockState(pos);
+		if (working) {
+			if (state.get(BlockGeneratorBase.WORKING) == false)
+				world.setBlockState(pos, state.with(BlockGeneratorBase.WORKING, true));
+		} else {
+			if (state.get(BlockGeneratorBase.WORKING) == true)
+				world.setBlockState(pos, state.with(BlockGeneratorBase.WORKING, false));
+		}
 	}
 
 	@Override
@@ -90,18 +105,18 @@ public class TileHeatMachineBase extends TileEntity
 		return null;
 	}
 
-	public void receiveData(float amount) {
-		heatHelper.setCelcius(amount);
+	public void receiveData(int amount) {
+		plasmaHelper.setCapacity(amount);
 	}
 
 	private void sendData() {
 		List<? extends PlayerEntity> players = world.getPlayers();
 		for (int i = 0; i < players.size(); i++) {
-			PacketHandler.INSTANCE.sendTo(new HeatHelperPacket(pos, heatHelper.getCelcius()),
+			PacketHandler.INSTANCE.sendTo(new PlasmaHelperPacket(pos, plasmaHelper.getCapacity()),
 					((ServerPlayerEntity) players.get(i)).connection.netManager, NetworkDirection.PLAY_TO_CLIENT);
 		}
 	}
-
+	
 	@Override
 	public void clear() {
 		content.clear();
@@ -121,7 +136,6 @@ public class TileHeatMachineBase extends TileEntity
 	public ItemStack getStackInSlot(int index) {
 		if (index > size - 1)
 			return ItemStack.EMPTY;
-		
 		return content.get(index);
 	}
 
@@ -161,17 +175,6 @@ public class TileHeatMachineBase extends TileEntity
 		} else {
 			return !(player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D,
 					(double) this.pos.getZ() + 0.5D) > 64.0D);
-		}
-	}
-	
-	protected void updatePoweredState(boolean powered) {
-		BlockState state = world.getBlockState(pos);
-		if (powered) {
-			if (state.get(BlockHeatMachineBase.POWER) == false)
-				world.setBlockState(pos, state.with(BlockHeatMachineBase.POWER, true));
-		} else {
-			if (state.get(BlockHeatMachineBase.POWER) == true)
-				world.setBlockState(pos, state.with(BlockHeatMachineBase.POWER, false));
 		}
 	}
 }

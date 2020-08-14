@@ -1,8 +1,7 @@
 package laz.plasmine.util.interfaces;
 
-import laz.plasmine.api.base.convertor.BlockConvertorBase;
+import laz.plasmine.base.convertor.BlockConvertorBase;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;

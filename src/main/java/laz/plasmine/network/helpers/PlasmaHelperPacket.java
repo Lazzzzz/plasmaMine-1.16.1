@@ -2,7 +2,7 @@ package laz.plasmine.network.helpers;
 
 import java.util.function.Supplier;
 
-import laz.plasmine.api.base.generator.TileGeneratorBase;
+import laz.plasmine.base.generator.TileGeneratorBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.network.PacketBuffer;

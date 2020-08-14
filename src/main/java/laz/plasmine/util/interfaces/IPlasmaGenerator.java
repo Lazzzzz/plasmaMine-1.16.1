@@ -3,13 +3,10 @@ package laz.plasmine.util.interfaces;
 import java.util.List;
 
 import laz.plasmine.api.PlasmaHelper;
-import laz.plasmine.api.base.heat.TileHeatMachineBase;
-import laz.plasmine.api.base.plasma.TilePlasmaMachineBase;
 import laz.plasmine.content.tiles.generator.BlockBasicGenerator;
 import laz.plasmine.util.DirectionUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -23,15 +20,16 @@ public interface IPlasmaGenerator {
 			TileEntity tile = world.getTileEntity(DirectionUtils.getPosDirection(pos, state.get(BlockBasicGenerator.FACING).getOpposite()));
 			if (tile instanceof ICable) {
 				List<BlockPos> outputs = ((ICable) tile).getNetwork();
+				if (outputs.size() == 0) return 0;
+				
 				if (outputs.size() > 0) {
-					int amountEach = (amount + 1) / (outputs.size());
+					int amountEach = (int) Math.ceil(amount / outputs.size());
 					for (int i = 0; i < outputs.size(); i++) {
 						amount -= ((IPlasmaMachine) world.getTileEntity(outputs.get(i))).receiveEnergy(amountEach);
 					}
 				}
-			}
+			} else return 0;
 		}
-
 		return amount;
 	}
 

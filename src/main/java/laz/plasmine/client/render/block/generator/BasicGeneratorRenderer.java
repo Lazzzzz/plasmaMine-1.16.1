@@ -4,7 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
 import laz.plasmine.Plasmine;
-import laz.plasmine.api.base.generator.BlockGeneratorBase;
+import laz.plasmine.base.generator.BlockGeneratorBase;
 import laz.plasmine.client.models.block.generator.BasicGeneratorModel;
 import laz.plasmine.content.tiles.generator.BlockBasicGenerator;
 import laz.plasmine.content.tiles.generator.TileBasicGenerator;
@@ -36,7 +36,7 @@ public class BasicGeneratorRenderer extends TileEntityRenderer<TileBasicGenerato
 		
 		matrixStackIn.push();
 		
-		if (state.get(BlockGeneratorBase.WORKING)) model.animation((int) world.getDayTime(), partialTicks);
+		if (state.get(BlockGeneratorBase.WORKING)) model.animation(tileEntityIn.livingtick, partialTicks);
 		else model.resetState();
 		
 		model.rotate(state.get(BlockBasicGenerator.FACING).getOpposite());

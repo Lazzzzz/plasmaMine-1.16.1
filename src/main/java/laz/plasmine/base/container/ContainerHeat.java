@@ -1,8 +1,8 @@
-package laz.plasmine.api.base.container;
+package laz.plasmine.base.container;
 
 import java.util.Objects;
 
-import laz.plasmine.api.base.heat.TileHeatMachineBase;
+import laz.plasmine.base.heat.TileHeatMachineBase;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;

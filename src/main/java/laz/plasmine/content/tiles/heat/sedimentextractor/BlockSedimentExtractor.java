@@ -1,6 +1,6 @@
 package laz.plasmine.content.tiles.heat.sedimentextractor;
 
-import laz.plasmine.api.base.heat.BlockHeatMachineBase;
+import laz.plasmine.base.heat.BlockHeatMachineBase;
 import laz.plasmine.registry.init.PMItemsInit;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;

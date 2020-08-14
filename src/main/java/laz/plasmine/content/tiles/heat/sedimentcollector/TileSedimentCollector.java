@@ -1,6 +1,6 @@
 package laz.plasmine.content.tiles.heat.sedimentcollector;
 
-import laz.plasmine.api.base.heat.TileHeatMachineBase;
+import laz.plasmine.base.heat.TileHeatMachineBase;
 import laz.plasmine.recipes.sedimentcollector.SedimentCollectorRecipe;
 import laz.plasmine.registry.init.PMTilesInit;
 import net.minecraft.entity.player.PlayerEntity;

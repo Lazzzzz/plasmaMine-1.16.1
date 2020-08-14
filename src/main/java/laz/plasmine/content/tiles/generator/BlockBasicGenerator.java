@@ -2,7 +2,7 @@ package laz.plasmine.content.tiles.generator;
 
 import java.util.List;
 
-import laz.plasmine.api.base.generator.BlockGeneratorBase;
+import laz.plasmine.base.generator.BlockGeneratorBase;
 import laz.plasmine.registry.init.PMItemsInit;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -57,7 +57,7 @@ public class BlockBasicGenerator extends BlockGeneratorBase {
 	public void addInformation(ItemStack stack, IBlockReader worldIn, List<ITextComponent> tooltip,
 			ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
-		tooltip.add(new StringTextComponent("Produce plasma with iron nuggets"));
+		tooltip.add(new StringTextComponent("Produce plasma with rapeseed fruits"));
 	}
 
 	@Override
