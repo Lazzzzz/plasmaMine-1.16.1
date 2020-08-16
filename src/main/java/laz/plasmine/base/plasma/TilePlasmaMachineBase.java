@@ -45,8 +45,13 @@ public class TilePlasmaMachineBase extends TileEntity implements ITickableTileEn
 
 	@Override
 	public void func_230337_a_(BlockState p_230337_1_, CompoundNBT p_230337_2_) {
-		plasmaHelper.read(p_230337_2_);
 		super.func_230337_a_(p_230337_1_, p_230337_2_);
+		plasmaHelper.read(p_230337_2_);
+	}
+
+	@Override
+	public int getConsomationPerTick() {
+		return 0;
 	}
 
 

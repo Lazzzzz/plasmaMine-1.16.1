@@ -10,4 +10,6 @@ public interface IPlasmaMachine {
 	
 	int spaceLeft();
 	
+	int getConsomationPerTick();
+	
 }

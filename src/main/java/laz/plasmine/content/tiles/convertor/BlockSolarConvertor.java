@@ -2,7 +2,6 @@
 
 import java.util.List;
 
-import laz.plasmine.api.information.ConvertorInformationBase;
 import laz.plasmine.base.convertor.BlockConvertorBase;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;

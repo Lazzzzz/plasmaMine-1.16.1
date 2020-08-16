@@ -15,7 +15,6 @@ import laz.plasmine.content.tiles.heat.sedimentcollector.ContainerSedimentCollec
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.ITextProperties;
 
 public class SedimentCollectorScreen extends ContainerScreen<ContainerSedimentCollector> {
 
@@ -32,7 +31,7 @@ public class SedimentCollectorScreen extends ContainerScreen<ContainerSedimentCo
 		HEAT_LOGO.draw(guiLeft + 5, guiTop + 60, 9, 17);
 		HEAT_BAR.drawPartial(guiLeft + 2, guiTop + 2, 16, 56, 0,
 				1 - ((float) helper.getCelcius() / helper.getMaxCelcius()), 1f, 1f);
-		renderToolTip(p_230450_1_, new ArrayList<ITextProperties>(), p_230450_3_, p_230450_3_, this.field_230712_o_);
+		func_243308_b(p_230450_1_, new ArrayList<ITextComponent>(), p_230450_3_, p_230450_3_);
 
 		for (int i = 0; i < 3; ++i) {
 			for (int j = 0; j < 8; ++j) {

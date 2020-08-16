@@ -3,10 +3,10 @@ package laz.plasmine.base.heat;
 import java.util.List;
 
 import laz.plasmine.api.information.HeatInformationBase;
+import laz.plasmine.base.BlockRotationBase;
 import laz.plasmine.util.interfaces.ICanWrench;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
@@ -14,7 +14,6 @@ import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
@@ -24,9 +23,8 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
-public class BlockHeatMachineBase extends Block implements ICanWrench {
+public class BlockHeatMachineBase extends BlockRotationBase implements ICanWrench {
 
-	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 	public static final BooleanProperty WORKING = BooleanProperty.create("working");
 	public static final BooleanProperty POWER = BooleanProperty.create("power");
 

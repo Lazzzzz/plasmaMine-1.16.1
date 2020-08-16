@@ -53,6 +53,7 @@ public class TileHeatMachineBase extends TileEntity
 			heatHelper.coolDown(world, pos);
 			if (heatHelper.isOverHeating())
 				onOverHeat();
+			markDirty();
 		}
 	}
 
@@ -65,9 +66,9 @@ public class TileHeatMachineBase extends TileEntity
 
 	@Override
 	public void func_230337_a_(BlockState p_230337_1_, CompoundNBT p_230337_2_) {
+		super.func_230337_a_(p_230337_1_, p_230337_2_);
 		heatHelper.read(p_230337_2_);
 		ItemStackHelper.loadAllItems(p_230337_2_, content);
-		super.func_230337_a_(p_230337_1_, p_230337_2_);
 	}
 
 	@Override

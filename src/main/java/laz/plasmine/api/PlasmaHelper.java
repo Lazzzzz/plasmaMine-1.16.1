@@ -27,6 +27,15 @@ public class PlasmaHelper {
 		return maxCapacity;
 	}
 	
+	public void setMaxCapacity(int cap) {
+		maxCapacity = cap;
+		if (maxCapacity < capacity) capacity = maxCapacity;
+	}
+	
+	public void setMaxSend(int send) {
+		maxSend = send;
+	}
+	
 	public void setCapacity(int amount) {
 		capacity = amount;
 	}
@@ -60,6 +69,11 @@ public class PlasmaHelper {
 	public int sendPlasma() {
 		if (maxSend > getCapacity()) return 0;
 		return maxSend;
+	}
+	
+	public int sendPlasma(int amount) {
+		if (amount > getCapacity()) return getCapacity();
+		return amount;
 	}
 
 	public void write(CompoundNBT compound) {

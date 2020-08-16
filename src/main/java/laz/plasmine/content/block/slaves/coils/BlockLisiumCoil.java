@@ -16,32 +16,16 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-public class BlockLisiumCoil extends Block{
+public class BlockLisiumCoil extends BlockCoilBase {
 
 	public BlockLisiumCoil() {
-		super(Properties.from(Blocks.GOLD_BLOCK));
+		super(Properties.from(Blocks.GOLD_BLOCK), 100000, 1000);
+
 	}
 
-	@Override
-	public boolean hasTileEntity(BlockState state) {
-		return true;
-	}
-	
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
 		return new TileLisiumCoil();
-	}
-	
-	@Override
-	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (!worldIn.isRemote) {
-			ISlave tile = (ISlave) worldIn.getTileEntity(pos);
-			if (tile.getBlockPosMaster() != null) {
-				IMaster master = (IMaster) worldIn.getTileEntity(tile.getBlockPosMaster());
-				tile.sendMasterDestroy(pos, master);
-			}
-		}
-		super.onReplaced(state, worldIn, pos, newState, isMoving);
 	}
 	
 	@Override

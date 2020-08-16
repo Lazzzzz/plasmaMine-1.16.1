@@ -1,18 +1,13 @@
 package laz.plasmine.base.convertor;
-import static laz.plasmine.api.PlasmaToHeatConvertion.transformPlasmaToHeat;
 
 import java.util.List;
 import java.util.Random;
 
-import laz.plasmine.api.HeatHelper;
-import laz.plasmine.api.PlasmaToHeatConvertion;
 import laz.plasmine.api.information.ConvertorInformationBase;
-import laz.plasmine.util.DirectionUtils;
+import laz.plasmine.base.BlockRotationBase;
 import laz.plasmine.util.interfaces.ICanWrench;
-import laz.plasmine.util.interfaces.IHeatMachine;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
@@ -21,23 +16,16 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
-public class BlockConvertorBase extends Block implements ICanWrench {
+public class BlockConvertorBase extends BlockRotationBase implements ICanWrench {
 
-	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 	public static final BooleanProperty WORKING = BooleanProperty.create("working");
 
 	public float efficiency;

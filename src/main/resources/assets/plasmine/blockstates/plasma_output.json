@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "plasmine:block/storage/plasma_output" },
+        "facing=south": { "model": "plasmine:block/storage/plasma_output", "y": 180 },
+        "facing=west":  { "model": "plasmine:block/storage/plasma_output", "y": 270 },
+        "facing=east":  { "model": "plasmine:block/storage/plasma_output", "y": 90 }
+    }
+}

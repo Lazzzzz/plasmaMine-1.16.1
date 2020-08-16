@@ -55,7 +55,9 @@ public class TileGeneratorBase extends TileEntity
 			
 			setWorkingState(energy > 0);
 			plasmaHelper.addPlasma(energy);
-			plasmaHelper.removePlasma(sendEnergy(world, pos, plasmaHelper.sendPlasma()));
+			int sendit = sendEnergy(world, pos, plasmaHelper.sendPlasma());
+			plasmaHelper.removePlasma(sendit);
+			markDirty();
 		}
 	}
 
@@ -73,9 +75,9 @@ public class TileGeneratorBase extends TileEntity
 
 	@Override
 	public void func_230337_a_(BlockState p_230337_1_, CompoundNBT p_230337_2_) {
+		super.func_230337_a_(p_230337_1_, p_230337_2_);
 		plasmaHelper.read(p_230337_2_);
 		ItemStackHelper.loadAllItems(p_230337_2_, content);
-		super.func_230337_a_(p_230337_1_, p_230337_2_);
 	}
 
 	@Override
@@ -109,7 +111,7 @@ public class TileGeneratorBase extends TileEntity
 		plasmaHelper.setCapacity(amount);
 	}
 
-	private void sendData() {
+	protected void sendData() {
 		List<? extends PlayerEntity> players = world.getPlayers();
 		for (int i = 0; i < players.size(); i++) {
 			PacketHandler.INSTANCE.sendTo(new PlasmaHelperPacket(pos, plasmaHelper.getCapacity()),

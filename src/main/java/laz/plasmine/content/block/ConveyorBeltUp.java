@@ -1,19 +1,17 @@
 package laz.plasmine.content.block;
 
 import laz.plasmine.api.Constante;
+import laz.plasmine.base.BlockRotationBase;
 import laz.plasmine.registry.init.PMBlocksInit;
 import laz.plasmine.util.DirectionUtils;
 import laz.plasmine.util.interfaces.ICanWrench;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.HorizontalBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -24,9 +22,8 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-public class ConveyorBeltUp extends Block implements ICanWrench {
+public class ConveyorBeltUp extends BlockRotationBase implements ICanWrench {
 
-	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 	public static final BooleanProperty TOP = BooleanProperty.create("top");
 
 	VoxelShape SHAPE_NORTH = VoxelShapes.or(VoxelShapes.create(0, 0, 0, 1, 0.25, 1),

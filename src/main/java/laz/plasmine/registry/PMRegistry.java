@@ -51,8 +51,6 @@ public class PMRegistry {
 	@SuppressWarnings("unchecked")
 	public static final RegistryObject<Item>[] ITEMLIST = new RegistryObject[1000];
 	@SuppressWarnings("unchecked")
-	public static final RegistryObject<Biome>[] BIOMELIST = new RegistryObject[150];
-	@SuppressWarnings("unchecked")
 	public static final BlockRegistryObjectGroup<Block, BlockItem, TileEntity>[] TILES = new BlockRegistryObjectGroup[500];
 
 	public static void register(IEventBus eventBus) {

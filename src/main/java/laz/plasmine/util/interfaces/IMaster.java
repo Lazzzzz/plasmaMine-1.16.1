@@ -3,6 +3,7 @@ package laz.plasmine.util.interfaces;
 import java.util.List;
 
 import laz.plasmine.util.BlockPosUtil;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 
 public interface IMaster {
@@ -22,4 +23,10 @@ public interface IMaster {
 	List<BlockPos> getConnectedBlock();
 	
 	boolean checkIsFormed();
+
+	void sendStructureBind(BlockPos p, Direction dir);
+
+	void sendStructureUnBind(BlockPos p);
 }
+
+

@@ -29,8 +29,12 @@ import laz.plasmine.content.tiles.heat.sedimentextractor.BlockSedimentExtractor;
 import laz.plasmine.content.tiles.heat.sedimentextractor.TileSedimentExtractor;
 import laz.plasmine.content.tiles.other.BlockHupper;
 import laz.plasmine.content.tiles.other.TileHupper;
-import laz.plasmine.content.tiles.storage.BlockEnergyStorage;
-import laz.plasmine.content.tiles.storage.TileEnergyStorage;
+import laz.plasmine.content.tiles.storage.BlockPlasmaStorage;
+import laz.plasmine.content.tiles.storage.TilePlasmaStorage;
+import laz.plasmine.content.tiles.storage.put.BlockPlasmaInput;
+import laz.plasmine.content.tiles.storage.put.BlockPlasmaOutput;
+import laz.plasmine.content.tiles.storage.put.TilePlasmaInput;
+import laz.plasmine.content.tiles.storage.put.TilePlasmaOutput;
 import laz.plasmine.registry.BlockRegistryObjectGroup;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -51,7 +55,11 @@ public class PMTilesInit {
 	public static BlockRegistryObjectGroup<BlockCropBlower, BlockItem, TileCropBlower> CROP_BLOWER;
 
 	public static BlockRegistryObjectGroup<BlockMachine, BlockItem, TileMachine> MACHINE_BLOCK;
-	public static BlockRegistryObjectGroup<BlockEnergyStorage, BlockItem, TileEnergyStorage> ENERGY_STORAGE;
+	
+	public static BlockRegistryObjectGroup<BlockPlasmaStorage, BlockItem, TilePlasmaStorage> PLASMA_STORAGE;
+	public static BlockRegistryObjectGroup<BlockPlasmaInput, BlockItem, TilePlasmaInput> PLASMA_INPUT;
+	public static BlockRegistryObjectGroup<BlockPlasmaOutput, BlockItem, TilePlasmaOutput> PLASMA_OUTPUT;
+	
 	public static BlockRegistryObjectGroup<BlockLisiumCoil, BlockItem, TileLisiumCoil> LISIUM_COIL;
 
 	public static BlockRegistryObjectGroup<BlockHupper, BlockItem, TileHupper> HUPPER;
@@ -103,9 +111,17 @@ public class PMTilesInit {
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)), TileMachine::new)
 				.register(BLOCKS, ITEMS, TILE_ENTITIES);	 
 		
-		ENERGY_STORAGE = new BlockRegistryObjectGroup<>("energy_storage", BlockEnergyStorage::new,
-				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)), TileEnergyStorage::new)
-						.register(BLOCKS, ITEMS, TILE_ENTITIES);		
+		PLASMA_STORAGE = new BlockRegistryObjectGroup<>("plasma_storage", BlockPlasmaStorage::new,
+				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)), TilePlasmaStorage::new)
+						.register(BLOCKS, ITEMS, TILE_ENTITIES);
+		
+		PLASMA_INPUT = new BlockRegistryObjectGroup<>("plasma_input", BlockPlasmaInput::new,
+				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)), TilePlasmaInput::new)
+						.register(BLOCKS, ITEMS, TILE_ENTITIES);
+		
+		PLASMA_OUTPUT = new BlockRegistryObjectGroup<>("plasma_output", BlockPlasmaOutput::new,
+				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)), TilePlasmaOutput::new)
+						.register(BLOCKS, ITEMS, TILE_ENTITIES);	
 		
 		LISIUM_COIL = new BlockRegistryObjectGroup<>("lisium_coil", BlockLisiumCoil::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),

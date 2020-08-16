@@ -5,7 +5,7 @@ import net.minecraft.util.math.BlockPos;
 public interface ISlave {
 	
 	default void sendMasterDestroy(BlockPos pos, IMaster master) {
-		master.receiveDestroy(pos, master.getConnectedBlock());
+		if (master != null) master.receiveDestroy(pos, master.getConnectedBlock());
 	}
 	
 	void bindToMaster(BlockPos masterPos);

@@ -9,9 +9,10 @@ public class DirectionUtils {
 	public static BlockPos getPosDirection(BlockPos pos, Direction dir) {
 		return pos.add(dir.getDirectionVec());
 	}
-	
+
 	public static boolean isSide(Direction dir) {
-		if (dir == Direction.EAST || dir == Direction.WEST || dir == Direction.NORTH || dir == Direction.SOUTH) return true;
+		if (dir == Direction.EAST || dir == Direction.WEST || dir == Direction.NORTH || dir == Direction.SOUTH)
+			return true;
 		return false;
 	}
 
@@ -24,7 +25,7 @@ public class DirectionUtils {
 			return pos.add(i, 0, j - marge);
 		return pos.add(i, 0, j + marge);
 	}
-	
+
 	public static BlockPos getPosFromRot(BlockPos pos, Direction dir, int i, int marge) {
 		if (dir == Direction.EAST)
 			return pos.add(2, 0, i + marge);
@@ -45,4 +46,5 @@ public class DirectionUtils {
 		return new Vector3d(0f, 0, speed);
 
 	}
+
 }

@@ -7,15 +7,22 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class TileBlockSlave extends TileEntity implements ISlave {
 
-	private BlockPos bind;
+	private BlockPos bind = pos;
 	
 	public TileBlockSlave(TileEntityType<?> tileEntityTypeIn) {
 		super(tileEntityTypeIn);
 	}
 
+	@Override
+	public void setWorldAndPos(World p_226984_1_, BlockPos p_226984_2_) {
+		super.setWorldAndPos(p_226984_1_, p_226984_2_);
+		if (BlockPosUtil.areSame(bind, pos)) bind = pos;
+	}
+	
 	@Override
 	public void bindToMaster(BlockPos masterPos) {
 		bind = masterPos;
@@ -35,18 +42,18 @@ public class TileBlockSlave extends TileEntity implements ISlave {
 	
 	@Override
 	public void func_230337_a_(BlockState p_230337_1_, CompoundNBT p_230337_2_) {
-		bind = BlockPosUtil.readBlockPos(p_230337_2_, "bind");
 		super.func_230337_a_(p_230337_1_, p_230337_2_);
+		bind = BlockPosUtil.readBlockPos(p_230337_2_, "bind");
 	}
 
 	@Override
 	public boolean isBind() {
-		return bind != null;
+		return !BlockPosUtil.areSame(bind, pos);
 	}
 
 	@Override
 	public void unbindToMaster() {
-		bind = null;
+		bind = pos;
 	}
 
 }

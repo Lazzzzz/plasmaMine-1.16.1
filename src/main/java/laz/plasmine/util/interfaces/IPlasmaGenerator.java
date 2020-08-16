@@ -6,7 +6,9 @@ import laz.plasmine.api.PlasmaHelper;
 import laz.plasmine.content.tiles.generator.BlockBasicGenerator;
 import laz.plasmine.util.DirectionUtils;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.gui.toasts.TutorialToast.Icons;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -16,23 +18,35 @@ public interface IPlasmaGenerator {
 
 	default int sendEnergy(World world, BlockPos pos, int amount) {
 		if (amount > 0) {
-			BlockState state = world.getBlockState(pos);
-			TileEntity tile = world.getTileEntity(DirectionUtils.getPosDirection(pos, state.get(BlockBasicGenerator.FACING).getOpposite()));
+			TileEntity tile = null;
+			for (int i = 0; i < 6; i++) {
+				if (((IConnection) world.getTileEntity(pos)).getConnectionFace(Direction.byIndex(i)))
+					tile = world.getTileEntity(DirectionUtils.getPosDirection(pos, Direction.byIndex(i)));
+			}
 			if (tile instanceof ICable) {
 				List<BlockPos> outputs = ((ICable) tile).getNetwork();
-				if (outputs.size() == 0) return 0;
-
+				if (outputs.size() == 0)
+					return 0;
 				if (outputs.size() > 0) {
-					int amountEach = (int) Math.ceil(amount / outputs.size());
 					for (int i = 0; i < outputs.size(); i++) {
-						amount -= ((IPlasmaMachine) world.getTileEntity(outputs.get(i))).receiveEnergy(amountEach);
+						IPlasmaMachine machine = (IPlasmaMachine) world.getTileEntity(outputs.get(i));
+						if (machine != null) {
+							int toRemove = machine.receiveEnergy(amount);
+							amount -= toRemove;
+						}
 					}
 				}
 			} else if (tile instanceof IPlasmaMachine) {
-				amount -= ((IPlasmaMachine) tile).receiveEnergy(amount);
-			}
+				IPlasmaMachine machine = (IPlasmaMachine) tile;
+				if (machine != null) {
+					int toRemove = machine.receiveEnergy(amount);
+					amount -= toRemove;
+				}
+			} else
+				return 0;
+		} else {
+			return 0;
 		}
-
 		return amount;
 	}
 

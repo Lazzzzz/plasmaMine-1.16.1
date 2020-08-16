@@ -1,21 +1,18 @@
 package laz.plasmine.content.block;
 
 import laz.plasmine.api.Constante;
+import laz.plasmine.base.BlockRotationBase;
 import laz.plasmine.registry.init.PMBlocksInit;
 import laz.plasmine.util.DirectionUtils;
 import laz.plasmine.util.interfaces.ICanWrench;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.FenceBlock;
-import net.minecraft.block.HorizontalBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -27,9 +24,8 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
-public class ConveyorBelt extends Block implements ICanWrench {
-
-	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+public class ConveyorBelt extends BlockRotationBase implements ICanWrench {
+	
 	public static final BooleanProperty LEFT = BooleanProperty.create("left");
 	public static final BooleanProperty RIGHT = BooleanProperty.create("right");
 

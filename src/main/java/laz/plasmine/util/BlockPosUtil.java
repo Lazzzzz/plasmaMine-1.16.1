@@ -38,10 +38,10 @@ public class BlockPosUtil {
 	}
 	
 	public static CompoundNBT writeListBlockPos(CompoundNBT compound, List<BlockPos> l, String id) {
+		compound.putInt(id + "_size", l.size());
 		for (int i = 0; i < l.size(); i++) {
 			compound = writeBlockPos(compound, l.get(i), id + "_" + i);
 		}
-		compound.putInt(id + "_size", l.size());
 		return compound;
 	}
 	
@@ -49,7 +49,8 @@ public class BlockPosUtil {
 		int size = compound.getInt(id + "_size");
 		List<BlockPos> l = new ArrayList<BlockPos>();
 		for (int i = 0; i < size; i++) {
-			l.add(readBlockPos(compound, id + "_" + i));
+			BlockPos pos = readBlockPos(compound, id + "_" + i);
+			l.add(pos);
 		}
 		return l;
 	}

@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "": { "model": "plasmine:block/machine/machine_block" }
+    }
+}

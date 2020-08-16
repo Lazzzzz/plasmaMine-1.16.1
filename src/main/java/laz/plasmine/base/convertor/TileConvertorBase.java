@@ -45,6 +45,7 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 					if (world.rand.nextInt(100) == 0) world.playSound(null, pos, PMSoundInit.CONVERTOR_RUNNING.get(), SoundCategory.MASTER, 0.5f, 1f);
 				}
 			}
+			markDirty();
 		}
 
 	}
@@ -73,6 +74,10 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 	@Override
 	public Direction heatInOut(BlockState state) {
 		return state.get(BlockConvertorBase.FACING);
+	}
+	
+	public int getConsomationPerTick() {
+		return amountToConvertPerTick;
 	}
 
 	@Override

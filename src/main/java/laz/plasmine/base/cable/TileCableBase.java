@@ -33,7 +33,7 @@ public class TileCableBase extends TileEntity implements ITickableTileEntity, IC
 	public TileCableBase(TileEntityType<?> tileEntityTypeIn) {
 		super(tileEntityTypeIn);
 	}
-
+	
 	@Override
 	public void tick() {
 		if (!world.isRemote) {
@@ -46,6 +46,7 @@ public class TileCableBase extends TileEntity implements ITickableTileEntity, IC
 					updateWorkingState();
 				}
 			}
+			markDirty();
 		}
 	}
 
@@ -168,13 +169,12 @@ public class TileCableBase extends TileEntity implements ITickableTileEntity, IC
 
 	@Override
 	public void func_230337_a_(BlockState p_230337_1_, CompoundNBT p_230337_2_) {
-
+		super.func_230337_a_(p_230337_1_, p_230337_2_);
 		for (int i = 0; i < 6; i++) {
 			connected[i] = p_230337_2_.getBoolean("connected_" + i);
 		}
 
 		NETWORK = BlockPosUtil.readListBlockPos(p_230337_2_, "net");
-		super.func_230337_a_(p_230337_1_, p_230337_2_);
 	}
 
 	@Override
