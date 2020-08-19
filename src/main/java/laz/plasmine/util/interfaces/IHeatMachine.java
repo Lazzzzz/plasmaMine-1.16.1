@@ -25,6 +25,7 @@ public interface IHeatMachine {
 
 	default void putHeat(float amount) {
 	}
+	
 
 	default void setWorkingState(World world, BlockPos pos, BlockState state, boolean working) {
 		if (working) {

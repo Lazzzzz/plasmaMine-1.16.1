@@ -77,20 +77,20 @@ public class ConveyorBeltUp extends BlockRotationBase implements ICanWrench {
 			dif = pos.getZ() + 0.5f - entityIn.getPosZ();
 			motion = motion.add(0, 0, dif / 10);
 			if (dir == Direction.EAST) {
-				if (entityIn.getPosX() - pos.getX() == 0.625)
+				if (entityIn.getPosX() - pos.getX() >= 0.625)
 					goingUp = true;
 			} else {
-				if (entityIn.getPosX() - pos.getX() == 0.375)
+				if (entityIn.getPosX() - pos.getX() <= 0.376)
 					goingUp = true;
 			}
 		} else {
 			dif = pos.getX() + 0.5f - entityIn.getPosX();
 			motion = motion.add(dif / 10, 0, 0);
 			if (dir == Direction.SOUTH) {
-				if (entityIn.getPosZ() - pos.getZ() == 0.625)
+				if (entityIn.getPosZ() - pos.getZ() >= 0.624)
 					goingUp = true;
 			} else {
-				if (entityIn.getPosZ() - pos.getZ() == 0.375)
+				if (entityIn.getPosZ() - pos.getZ() <= 0.376)
 					goingUp = true;
 			}
 		}

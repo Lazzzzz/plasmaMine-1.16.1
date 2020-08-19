@@ -28,6 +28,8 @@ public class TileSedimentCollector extends TileHeatMachineBase {
 
 	@Override
 	public void onWorking() {
+		setWorkingState(world, pos, world.getBlockState(pos), true);
+		
 		if (livingtick % 100 == 0) {
 			float random = world.rand.nextFloat();
 			world.getRecipeManager().getRecipes().stream().filter(recipe -> recipe instanceof SedimentCollectorRecipe)
@@ -36,7 +38,7 @@ public class TileSedimentCollector extends TileHeatMachineBase {
 	}
 
 	private void produceItem(SedimentCollectorRecipe recipe, float rand) {
-		if (recipe.getChance() > rand && recipe.getTemp() < heatHelper.getCelcius()) {
+		if (recipe.getChance() > rand && recipe.getTemp() <= heatHelper.getCelcius()) {
 			for (int i = 0; i < size; i++) {
 				ItemStack stack = getStackInSlot(i);
 				ItemStack out = recipe.getItemOut().copy();

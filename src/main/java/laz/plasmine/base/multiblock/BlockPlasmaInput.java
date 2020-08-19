@@ -1,26 +1,25 @@
-package laz.plasmine.content.tiles.storage.put;
+package laz.plasmine.base.multiblock;
 
-import java.util.List;
-
-import laz.plasmine.base.generator.BlockGeneratorBase;
-import laz.plasmine.util.BlockPosUtil;
+import laz.plasmine.base.BlockRotationBase;
 import laz.plasmine.util.interfaces.IMaster;
 import laz.plasmine.util.interfaces.ISlave;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.ItemStack;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ToolType;
 
-public class BlockPlasmaOutput extends BlockGeneratorBase {
+public class BlockPlasmaInput extends BlockRotationBase{
 
-	public BlockPlasmaOutput() {
-		super(0, 0, 0);
+	public BlockPlasmaInput() {
+		super(Block.Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).hardnessAndResistance(3, 15)
+				.sound(SoundType.METAL).harvestLevel(0));
 	}
-
+	
 	@Override
 	public boolean hasTileEntity(BlockState state) {
 		return true;
@@ -28,23 +27,19 @@ public class BlockPlasmaOutput extends BlockGeneratorBase {
 
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return new TilePlasmaOutput();
-	}
-
-	@Override
-	public void addInformation(ItemStack stack, IBlockReader worldIn, List<ITextComponent> tooltip,
-			ITooltipFlag flagIn) {
+		return new TilePlasmaInput();
 	}
 
 	@Override
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (!worldIn.isRemote) {
 			ISlave tile = (ISlave) worldIn.getTileEntity(pos);
-			if (!BlockPosUtil.areSame(tile.getBlockPosMaster(), pos)) {
+			if (tile.isBind()) {
 				IMaster master = (IMaster) worldIn.getTileEntity(tile.getBlockPosMaster());
 				tile.sendMasterDestroy(pos, master);
 			}
 		}
 		super.onReplaced(state, worldIn, pos, newState, isMoving);
 	}
+	
 }

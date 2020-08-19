@@ -1,4 +1,4 @@
-package laz.plasmine.content.tiles.generator;
+package laz.plasmine.content.tiles.generator.basicgenerator;
 
 import laz.plasmine.base.generator.TileGeneratorBase;
 import laz.plasmine.registry.init.PMItemsInit;
@@ -16,7 +16,7 @@ public class TileBasicGenerator extends TileGeneratorBase {
 
 	private int maxCooking = 20 * 4;
 	private int cooking = 0;
-
+	
 	public TileBasicGenerator(int maxCapacity, int rate, int production) {
 		super(PMTilesInit.BASIC_GENERATOR.getTileEntityType(), maxCapacity, rate, production, 1);
 	}
@@ -73,4 +73,5 @@ public class TileBasicGenerator extends TileGeneratorBase {
 	public ITextComponent getDisplayName() {
 		return new StringTextComponent("basic generator");
 	}
+	
 }

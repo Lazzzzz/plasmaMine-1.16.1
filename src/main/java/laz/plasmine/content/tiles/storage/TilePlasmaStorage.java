@@ -4,22 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 import laz.plasmine.api.PlasmaHelper;
-import laz.plasmine.content.block.slaves.coils.BlockCoilBase;
-import laz.plasmine.content.tiles.storage.put.TilePlasmaInput;
-import laz.plasmine.content.tiles.storage.put.TilePlasmaOutput;
+import laz.plasmine.base.multiblock.BlockCoilBase;
+import laz.plasmine.base.multiblock.TilePlasmaInput;
+import laz.plasmine.base.multiblock.TilePlasmaOutput;
+import laz.plasmine.network.PacketHandler;
+import laz.plasmine.network.helpers.PlasmaStorageHelperPacket;
 import laz.plasmine.registry.init.PMTilesInit;
 import laz.plasmine.util.BlockPosUtil;
 import laz.plasmine.util.DirectionUtils;
 import laz.plasmine.util.interfaces.IMaster;
 import laz.plasmine.util.interfaces.ISlave;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraftforge.fml.network.NetworkDirection;
 
-public class TilePlasmaStorage extends TileEntity implements IMaster, ITickableTileEntity {
+public class TilePlasmaStorage extends TileEntity implements IMaster, ITickableTileEntity, INamedContainerProvider {
 
 	private List<BlockPos> connectedBlock = new ArrayList<BlockPos>();
 
@@ -41,6 +51,11 @@ public class TilePlasmaStorage extends TileEntity implements IMaster, ITickableT
 	@Override
 	public List<BlockPos> getConnectedBlock() {
 		return connectedBlock;
+	}
+
+	public void receiveData(int amount, int capacity, int rate) {
+		plasma = new PlasmaHelper(capacity, rate);
+		plasma.setCapacity(amount);
 	}
 
 	@Override
@@ -202,10 +217,10 @@ public class TilePlasmaStorage extends TileEntity implements IMaster, ITickableT
 	private void reset() {
 		maxOutput = -1;
 		maxStorage = -1;
-		TilePlasmaInput tile = (TilePlasmaInput) world.getTileEntity(input);
-		if (tile != null) {
-			tile.getPlasmaHelper().setMaxCapacity(0);
-			tile.getPlasmaHelper().setMaxSend(0);
+		TileEntity tile = world.getTileEntity(input);
+		if (tile instanceof TilePlasmaInput) {
+			((TilePlasmaInput) tile).getPlasmaHelper().setMaxCapacity(0);
+			((TilePlasmaInput) tile).getPlasmaHelper().setMaxSend(0);
 		}
 		input = pos;
 		output = pos;
@@ -231,6 +246,7 @@ public class TilePlasmaStorage extends TileEntity implements IMaster, ITickableT
 	@Override
 	public void tick() {
 		if (!world.isRemote) {
+			senddata();
 			if (!isFormed) {
 				if (checkIsFormed())
 					isFormed = true;
@@ -244,11 +260,49 @@ public class TilePlasmaStorage extends TileEntity implements IMaster, ITickableT
 					((TilePlasmaOutput) world.getTileEntity(output)).setPlasmaHelper(plasma);
 				}
 			}
+			setState();
+			markDirty();
+		}
+	}
+
+	private void senddata() {
+		if (plasma != null) {
+			List<? extends PlayerEntity> players = world.getPlayers();
+			for (int i = 0; i < players.size(); i++) {
+				PacketHandler.INSTANCE.sendTo(
+						new PlasmaStorageHelperPacket(pos, plasma.getCapacity(), plasma.getMaxCapacity(),
+								plasma.getMaxSend()),
+						((ServerPlayerEntity) players.get(i)).connection.netManager, NetworkDirection.PLAY_TO_CLIENT);
+			}
 		}
 	}
 
 	public PlasmaHelper getHelper() {
 		return plasma;
+	}
+
+	@Override
+	public Container createMenu(int p_createMenu_1_, PlayerInventory p_createMenu_2_, PlayerEntity p_createMenu_3_) {
+		return new ContainerPlasmaStorage(p_createMenu_1_, this, p_createMenu_2_);
+	}
+
+	@Override
+	public ITextComponent getDisplayName() {
+		return new StringTextComponent("Plasma storage");
+	}
+
+	private void setState() {
+		int state = world.getBlockState(pos).get(BlockPlasmaStorage.STORAGE);
+		int newState = 0;
+		if (plasma != null)
+			newState = (int) (((float) plasma.getCapacity() / (plasma.getMaxCapacity() * 0.95f)) * 10f);
+
+		if (state != newState) {
+			Direction dir = world.getBlockState(pos).get(BlockPlasmaStorage.FACING).getOpposite();
+			BlockPos p = DirectionUtils.getPosDirection(pos, dir);
+			world.setBlockState(pos, world.getBlockState(pos).with(BlockPlasmaStorage.STORAGE, newState));
+			sendStructureBind(p, dir);
+		}
 	}
 
 }

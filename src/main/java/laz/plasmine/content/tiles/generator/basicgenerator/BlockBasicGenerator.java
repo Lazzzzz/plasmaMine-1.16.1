@@ -1,4 +1,4 @@
-package laz.plasmine.content.tiles.generator;
+package laz.plasmine.content.tiles.generator.basicgenerator;
 
 import java.util.List;
 

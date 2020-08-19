@@ -1,0 +1,13 @@
+{
+	"parent": "block/cube",
+	"textures": 
+	{
+		"particle": "plasmine:blocks/machine/machine_side",
+		"down": "plasmine:blocks/machine/machine_side",
+		"up": "plasmine:blocks/machine/machine_side",
+		"north": "plasmine:blocks/storage/plasma_storage_3",
+		"east": "plasmine:blocks/machine/machine_side",
+		"south": "plasmine:blocks/machine/machine_side",
+		"west": "plasmine:blocks/machine/machine_side"
+	}
+}

@@ -3,8 +3,10 @@ package laz.plasmine.base.heat;
 import java.util.List;
 
 import laz.plasmine.api.HeatHelper;
+import laz.plasmine.base.convertor.TileConvertorBase;
 import laz.plasmine.network.PacketHandler;
 import laz.plasmine.network.helpers.HeatHelperPacket;
+import laz.plasmine.util.DirectionUtils;
 import laz.plasmine.util.interfaces.IHeatMachine;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -20,6 +22,7 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fml.network.NetworkDirection;
 
@@ -44,17 +47,23 @@ public class TileHeatMachineBase extends TileEntity
 		if (!world.isRemote) {
 			sendData();
 			
-			if (heatHelper.isWorkingCelcius(world, pos)) setWorkingState(world, pos, world.getBlockState(pos), true);
-			else setWorkingState(world, pos, world.getBlockState(pos), false);
-
-			if (world.getBlockState(pos).get(BlockHeatMachineBase.WORKING)) onWorking();
-			heatHelper.removeHeat(consumeHeat());
-
-			heatHelper.coolDown(world, pos);
+			setWorkingState(world, pos, world.getBlockState(pos), false);
+			
+			if (heatHelper.isWorkingCelcius(world, pos)) onWorking();
+			
+			if (!isConvertorHere()) heatHelper.coolDown(world, pos);
+			
 			if (heatHelper.isOverHeating())
 				onOverHeat();
+			
 			markDirty();
 		}
+	}
+	
+	private boolean isConvertorHere() {
+		BlockPos conv = DirectionUtils.getPosDirection(pos, heatInOut(world.getBlockState(pos)));
+		if (world.getTileEntity(conv) instanceof TileConvertorBase) return true;
+		return false;
 	}
 
 	@Override

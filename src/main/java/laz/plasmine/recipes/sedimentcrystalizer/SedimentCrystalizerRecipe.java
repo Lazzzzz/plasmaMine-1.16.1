@@ -14,7 +14,7 @@ public class SedimentCrystalizerRecipe extends AbstractPlasmineRecipe {
     private final ItemStack itemOut;
 
     public SedimentCrystalizerRecipe(ResourceLocation id, ItemStack itemIn, ItemStack itemOut, int temp, int time) {
-        super(PMRecipesSerializer.SEDIMENT_COLLECTOR_TYPE, id, temp, time);
+        super(PMRecipesSerializer.SEDIMENT_CRYSTALIZER_TYPE, id, temp, time);
         this.itemIn = itemIn;
         this.itemOut = itemOut;
     }

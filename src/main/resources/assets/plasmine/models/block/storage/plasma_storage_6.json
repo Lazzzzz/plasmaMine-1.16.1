@@ -5,7 +5,7 @@
 		"particle": "plasmine:blocks/machine/machine_side",
 		"down": "plasmine:blocks/machine/machine_side",
 		"up": "plasmine:blocks/machine/machine_side",
-		"north": "plasmine:blocks/storage/plasma_storage",
+		"north": "plasmine:blocks/storage/plasma_storage_6",
 		"east": "plasmine:blocks/machine/machine_side",
 		"south": "plasmine:blocks/machine/machine_side",
 		"west": "plasmine:blocks/machine/machine_side"

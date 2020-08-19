@@ -6,7 +6,7 @@ import laz.plasmine.Plasmine;
 import laz.plasmine.base.convertor.TileConvertorBase;
 import laz.plasmine.base.generator.BlockGeneratorBase;
 import laz.plasmine.client.models.block.convertor.BasicConvertorModel;
-import laz.plasmine.content.tiles.generator.BlockBasicGenerator;
+import laz.plasmine.content.tiles.generator.basicgenerator.BlockBasicGenerator;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;

@@ -36,6 +36,10 @@ public class PlasmaHelper {
 		maxSend = send;
 	}
 	
+	public int getMaxSend() {
+		return maxSend;
+	}
+	
 	public void setCapacity(int amount) {
 		capacity = amount;
 	}
@@ -72,16 +76,21 @@ public class PlasmaHelper {
 	}
 	
 	public int sendPlasma(int amount) {
+		if (getCapacity() == 0) return 0;
 		if (amount > getCapacity()) return getCapacity();
 		return amount;
 	}
 
 	public void write(CompoundNBT compound) {
 		compound.putInt("capacity", capacity);
+		compound.putInt("maxCapacity", maxCapacity);
+		compound.putInt("maxSend", maxSend);
 	}
 
 	public void read(CompoundNBT compoundNBT) {
 		capacity = compoundNBT.getInt("capacity");
+		maxCapacity = compoundNBT.getInt("maxCapacity");
+		maxSend = compoundNBT.getInt("maxSend");
 	}
 
 	public void displayInfo(PlayerEntity player) {

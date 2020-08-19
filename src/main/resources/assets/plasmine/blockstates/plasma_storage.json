@@ -1,8 +1,58 @@
 {
     "variants": {
-        "facing=north": { "model": "plasmine:block/storage/plasma_storage" },
-        "facing=south": { "model": "plasmine:block/storage/plasma_storage", "y": 180 },
-        "facing=west":  { "model": "plasmine:block/storage/plasma_storage", "y": 270 },
-        "facing=east":  { "model": "plasmine:block/storage/plasma_storage", "y": 90 }
+        "facing=north,storage=0": { "model": "plasmine:block/storage/plasma_storage_0" },
+        "facing=south,storage=0": { "model": "plasmine:block/storage/plasma_storage_0", "y": 180 },
+        "facing=west,storage=0":  { "model": "plasmine:block/storage/plasma_storage_0", "y": 270 },
+        "facing=east,storage=0":  { "model": "plasmine:block/storage/plasma_storage_0", "y": 90 },
+
+        "facing=north,storage=1": { "model": "plasmine:block/storage/plasma_storage_1" },
+        "facing=south,storage=1": { "model": "plasmine:block/storage/plasma_storage_1", "y": 180 },
+        "facing=west,storage=1":  { "model": "plasmine:block/storage/plasma_storage_1", "y": 270 },
+        "facing=east,storage=1":  { "model": "plasmine:block/storage/plasma_storage_1", "y": 90 },
+
+        "facing=north,storage=2": { "model": "plasmine:block/storage/plasma_storage_2" },
+        "facing=south,storage=2": { "model": "plasmine:block/storage/plasma_storage_2", "y": 180 },
+        "facing=west,storage=2":  { "model": "plasmine:block/storage/plasma_storage_2", "y": 270 },
+        "facing=east,storage=2":  { "model": "plasmine:block/storage/plasma_storage_2", "y": 90 },
+
+        "facing=north,storage=3": { "model": "plasmine:block/storage/plasma_storage_3" },
+        "facing=south,storage=3": { "model": "plasmine:block/storage/plasma_storage_3", "y": 180 },
+        "facing=west,storage=3":  { "model": "plasmine:block/storage/plasma_storage_3", "y": 270 },
+        "facing=east,storage=3":  { "model": "plasmine:block/storage/plasma_storage_3", "y": 90 },
+
+        "facing=north,storage=4": { "model": "plasmine:block/storage/plasma_storage_4" },
+        "facing=south,storage=4": { "model": "plasmine:block/storage/plasma_storage_4", "y": 180 },
+        "facing=west,storage=4":  { "model": "plasmine:block/storage/plasma_storage_4", "y": 270 },
+        "facing=east,storage=4":  { "model": "plasmine:block/storage/plasma_storage_4", "y": 90 },
+
+        "facing=north,storage=5": { "model": "plasmine:block/storage/plasma_storage_5" },
+        "facing=south,storage=5": { "model": "plasmine:block/storage/plasma_storage_5", "y": 180 },
+        "facing=west,storage=5":  { "model": "plasmine:block/storage/plasma_storage_5", "y": 270 },
+        "facing=east,storage=5":  { "model": "plasmine:block/storage/plasma_storage_5", "y": 90 },
+
+		"facing=north,storage=6": { "model": "plasmine:block/storage/plasma_storage_6" },
+        "facing=south,storage=6": { "model": "plasmine:block/storage/plasma_storage_6", "y": 180 },
+        "facing=west,storage=6":  { "model": "plasmine:block/storage/plasma_storage_6", "y": 270 },
+        "facing=east,storage=6":  { "model": "plasmine:block/storage/plasma_storage_6", "y": 90 },
+
+        "facing=north,storage=7": { "model": "plasmine:block/storage/plasma_storage_7" },
+        "facing=south,storage=7": { "model": "plasmine:block/storage/plasma_storage_7", "y": 180 },
+        "facing=west,storage=7":  { "model": "plasmine:block/storage/plasma_storage_7", "y": 270 },
+        "facing=east,storage=7":  { "model": "plasmine:block/storage/plasma_storage_7", "y": 90 },
+
+        "facing=north,storage=8": { "model": "plasmine:block/storage/plasma_storage_8" },
+        "facing=south,storage=8": { "model": "plasmine:block/storage/plasma_storage_8", "y": 180 },
+        "facing=west,storage=8":  { "model": "plasmine:block/storage/plasma_storage_8", "y": 270 },
+        "facing=east,storage=8":  { "model": "plasmine:block/storage/plasma_storage_8", "y": 90 },
+
+        "facing=north,storage=9": { "model": "plasmine:block/storage/plasma_storage_9" },
+        "facing=south,storage=9": { "model": "plasmine:block/storage/plasma_storage_9", "y": 180 },
+        "facing=west,storage=9":  { "model": "plasmine:block/storage/plasma_storage_9", "y": 270 },
+        "facing=east,storage=9":  { "model": "plasmine:block/storage/plasma_storage_9", "y": 90 },
+
+        "facing=north,storage=10": { "model": "plasmine:block/storage/plasma_storage_10" },
+        "facing=south,storage=10": { "model": "plasmine:block/storage/plasma_storage_10", "y": 180 },
+        "facing=west,storage=10":  { "model": "plasmine:block/storage/plasma_storage_10", "y": 270 },
+        "facing=east,storage=10":  { "model": "plasmine:block/storage/plasma_storage_10", "y": 90 }
     }
 }

@@ -23,7 +23,6 @@ import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.world.biome.Biome;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -70,7 +69,6 @@ public class PMRegistry {
 		PMSoundInit.init();
 		PMRecipesSerializer.init();
 		register(eventBus);
-
 	}
 
 	public static BlockRegistryObjectGroup<Block, BlockItem, ?> addCubedBlock(String name,

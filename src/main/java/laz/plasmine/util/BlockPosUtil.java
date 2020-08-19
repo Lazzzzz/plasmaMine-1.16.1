@@ -29,6 +29,14 @@ public class BlockPosUtil {
 		return compound;
 	}
 
+	public static boolean containsBlockPos(CompoundNBT compound, String id) {
+		if (!compound.contains(id + "_posx")) return false;
+		if (!compound.contains(id + "_posy")) return false;
+		if (!compound.contains(id + "_posz")) return false;
+		
+		return true;
+	}
+	
 	public static BlockPos readBlockPos(CompoundNBT compound, String id) {
 		int x = compound.getInt(id + "_posx");
 		int y = compound.getInt(id + "_posy");

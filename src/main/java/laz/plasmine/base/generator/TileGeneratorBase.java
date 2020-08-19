@@ -107,14 +107,15 @@ public class TileGeneratorBase extends TileEntity
 		return null;
 	}
 
-	public void receiveData(int amount) {
+	public void receiveData(int amount, int cap) {
 		plasmaHelper.setCapacity(amount);
+		plasmaHelper.setMaxCapacity(cap);
 	}
 
 	protected void sendData() {
 		List<? extends PlayerEntity> players = world.getPlayers();
 		for (int i = 0; i < players.size(); i++) {
-			PacketHandler.INSTANCE.sendTo(new PlasmaHelperPacket(pos, plasmaHelper.getCapacity()),
+			PacketHandler.INSTANCE.sendTo(new PlasmaHelperPacket(pos, plasmaHelper.getCapacity(), plasmaHelper.getMaxCapacity()),
 					((ServerPlayerEntity) players.get(i)).connection.netManager, NetworkDirection.PLAY_TO_CLIENT);
 		}
 	}

@@ -14,7 +14,7 @@ public class BlockBasicConvertor extends BlockConvertorBase {
 	VoxelShape SHAPE = VoxelShapes.create(0.125, 0.125f, 0.125f, 0.875f, 0.875f, 0.875f);
 		
 	public BlockBasicConvertor() {
-		super(2, 0.3f, 1);
+		super(2, 0.3f, 150);
 	}
 	
 	@Override

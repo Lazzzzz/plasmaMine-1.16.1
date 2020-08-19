@@ -17,32 +17,38 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 
 	protected int amountToConvertPerTick;
 	protected float efficiency;
+	protected int maxTemp;
 
-	public TileConvertorBase(TileEntityType<?> tileEntityTypeIn, int maxCapacity,
-			int convert, float efficiency) {
+	public TileConvertorBase(TileEntityType<?> tileEntityTypeIn, int maxCapacity, int convert, float efficiency,
+			int maxTemp) {
 		super(tileEntityTypeIn, maxCapacity);
 		this.amountToConvertPerTick = convert;
 		this.efficiency = efficiency;
-
+		this.maxTemp = maxTemp;
 	}
 
 	@Override
 	public void tick() {
-		livingtick ++;
+		livingtick++;
 		if (!world.isRemote) {
-			boolean isWorking = plasmaHelper.getCapacity() > amountToConvertPerTick && world.isBlockPowered(pos);
+			HeatHelper helper = heatAround();
+			boolean isWorking = world.isBlockPowered(pos) && plasmaHelper.getCapacity() >= amountToConvertPerTick && helper != null;
 			setWorkingState(world, pos, world.getBlockState(pos), isWorking);
-			
 			float heat = 0;
-			if (isTileConnect() && world.isBlockPowered(pos)) {
-				HeatHelper helper = heatAround();
-				if (helper != null) {
-					if (plasmaHelper.getCapacity() > amountToConvertPerTick) heat = transformPlasmaToHeat(helper, plasmaHelper.removePlasma(amountToConvertPerTick), efficiency);
-					helper.addCelcius(heat);
+			if (helper != null) {
+				if (isTileConnect() && isWorking) {
+					if (plasmaHelper.getCapacity() >= amountToConvertPerTick)
+						heat = transformPlasmaToHeat(plasmaHelper.removePlasma(amountToConvertPerTick), efficiency,
+								helper.getCelcius(), maxTemp);
+					if (helper.getCelcius() < maxTemp)
+						helper.addCelcius(heat);
+				} else {
+					helper.coolDown(world, pos, transformPlasmaToHeat(amountToConvertPerTick, efficiency * 1.1f,
+							helper.getCelcius(), helper.getMaxCelcius()));
 				}
-				
 				if (isWorking) {
-					if (world.rand.nextInt(100) == 0) world.playSound(null, pos, PMSoundInit.CONVERTOR_RUNNING.get(), SoundCategory.MASTER, 0.5f, 1f);
+					if (world.rand.nextInt(100) == 0)
+						world.playSound(null, pos, PMSoundInit.CONVERTOR_RUNNING.get(), SoundCategory.MASTER, 0.5f, 1f);
 				}
 			}
 			markDirty();
@@ -50,10 +56,16 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 
 	}
 
+	@Override
+	public int receiveEnergy(int amount) {
+		return plasmaHelper.addPlasma(amount);
+	}
+
 	public HeatHelper heatAround() {
 		Direction dir = heatInOut(world.getBlockState(pos));
 		TileEntity tile = world.getTileEntity(getPosDirection(pos, dir));
-		if (tile instanceof IHeatMachine) return ((IHeatMachine) tile).getHeatHelper();
+		if (tile instanceof IHeatMachine)
+			return ((IHeatMachine) tile).getHeatHelper();
 		return null;
 	}
 
@@ -75,7 +87,7 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 	public Direction heatInOut(BlockState state) {
 		return state.get(BlockConvertorBase.FACING);
 	}
-	
+
 	public int getConsomationPerTick() {
 		return amountToConvertPerTick;
 	}

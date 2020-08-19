@@ -3,10 +3,7 @@ package laz.plasmine.util.interfaces;
 import java.util.List;
 
 import laz.plasmine.api.PlasmaHelper;
-import laz.plasmine.content.tiles.generator.BlockBasicGenerator;
 import laz.plasmine.util.DirectionUtils;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.gui.toasts.TutorialToast.Icons;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -17,6 +14,7 @@ public interface IPlasmaGenerator {
 	PlasmaHelper getPlasmaHelper();
 
 	default int sendEnergy(World world, BlockPos pos, int amount) {
+		int return_amount = amount;
 		if (amount > 0) {
 			TileEntity tile = null;
 			for (int i = 0; i < 6; i++) {
@@ -28,11 +26,11 @@ public interface IPlasmaGenerator {
 				if (outputs.size() == 0)
 					return 0;
 				if (outputs.size() > 0) {
+
 					for (int i = 0; i < outputs.size(); i++) {
 						IPlasmaMachine machine = (IPlasmaMachine) world.getTileEntity(outputs.get(i));
 						if (machine != null) {
-							int toRemove = machine.receiveEnergy(amount);
-							amount -= toRemove;
+							return_amount = machine.receiveEnergy(return_amount);
 						}
 					}
 				}
@@ -47,7 +45,7 @@ public interface IPlasmaGenerator {
 		} else {
 			return 0;
 		}
-		return amount;
+		return amount - return_amount;
 	}
 
 	int produceEnergy();

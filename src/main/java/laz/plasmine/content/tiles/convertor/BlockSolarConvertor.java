@@ -20,7 +20,7 @@ public class BlockSolarConvertor extends BlockConvertorBase {
 	VoxelShape SHAPE = VoxelShapes.create(0.125, 0.125f, 0.125f, 0.875f, 0.875f, 0.875f);
 	
 	public BlockSolarConvertor() {
-		super(1, 0.5f, 0);
+		super(1, 0.5f, 50);
 	}
 	
 	@Override

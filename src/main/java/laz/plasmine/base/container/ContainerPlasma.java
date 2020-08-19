@@ -2,7 +2,7 @@ package laz.plasmine.base.container;
 
 import java.util.Objects;
 
-import laz.plasmine.content.tiles.generator.TileBasicGenerator;
+import laz.plasmine.content.tiles.generator.basicgenerator.TileBasicGenerator;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;

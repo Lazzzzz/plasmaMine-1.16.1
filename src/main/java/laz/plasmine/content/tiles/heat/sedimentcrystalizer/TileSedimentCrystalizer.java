@@ -65,6 +65,8 @@ public class TileSedimentCrystalizer extends TileHeatMachineBase implements ISid
 
 	@Override
 	public void onWorking() {
+		setWorkingState(world, pos, world.getBlockState(pos), true);
+		
 		if (result == ItemStack.EMPTY)
 			world.getRecipeManager().getRecipes().stream().filter(recipe -> recipe instanceof SedimentCrystalizerRecipe)
 					.forEach(e -> start((SedimentCrystalizerRecipe) e));

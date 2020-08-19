@@ -15,7 +15,7 @@ public class SedimentExtractorRecipe extends AbstractPlasmineRecipe {
     private final ItemStack itemOut;
 
     public SedimentExtractorRecipe(ResourceLocation id, ItemStack itemIn1, ItemStack itemIn2, ItemStack itemOut, int temp, int time) {
-        super(PMRecipesSerializer.SEDIMENT_COLLECTOR_TYPE, id, temp, time);
+        super(PMRecipesSerializer.SEDIMENT_EXTRACTOR_TYPE, id, temp, time);
         this.itemIn1 = itemIn1;
         this.itemIn2 = itemIn2;
         this.itemOut = itemOut;

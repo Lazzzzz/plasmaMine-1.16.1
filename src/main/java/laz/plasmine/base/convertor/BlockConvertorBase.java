@@ -30,16 +30,16 @@ public class BlockConvertorBase extends BlockRotationBase implements ICanWrench 
 
 	public float efficiency;
 	public int rate;
-	public int tier;
+	public int temp;
 
-	public BlockConvertorBase(int rate, float efficiency, int tier) {
+	public BlockConvertorBase(int rate, float efficiency, int temp) {
 		super(Block.Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).hardnessAndResistance(3, 15)
 				.sound(SoundType.METAL).harvestLevel(0));
 		this.setDefaultState(
 				this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(WORKING, Boolean.valueOf(false)));
 		this.efficiency = efficiency;
 		this.rate = rate;
-		this.tier = tier;
+		this.temp = temp;
 	}
 
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
@@ -71,7 +71,7 @@ public class BlockConvertorBase extends BlockRotationBase implements ICanWrench 
 	@Override
 	public void addInformation(ItemStack stack, IBlockReader worldIn, List<ITextComponent> tooltip,
 			ITooltipFlag flagIn) {
-		ConvertorInformationBase.info(efficiency, rate, tier, tooltip);
+		ConvertorInformationBase.info(efficiency, rate, temp, tooltip);
 	}
 
 }

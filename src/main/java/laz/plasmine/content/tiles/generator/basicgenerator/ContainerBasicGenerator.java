@@ -1,4 +1,4 @@
-package laz.plasmine.content.tiles.generator;
+package laz.plasmine.content.tiles.generator.basicgenerator;
 
 import laz.plasmine.base.container.ContainerPlasma;
 import laz.plasmine.registry.init.PMContainersInit;

@@ -49,6 +49,13 @@ public class HeatHelper {
 		if (celcius < minTemp)
 			celcius = minTemp;
 	}
+	
+	public void coolDown(World world, BlockPos pos, float amount) {
+		float minTemp = getMinTemp(world, pos);
+		removeHeat(amount);
+		if (celcius < minTemp)
+			celcius = minTemp;
+	}
 
 	public float getMinTemp(World world, BlockPos pos) {
 		return world.getBiome(pos).getTemperature(pos) * 20;

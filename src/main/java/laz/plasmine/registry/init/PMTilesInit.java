@@ -5,6 +5,10 @@ import static laz.plasmine.registry.PMRegistry.BLOCKS;
 import static laz.plasmine.registry.PMRegistry.ITEMS;
 import static laz.plasmine.registry.PMRegistry.TILE_ENTITIES;
 
+import laz.plasmine.base.multiblock.BlockPlasmaInput;
+import laz.plasmine.base.multiblock.BlockPlasmaOutput;
+import laz.plasmine.base.multiblock.TilePlasmaInput;
+import laz.plasmine.base.multiblock.TilePlasmaOutput;
 import laz.plasmine.content.block.slaves.BlockMachine;
 import laz.plasmine.content.block.slaves.TileMachine;
 import laz.plasmine.content.block.slaves.coils.BlockLisiumCoil;
@@ -17,8 +21,8 @@ import laz.plasmine.content.tiles.convertor.BlockSolarConvertor;
 import laz.plasmine.content.tiles.convertor.TileAdvancedConvertor;
 import laz.plasmine.content.tiles.convertor.TileBasicConvertor;
 import laz.plasmine.content.tiles.convertor.TileSolarConvertor;
-import laz.plasmine.content.tiles.generator.BlockBasicGenerator;
-import laz.plasmine.content.tiles.generator.TileBasicGenerator;
+import laz.plasmine.content.tiles.generator.basicgenerator.BlockBasicGenerator;
+import laz.plasmine.content.tiles.generator.basicgenerator.TileBasicGenerator;
 import laz.plasmine.content.tiles.heat.cropblower.BlockCropBlower;
 import laz.plasmine.content.tiles.heat.cropblower.TileCropBlower;
 import laz.plasmine.content.tiles.heat.sedimentcollector.BlockSedimentCollector;
@@ -31,10 +35,6 @@ import laz.plasmine.content.tiles.other.BlockHupper;
 import laz.plasmine.content.tiles.other.TileHupper;
 import laz.plasmine.content.tiles.storage.BlockPlasmaStorage;
 import laz.plasmine.content.tiles.storage.TilePlasmaStorage;
-import laz.plasmine.content.tiles.storage.put.BlockPlasmaInput;
-import laz.plasmine.content.tiles.storage.put.BlockPlasmaOutput;
-import laz.plasmine.content.tiles.storage.put.TilePlasmaInput;
-import laz.plasmine.content.tiles.storage.put.TilePlasmaOutput;
 import laz.plasmine.registry.BlockRegistryObjectGroup;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -52,8 +52,6 @@ public class PMTilesInit {
 	public static BlockRegistryObjectGroup<BlockBasicConvertor, BlockItem, TileBasicConvertor> BASIC_CONVERTOR;
 	public static BlockRegistryObjectGroup<BlockAdvancedConvertor, BlockItem, TileAdvancedConvertor> ADVANCED_CONVERTOR;
 
-	public static BlockRegistryObjectGroup<BlockCropBlower, BlockItem, TileCropBlower> CROP_BLOWER;
-
 	public static BlockRegistryObjectGroup<BlockMachine, BlockItem, TileMachine> MACHINE_BLOCK;
 	
 	public static BlockRegistryObjectGroup<BlockPlasmaStorage, BlockItem, TilePlasmaStorage> PLASMA_STORAGE;
@@ -61,6 +59,8 @@ public class PMTilesInit {
 	public static BlockRegistryObjectGroup<BlockPlasmaOutput, BlockItem, TilePlasmaOutput> PLASMA_OUTPUT;
 	
 	public static BlockRegistryObjectGroup<BlockLisiumCoil, BlockItem, TileLisiumCoil> LISIUM_COIL;
+	
+	public static BlockRegistryObjectGroup<BlockCropBlower, BlockItem, TileCropBlower> CROP_BLOWER;
 
 	public static BlockRegistryObjectGroup<BlockHupper, BlockItem, TileHupper> HUPPER;
 
@@ -125,7 +125,8 @@ public class PMTilesInit {
 		
 		LISIUM_COIL = new BlockRegistryObjectGroup<>("lisium_coil", BlockLisiumCoil::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
-				TileLisiumCoil::new).register(BLOCKS, ITEMS, TILE_ENTITIES);
+				TileLisiumCoil::new).register(BLOCKS, ITEMS, TILE_ENTITIES);	
+
 
 		//OTHER
 		HUPPER = new BlockRegistryObjectGroup<>("hupper", BlockHupper::new,

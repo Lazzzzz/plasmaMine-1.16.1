@@ -2,6 +2,7 @@ package laz.plasmine.registry.init;
 
 import static laz.plasmine.registry.PMRegistry.PM_SERIALIZER;
 
+import laz.plasmine.Plasmine;
 import laz.plasmine.recipes.sediementextractor.SedimentExtractorRecipe;
 import laz.plasmine.recipes.sediementextractor.SedimentExtractorSerializer;
 import laz.plasmine.recipes.sedimentcollector.SedimentCollectorRecipe;
@@ -24,12 +25,17 @@ public class PMRecipesSerializer {
 	
 	public static void init() {
 		
-		SEDIMENT_COLLECTOR_TYPE = IRecipeType.register("sediment_collector");
+		SEDIMENT_COLLECTOR_TYPE = IRecipeType.register(setRegistreName("sediment_collector"));
+		SEDIMENT_EXTRACTOR_TYPE = IRecipeType.register(setRegistreName("sediment_extractor"));
+		SEDIMENT_CRYSTALIZER_TYPE = IRecipeType.register(setRegistreName("sediment_crystalizer"));
 		
 		SEDIMENT_COLLECTOR_SERIALIZER = PM_SERIALIZER.register("sediment_collector", SedimentCollectorSerializer::new);
 		SEDIMENT_EXTRACTOR_SERIALIZER = PM_SERIALIZER.register("sediment_extractor", SedimentExtractorSerializer::new);
 		SEDIMENT_CRYSTALIZER_SERIALIZER = PM_SERIALIZER.register("sediment_crystalizer", SedimentCrystalizerSerializer::new);
 		
 	}
-	
+
+	private static String setRegistreName(String name) {
+		return Plasmine.MOD_ID + ":" + name;
+	}
 }

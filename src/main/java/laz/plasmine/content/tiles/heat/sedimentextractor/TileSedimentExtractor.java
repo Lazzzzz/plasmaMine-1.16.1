@@ -58,6 +58,8 @@ public class TileSedimentExtractor extends TileHeatMachineBase implements ISided
 
 	@Override
 	public void onWorking() {
+		setWorkingState(world, pos, world.getBlockState(pos), true);
+		
 		if (result == ItemStack.EMPTY)
 			world.getRecipeManager().getRecipes().stream().filter(recipe -> recipe instanceof SedimentExtractorRecipe)
 					.forEach(e -> start((SedimentExtractorRecipe) e));

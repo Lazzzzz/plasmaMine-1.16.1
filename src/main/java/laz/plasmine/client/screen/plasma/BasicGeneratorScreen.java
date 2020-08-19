@@ -8,9 +8,9 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 
 import laz.plasmine.api.PlasmaHelper;
 import laz.plasmine.client.screen.DrawBaseGui;
-import laz.plasmine.content.tiles.generator.BlockBasicGenerator;
-import laz.plasmine.content.tiles.generator.ContainerBasicGenerator;
-import laz.plasmine.content.tiles.generator.TileBasicGenerator;
+import laz.plasmine.content.tiles.generator.basicgenerator.BlockBasicGenerator;
+import laz.plasmine.content.tiles.generator.basicgenerator.ContainerBasicGenerator;
+import laz.plasmine.content.tiles.generator.basicgenerator.TileBasicGenerator;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.text.ITextComponent;
@@ -32,9 +32,9 @@ public class BasicGeneratorScreen extends ContainerScreen<ContainerBasicGenerato
 		BASE_SLOT.draw(guiLeft + 80, guiTop + 35, 16, 16);
 
 		if (tile.getWorld().getBlockState(tile.getPos()).get(BlockBasicGenerator.WORKING))
-	    	this.field_230712_o_.func_243248_b(p_230450_1_, new StringTextComponent("\u00A7n\u00A7lworking"), guiLeft + 113,  guiTop + 39, 50432);
+	    	this.field_230712_o_.func_243248_b(p_230450_1_, new StringTextComponent("\u00A7nworking"), guiLeft + 113,  guiTop + 39, 50432);
 	    else
-	    	this.field_230712_o_.func_243248_b(p_230450_1_, new StringTextComponent("\u00A7n\u00A7lnot working"), guiLeft + 102,  guiTop + 39, 12976128);
+	    	this.field_230712_o_.func_243248_b(p_230450_1_, new StringTextComponent("\u00A7nnot working"), guiLeft + 102,  guiTop + 39, 12976128);
 	}
 
 	@Override
