@@ -22,15 +22,15 @@ public class SedimentExtractorRecipe extends AbstractPlasmineRecipe {
     }
     
     public ItemStack getItemIn1() {
-    	return itemIn1;
+    	return itemIn1.copy();
     }
     
     public ItemStack getItemIn2() {
-    	return itemIn2;
+    	return itemIn2.copy();
     }
 
     public ItemStack getItemOut() {
-        return itemOut;
+        return itemOut.copy();
     }
 
     @Override

@@ -1,6 +1,6 @@
 package laz.plasmine.base.convertor;
 
-import static laz.plasmine.api.PlasmaToHeatConvertion.transformPlasmaToHeat;
+import static laz.plasmine.api.PlasmaToHeatConvertion.*;
 import static laz.plasmine.util.DirectionUtils.getPosDirection;
 
 import laz.plasmine.api.HeatHelper;
@@ -28,6 +28,11 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 	}
 
 	@Override
+	public int receiveEnergy(int amount) {
+		return plasmaHelper.addPlasma(amount);
+	}
+
+	@Override
 	public void tick() {
 		livingtick++;
 		if (!world.isRemote) {
@@ -39,12 +44,13 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 				if (isTileConnect() && isWorking) {
 					if (plasmaHelper.getCapacity() >= amountToConvertPerTick)
 						heat = transformPlasmaToHeat(plasmaHelper.removePlasma(amountToConvertPerTick), efficiency,
-								helper.getCelcius(), maxTemp);
-					if (helper.getCelcius() < maxTemp)
+								helper.getCelcius(), maxTemp, world, pos);
+					if (helper.getCelcius() < maxTemp + getMinTemp(world, pos) + 20) {
 						helper.addCelcius(heat);
+					}
 				} else {
 					helper.coolDown(world, pos, transformPlasmaToHeat(amountToConvertPerTick, efficiency * 1.1f,
-							helper.getCelcius(), helper.getMaxCelcius()));
+							helper.getCelcius(), helper.getMaxCelcius(), world, pos));
 				}
 				if (isWorking) {
 					if (world.rand.nextInt(100) == 0)
@@ -53,14 +59,9 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 			}
 			markDirty();
 		}
-
+		super.tick();
 	}
-
-	@Override
-	public int receiveEnergy(int amount) {
-		return plasmaHelper.addPlasma(amount);
-	}
-
+	
 	public HeatHelper heatAround() {
 		Direction dir = heatInOut(world.getBlockState(pos));
 		TileEntity tile = world.getTileEntity(getPosDirection(pos, dir));

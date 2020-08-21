@@ -1,4 +1,4 @@
-package laz.plasmine.recipes.sedimentcollector;
+package laz.plasmine.recipes.ionizer;
 
 import laz.plasmine.recipes.AbstractPlasmineRecipe;
 import laz.plasmine.registry.init.PMRecipesSerializer;
@@ -8,19 +8,25 @@ import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class SedimentCollectorRecipe extends AbstractPlasmineRecipe {
+public class IonizerRecipe extends AbstractPlasmineRecipe {
 
-    private final float chance;
+    private final ItemStack itemIn1;
+    private final ItemStack itemIn2;
     private final ItemStack itemOut;
 
-    public SedimentCollectorRecipe(ResourceLocation id, float chance, ItemStack itemOut, int temp, int time) {
-        super(PMRecipesSerializer.SEDIMENT_COLLECTOR_TYPE, id, temp, time);
-        this.chance = chance;
+    public IonizerRecipe(ResourceLocation id, ItemStack itemIn1, ItemStack itemIn2, ItemStack itemOut, int temp, int time) {
+        super(PMRecipesSerializer.IONIZER_TYPE, id, temp, time);
+        this.itemIn1 = itemIn1;
+        this.itemIn2 = itemIn2;
         this.itemOut = itemOut;
     }
     
-    public float getChance() {
-    	return this.chance;
+    public ItemStack getItemIn1() {
+    	return itemIn1.copy();
+    }
+    
+    public ItemStack getItemIn2() {
+    	return itemIn2.copy();
     }
 
     public ItemStack getItemOut() {
@@ -49,7 +55,7 @@ public class SedimentCollectorRecipe extends AbstractPlasmineRecipe {
 
     @Override
     public IRecipeSerializer<?> getSerializer() {
-        return PMRecipesSerializer.SEDIMENT_COLLECTOR_SERIALIZER.get();
+        return PMRecipesSerializer.IONIZER_SERIALIZER.get();
     }
 
 }

@@ -1,14 +1,13 @@
-package laz.plasmine.base.multiblock;
+package laz.plasmine.content.tiles.heat.ionizer;
 
-import laz.plasmine.base.BlockRotationBase;
-import laz.plasmine.content.tiles.generator.basicgenerator.TileBasicGenerator;
+import java.util.Random;
+
+import laz.plasmine.base.heat.BlockHeatMachineBase;
 import laz.plasmine.registry.init.PMItemsInit;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.particles.RedstoneParticleData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -16,24 +15,17 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class BlockItemInput extends BlockRotationBase {
+public class BlockIonizer extends BlockHeatMachineBase {
 
-	public BlockItemInput() {
-		super(Block.Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).hardnessAndResistance(3, 15)
-				.sound(SoundType.METAL).harvestLevel(0));
-	}
-
-	@Override
-	public boolean hasTileEntity(BlockState state) {
-		return true;
+	public BlockIonizer() {
+		super(1500, 0.8f);
 	}
 
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return new TileItemInput();
+		return new TileIonizer(maxCelcius, thermo);
 	}
 
 	@Override
@@ -41,8 +33,8 @@ public class BlockItemInput extends BlockRotationBase {
 			Hand handIn, BlockRayTraceResult hit) {
 		if (!worldIn.isRemote && player.getHeldItemMainhand().getItem() != PMItemsInit.WRENCH.get()) {
 			TileEntity te = worldIn.getTileEntity(pos);
-			if (te instanceof TileItemInput) {
-				NetworkHooks.openGui((ServerPlayerEntity) player, (TileItemInput) te, pos);
+			if (te instanceof TileIonizer) {
+				NetworkHooks.openGui((ServerPlayerEntity) player, (TileIonizer) te, pos);
 				return ActionResultType.SUCCESS;
 			}
 		}
@@ -50,4 +42,19 @@ public class BlockItemInput extends BlockRotationBase {
 
 	}
 
+	@Override
+	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+		if (stateIn.get(BlockHeatMachineBase.WORKING)) {
+			int y = pos.getY();
+			for (int i = -1; i < 2; i++) {
+				for (int j = -1; j < 2; j++) {
+					int x = pos.getX() + i;
+					int z = pos.getZ() + j;
+					worldIn.addParticle(new RedstoneParticleData(0f, 0f, 0f, 1f), x + rand.nextFloat(), y + 0.01f,
+							z + rand.nextFloat(), 0, 0, 0);
+				}
+			}
+		}
+		super.animateTick(stateIn, worldIn, pos, rand);
+	}
 }

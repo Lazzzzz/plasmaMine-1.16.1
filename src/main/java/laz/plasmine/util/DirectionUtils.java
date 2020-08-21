@@ -9,6 +9,14 @@ public class DirectionUtils {
 	public static BlockPos getPosDirection(BlockPos pos, Direction dir) {
 		return pos.add(dir.getDirectionVec());
 	}
+	
+	public static BlockPos getPosDirection(BlockPos pos, Direction dir, int amount) {
+		BlockPos newPos = pos;
+		for (int i = 0; i < amount; i++) {
+			newPos = newPos.add(dir.getDirectionVec());
+		}
+		return newPos;
+	}
 
 	public static boolean isSide(Direction dir) {
 		if (dir == Direction.EAST || dir == Direction.WEST || dir == Direction.NORTH || dir == Direction.SOUTH)

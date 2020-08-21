@@ -7,6 +7,7 @@ import static laz.plasmine.client.draw.PMDrawable.PLASMA_LOGO;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import laz.plasmine.api.PlasmaHelper;
+import laz.plasmine.base.generator.TileGeneratorBase;
 import laz.plasmine.client.screen.DrawBaseGui;
 import laz.plasmine.content.tiles.generator.basicgenerator.BlockBasicGenerator;
 import laz.plasmine.content.tiles.generator.basicgenerator.ContainerBasicGenerator;
@@ -24,7 +25,7 @@ public class BasicGeneratorScreen extends ContainerScreen<ContainerBasicGenerato
 
 	@Override
 	protected void func_230450_a_(MatrixStack p_230450_1_, float p_230450_2_, int p_230450_3_, int p_230450_4_) {
-		TileBasicGenerator tile = this.container.getTile();
+		TileGeneratorBase tile = this.container.getTile();
 		PlasmaHelper helper = tile.getPlasmaHelper();
 		DrawBaseGui.drawGui(p_230450_1_, this.field_230712_o_, guiLeft, guiTop, " PU", (int) helper.getCapacity(), 3833343);
 		PLASMA_LOGO.draw(guiLeft + 5, guiTop + 60, 9, 17);

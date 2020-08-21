@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "": { "model": "plasmine:block/coils/magnetic_coils" }
+    }
+}

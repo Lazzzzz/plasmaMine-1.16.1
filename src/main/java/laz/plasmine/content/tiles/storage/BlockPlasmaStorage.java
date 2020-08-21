@@ -68,7 +68,7 @@ public class BlockPlasmaStorage extends BlockRotationBase {
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (!worldIn.isRemote) {
 			IMaster tile = (IMaster) worldIn.getTileEntity(pos);
-			tile.sendStructureUnBind(DirectionUtils.getPosDirection(pos, state.get(FACING).getOpposite()));
+			tile.sendStructureUnBind(DirectionUtils.getPosDirection(pos, state.get(FACING).getOpposite()), null);
 		}
 		
 		super.onReplaced(state, worldIn, pos, newState, isMoving);

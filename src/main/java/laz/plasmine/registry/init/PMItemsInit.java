@@ -14,7 +14,8 @@ public class PMItemsInit {
 	public static RegistryObject<Item> GOLD_WIRE;
 	public static RegistryObject<Item> MAGNETIC_WIRE;
 	public static RegistryObject<Item> RAPESEED_FRUIT;
-
+	public static RegistryObject<Item> IONIZED_RAPESEED;
+	
 	public static MaterialGroup LISIUM;
 	public static MaterialGroup KETIUM;
 	public static MaterialGroup ROSIUM;
@@ -25,6 +26,7 @@ public class PMItemsInit {
 		GOLD_WIRE = addSimpleItem("gold_wire", 64);
 		MAGNETIC_WIRE = addSimpleItem("magnetic_wire", 64);
 		RAPESEED_FRUIT = addSimpleItem("rapeseed_fruit", 64);
+		IONIZED_RAPESEED = addSimpleItem("ionized_rapeseed", 64);
 
 		LISIUM = initMaterial("lisium", 1);
 		KETIUM = initMaterial("ketium", 2);

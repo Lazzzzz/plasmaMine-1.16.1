@@ -27,17 +27,7 @@ public class TilePlasmaOutput extends TileGeneratorBase implements ISlave {
 
 	@Override
 	public void tick() {
-		livingtick++;
-		if (!world.isRemote) {
-			sendData();
-			if (livingtick % 40 == 0)
-				connectedTo(world, pos, connected);
-			if (plasmaHelper.getCapacity() > 0) {
-				int sendit = sendEnergy(world, pos, plasmaHelper.sendPlasma(generation));
-				plasmaHelper.removePlasma(sendit);
-			}
-			markDirty();
-		}
+		super.tick();
 	}
 
 	@Override

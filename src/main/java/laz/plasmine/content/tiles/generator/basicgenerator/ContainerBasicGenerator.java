@@ -1,6 +1,7 @@
 package laz.plasmine.content.tiles.generator.basicgenerator;
 
 import laz.plasmine.base.container.ContainerPlasma;
+import laz.plasmine.base.generator.TileGeneratorBase;
 import laz.plasmine.registry.init.PMContainersInit;
 import laz.plasmine.registry.init.PMItemsInit;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,7 +16,7 @@ public class ContainerBasicGenerator extends ContainerPlasma {
 		this(windowId, playerInventory, getTileEntity(playerInventory, data));
 	}
 
-	public ContainerBasicGenerator(int id, PlayerInventory inv, final TileBasicGenerator tile) {
+	public ContainerBasicGenerator(int id, PlayerInventory inv, final TileGeneratorBase tile) {
 		super(PMContainersInit.BASIC_GENERATOR_CONTAINER.get(), id, tile, inv);
 		this.addSlot(new Slot(tile, 0, 80, 35));
 		

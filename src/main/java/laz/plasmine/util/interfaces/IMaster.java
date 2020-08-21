@@ -26,7 +26,7 @@ public interface IMaster {
 
 	void sendStructureBind(BlockPos p, Direction dir);
 
-	void sendStructureUnBind(BlockPos p);
+	void sendStructureUnBind(BlockPos p, Direction dir);
 }
 
 

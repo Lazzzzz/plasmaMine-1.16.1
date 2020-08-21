@@ -130,7 +130,6 @@ public class TileHeatMachineBase extends TileEntity
 	public ItemStack getStackInSlot(int index) {
 		if (index > size - 1)
 			return ItemStack.EMPTY;
-		
 		return content.get(index);
 	}
 
@@ -149,8 +148,7 @@ public class TileHeatMachineBase extends TileEntity
 
 	@Override
 	public ItemStack removeStackFromSlot(int index) {
-		if (index > size - 1)
-			return ItemStack.EMPTY;
+		if (index > size - 1) return ItemStack.EMPTY;
 		ItemStack stack = content.get(index).copy();
 		content.set(index, ItemStack.EMPTY);
 		return stack;

@@ -63,8 +63,8 @@ public class TilePlasmaStorage extends TileEntity implements IMaster, ITickableT
 		compound.putBoolean("isformed", isFormed);
 		compound = BlockPosUtil.writeListBlockPos(compound, connectedBlock, "connected");
 
-		compound = BlockPosUtil.writeBlockPos(compound, input, "input");
-		compound = BlockPosUtil.writeBlockPos(compound, output, "output");
+		if (input != null)  compound = BlockPosUtil.writeBlockPos(compound, input, "input");
+		if (output != null) compound = BlockPosUtil.writeBlockPos(compound, output, "output");
 
 		compound.putInt("maxOutput", maxOutput);
 		compound.putInt("maxStorage", maxStorage);
@@ -77,8 +77,8 @@ public class TilePlasmaStorage extends TileEntity implements IMaster, ITickableT
 		isFormed = compound.getBoolean("isformed");
 		connectedBlock = BlockPosUtil.readListBlockPos(compound, "connected");
 
-		input = BlockPosUtil.readBlockPos(compound, "input");
-		output = BlockPosUtil.readBlockPos(compound, "output");
+		if (BlockPosUtil.containsBlockPos(compound, "input")) input = BlockPosUtil.readBlockPos(compound, "input");
+		if (BlockPosUtil.containsBlockPos(compound, "output")) output = BlockPosUtil.readBlockPos(compound, "output");
 
 		maxOutput = compound.getInt("maxOutput");
 		maxStorage = compound.getInt("maxStorage");
@@ -167,7 +167,7 @@ public class TilePlasmaStorage extends TileEntity implements IMaster, ITickableT
 	}
 
 	@Override
-	public void sendStructureUnBind(BlockPos p) {
+	public void sendStructureUnBind(BlockPos p, Direction dir) {
 		for (int i = -1; i < 2; i++) {
 			for (int j = -1; j < 2; j++) {
 				for (int k = 0; k < 4; k++) {
@@ -184,7 +184,7 @@ public class TilePlasmaStorage extends TileEntity implements IMaster, ITickableT
 		BlockPos p = DirectionUtils.getPosDirection(this.pos,
 				world.getBlockState(this.pos).get(BlockPlasmaStorage.FACING).getOpposite());
 		isFormed = false;
-		sendStructureUnBind(p);
+		sendStructureUnBind(p, null);
 		IMaster.super.receiveDestroy(pos, connectedBlock);
 	}
 
@@ -248,10 +248,8 @@ public class TilePlasmaStorage extends TileEntity implements IMaster, ITickableT
 		if (!world.isRemote) {
 			senddata();
 			if (!isFormed) {
-				if (checkIsFormed())
-					isFormed = true;
-				else
-					reset();
+				if (checkIsFormed()) isFormed = true;
+				else reset();
 			} else {
 				sendDataToInputOutput();
 				TilePlasmaInput tile = (TilePlasmaInput) world.getTileEntity(input);

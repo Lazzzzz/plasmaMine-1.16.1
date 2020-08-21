@@ -1,4 +1,4 @@
-package laz.plasmine.content.block.slaves.coils;
+package laz.plasmine.content.tiles.coils;
 
 import laz.plasmine.base.multiblock.TileBlockSlave;
 import laz.plasmine.registry.init.PMTilesInit;

@@ -22,6 +22,8 @@ public class TileCropBlower extends TileHeatMachineBase {
 
 	@Override
 	public void onWorking() {
+
+		
 		setWorkingState(world, pos, world.getBlockState(pos), true);
 		
 		Direction dir = world.getBlockState(pos).get(BlockHeatMachineBase.FACING);

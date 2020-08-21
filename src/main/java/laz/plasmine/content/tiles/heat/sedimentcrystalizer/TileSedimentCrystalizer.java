@@ -75,7 +75,6 @@ public class TileSedimentCrystalizer extends TileHeatMachineBase implements ISid
 			if (timer >= currentMaxTimer) {
 				ItemStack stack = getStackInSlot(1);
 				if (stack == ItemStack.EMPTY) {
-					System.out.println("result");
 					setInventorySlotContents(1, result);
 				}
 				else if (stack.getCount() == stack.getMaxStackSize()) world.addEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), result));

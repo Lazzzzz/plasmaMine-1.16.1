@@ -44,22 +44,19 @@ public class HeatHelper {
 	}
 
 	public void coolDown(World world, BlockPos pos) {
-		float minTemp = getMinTemp(world, pos);
+		float minTemp = PlasmaToHeatConvertion.getMinTemp(world, pos);
 		removeHeat(thermoConductivity / 5);
 		if (celcius < minTemp)
 			celcius = minTemp;
 	}
 	
 	public void coolDown(World world, BlockPos pos, float amount) {
-		float minTemp = getMinTemp(world, pos);
+		float minTemp = PlasmaToHeatConvertion.getMinTemp(world, pos);
 		removeHeat(amount);
 		if (celcius < minTemp)
 			celcius = minTemp;
 	}
 
-	public float getMinTemp(World world, BlockPos pos) {
-		return world.getBiome(pos).getTemperature(pos) * 20;
-	}
 
 	public void write(CompoundNBT compound) {
 		compound.putFloat("celcius", celcius);
@@ -70,11 +67,11 @@ public class HeatHelper {
 	}
 
 	public boolean isWorkingCelcius(World world, BlockPos pos) {
-		return celcius > getMinTemp(world, pos) + 20;
+		return celcius > getWorkingCelcius(world, pos);
 	}
 
 	public float getWorkingCelcius(World world, BlockPos pos) {
-		return getMinTemp(world, pos) + 20;
+		return PlasmaToHeatConvertion.getMinTemp(world, pos) + 20;
 	}
 
 	public float getCelcius() {

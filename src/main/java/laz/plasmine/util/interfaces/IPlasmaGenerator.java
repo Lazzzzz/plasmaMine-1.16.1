@@ -26,7 +26,6 @@ public interface IPlasmaGenerator {
 				if (outputs.size() == 0)
 					return 0;
 				if (outputs.size() > 0) {
-
 					for (int i = 0; i < outputs.size(); i++) {
 						IPlasmaMachine machine = (IPlasmaMachine) world.getTileEntity(outputs.get(i));
 						if (machine != null) {

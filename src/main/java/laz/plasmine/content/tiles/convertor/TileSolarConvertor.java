@@ -17,6 +17,7 @@ public class TileSolarConvertor extends TileConvertorBase {
 	
 	@Override
 	public void tick() {
+		livingtick++;
 		if (!world.isRemote) {
 			if (world.isDaytime() && world.canBlockSeeSky(pos)) plasmaHelper.addPlasma(1);
 		}

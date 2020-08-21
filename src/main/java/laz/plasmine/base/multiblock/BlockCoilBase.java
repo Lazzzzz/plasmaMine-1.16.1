@@ -14,7 +14,7 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-public class BlockCoilBase extends Block {
+public class BlockCoilBase extends BlockSlave {
 
 	public int maxstorage = 0;
 	public int output = 0;
@@ -28,18 +28,6 @@ public class BlockCoilBase extends Block {
 	@Override
 	public boolean hasTileEntity(BlockState state) {
 		return true;
-	}
-
-	@Override
-	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (!worldIn.isRemote) {
-			ISlave tile = (ISlave) worldIn.getTileEntity(pos);
-			if (tile.isBind()) {
-				IMaster master = (IMaster) worldIn.getTileEntity(tile.getBlockPosMaster());
-				tile.sendMasterDestroy(pos, master);
-			}
-		}
-		super.onReplaced(state, worldIn, pos, newState, isMoving);
 	}
 
 	@Override

@@ -1,0 +1,20 @@
+{
+	"type": "plasmine:ionizer",
+	"input1": 
+	{
+		"item": "plasmine:rapeseed_fruit"
+	},
+
+	"input2": 
+	{
+		"item": "minecraft:lapis_lazuli"
+	},
+
+	"result": 
+	{
+		"item": "plasmine:ionized_rapeseed"
+	},
+
+	"temp": 150,
+	"time": 20
+}

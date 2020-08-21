@@ -20,11 +20,11 @@ public class SedimentCrystalizerRecipe extends AbstractPlasmineRecipe {
     }
     
     public ItemStack getItemIn() {
-    	return itemIn;
+    	return itemIn.copy();
     }
 
     public ItemStack getItemOut() {
-        return itemOut;
+        return itemOut.copy();
     }
 
     @Override
