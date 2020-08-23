@@ -41,11 +41,13 @@ public class TileBlockSlave extends TileEntity implements ISlave {
 
 	@Override
 	public boolean isBind() {
+		markDirty();
 		return bind != null;
 	}
 
 	@Override
 	public void unbindToMaster() {
+		markDirty();
 		bind = null;
 	}
 

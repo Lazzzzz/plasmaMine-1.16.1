@@ -2,17 +2,12 @@ package laz.plasmine.base.multiblock;
 
 import java.util.List;
 
-import laz.plasmine.util.interfaces.IMaster;
-import laz.plasmine.util.interfaces.ISlave;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
 
 public class BlockCoilBase extends BlockSlave {
 

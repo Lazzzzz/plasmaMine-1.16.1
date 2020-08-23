@@ -2,10 +2,12 @@ package laz.plasmine.recipes.sediementextractor;
 
 import javax.annotation.Nullable;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.ShapedRecipe;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
@@ -17,8 +19,16 @@ public class SedimentExtractorSerializer extends ForgeRegistryEntry<IRecipeSeria
 
 	@Override
 	public SedimentExtractorRecipe read(ResourceLocation recipeId, JsonObject json) {
-		ItemStack itemIn1 = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "input1"));
-		ItemStack itemIn2 = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "input2"));
+		JsonElement jsonelement1 = (JsonElement) (JSONUtils.isJsonArray(json, "input1")
+				? JSONUtils.getJsonArray(json, "input1")
+				: JSONUtils.getJsonObject(json, "input1"));
+		JsonElement jsonelement2 = (JsonElement) (JSONUtils.isJsonArray(json, "input2")
+				? JSONUtils.getJsonArray(json, "input2")
+				: JSONUtils.getJsonObject(json, "input2"));
+		
+		Ingredient itemIn1 = Ingredient.deserialize(jsonelement1);
+		Ingredient itemIn2 = Ingredient.deserialize(jsonelement2);
+		
 		ItemStack itemOut = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
 		int temp = JSONUtils.getInt(json, "temp");
 		int time = JSONUtils.getInt(json, "time");
@@ -29,8 +39,9 @@ public class SedimentExtractorSerializer extends ForgeRegistryEntry<IRecipeSeria
 	@Nullable
 	@Override
 	public SedimentExtractorRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
-		ItemStack itemIn1 = buffer.readItemStack();
-		ItemStack itemIn2 = buffer.readItemStack();
+	    Ingredient itemIn1 = Ingredient.read(buffer);
+		Ingredient itemIn2 = Ingredient.read(buffer);
+		
 		ItemStack itemOut = buffer.readItemStack();
 
 		int temp = buffer.readInt();
@@ -41,8 +52,8 @@ public class SedimentExtractorSerializer extends ForgeRegistryEntry<IRecipeSeria
 
 	@Override
 	public void write(PacketBuffer buffer, SedimentExtractorRecipe recipe) {
-		buffer.writeItemStack(recipe.getItemIn1());
-		buffer.writeItemStack(recipe.getItemIn2());	
+		recipe.itemIn1.write(buffer);
+		recipe.itemIn2.write(buffer);
 		buffer.writeItemStack(recipe.getItemOut());
 		
 		buffer.writeInt(recipe.getTemp());

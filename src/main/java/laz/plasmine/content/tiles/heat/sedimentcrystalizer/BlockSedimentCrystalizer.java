@@ -7,7 +7,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -24,12 +23,6 @@ public class BlockSedimentCrystalizer extends BlockHeatMachineBase {
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
 		return new TileSedimentCrystalizer(maxCelcius, thermo);
-	}
-
-	public int getWeakPower(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
-		TileSedimentCrystalizer tile = (TileSedimentCrystalizer) blockAccess.getTileEntity(pos);
-		if (!tile.getStackInSlot(0).isEmpty()) return 15;
-		return 0;
 	}
 
 	@Override

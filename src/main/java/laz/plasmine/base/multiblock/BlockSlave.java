@@ -25,7 +25,9 @@ public class BlockSlave extends Block{
 			ISlave tile = (ISlave) worldIn.getTileEntity(pos);
 			if (tile.isBind()) {
 				TileEntity master = worldIn.getTileEntity(tile.getBlockPosMaster());
-				if (master instanceof IMaster) tile.sendMasterDestroy(pos, (IMaster) master);
+				if (master instanceof IMaster) {
+					tile.sendMasterDestroy(pos, (IMaster) master);
+				}
 			}
 		}
 		super.onReplaced(state, worldIn, pos, newState, isMoving);

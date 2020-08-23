@@ -3,8 +3,6 @@ package laz.plasmine.base.container;
 import java.util.Objects;
 
 import laz.plasmine.base.generator.TileGeneratorBase;
-import laz.plasmine.content.tiles.generator.basicgenerator.TileBasicGenerator;
-import laz.plasmine.content.tiles.generator.electromagneticgenerator.TileEMGenerator;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;

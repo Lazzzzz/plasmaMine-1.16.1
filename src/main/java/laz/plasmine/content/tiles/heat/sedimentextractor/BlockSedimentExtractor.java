@@ -7,6 +7,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -23,6 +24,11 @@ public class BlockSedimentExtractor extends BlockHeatMachineBase {
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
 		return new TileSedimentExtractor(maxCelcius, thermo);
+	}
+	@Override
+	public int getWeakPower(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
+		if (blockState.get(POWER)) return 15;
+		return 0;
 	}
 	
 	@Override

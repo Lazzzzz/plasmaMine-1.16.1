@@ -41,7 +41,7 @@ public class BlockHeatMachineBase extends BlockRotationBase implements ICanWrenc
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing());
 	}
 
 	@Override
@@ -64,10 +64,14 @@ public class BlockHeatMachineBase extends BlockRotationBase implements ICanWrenc
 	public boolean canProvidePower(BlockState state) {
 		return true;
 	}
-	
-	public int getWeakPower(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
-		if (blockState.get(BlockHeatMachineBase.POWER) && side == blockState.get(BlockHeatMachineBase.FACING)) return 15;
+
+	@Override
+	public int getStrongPower(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
+		if (blockState.get(BlockHeatMachineBase.POWER) && side == blockState.get(BlockHeatMachineBase.FACING).getOpposite()) {
+		System.out.println("ye");
+			return 15;
+		}
 		return 0;
 	}
-	
+
 }

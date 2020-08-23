@@ -4,6 +4,7 @@ import laz.plasmine.base.heat.TileHeatMachineBase;
 import laz.plasmine.recipes.sediementextractor.SedimentExtractorRecipe;
 import laz.plasmine.registry.init.PMTilesInit;
 import laz.plasmine.util.DirectionUtils;
+import laz.plasmine.util.RecipiesUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,7 +20,7 @@ import net.minecraft.util.text.StringTextComponent;
 public class TileSedimentExtractor extends TileHeatMachineBase implements ISidedInventory {
 
 	private int maxTime = 20 * 20;
-	private int timer = 0;
+	private double timer = 0;
 	private ItemStack result = ItemStack.EMPTY;
 
 	public TileSedimentExtractor(int maxCelcius, float thermo) {
@@ -37,34 +38,27 @@ public class TileSedimentExtractor extends TileHeatMachineBase implements ISided
 	}
 
 	@Override
-	public void tick() {
-		if (!world.isRemote) updatePoweredState(!getStackInSlot(0).isEmpty() && !getStackInSlot(1).isEmpty());
-		super.tick();
-	}
-	
-	@Override
 	public CompoundNBT write(CompoundNBT compound) {
 		compound.put("result", result.serializeNBT());
-		compound.putInt("recipetimer", timer);
+		compound.putDouble("recipetimer", timer);
 		return super.write(compound);
 	}
 
 	@Override
 	public void func_230337_a_(BlockState p_230337_1_, CompoundNBT compound) {
 		result.deserializeNBT(compound.getCompound("result"));
-		timer = compound.getInt("recipetimer");
+		timer = compound.getDouble("recipetimer");
 		super.func_230337_a_(p_230337_1_, compound);
 	}
 
 	@Override
 	public void onWorking() {
 		setWorkingState(world, pos, world.getBlockState(pos), true);
-		System.out.println(getStackInSlot(2));
 		if (result == ItemStack.EMPTY)
 			world.getRecipeManager().getRecipes().stream().filter(recipe -> recipe instanceof SedimentExtractorRecipe)
 					.forEach(e -> start((SedimentExtractorRecipe) e));
 		else {
-			timer++;
+			timer += speedFactor();
 			if (timer >= maxTime) {
 				ItemStack stack = getStackInSlot(2);
 				if (stack == ItemStack.EMPTY) {
@@ -82,7 +76,7 @@ public class TileSedimentExtractor extends TileHeatMachineBase implements ISided
 		ItemStack in1 = content.get(0);
 		ItemStack in2 = content.get(1);
 		ItemStack out = getStackInSlot(2);
-		if (in1.getItem() == recipe.getItemIn1().getItem() && in2.getItem() == recipe.getItemIn2().getItem()
+		if (RecipiesUtils.isSameTag(in1, recipe.getItemIn1()) && RecipiesUtils.isSameTag(in2, recipe.getItemIn2())
 				&& recipe.getTemp() < heatHelper.getCelcius()) {
 			if (out == ItemStack.EMPTY || out.getCount() < out.getMaxStackSize()) {
 				in1.shrink(1);
@@ -110,8 +104,10 @@ public class TileSedimentExtractor extends TileHeatMachineBase implements ISided
 
 	@Override
 	public boolean canInsertItem(int index, ItemStack itemStackIn, Direction direction) {
-		if (index == 0 && direction == Direction.UP) return true;
-		else if (index == 1 && DirectionUtils.isSide(direction)) return true; 
+		if (index == 0 && direction == Direction.UP)
+			return true;
+		else if (index == 1 && DirectionUtils.isSide(direction))
+			return true;
 		return false;
 	}
 

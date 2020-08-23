@@ -55,11 +55,13 @@ public class TilePlasmaOutput extends TileGeneratorBase implements ISlave {
 
 	@Override
 	public boolean isBind() {
+		markDirty();
 		return bind != null;
 	}
 
 	@Override
 	public void unbindToMaster() {
+		markDirty();
 		bind = null;
 	}
 

@@ -2,7 +2,7 @@
 	"type": "plasmine:sediment_crystalizer",
 	"input": 
 	{
-		"item": "plasmine:ketium_chunk"
+    	"item": "plasmine:ketium_chunk"
 	},
 
 	"result": 

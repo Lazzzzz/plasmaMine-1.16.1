@@ -5,28 +5,29 @@ import laz.plasmine.registry.init.PMRecipesSerializer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 public class SedimentExtractorRecipe extends AbstractPlasmineRecipe {
 
-    private final ItemStack itemIn1;
-    private final ItemStack itemIn2;
+    public final Ingredient itemIn1;
+    public final Ingredient itemIn2;
     private final ItemStack itemOut;
 
-    public SedimentExtractorRecipe(ResourceLocation id, ItemStack itemIn1, ItemStack itemIn2, ItemStack itemOut, int temp, int time) {
+    public SedimentExtractorRecipe(ResourceLocation id, Ingredient itemIn1, Ingredient itemIn2, ItemStack itemOut, int temp, int time) {
         super(PMRecipesSerializer.SEDIMENT_EXTRACTOR_TYPE, id, temp, time);
         this.itemIn1 = itemIn1;
         this.itemIn2 = itemIn2;
         this.itemOut = itemOut;
     }
     
-    public ItemStack getItemIn1() {
-    	return itemIn1.copy();
+    public ItemStack [] getItemIn1() {
+    	return itemIn1.getMatchingStacks();
     }
     
-    public ItemStack getItemIn2() {
-    	return itemIn2.copy();
+    public ItemStack [] getItemIn2() {
+    	return itemIn2.getMatchingStacks();
     }
 
     public ItemStack getItemOut() {

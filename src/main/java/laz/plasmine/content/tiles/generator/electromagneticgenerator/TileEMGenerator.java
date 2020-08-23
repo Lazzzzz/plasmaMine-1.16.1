@@ -6,9 +6,10 @@ import java.util.List;
 import laz.plasmine.base.BlockRotationBase;
 import laz.plasmine.base.generator.TileGeneratorBase;
 import laz.plasmine.base.multiblock.TileItemInput;
-import laz.plasmine.base.multiblock.TilePlasmaInput;
 import laz.plasmine.base.multiblock.TilePlasmaOutput;
 import laz.plasmine.content.tiles.storage.BlockPlasmaStorage;
+import laz.plasmine.network.PacketHandler;
+import laz.plasmine.network.helpers.PlasmaHelperPacket;
 import laz.plasmine.registry.init.PMItemsInit;
 import laz.plasmine.registry.init.PMTilesInit;
 import laz.plasmine.util.BlockPosUtil;
@@ -18,6 +19,7 @@ import laz.plasmine.util.interfaces.ISlave;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -26,6 +28,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraftforge.fml.network.NetworkDirection;
 
 public class TileEMGenerator extends TileGeneratorBase implements IMaster {
 
@@ -42,12 +45,29 @@ public class TileEMGenerator extends TileGeneratorBase implements IMaster {
 
 	@Override
 	public void tick() {
-		super.tick();
 		if (!world.isRemote) {
+			sendData();
 			if (!isFormed) {
+				setWorkingState(false);
 				if (checkIsFormed()) isFormed = true;
 				else reset();
 			} else process();
+		}
+	}
+	
+	@Override
+	protected void sendData() {
+		int arg0 = -1;
+		int arg1 = -1;
+		if (isFormed) {
+			arg0 = plasmaHelper.getCapacity();
+			arg1 = plasmaHelper.getMaxCapacity();
+		}
+		
+		List<? extends PlayerEntity> players = world.getPlayers();
+		for (int i = 0; i < players.size(); i++) {
+			PacketHandler.INSTANCE.sendTo(new PlasmaHelperPacket(pos, arg0, arg1),
+					((ServerPlayerEntity) players.get(i)).connection.netManager, NetworkDirection.PLAY_TO_CLIENT);
 		}
 	}
 	
@@ -59,6 +79,9 @@ public class TileEMGenerator extends TileGeneratorBase implements IMaster {
 			ItemStack stack = getItemFromInput();
 			if (stack != ItemStack.EMPTY) {
 				cooking = maxCooking;
+				setWorkingState(true);
+			}else {
+				setWorkingState(false);
 			}
 		}
 		TileEntity tile = world.getTileEntity(output);
@@ -88,6 +111,11 @@ public class TileEMGenerator extends TileGeneratorBase implements IMaster {
 		input = null;
 		output = null;
 		cooking = 0;
+		
+		Direction dir = world.getBlockState(pos).get(BlockPlasmaStorage.FACING).getOpposite();
+		BlockPos p = DirectionUtils.getPosDirection(pos, dir, 2).down();
+		
+		sendStructureUnBind(p, dir);
 	}
 
 	@Override

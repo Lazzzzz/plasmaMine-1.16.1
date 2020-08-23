@@ -37,4 +37,5 @@ public interface IHeatMachine {
 		}
 	}
 	
+	double speedFactor();
 }

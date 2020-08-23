@@ -1,0 +1,8 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "plasmine:blocks/machine/machine_side",
+        "front": "plasmine:blocks/storage/item_input",
+        "side": "plasmine:blocks/machine/machine_side"
+    }
+}

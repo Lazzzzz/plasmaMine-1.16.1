@@ -63,8 +63,10 @@ public class TilePlasmaStorage extends TileEntity implements IMaster, ITickableT
 		compound.putBoolean("isformed", isFormed);
 		compound = BlockPosUtil.writeListBlockPos(compound, connectedBlock, "connected");
 
-		if (input != null)  compound = BlockPosUtil.writeBlockPos(compound, input, "input");
-		if (output != null) compound = BlockPosUtil.writeBlockPos(compound, output, "output");
+		if (input != null)
+			compound = BlockPosUtil.writeBlockPos(compound, input, "input");
+		if (output != null)
+			compound = BlockPosUtil.writeBlockPos(compound, output, "output");
 
 		compound.putInt("maxOutput", maxOutput);
 		compound.putInt("maxStorage", maxStorage);
@@ -77,8 +79,10 @@ public class TilePlasmaStorage extends TileEntity implements IMaster, ITickableT
 		isFormed = compound.getBoolean("isformed");
 		connectedBlock = BlockPosUtil.readListBlockPos(compound, "connected");
 
-		if (BlockPosUtil.containsBlockPos(compound, "input")) input = BlockPosUtil.readBlockPos(compound, "input");
-		if (BlockPosUtil.containsBlockPos(compound, "output")) output = BlockPosUtil.readBlockPos(compound, "output");
+		if (BlockPosUtil.containsBlockPos(compound, "input"))
+			input = BlockPosUtil.readBlockPos(compound, "input");
+		if (BlockPosUtil.containsBlockPos(compound, "output"))
+			output = BlockPosUtil.readBlockPos(compound, "output");
 
 		maxOutput = compound.getInt("maxOutput");
 		maxStorage = compound.getInt("maxStorage");
@@ -225,6 +229,10 @@ public class TilePlasmaStorage extends TileEntity implements IMaster, ITickableT
 		input = pos;
 		output = pos;
 		plasma = null;
+		
+		Direction dir = world.getBlockState(pos).get(BlockPlasmaStorage.FACING).getOpposite();
+		BlockPos p = DirectionUtils.getPosDirection(pos, dir);
+		sendStructureUnBind(p, dir);
 	}
 
 	private void sendDataToInputOutput() {
@@ -248,8 +256,10 @@ public class TilePlasmaStorage extends TileEntity implements IMaster, ITickableT
 		if (!world.isRemote) {
 			senddata();
 			if (!isFormed) {
-				if (checkIsFormed()) isFormed = true;
-				else reset();
+				if (checkIsFormed())
+					isFormed = true;
+				else
+					reset();
 			} else {
 				sendDataToInputOutput();
 				TilePlasmaInput tile = (TilePlasmaInput) world.getTileEntity(input);
@@ -264,14 +274,21 @@ public class TilePlasmaStorage extends TileEntity implements IMaster, ITickableT
 	}
 
 	private void senddata() {
+		int arg1 = -1;
+		int arg2 = -1;
+		int arg3 = -1;
+
 		if (plasma != null) {
-			List<? extends PlayerEntity> players = world.getPlayers();
-			for (int i = 0; i < players.size(); i++) {
-				PacketHandler.INSTANCE.sendTo(
-						new PlasmaStorageHelperPacket(pos, plasma.getCapacity(), plasma.getMaxCapacity(),
-								plasma.getMaxSend()),
-						((ServerPlayerEntity) players.get(i)).connection.netManager, NetworkDirection.PLAY_TO_CLIENT);
-			}
+			arg1 = plasma.getCapacity();
+			arg2 = plasma.getMaxCapacity();
+			arg3 = plasma.getMaxSend();
+		}
+		
+		List<? extends PlayerEntity> players = world.getPlayers();
+		for (int i = 0; i < players.size(); i++) {
+			PacketHandler.INSTANCE.sendTo(new PlasmaStorageHelperPacket(pos, arg1, arg2, arg3),
+					((ServerPlayerEntity) players.get(i)).connection.netManager, NetworkDirection.PLAY_TO_CLIENT);
+
 		}
 	}
 
@@ -299,7 +316,6 @@ public class TilePlasmaStorage extends TileEntity implements IMaster, ITickableT
 			Direction dir = world.getBlockState(pos).get(BlockPlasmaStorage.FACING).getOpposite();
 			BlockPos p = DirectionUtils.getPosDirection(pos, dir);
 			world.setBlockState(pos, world.getBlockState(pos).with(BlockPlasmaStorage.STORAGE, newState));
-			sendStructureBind(p, dir);
 		}
 	}
 

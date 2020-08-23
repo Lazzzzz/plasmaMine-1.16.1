@@ -3,6 +3,7 @@ package laz.plasmine.content.tiles.heat.sedimentcrystalizer;
 import laz.plasmine.base.heat.TileHeatMachineBase;
 import laz.plasmine.recipes.sedimentcrystalizer.SedimentCrystalizerRecipe;
 import laz.plasmine.registry.init.PMTilesInit;
+import laz.plasmine.util.RecipiesUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,7 +19,7 @@ import net.minecraft.util.text.StringTextComponent;
 public class TileSedimentCrystalizer extends TileHeatMachineBase implements ISidedInventory {
 
 	private ItemStack result = ItemStack.EMPTY;
-	private int timer = 0;
+	private double timer = 0;
 	private int currentMaxTimer = 0;
 
 	public TileSedimentCrystalizer(int maxCelcius, float thermo) {
@@ -31,21 +32,14 @@ public class TileSedimentCrystalizer extends TileHeatMachineBase implements ISid
 	}
 
 	@Override
-	public void tick() {
-		if (!world.isRemote)
-			updatePoweredState(!getStackInSlot(0).isEmpty());
-		super.tick();
-	}
-
-	@Override
 	public ITextComponent getDisplayName() {
 		return new StringTextComponent("sediment crystalizer");
 	}
-
+	
 	@Override
 	public CompoundNBT write(CompoundNBT compound) {
 		compound.put("result", result.serializeNBT());
-		compound.putInt("recipetimer", timer);
+		compound.putDouble("recipetimer", timer);
 		compound.putInt("recipemaxtimer", currentMaxTimer);
 		return super.write(compound);
 	}
@@ -53,7 +47,7 @@ public class TileSedimentCrystalizer extends TileHeatMachineBase implements ISid
 	@Override
 	public void func_230337_a_(BlockState p_230337_1_, CompoundNBT compound) {
 		result.deserializeNBT(compound.getCompound("result"));
-		timer = compound.getInt("recipetimer");
+		timer = compound.getDouble("recipetimer");
 		currentMaxTimer = compound.getInt("recipemaxtimer");
 		super.func_230337_a_(p_230337_1_, compound);
 	}
@@ -71,7 +65,7 @@ public class TileSedimentCrystalizer extends TileHeatMachineBase implements ISid
 			world.getRecipeManager().getRecipes().stream().filter(recipe -> recipe instanceof SedimentCrystalizerRecipe)
 					.forEach(e -> start((SedimentCrystalizerRecipe) e));
 		else {
-			timer++;
+			timer += speedFactor();
 			if (timer >= currentMaxTimer) {
 				ItemStack stack = getStackInSlot(1);
 				if (stack == ItemStack.EMPTY) {
@@ -88,7 +82,7 @@ public class TileSedimentCrystalizer extends TileHeatMachineBase implements ISid
 	private void start(SedimentCrystalizerRecipe recipe) {
 		ItemStack in = content.get(0);
 		ItemStack out = getStackInSlot(1);
-		if (in.getItem() == recipe.getItemIn().getItem() && recipe.getTemp() < heatHelper.getCelcius()) {
+		if (RecipiesUtils.isSameTag(in, recipe.getItemIn()) && recipe.getTemp() < heatHelper.getCelcius()) {
 			if (out == ItemStack.EMPTY || out.getCount() < out.getMaxStackSize()) {
 				in.shrink(1);
 				result = recipe.getItemOut();

@@ -3,11 +3,9 @@ package laz.plasmine.content.tiles.generator.electromagneticgenerator;
 import java.util.List;
 
 import laz.plasmine.base.generator.BlockGeneratorBase;
-import laz.plasmine.content.tiles.storage.BlockPlasmaStorage;
 import laz.plasmine.registry.init.PMItemsInit;
 import laz.plasmine.util.DirectionUtils;
 import laz.plasmine.util.interfaces.IMaster;
-import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,9 +17,6 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IBlockReader;
@@ -43,12 +38,12 @@ public class BlockEMGenerator extends BlockGeneratorBase {
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
 			Hand handIn, BlockRayTraceResult hit) {
 		if (!worldIn.isRemote && player.getHeldItemMainhand().getItem() != PMItemsInit.WRENCH.get()) {
-				TileEntity te = worldIn.getTileEntity(pos);
-				if (te instanceof TileEMGenerator) {
-					NetworkHooks.openGui((ServerPlayerEntity) player, (TileEMGenerator) te, pos);
-					return ActionResultType.SUCCESS;
-				}
+			TileEntity te = worldIn.getTileEntity(pos);
+			if (te instanceof TileEMGenerator) {
+				NetworkHooks.openGui((ServerPlayerEntity) player, (TileEMGenerator) te, pos);
+				return ActionResultType.SUCCESS;
 			}
+		}
 		return ActionResultType.FAIL;
 
 	}
@@ -64,16 +59,18 @@ public class BlockEMGenerator extends BlockGeneratorBase {
 	public void onWrenchAction(PlayerEntity player, World world, BlockPos pos, BlockState state, Direction dir) {
 		super.onWrenchAction(player, world, pos, state, dir);
 	}
-	
+
 	@Override
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (!worldIn.isRemote) {
-			IMaster tile = (IMaster) worldIn.getTileEntity(pos);
-			Direction dir = state.get(FACING).getOpposite();
-			BlockPos p = DirectionUtils.getPosDirection(pos, dir, 2).down();
-			tile.sendStructureUnBind(p, dir);
+			if (state.getBlock() != newState.getBlock()) {
+				IMaster tile = (IMaster) worldIn.getTileEntity(pos);
+				Direction dir = state.get(FACING).getOpposite();
+				BlockPos p = DirectionUtils.getPosDirection(pos, dir, 2).down();
+				tile.sendStructureUnBind(p, dir);
+			}
 		}
-		
+
 		super.onReplaced(state, worldIn, pos, newState, isMoving);
 	}
 

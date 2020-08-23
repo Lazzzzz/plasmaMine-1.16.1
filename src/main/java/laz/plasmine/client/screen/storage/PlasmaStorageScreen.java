@@ -28,12 +28,16 @@ public class PlasmaStorageScreen extends ContainerScreen<ContainerPlasmaStorage>
 		BASE_GUI_STORAGE.draw(guiLeft, guiTop, 176, 166);
 		PLASMA_STORAGE_EMPTY.draw(guiLeft + 4, guiTop + 4, 168, 63);
 		if (plasma != null) {
-			PLASMA_STORAGE_FULL.drawPartial(guiLeft + 4, guiTop + 4, 168, 63, 0,
-					1f - (float) plasma.getCapacity() / plasma.getMaxCapacity(), 1, 1);
-			this.field_230712_o_.func_243248_b(p_230450_1_,
-					new StringTextComponent(plasma.getCapacity() + "/" + plasma.getMaxCapacity() + "PU"), guiLeft + 3,
-					guiTop + 69, 3833343);
-
+			if (plasma.getMaxCapacity() == -1)
+				this.field_230712_o_.func_243248_b(p_230450_1_, new StringTextComponent("Incomplete Multi-block"),
+						guiLeft + 3, guiTop + 69, 12976128);
+			else {
+				PLASMA_STORAGE_FULL.drawPartial(guiLeft + 4, guiTop + 4, 168, 63, 0,
+						1f - (float) plasma.getCapacity() / plasma.getMaxCapacity(), 1, 1);
+				this.field_230712_o_.func_243248_b(p_230450_1_,
+						new StringTextComponent(plasma.getCapacity() + "/" + plasma.getMaxCapacity() + "PU"),
+						guiLeft + 3, guiTop + 69, 3833343);
+			}
 		}
 
 	}

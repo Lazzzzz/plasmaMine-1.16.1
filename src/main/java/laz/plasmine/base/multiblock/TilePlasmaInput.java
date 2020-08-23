@@ -25,6 +25,7 @@ public class TilePlasmaInput extends TilePlasmaMachineBase implements ISlave {
 
 	@Override
 	public int receiveEnergy(int amount) {
+		markDirty();
 		if (isBind())
 			return plasmaHelper.addPlasma(amount);
 		return amount;
@@ -49,11 +50,13 @@ public class TilePlasmaInput extends TilePlasmaMachineBase implements ISlave {
 
 	@Override
 	public boolean isBind() {
+		markDirty();
 		return bind != null;
 	}
 
 	@Override
 	public void unbindToMaster() {
+		markDirty();
 		bind = null;
 	}
 

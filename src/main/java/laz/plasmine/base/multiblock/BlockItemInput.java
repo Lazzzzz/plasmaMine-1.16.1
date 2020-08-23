@@ -1,7 +1,6 @@
 package laz.plasmine.base.multiblock;
 
 import laz.plasmine.base.BlockRotationBase;
-import laz.plasmine.content.tiles.generator.basicgenerator.TileBasicGenerator;
 import laz.plasmine.registry.init.PMItemsInit;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

@@ -45,7 +45,7 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 					if (plasmaHelper.getCapacity() >= amountToConvertPerTick)
 						heat = transformPlasmaToHeat(plasmaHelper.removePlasma(amountToConvertPerTick), efficiency,
 								helper.getCelcius(), maxTemp, world, pos);
-					if (helper.getCelcius() < maxTemp + getMinTemp(world, pos) + 20) {
+					if (helper.getCelcius() < maxTemp + getMinTemp(world, pos)) {
 						helper.addCelcius(heat);
 					}
 				} else {
@@ -98,4 +98,8 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 		return null;
 	}
 
+	@Override
+	public double speedFactor() {
+		return 0;
+	}
 }

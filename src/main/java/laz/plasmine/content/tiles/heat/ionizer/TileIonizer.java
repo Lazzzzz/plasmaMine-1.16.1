@@ -3,6 +3,7 @@ package laz.plasmine.content.tiles.heat.ionizer;
 import laz.plasmine.base.heat.TileHeatMachineBase;
 import laz.plasmine.recipes.ionizer.IonizerRecipe;
 import laz.plasmine.registry.init.PMTilesInit;
+import laz.plasmine.util.RecipiesUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,12 +16,12 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 
-public class TileIonizer extends TileHeatMachineBase implements ISidedInventory{
+public class TileIonizer extends TileHeatMachineBase implements ISidedInventory {
 
 	private ItemStack result = ItemStack.EMPTY;
-	private int timer = 0;
+	private double timer = 0;
 	private int currentMaxTimer = 0;
-	
+
 	public TileIonizer(int maxCelcius, float thermo) {
 		super(PMTilesInit.IONIZER.getTileEntityType(), maxCelcius, thermo, 3);
 	}
@@ -29,7 +30,7 @@ public class TileIonizer extends TileHeatMachineBase implements ISidedInventory{
 	public Container createMenu(int id, PlayerInventory playerInv, PlayerEntity player) {
 		return new ContainerIonizer(id, playerInv, this);
 	}
-
+		
 	@Override
 	public ITextComponent getDisplayName() {
 		return new StringTextComponent("Ionizer");
@@ -38,28 +39,28 @@ public class TileIonizer extends TileHeatMachineBase implements ISidedInventory{
 	@Override
 	public CompoundNBT write(CompoundNBT compound) {
 		compound.put("result", result.serializeNBT());
-		compound.putInt("recipetimer", timer);
+		compound.putDouble("recipetimer", timer);
 		compound.putInt("recipemaxtimer", currentMaxTimer);
 		return super.write(compound);
 	}
-	
+
 	@Override
 	public void func_230337_a_(BlockState p_230337_1_, CompoundNBT compound) {
 		result.deserializeNBT(compound.getCompound("result"));
-		timer = compound.getInt("recipetimer");
+		timer = compound.getDouble("recipetimer");
 		currentMaxTimer = compound.getInt("recipemaxtimer");
 		super.func_230337_a_(p_230337_1_, compound);
 	}
-	
+
 	@Override
 	public void onWorking() {
 		setWorkingState(world, pos, world.getBlockState(pos), true);
-		
+
 		if (result == ItemStack.EMPTY)
 			world.getRecipeManager().getRecipes().stream().filter(recipe -> recipe instanceof IonizerRecipe)
 					.forEach(e -> start((IonizerRecipe) e));
 		else {
-			timer++;
+			timer+=speedFactor();
 			heatHelper.removeHeat(consumeHeat());
 			if (timer >= currentMaxTimer) {
 				ItemStack stack = getStackInSlot(2);
@@ -84,7 +85,7 @@ public class TileIonizer extends TileHeatMachineBase implements ISidedInventory{
 		ItemStack in1 = content.get(0);
 		ItemStack in2 = content.get(1);
 		ItemStack out = getStackInSlot(2);
-		if (in1.getItem() == recipe.getItemIn1().getItem() && in2.getItem() == recipe.getItemIn2().getItem()
+		if (RecipiesUtils.isSameTag(in1, recipe.getItemIn1()) && RecipiesUtils.isSameTag(in2, recipe.getItemIn2())
 				&& recipe.getTemp() < heatHelper.getCelcius()) {
 			if (out == ItemStack.EMPTY || out.getCount() < out.getMaxStackSize()) {
 				in1.shrink(1);
@@ -102,19 +103,20 @@ public class TileIonizer extends TileHeatMachineBase implements ISidedInventory{
 
 	@Override
 	public boolean canExtractItem(int arg0, ItemStack arg1, Direction arg2) {
-		if (arg0 == 2) return true;
+		if (arg0 == 2)
+			return true;
 		return false;
 	}
 
 	@Override
 	public boolean canInsertItem(int arg0, ItemStack arg1, Direction arg2) {
-		if (arg0 == 0 || arg0 == 1) return true;
+		if (arg0 == 0 || arg0 == 1)
+			return true;
 		return false;
 	}
 
 	@Override
 	public int[] getSlotsForFace(Direction arg0) {
-		return new int [] {0,1,2};
+		return new int[] { 0, 1, 2 };
 	}
-
 }

@@ -175,10 +175,15 @@ public class TileHeatMachineBase extends TileEntity
 		BlockState state = world.getBlockState(pos);
 		if (powered) {
 			if (state.get(BlockHeatMachineBase.POWER) == false)
-				world.setBlockState(pos, state.with(BlockHeatMachineBase.POWER, true));
+				world.setBlockState(pos, state.with(BlockHeatMachineBase.POWER, true), 1);
 		} else {
 			if (state.get(BlockHeatMachineBase.POWER) == true)
-				world.setBlockState(pos, state.with(BlockHeatMachineBase.POWER, false));
+				world.setBlockState(pos, state.with(BlockHeatMachineBase.POWER, false), 1);
 		}
+	}
+
+	@Override
+	public double speedFactor() {
+		return 1 + ((heatHelper.getCelcius() / heatHelper.getMaxCelcius()) * 2);
 	}
 }

@@ -15,10 +15,14 @@ import laz.plasmine.content.tiles.BlockMachine;
 import laz.plasmine.content.tiles.TileMachine;
 import laz.plasmine.content.tiles.cable.BlockBasicPlasmaCable;
 import laz.plasmine.content.tiles.cable.TileBasicPlasmaCable;
+import laz.plasmine.content.tiles.coils.BlockKetiumCoil;
 import laz.plasmine.content.tiles.coils.BlockLisiumCoil;
 import laz.plasmine.content.tiles.coils.BlockMagneticCoil;
+import laz.plasmine.content.tiles.coils.BlockRosiumCoil;
+import laz.plasmine.content.tiles.coils.TileKetiumCoil;
 import laz.plasmine.content.tiles.coils.TileLisiumCoil;
 import laz.plasmine.content.tiles.coils.TileMagneticCoil;
+import laz.plasmine.content.tiles.coils.TileRosiumCoil;
 import laz.plasmine.content.tiles.convertor.BlockAdvancedConvertor;
 import laz.plasmine.content.tiles.convertor.BlockBasicConvertor;
 import laz.plasmine.content.tiles.convertor.BlockSolarConvertor;
@@ -31,6 +35,8 @@ import laz.plasmine.content.tiles.generator.electromagneticgenerator.BlockEMGene
 import laz.plasmine.content.tiles.generator.electromagneticgenerator.TileEMGenerator;
 import laz.plasmine.content.tiles.heat.cropblower.BlockCropBlower;
 import laz.plasmine.content.tiles.heat.cropblower.TileCropBlower;
+import laz.plasmine.content.tiles.heat.furnace.BlockFurnace;
+import laz.plasmine.content.tiles.heat.furnace.TileFurnace;
 import laz.plasmine.content.tiles.heat.ionizer.BlockIonizer;
 import laz.plasmine.content.tiles.heat.ionizer.TileIonizer;
 import laz.plasmine.content.tiles.heat.sedimentcollector.BlockSedimentCollector;
@@ -57,6 +63,7 @@ public class PMTilesInit {
 	public static BlockRegistryObjectGroup<BlockSedimentExtractor, BlockItem, TileSedimentExtractor> SEDIMENT_EXTRACTOR;
 	public static BlockRegistryObjectGroup<BlockSedimentCrystalizer, BlockItem, TileSedimentCrystalizer> SEDIMENT_CRYSTALIZER;
 	public static BlockRegistryObjectGroup<BlockIonizer, BlockItem, TileIonizer> IONIZER;
+	public static BlockRegistryObjectGroup<BlockFurnace, BlockItem, TileFurnace> FURNACE;
 
 	public static BlockRegistryObjectGroup<BlockSolarConvertor, BlockItem, TileSolarConvertor> SOLAR_CONVERTOR;
 	public static BlockRegistryObjectGroup<BlockBasicConvertor, BlockItem, TileBasicConvertor> BASIC_CONVERTOR;
@@ -71,6 +78,8 @@ public class PMTilesInit {
 	public static BlockRegistryObjectGroup<BlockItemInput, BlockItem, TileItemInput> ITEM_INPUT;
 	
 	public static BlockRegistryObjectGroup<BlockLisiumCoil, BlockItem, TileLisiumCoil> LISIUM_COIL;
+	public static BlockRegistryObjectGroup<BlockKetiumCoil, BlockItem, TileKetiumCoil> KETIUM_COIL;
+	public static BlockRegistryObjectGroup<BlockRosiumCoil, BlockItem, TileRosiumCoil> ROSIUM_COIL;
 	public static BlockRegistryObjectGroup<BlockMagneticCoil, BlockItem, TileMagneticCoil> MAGNETIC_COIL;
 	
 	public static BlockRegistryObjectGroup<BlockCropBlower, BlockItem, TileCropBlower> CROP_BLOWER;
@@ -122,6 +131,10 @@ public class PMTilesInit {
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
 				() -> new TileIonizer(1500, 0.8f)).register(BLOCKS, ITEMS, TILE_ENTITIES);
 
+		FURNACE = new BlockRegistryObjectGroup<>("furnace", BlockFurnace::new,
+				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
+				() -> new TileFurnace(500, 0.1f)).register(BLOCKS, ITEMS, TILE_ENTITIES);
+		
 		CROP_BLOWER = new BlockRegistryObjectGroup<>("crop_blower", BlockCropBlower::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
 				() -> new TileCropBlower(500, 0.4f)).register(BLOCKS, ITEMS, TILE_ENTITIES);
@@ -150,7 +163,15 @@ public class PMTilesInit {
 		
 		LISIUM_COIL = new BlockRegistryObjectGroup<>("lisium_coil", BlockLisiumCoil::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
-				TileLisiumCoil::new).register(BLOCKS, ITEMS, TILE_ENTITIES);	
+				TileLisiumCoil::new).register(BLOCKS, ITEMS, TILE_ENTITIES);
+		
+		KETIUM_COIL = new BlockRegistryObjectGroup<>("ketium_coil", BlockKetiumCoil::new,
+				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
+				TileKetiumCoil::new).register(BLOCKS, ITEMS, TILE_ENTITIES);
+		
+		ROSIUM_COIL = new BlockRegistryObjectGroup<>("rosium_coil", BlockRosiumCoil::new,
+				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
+				TileRosiumCoil::new).register(BLOCKS, ITEMS, TILE_ENTITIES);
 		
 		MAGNETIC_COIL = new BlockRegistryObjectGroup<>("magnetic_coil", BlockMagneticCoil::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),

@@ -25,7 +25,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 public class BlockPlasmaStorage extends BlockRotationBase {
 
 	public static final IntegerProperty STORAGE = IntegerProperty.create("storage", 0, 10);
-	
+
 	public BlockPlasmaStorage() {
 		super(Properties.from(Blocks.IRON_BLOCK.getBlock()));
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(STORAGE, 0));
@@ -35,7 +35,7 @@ public class BlockPlasmaStorage extends BlockRotationBase {
 	public boolean hasTileEntity(BlockState state) {
 		return true;
 	}
-	
+
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(FACING, STORAGE);
 	}
@@ -49,7 +49,7 @@ public class BlockPlasmaStorage extends BlockRotationBase {
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
 		return new TilePlasmaStorage();
 	}
-	
+
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
 			Hand handIn, BlockRayTraceResult hit) {
@@ -67,11 +67,13 @@ public class BlockPlasmaStorage extends BlockRotationBase {
 	@Override
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (!worldIn.isRemote) {
-			IMaster tile = (IMaster) worldIn.getTileEntity(pos);
-			tile.sendStructureUnBind(DirectionUtils.getPosDirection(pos, state.get(FACING).getOpposite()), null);
+			if (state.getBlock() != newState.getBlock()) {
+				IMaster tile = (IMaster) worldIn.getTileEntity(pos);
+				tile.sendStructureUnBind(DirectionUtils.getPosDirection(pos, state.get(FACING).getOpposite()), null);
+			}
 		}
-		
+
 		super.onReplaced(state, worldIn, pos, newState, isMoving);
 	}
-	
+
 }

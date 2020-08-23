@@ -1,13 +1,10 @@
 package laz.plasmine.content.tiles.heat.ionizer;
 
-import java.util.Random;
-
 import laz.plasmine.base.heat.BlockHeatMachineBase;
 import laz.plasmine.registry.init.PMItemsInit;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.particles.RedstoneParticleData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -38,23 +35,6 @@ public class BlockIonizer extends BlockHeatMachineBase {
 				return ActionResultType.SUCCESS;
 			}
 		}
-		return ActionResultType.FAIL;
-
-	}
-
-	@Override
-	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-		if (stateIn.get(BlockHeatMachineBase.WORKING)) {
-			int y = pos.getY();
-			for (int i = -1; i < 2; i++) {
-				for (int j = -1; j < 2; j++) {
-					int x = pos.getX() + i;
-					int z = pos.getZ() + j;
-					worldIn.addParticle(new RedstoneParticleData(0f, 0f, 0f, 1f), x + rand.nextFloat(), y + 0.01f,
-							z + rand.nextFloat(), 0, 0, 0);
-				}
-			}
-		}
-		super.animateTick(stateIn, worldIn, pos, rand);
+		return ActionResultType.SUCCESS;
 	}
 }

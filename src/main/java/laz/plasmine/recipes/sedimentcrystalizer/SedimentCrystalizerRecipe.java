@@ -5,22 +5,23 @@ import laz.plasmine.registry.init.PMRecipesSerializer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 public class SedimentCrystalizerRecipe extends AbstractPlasmineRecipe {
 
-    private final ItemStack itemIn;
+    public final Ingredient itemIn;
     private final ItemStack itemOut;
 
-    public SedimentCrystalizerRecipe(ResourceLocation id, ItemStack itemIn, ItemStack itemOut, int temp, int time) {
+    public SedimentCrystalizerRecipe(ResourceLocation id, Ingredient itemIn, ItemStack itemOut, int temp, int time) {
         super(PMRecipesSerializer.SEDIMENT_CRYSTALIZER_TYPE, id, temp, time);
         this.itemIn = itemIn;
         this.itemOut = itemOut;
     }
     
-    public ItemStack getItemIn() {
-    	return itemIn.copy();
+    public ItemStack [] getItemIn() {
+    	return itemIn.getMatchingStacks();
     }
 
     public ItemStack getItemOut() {

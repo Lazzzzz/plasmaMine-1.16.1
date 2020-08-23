@@ -11,7 +11,6 @@ import laz.plasmine.base.generator.TileGeneratorBase;
 import laz.plasmine.client.screen.DrawBaseGui;
 import laz.plasmine.content.tiles.generator.basicgenerator.BlockBasicGenerator;
 import laz.plasmine.content.tiles.generator.basicgenerator.ContainerBasicGenerator;
-import laz.plasmine.content.tiles.generator.basicgenerator.TileBasicGenerator;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.text.ITextComponent;
