@@ -184,6 +184,7 @@ public class TileHeatMachineBase extends TileEntity
 
 	@Override
 	public double speedFactor() {
-		return 1 + ((heatHelper.getCelcius() / heatHelper.getMaxCelcius()) * 2);
+		if (!heatHelper.isWorkingCelcius(world, pos)) return 0;
+		return 1f + ((heatHelper.getCelcius() / heatHelper.getMaxCelcius()) * 2);
 	}
 }

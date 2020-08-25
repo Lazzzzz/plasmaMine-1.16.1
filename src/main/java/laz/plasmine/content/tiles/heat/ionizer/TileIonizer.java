@@ -2,6 +2,7 @@ package laz.plasmine.content.tiles.heat.ionizer;
 
 import laz.plasmine.base.heat.TileHeatMachineBase;
 import laz.plasmine.recipes.ionizer.IonizerRecipe;
+import laz.plasmine.recipes.sediementextractor.SedimentExtractorRecipe;
 import laz.plasmine.registry.init.PMTilesInit;
 import laz.plasmine.util.RecipiesUtils;
 import net.minecraft.block.BlockState;
@@ -30,7 +31,7 @@ public class TileIonizer extends TileHeatMachineBase implements ISidedInventory 
 	public Container createMenu(int id, PlayerInventory playerInv, PlayerEntity player) {
 		return new ContainerIonizer(id, playerInv, this);
 	}
-		
+
 	@Override
 	public ITextComponent getDisplayName() {
 		return new StringTextComponent("Ionizer");
@@ -60,7 +61,7 @@ public class TileIonizer extends TileHeatMachineBase implements ISidedInventory 
 			world.getRecipeManager().getRecipes().stream().filter(recipe -> recipe instanceof IonizerRecipe)
 					.forEach(e -> start((IonizerRecipe) e));
 		else {
-			timer+=speedFactor();
+			timer += speedFactor();
 			heatHelper.removeHeat(consumeHeat());
 			if (timer >= currentMaxTimer) {
 				ItemStack stack = getStackInSlot(2);
@@ -87,13 +88,18 @@ public class TileIonizer extends TileHeatMachineBase implements ISidedInventory 
 		ItemStack out = getStackInSlot(2);
 		if (RecipiesUtils.isSameTag(in1, recipe.getItemIn1()) && RecipiesUtils.isSameTag(in2, recipe.getItemIn2())
 				&& recipe.getTemp() < heatHelper.getCelcius()) {
-			if (out == ItemStack.EMPTY || out.getCount() < out.getMaxStackSize()) {
-				in1.shrink(1);
-				in2.shrink(1);
-				result = recipe.getItemOut();
-				timer = 0;
-			}
+			if (out.isEmpty())
+				init(recipe, in1, in2);
+			else if (out.getCount() < out.getMaxStackSize() && out.getItem() == recipe.getItemOut().getItem())
+				init(recipe, in1, in2);
 		}
+	}
+
+	public void init(IonizerRecipe recipe, ItemStack in1, ItemStack in2) {
+		in1.shrink(1);
+		in2.shrink(1);
+		result = recipe.getItemOut();
+		timer = 0;
 	}
 
 	@Override

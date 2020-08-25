@@ -5,6 +5,7 @@ import static laz.plasmine.registry.PMRegistry.PM_CONTAINER;
 import laz.plasmine.base.container.ContainerItemInput;
 import laz.plasmine.content.tiles.generator.basicgenerator.ContainerBasicGenerator;
 import laz.plasmine.content.tiles.generator.electromagneticgenerator.ContainerEMGenerator;
+import laz.plasmine.content.tiles.heat.crusher.ContainerCrusher;
 import laz.plasmine.content.tiles.heat.furnace.ContainerFurnace;
 import laz.plasmine.content.tiles.heat.ionizer.ContainerIonizer;
 import laz.plasmine.content.tiles.heat.sedimentcollector.ContainerSedimentCollector;
@@ -25,6 +26,7 @@ public class PMContainersInit {
 	public static RegistryObject<ContainerType<ContainerSedimentCrystalizer>> SEDIMENT_CRYSTALIZER_CONTAINER;
 	public static RegistryObject<ContainerType<ContainerIonizer>> IONIZER_CONTAINER;
 	public static RegistryObject<ContainerType<ContainerFurnace>> FURNACE_CONTAINER;
+	public static RegistryObject<ContainerType<ContainerCrusher>> CRUSHER_CONTAINER;
 	
 	public static RegistryObject<ContainerType<ContainerPlasmaStorage>> PLASMA_STORAGE_CONTAINER;
 	public static RegistryObject<ContainerType<ContainerItemInput>> ITEM_INPUT_CONTAINER;
@@ -38,6 +40,7 @@ public class PMContainersInit {
 		SEDIMENT_CRYSTALIZER_CONTAINER = PM_CONTAINER.register("sediment_crystalizer", () -> IForgeContainerType.create(ContainerSedimentCrystalizer::new));
 		IONIZER_CONTAINER = PM_CONTAINER.register("ionizer", () -> IForgeContainerType.create(ContainerIonizer::new));
 		FURNACE_CONTAINER = PM_CONTAINER.register("furnace", () -> IForgeContainerType.create(ContainerFurnace::new));
+		CRUSHER_CONTAINER = PM_CONTAINER.register("crusher", () -> IForgeContainerType.create(ContainerCrusher::new));
 		
 		
 		PLASMA_STORAGE_CONTAINER = PM_CONTAINER.register("plasma_storage", () -> IForgeContainerType.create(ContainerPlasmaStorage::new));

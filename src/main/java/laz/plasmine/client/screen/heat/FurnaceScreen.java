@@ -28,15 +28,14 @@ public class FurnaceScreen extends ContainerScreen<ContainerFurnace> {
 		
 		TileHeatMachineBase tile = this.container.getTile();
 		HeatHelper helper = tile.getHeatHelper();
-		DrawBaseGui.drawGui(p_230450_1_, this.field_230712_o_, guiLeft, guiTop, " °C", (int) helper.getCelcius(), 12976128);
+		DrawBaseGui.drawGuiSpeed(p_230450_1_, this.field_230712_o_, guiLeft, guiTop, " °C", (int) helper.getCelcius(),tile.speedFactor(), 12976128);
 		HEAT_LOGO.draw(guiLeft + 5, guiTop + 60, 9, 17);
 		HEAT_BAR.drawPartial(guiLeft + 2, guiTop + 2, 16, 56, 0,
 				1 - ((float) helper.getCelcius() / helper.getMaxCelcius()), 1f, 1f);
 		func_243308_b(p_230450_1_, new ArrayList<ITextComponent>(), p_230450_3_, p_230450_3_);
 		
-		BASE_SLOT.draw(guiLeft + 44, guiTop + 13, 16, 16);
-		BASE_SLOT.draw(guiLeft + 44, guiTop + 49, 16, 16);
-		BASE_SLOT.draw(guiLeft + 116, guiTop + 31, 16, 16);
+		BASE_SLOT.draw(guiLeft + 44, guiTop + 35, 16, 16);
+		BASE_SLOT.draw(guiLeft + 116, guiTop + 35, 16, 16);
 		
 }
 

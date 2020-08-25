@@ -61,7 +61,7 @@ public class TileSedimentExtractor extends TileHeatMachineBase implements ISided
 			timer += speedFactor();
 			if (timer >= maxTime) {
 				ItemStack stack = getStackInSlot(2);
-				if (stack == ItemStack.EMPTY) {
+				if (stack.isEmpty()) {
 					setInventorySlotContents(2, result);
 				} else if (stack.getCount() == stack.getMaxStackSize())
 					world.addEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), result));
@@ -78,13 +78,20 @@ public class TileSedimentExtractor extends TileHeatMachineBase implements ISided
 		ItemStack out = getStackInSlot(2);
 		if (RecipiesUtils.isSameTag(in1, recipe.getItemIn1()) && RecipiesUtils.isSameTag(in2, recipe.getItemIn2())
 				&& recipe.getTemp() < heatHelper.getCelcius()) {
-			if (out == ItemStack.EMPTY || out.getCount() < out.getMaxStackSize()) {
-				in1.shrink(1);
-				in2.shrink(1);
-				result = recipe.getItemOut();
-				timer = 0;
-			}
+			if (out == ItemStack.EMPTY)
+				init(recipe, in1, in2);
+			else if (out.getCount() < out.getMaxStackSize() && out.getItem() == recipe.getItemOut().getItem())
+				init(recipe, in1, in2);
+
 		}
+
+	}
+
+	public void init(SedimentExtractorRecipe recipe, ItemStack in1, ItemStack in2) {
+		in1.shrink(1);
+		in2.shrink(1);
+		result = recipe.getItemOut();
+		timer = 0;
 	}
 
 	@Override

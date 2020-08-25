@@ -37,20 +37,23 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 		livingtick++;
 		if (!world.isRemote) {
 			HeatHelper helper = heatAround();
-			boolean isWorking = world.isBlockPowered(pos) && plasmaHelper.getCapacity() >= amountToConvertPerTick && helper != null;
+			boolean isWorking = world.isBlockPowered(pos) && plasmaHelper.getCapacity() >= amountToConvertPerTick
+					&& helper != null;
 			setWorkingState(world, pos, world.getBlockState(pos), isWorking);
 			float heat = 0;
 			if (helper != null) {
-				if (isTileConnect() && isWorking) {
+				if (isTileConnect() && isWorking && helper.getCelcius() <= maxTemp) {
 					if (plasmaHelper.getCapacity() >= amountToConvertPerTick)
 						heat = transformPlasmaToHeat(plasmaHelper.removePlasma(amountToConvertPerTick), efficiency,
-								helper.getCelcius(), maxTemp, world, pos);
-					if (helper.getCelcius() < maxTemp + getMinTemp(world, pos)) {
+								helper.getCelcius(), Math.min(helper.getMaxCelcius(), maxTemp), world, pos);
+
+					if (helper.getCelcius() < maxTemp) {
 						helper.addCelcius(heat);
 					}
 				} else {
-					helper.coolDown(world, pos, transformPlasmaToHeat(amountToConvertPerTick, efficiency * 1.1f,
-							helper.getCelcius(), helper.getMaxCelcius(), world, pos));
+					float cool = transformPlasmaToHeat(0, efficiency * 1.1f,
+							helper.getCelcius(), Math.min(helper.getMaxCelcius(), maxTemp), world, pos);
+					helper.coolDown(world, pos, cool);
 				}
 				if (isWorking) {
 					if (world.rand.nextInt(100) == 0)
@@ -61,7 +64,7 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 		}
 		super.tick();
 	}
-	
+
 	public HeatHelper heatAround() {
 		Direction dir = heatInOut(world.getBlockState(pos));
 		TileEntity tile = world.getTileEntity(getPosDirection(pos, dir));

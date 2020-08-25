@@ -17,36 +17,13 @@ import net.minecraft.world.IBlockReader;
 
 public class BlockSolarConvertor extends BlockConvertorBase {
 
-	VoxelShape SHAPE = VoxelShapes.create(0.125, 0.125f, 0.125f, 0.875f, 0.875f, 0.875f);
-	
 	public BlockSolarConvertor() {
 		super(1, 0.5f, 50);
 	}
 	
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return new TileSolarConvertor(this.rate, this.efficiency);
-	}
-	
-	@Override
-	public VoxelShape getRenderShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return SHAPE;
-	}
-
-	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return SHAPE;
-	}
-
-	@Override
-	public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos,
-			ISelectionContext context) {
-		return SHAPE;
-	}
-
-	@Override
-	public VoxelShape getRaytraceShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return SHAPE;
+		return new TileSolarConvertor(this.rate, this.efficiency, this.temp);
 	}
 	
 	@Override
@@ -54,7 +31,8 @@ public class BlockSolarConvertor extends BlockConvertorBase {
 			ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		tooltip.add(new StringTextComponent("Produce heat from the sun"));
-		tooltip.add(new StringTextComponent("Low tier heat producer - useless on processing machine"));
+		tooltip.add(new StringTextComponent("Low tier heat producer"));
+		tooltip.add(new StringTextComponent("Useless on processing machine"));
 	}
 
 }

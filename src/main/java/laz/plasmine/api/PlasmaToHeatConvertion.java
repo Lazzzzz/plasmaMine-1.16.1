@@ -6,8 +6,8 @@ import net.minecraft.world.World;
 public class PlasmaToHeatConvertion {
 
 	public static float transformPlasmaToHeat(int amount, float efficiency, float temp, float maxTemp, World world, BlockPos pos) {
-		if (amount != 0) return amount * efficiency * (1 - (temp / ((maxTemp + getMinTemp(world, pos) + 20) * 1.5f)));
-		return efficiency * (1 - temp / maxTemp * 2);
+		if (amount != 0) return amount * efficiency * (1f - (temp / maxTemp)) * 0.5f;
+		return efficiency * Math.max(0.01f, (1 - temp / maxTemp));
 	}
 
 

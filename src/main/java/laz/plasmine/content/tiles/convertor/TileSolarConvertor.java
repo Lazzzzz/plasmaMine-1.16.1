@@ -6,8 +6,8 @@ import net.minecraft.util.Direction;
 
 public class TileSolarConvertor extends TileConvertorBase {
 
-	public TileSolarConvertor(int rate, float efficiency) {
-		super(PMTilesInit.SOLAR_CONVERTOR.getTileEntityType(), 100, rate, efficiency, 50);
+	public TileSolarConvertor(int rate, float efficiency, int temp) {
+		super(PMTilesInit.SOLAR_CONVERTOR.getTileEntityType(), 100, rate, efficiency, temp);
 	}
 
 	@Override

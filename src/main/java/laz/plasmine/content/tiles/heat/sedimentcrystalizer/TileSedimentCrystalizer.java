@@ -83,16 +83,20 @@ public class TileSedimentCrystalizer extends TileHeatMachineBase implements ISid
 		ItemStack in = content.get(0);
 		ItemStack out = getStackInSlot(1);
 		if (RecipiesUtils.isSameTag(in, recipe.getItemIn()) && recipe.getTemp() < heatHelper.getCelcius()) {
-			if (out == ItemStack.EMPTY || out.getCount() < out.getMaxStackSize()) {
-				in.shrink(1);
-				result = recipe.getItemOut();
-				timer = 0;
-				currentMaxTimer = recipe.getCookTime();
-
-			}
+			if (out.isEmpty())
+				init(recipe, in);
+			else if (out.getCount() < out.getMaxStackSize() && out.getItem() == recipe.getItemOut().getItem())
+				init(recipe, in);
 		}
 	}
 
+	private void init(SedimentCrystalizerRecipe recipe, ItemStack in) {
+		in.shrink(1);
+		result = recipe.getItemOut();
+		timer = 0;
+		currentMaxTimer = recipe.getCookTime();
+	}
+	
 	private void reset() {
 		result = ItemStack.EMPTY;
 		timer = 0;

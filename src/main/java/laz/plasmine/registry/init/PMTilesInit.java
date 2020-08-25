@@ -26,15 +26,21 @@ import laz.plasmine.content.tiles.coils.TileRosiumCoil;
 import laz.plasmine.content.tiles.convertor.BlockAdvancedConvertor;
 import laz.plasmine.content.tiles.convertor.BlockBasicConvertor;
 import laz.plasmine.content.tiles.convertor.BlockSolarConvertor;
+import laz.plasmine.content.tiles.convertor.BlockSuperAdvancedConvertor;
+import laz.plasmine.content.tiles.convertor.BlockUltimateConvertor;
 import laz.plasmine.content.tiles.convertor.TileAdvancedConvertor;
 import laz.plasmine.content.tiles.convertor.TileBasicConvertor;
 import laz.plasmine.content.tiles.convertor.TileSolarConvertor;
+import laz.plasmine.content.tiles.convertor.TileSuperAdvancedConvertor;
+import laz.plasmine.content.tiles.convertor.TileUltimateConvertor;
 import laz.plasmine.content.tiles.generator.basicgenerator.BlockBasicGenerator;
 import laz.plasmine.content.tiles.generator.basicgenerator.TileBasicGenerator;
 import laz.plasmine.content.tiles.generator.electromagneticgenerator.BlockEMGenerator;
 import laz.plasmine.content.tiles.generator.electromagneticgenerator.TileEMGenerator;
 import laz.plasmine.content.tiles.heat.cropblower.BlockCropBlower;
 import laz.plasmine.content.tiles.heat.cropblower.TileCropBlower;
+import laz.plasmine.content.tiles.heat.crusher.BlockCrusher;
+import laz.plasmine.content.tiles.heat.crusher.TileCrusher;
 import laz.plasmine.content.tiles.heat.furnace.BlockFurnace;
 import laz.plasmine.content.tiles.heat.furnace.TileFurnace;
 import laz.plasmine.content.tiles.heat.ionizer.BlockIonizer;
@@ -64,10 +70,13 @@ public class PMTilesInit {
 	public static BlockRegistryObjectGroup<BlockSedimentCrystalizer, BlockItem, TileSedimentCrystalizer> SEDIMENT_CRYSTALIZER;
 	public static BlockRegistryObjectGroup<BlockIonizer, BlockItem, TileIonizer> IONIZER;
 	public static BlockRegistryObjectGroup<BlockFurnace, BlockItem, TileFurnace> FURNACE;
+	public static BlockRegistryObjectGroup<BlockCrusher, BlockItem, TileCrusher> CRUSHER;
 
 	public static BlockRegistryObjectGroup<BlockSolarConvertor, BlockItem, TileSolarConvertor> SOLAR_CONVERTOR;
 	public static BlockRegistryObjectGroup<BlockBasicConvertor, BlockItem, TileBasicConvertor> BASIC_CONVERTOR;
 	public static BlockRegistryObjectGroup<BlockAdvancedConvertor, BlockItem, TileAdvancedConvertor> ADVANCED_CONVERTOR;
+	public static BlockRegistryObjectGroup<BlockSuperAdvancedConvertor, BlockItem, TileSuperAdvancedConvertor> SUPER_ADVANCED_CONVERTOR;
+	public static BlockRegistryObjectGroup<BlockUltimateConvertor, BlockItem, TileUltimateConvertor> ULTIMATE_CONVERTOR;
 
 	public static BlockRegistryObjectGroup<BlockMachine, BlockItem, TileMachine> MACHINE_BLOCK;
 	
@@ -104,15 +113,23 @@ public class PMTilesInit {
 		// CONVERTOR
 		SOLAR_CONVERTOR = new BlockRegistryObjectGroup<>("solar_convertor", BlockSolarConvertor::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
-				() -> new TileSolarConvertor(1, 0.5f)).register(BLOCKS, ITEMS, TILE_ENTITIES);
+				() -> new TileSolarConvertor(1, 0.5f, 50)).register(BLOCKS, ITEMS, TILE_ENTITIES);
 
 		BASIC_CONVERTOR = new BlockRegistryObjectGroup<>("basic_convertor", BlockBasicConvertor::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
-				() -> new TileBasicConvertor(2, 0.3f)).register(BLOCKS, ITEMS, TILE_ENTITIES);
+				() -> new TileBasicConvertor(2, 0.3f, 150)).register(BLOCKS, ITEMS, TILE_ENTITIES);
 
 		ADVANCED_CONVERTOR = new BlockRegistryObjectGroup<>("advanced_convertor", BlockAdvancedConvertor::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
-				() -> new TileAdvancedConvertor(5, 0.5f)).register(BLOCKS, ITEMS, TILE_ENTITIES);
+				() -> new TileAdvancedConvertor(5, 0.5f, 250)).register(BLOCKS, ITEMS, TILE_ENTITIES);
+		
+		SUPER_ADVANCED_CONVERTOR = new BlockRegistryObjectGroup<>("super_advanced_convertor", BlockSuperAdvancedConvertor::new,
+				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
+				() -> new TileSuperAdvancedConvertor(5, 0.5f, 350)).register(BLOCKS, ITEMS, TILE_ENTITIES);
+		
+		ULTIMATE_CONVERTOR = new BlockRegistryObjectGroup<>("ultimate_convertor", BlockUltimateConvertor::new,
+				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
+				() -> new TileUltimateConvertor(20, 0.95f, 750)).register(BLOCKS, ITEMS, TILE_ENTITIES);
 
 		// MACHINE
 		SEDIMENT_COLLECTOR = new BlockRegistryObjectGroup<>("sediment_collector", BlockSedimentCollector::new,
@@ -134,6 +151,10 @@ public class PMTilesInit {
 		FURNACE = new BlockRegistryObjectGroup<>("furnace", BlockFurnace::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
 				() -> new TileFurnace(500, 0.1f)).register(BLOCKS, ITEMS, TILE_ENTITIES);
+		
+		CRUSHER = new BlockRegistryObjectGroup<>("crusher", BlockCrusher::new,
+				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
+				() -> new TileCrusher(700, 0.2f)).register(BLOCKS, ITEMS, TILE_ENTITIES);
 		
 		CROP_BLOWER = new BlockRegistryObjectGroup<>("crop_blower", BlockCropBlower::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),

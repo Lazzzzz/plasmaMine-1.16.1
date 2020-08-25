@@ -2,12 +2,15 @@ package laz.plasmine.base.multiblock;
 
 import laz.plasmine.base.container.ContainerItemInput;
 import laz.plasmine.registry.init.PMTilesInit;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -31,6 +34,18 @@ public class TileItemInput extends TileBlockSlave implements IInventory, INamedC
 		return size;
 	}
 
+	@Override
+	public CompoundNBT write(CompoundNBT compound) {
+		ItemStackHelper.saveAllItems(compound, content);
+		return super.write(compound);
+	}
+	
+	@Override
+	public void func_230337_a_(BlockState p_230337_1_, CompoundNBT p_230337_2_) {
+		ItemStackHelper.loadAllItems(p_230337_2_, content);
+		super.func_230337_a_(p_230337_1_, p_230337_2_);
+	}
+	
 	@Override
 	public boolean isEmpty() {
 		return false;

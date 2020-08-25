@@ -26,12 +26,6 @@ public class BlockFurnace extends BlockHeatMachineBase {
 		return new TileFurnace(maxCelcius, thermo);
 	}
 
-	public int getWeakPower(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
-		TileFurnace tile = (TileFurnace) blockAccess.getTileEntity(pos);
-		if (!tile.getStackInSlot(0).isEmpty()) return 15;
-		return 0;
-	}
-
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
 			Hand handIn, BlockRayTraceResult hit) {

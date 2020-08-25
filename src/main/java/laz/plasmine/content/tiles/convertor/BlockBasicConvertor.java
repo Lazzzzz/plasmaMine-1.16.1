@@ -10,37 +10,13 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 
 public class BlockBasicConvertor extends BlockConvertorBase {
-
-	VoxelShape SHAPE = VoxelShapes.create(0.125, 0.125f, 0.125f, 0.875f, 0.875f, 0.875f);
-		
 	public BlockBasicConvertor() {
 		super(2, 0.3f, 150);
 	}
 	
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return new TileBasicConvertor(this.rate, this.efficiency);
-	}
-	
-	@Override
-	public VoxelShape getRenderShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return SHAPE;
-	}
-
-	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return SHAPE;
-	}
-
-	@Override
-	public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos,
-			ISelectionContext context) {
-		return SHAPE;
-	}
-
-	@Override
-	public VoxelShape getRaytraceShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return SHAPE;
+		return new TileBasicConvertor(this.rate, this.efficiency, this.temp);
 	}
 
 }

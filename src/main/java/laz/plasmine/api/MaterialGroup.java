@@ -9,23 +9,41 @@ import net.minecraftforge.fml.RegistryObject;
 public class MaterialGroup {
 
 	private List<RegistryObject<Item>> elements = new ArrayList<RegistryObject<Item>>();
-
-	public MaterialGroup(RegistryObject<Item> a, RegistryObject<Item> b, RegistryObject<Item> c) {
-
+	private boolean [] hasItem = new boolean [3];
+	
+	public MaterialGroup(boolean a,boolean b, boolean c) {
+		hasItem[0] = a;
+		hasItem[1] = b;
+		hasItem[2] = c;
+	}
+	
+	public MaterialGroup setSediment(RegistryObject<Item> a) {
 		elements.add(a);
-		elements.add(b);
-		elements.add(c);
+		return this;
 	}
 
+	public MaterialGroup setChunk(RegistryObject<Item> a) {
+		elements.add(a);
+		return this;
+	}
+	
+	public MaterialGroup setIngot(RegistryObject<Item> a) {
+		elements.add(a);
+		return this;
+	}
+	
 	public Item getSediment() {
-		return elements.get(0).get();
+		if (hasItem[0]) return elements.get(0).get();
+		return null;
 	}
 
 	public Item getChunk() {
-		return elements.get(1).get();
+		if (hasItem[1]) return elements.get(1).get();
+		return null;
 	}
 
 	public Item getIngot() {
-		return elements.get(2).get();
+		if (hasItem[2]) return elements.get(2).get();
+		return null;
 	}
 }

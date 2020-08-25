@@ -34,7 +34,7 @@ public class TileFurnace extends TileHeatMachineBase implements ISidedInventory 
 	public ITextComponent getDisplayName() {
 		return new StringTextComponent("furnace");
 	}
-	
+
 	@Override
 	public CompoundNBT write(CompoundNBT compound) {
 		compound.put("result", result.serializeNBT());
@@ -69,10 +69,11 @@ public class TileFurnace extends TileHeatMachineBase implements ISidedInventory 
 				ItemStack stack = getStackInSlot(1);
 				if (stack == ItemStack.EMPTY) {
 					setInventorySlotContents(1, result);
-				}
-				else if (stack.getCount() == stack.getMaxStackSize()) world.addEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), result));
-				else stack.grow(1);
-				
+				} else if (stack.getCount() == stack.getMaxStackSize())
+					world.addEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), result));
+				else
+					stack.grow(1);
+
 				reset();
 			}
 		}
@@ -81,15 +82,22 @@ public class TileFurnace extends TileHeatMachineBase implements ISidedInventory 
 	private void start(FurnaceRecipe recipe) {
 		ItemStack in = content.get(0);
 		ItemStack out = getStackInSlot(1);
-		if (recipe.matches(this, world)) {
-			if (out == ItemStack.EMPTY || out.getCount() < out.getMaxStackSize() && heatHelper.getCelcius() > 90) {
-				in.shrink(1);
-				result = recipe.getRecipeOutput().copy();
-				timer = 0;
-				currentMaxTimer = 100;
-
+		if (recipe.matches(this, world) && heatHelper.getCelcius() > 90) {
+			if (out.isEmpty()) {
+				init(recipe, in);
+			}
+			else if (out.getCount() < out.getMaxStackSize()
+					&& out.getItem() == recipe.getRecipeOutput().copy().getItem()) {
+				init(recipe, in);
 			}
 		}
+	}
+
+	private void init(FurnaceRecipe recipe, ItemStack in) {
+		in.shrink(1);
+		result = recipe.getRecipeOutput().copy();
+		timer = 0;
+		currentMaxTimer = 100;
 	}
 
 	private void reset() {

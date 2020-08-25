@@ -5,6 +5,7 @@ import java.util.Random;
 
 import laz.plasmine.api.information.ConvertorInformationBase;
 import laz.plasmine.base.BlockRotationBase;
+import laz.plasmine.content.tiles.convertor.TileAdvancedConvertor;
 import laz.plasmine.util.interfaces.ICanWrench;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -17,8 +18,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
@@ -26,6 +31,8 @@ import net.minecraftforge.common.ToolType;
 
 public class BlockConvertorBase extends BlockRotationBase implements ICanWrench {
 
+	VoxelShape SHAPE = VoxelShapes.create(0.125, 0.125f, 0.125f, 0.875f, 0.875f, 0.875f);
+	
 	public static final BooleanProperty WORKING = BooleanProperty.create("working");
 
 	public float efficiency;
@@ -37,6 +44,7 @@ public class BlockConvertorBase extends BlockRotationBase implements ICanWrench 
 				.sound(SoundType.METAL).harvestLevel(0));
 		this.setDefaultState(
 				this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(WORKING, Boolean.valueOf(false)));
+		
 		this.efficiency = efficiency;
 		this.rate = rate;
 		this.temp = temp;
@@ -72,6 +80,27 @@ public class BlockConvertorBase extends BlockRotationBase implements ICanWrench 
 	public void addInformation(ItemStack stack, IBlockReader worldIn, List<ITextComponent> tooltip,
 			ITooltipFlag flagIn) {
 		ConvertorInformationBase.info(efficiency, rate, temp, tooltip);
+	}
+	
+	@Override
+	public VoxelShape getRenderShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
+		return SHAPE;
+	}
+
+	@Override
+	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+		return SHAPE;
+	}
+
+	@Override
+	public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos,
+			ISelectionContext context) {
+		return SHAPE;
+	}
+
+	@Override
+	public VoxelShape getRaytraceShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
+		return SHAPE;
 	}
 
 }

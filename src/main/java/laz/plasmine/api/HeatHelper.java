@@ -16,7 +16,7 @@ public class HeatHelper {
 	}
 
 	public void addCelcius(float amount) {
-		celcius += amount * getThermalFactor();
+		celcius += amount;
 	}
 
 	public void setCelcius(float amount) {

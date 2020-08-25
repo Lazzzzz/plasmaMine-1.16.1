@@ -5,8 +5,8 @@ import laz.plasmine.registry.init.PMTilesInit;
 
 public class TileBasicConvertor extends TileConvertorBase {
 
-	public TileBasicConvertor(int rate, float efficiency) {
-		super(PMTilesInit.BASIC_CONVERTOR.getTileEntityType(), 1000, rate, efficiency, 150);
+	public TileBasicConvertor(int rate, float efficiency, int temp) {
+		super(PMTilesInit.BASIC_CONVERTOR.getTileEntityType(), 1000, rate, efficiency, temp);
 	}
 
 }

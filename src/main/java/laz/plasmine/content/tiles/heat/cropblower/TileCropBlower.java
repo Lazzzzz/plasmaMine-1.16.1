@@ -9,6 +9,7 @@ import laz.plasmine.util.DirectionUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -23,11 +24,10 @@ public class TileCropBlower extends TileHeatMachineBase {
 	@Override
 	public void onWorking() {
 
-		
 		setWorkingState(world, pos, world.getBlockState(pos), true);
-		
+
 		Direction dir = world.getBlockState(pos).get(BlockHeatMachineBase.FACING);
-		if (livingtick % 20 == 0) {
+		if (livingtick % Math.max(1, (int) (100 - speedFactor() * 10)) == 0) {
 			for (int i = -2; i < 3; i++) {
 				for (int j = -2; j < 3; j++) {
 					BlockPos p = DirectionUtils.getPosFromRot(pos, dir, i, j, 3);
@@ -37,6 +37,8 @@ public class TileCropBlower extends TileHeatMachineBase {
 							world.destroyBlock(p, true);
 							world.setBlockState(p, state.with(CropsBlock.AGE, 0));
 						}
+					} else if (state.getBlockHardness(world, p) < 0.1f) {
+						world.destroyBlock(p, true);
 					}
 				}
 			}
@@ -63,7 +65,7 @@ public class TileCropBlower extends TileHeatMachineBase {
 			Entity entity = entitys.get(i);
 
 			if (entity.func_233570_aj_()) {
-				Vector3d speed = DirectionUtils.getMotion(dir, 0.2f);
+				Vector3d speed = DirectionUtils.getMotion(dir, (float) (0.2f * speedFactor() / 2));
 				entity.setMotion(entity.getMotion().x + speed.x, entity.getMotion().y, entity.getMotion().z + speed.z);
 			}
 		}
