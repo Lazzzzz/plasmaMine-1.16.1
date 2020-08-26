@@ -78,7 +78,7 @@ public class TileSedimentExtractor extends TileHeatMachineBase implements ISided
 		ItemStack out = getStackInSlot(2);
 		if (RecipiesUtils.isSameTag(in1, recipe.getItemIn1()) && RecipiesUtils.isSameTag(in2, recipe.getItemIn2())
 				&& recipe.getTemp() < heatHelper.getCelcius()) {
-			if (out == ItemStack.EMPTY)
+			if (out.isEmpty())
 				init(recipe, in1, in2);
 			else if (out.getCount() < out.getMaxStackSize() && out.getItem() == recipe.getItemOut().getItem())
 				init(recipe, in1, in2);

@@ -129,6 +129,13 @@ public class PMRegistry {
 		return TILES[TILE_INT - 1] = new BlockRegistryObjectGroup<>(name, blockSupplier, tileItemCreator(1),
 				tileSupplier).register(BLOCKS, ITEMS, TILE_ENTITIES);
 	}
+	
+	public static BlockRegistryObjectGroup<Block, BlockItem, TileEntity> addTileEntityNoItem(String name,
+			Supplier<Block> blockSupplier, Supplier<TileEntity> tileSupplier) {
+		TILE_INT = ++TILE_INT;
+		return TILES[TILE_INT - 1] = new BlockRegistryObjectGroup<>(name, blockSupplier, blockItemCreatorNoTab(),
+				tileSupplier).register(BLOCKS, ITEMS, TILE_ENTITIES);
+	}
 
 	public static BlockRegistryObjectGroup<Block, BlockItem, TileEntity> addTileEntityWStackSize(String name, int size,
 			Supplier<Block> blockSupplier, Supplier<TileEntity> tileSupplier) {

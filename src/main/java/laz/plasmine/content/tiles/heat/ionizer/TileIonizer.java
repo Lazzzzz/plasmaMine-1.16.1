@@ -2,7 +2,6 @@ package laz.plasmine.content.tiles.heat.ionizer;
 
 import laz.plasmine.base.heat.TileHeatMachineBase;
 import laz.plasmine.recipes.ionizer.IonizerRecipe;
-import laz.plasmine.recipes.sediementextractor.SedimentExtractorRecipe;
 import laz.plasmine.registry.init.PMTilesInit;
 import laz.plasmine.util.RecipiesUtils;
 import net.minecraft.block.BlockState;

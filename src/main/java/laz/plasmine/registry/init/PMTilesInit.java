@@ -4,13 +4,16 @@ import static laz.plasmine.Plasmine.ITEM_GROUP;
 import static laz.plasmine.registry.PMRegistry.BLOCKS;
 import static laz.plasmine.registry.PMRegistry.ITEMS;
 import static laz.plasmine.registry.PMRegistry.TILE_ENTITIES;
+import static laz.plasmine.registry.PMRegistry.addTileEntityNoItem;
 
-import laz.plasmine.base.multiblock.BlockItemInput;
-import laz.plasmine.base.multiblock.BlockPlasmaInput;
-import laz.plasmine.base.multiblock.BlockPlasmaOutput;
-import laz.plasmine.base.multiblock.TileItemInput;
-import laz.plasmine.base.multiblock.TilePlasmaInput;
-import laz.plasmine.base.multiblock.TilePlasmaOutput;
+import laz.plasmine.base.multiblock.input.BlockItemInput;
+import laz.plasmine.base.multiblock.input.BlockPlasmaInput;
+import laz.plasmine.base.multiblock.input.TileItemInput;
+import laz.plasmine.base.multiblock.input.TilePlasmaInput;
+import laz.plasmine.base.multiblock.output.BlockPlasmaOutput;
+import laz.plasmine.base.multiblock.output.TilePlasmaOutput;
+import laz.plasmine.base.multiblock.structure.BlockStructureBase;
+import laz.plasmine.base.multiblock.structure.TileStructureBase;
 import laz.plasmine.content.tiles.BlockMachine;
 import laz.plasmine.content.tiles.TileMachine;
 import laz.plasmine.content.tiles.cable.BlockBasicPlasmaCable;
@@ -45,6 +48,8 @@ import laz.plasmine.content.tiles.heat.furnace.BlockFurnace;
 import laz.plasmine.content.tiles.heat.furnace.TileFurnace;
 import laz.plasmine.content.tiles.heat.ionizer.BlockIonizer;
 import laz.plasmine.content.tiles.heat.ionizer.TileIonizer;
+import laz.plasmine.content.tiles.heat.miner.BlockMiner;
+import laz.plasmine.content.tiles.heat.miner.TileMiner;
 import laz.plasmine.content.tiles.heat.sedimentcollector.BlockSedimentCollector;
 import laz.plasmine.content.tiles.heat.sedimentcollector.TileSedimentCollector;
 import laz.plasmine.content.tiles.heat.sedimentcrystalizer.BlockSedimentCrystalizer;
@@ -56,8 +61,11 @@ import laz.plasmine.content.tiles.other.TileHupper;
 import laz.plasmine.content.tiles.storage.BlockPlasmaStorage;
 import laz.plasmine.content.tiles.storage.TilePlasmaStorage;
 import laz.plasmine.registry.BlockRegistryObjectGroup;
+import laz.plasmine.registry.PMRegistry;
+import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
 
 public class PMTilesInit {
 
@@ -92,9 +100,11 @@ public class PMTilesInit {
 	public static BlockRegistryObjectGroup<BlockMagneticCoil, BlockItem, TileMagneticCoil> MAGNETIC_COIL;
 	
 	public static BlockRegistryObjectGroup<BlockCropBlower, BlockItem, TileCropBlower> CROP_BLOWER;
+	public static BlockRegistryObjectGroup<BlockMiner, BlockItem, TileMiner> MINER;
 
 	public static BlockRegistryObjectGroup<BlockHupper, BlockItem, TileHupper> HUPPER;
-
+	public static BlockRegistryObjectGroup<Block, BlockItem, TileEntity> STRUCTURE_BLOCK;
+	
 	public static void init() {
 
 		// CABLES
@@ -159,7 +169,10 @@ public class PMTilesInit {
 		CROP_BLOWER = new BlockRegistryObjectGroup<>("crop_blower", BlockCropBlower::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
 				() -> new TileCropBlower(500, 0.4f)).register(BLOCKS, ITEMS, TILE_ENTITIES);
-
+		
+		MINER = new BlockRegistryObjectGroup<>("miner", BlockMiner::new,
+				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
+				() -> new TileMiner(1500, 0.5f)).register(BLOCKS, ITEMS, TILE_ENTITIES);
 		
 		//STORAGE
 		MACHINE_BLOCK = new BlockRegistryObjectGroup<>("machine_block", BlockMachine::new,
@@ -203,6 +216,8 @@ public class PMTilesInit {
 		HUPPER = new BlockRegistryObjectGroup<>("hupper", BlockHupper::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)), TileHupper::new)
 						.register(BLOCKS, ITEMS, TILE_ENTITIES);
+		
+		STRUCTURE_BLOCK = addTileEntityNoItem("structure_block", BlockStructureBase::new, TileStructureBase::new);
 
 	}
 

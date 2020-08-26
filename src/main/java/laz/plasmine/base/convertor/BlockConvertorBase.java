@@ -5,7 +5,6 @@ import java.util.Random;
 
 import laz.plasmine.api.information.ConvertorInformationBase;
 import laz.plasmine.base.BlockRotationBase;
-import laz.plasmine.content.tiles.convertor.TileAdvancedConvertor;
 import laz.plasmine.util.interfaces.ICanWrench;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -18,7 +17,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;

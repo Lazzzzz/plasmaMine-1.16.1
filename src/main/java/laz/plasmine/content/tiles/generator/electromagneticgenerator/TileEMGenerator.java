@@ -5,8 +5,8 @@ import java.util.List;
 
 import laz.plasmine.base.BlockRotationBase;
 import laz.plasmine.base.generator.TileGeneratorBase;
-import laz.plasmine.base.multiblock.TileItemInput;
-import laz.plasmine.base.multiblock.TilePlasmaOutput;
+import laz.plasmine.base.multiblock.input.TileItemInput;
+import laz.plasmine.base.multiblock.output.TilePlasmaOutput;
 import laz.plasmine.content.tiles.storage.BlockPlasmaStorage;
 import laz.plasmine.network.PacketHandler;
 import laz.plasmine.network.helpers.PlasmaHelperPacket;

@@ -1,6 +1,7 @@
-package laz.plasmine.base.multiblock;
+package laz.plasmine.base.multiblock.input;
 
 import laz.plasmine.base.container.ContainerItemInput;
+import laz.plasmine.base.multiblock.TileBlockSlave;
 import laz.plasmine.registry.init.PMTilesInit;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;

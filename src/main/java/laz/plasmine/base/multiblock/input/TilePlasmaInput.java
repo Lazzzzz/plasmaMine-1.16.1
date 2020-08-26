@@ -1,4 +1,4 @@
-package laz.plasmine.base.multiblock;
+package laz.plasmine.base.multiblock.input;
 
 import laz.plasmine.base.BlockRotationBase;
 import laz.plasmine.base.plasma.TilePlasmaMachineBase;

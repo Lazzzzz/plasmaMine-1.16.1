@@ -103,7 +103,7 @@ public class BasicConvertorModel extends Model implements ITileModel {
 			bone6.rotateAngleY = (float) Math.PI;
 			break;
 		case 4:
-			bone6.rotateAngleY = (float) Math.PI / 2;
+			bone6.rotateAngleY = (float) Math.PI/2;
 			break;
 		case 5:
 			bone6.rotateAngleY = -(float) Math.PI/2;

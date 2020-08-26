@@ -12,7 +12,6 @@ import laz.plasmine.api.HeatHelper;
 import laz.plasmine.base.heat.TileHeatMachineBase;
 import laz.plasmine.client.screen.DrawBaseGui;
 import laz.plasmine.content.tiles.heat.crusher.ContainerCrusher;
-import laz.plasmine.content.tiles.heat.furnace.ContainerFurnace;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.text.ITextComponent;

@@ -36,8 +36,7 @@ public interface IPlasmaGenerator {
 			} else if (tile instanceof IPlasmaMachine) {
 				IPlasmaMachine machine = (IPlasmaMachine) tile;
 				if (machine != null) {
-					int toRemove = machine.receiveEnergy(amount);
-					amount -= toRemove;
+					return_amount = machine.receiveEnergy(return_amount);
 				}
 			} else
 				return 0;

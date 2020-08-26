@@ -5,8 +5,8 @@ import java.util.List;
 
 import laz.plasmine.api.PlasmaHelper;
 import laz.plasmine.base.multiblock.BlockCoilBase;
-import laz.plasmine.base.multiblock.TilePlasmaInput;
-import laz.plasmine.base.multiblock.TilePlasmaOutput;
+import laz.plasmine.base.multiblock.input.TilePlasmaInput;
+import laz.plasmine.base.multiblock.output.TilePlasmaOutput;
 import laz.plasmine.network.PacketHandler;
 import laz.plasmine.network.helpers.PlasmaStorageHelperPacket;
 import laz.plasmine.registry.init.PMTilesInit;

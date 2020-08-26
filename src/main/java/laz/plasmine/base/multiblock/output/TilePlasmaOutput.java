@@ -1,4 +1,4 @@
-package laz.plasmine.base.multiblock;
+package laz.plasmine.base.multiblock.output;
 
 import laz.plasmine.api.PlasmaHelper;
 import laz.plasmine.base.BlockRotationBase;

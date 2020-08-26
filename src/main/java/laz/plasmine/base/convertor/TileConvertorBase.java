@@ -1,6 +1,6 @@
 package laz.plasmine.base.convertor;
 
-import static laz.plasmine.api.PlasmaToHeatConvertion.*;
+import static laz.plasmine.api.PlasmaToHeatConvertion.transformPlasmaToHeat;
 import static laz.plasmine.util.DirectionUtils.getPosDirection;
 
 import laz.plasmine.api.HeatHelper;
@@ -51,8 +51,7 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 						helper.addCelcius(heat);
 					}
 				} else {
-					float cool = transformPlasmaToHeat(0, efficiency * 1.1f,
-							helper.getCelcius(), Math.min(helper.getMaxCelcius(), maxTemp), world, pos);
+					float cool = transformPlasmaToHeat(0, efficiency * 1.1f, helper.getCelcius(), helper.getMaxCelcius(), world, pos);
 					helper.coolDown(world, pos, cool);
 				}
 				if (isWorking) {

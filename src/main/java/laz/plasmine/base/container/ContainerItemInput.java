@@ -2,7 +2,7 @@ package laz.plasmine.base.container;
 
 import java.util.Objects;
 
-import laz.plasmine.base.multiblock.TileItemInput;
+import laz.plasmine.base.multiblock.input.TileItemInput;
 import laz.plasmine.registry.init.PMContainersInit;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
