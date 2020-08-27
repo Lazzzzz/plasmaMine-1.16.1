@@ -18,7 +18,8 @@ import net.minecraft.util.ResourceLocation;
 public class MinerRenderer extends TileEntityRenderer<TileMiner> {
 
 	MinerModel model = new MinerModel();
-	ResourceLocation TEXTURE = new ResourceLocation(Plasmine.MOD_ID, "textures/blocks/machine/miner/miner_off.png");
+	ResourceLocation TEXTURE_OFF = new ResourceLocation(Plasmine.MOD_ID, "textures/blocks/machine/miner/miner_off.png");
+	ResourceLocation TEXTURE_ON  = new ResourceLocation(Plasmine.MOD_ID, "textures/blocks/machine/miner/miner_on.png");
 
 	public MinerRenderer(TileEntityRendererDispatcher rendererDispatcherIn) {
 		super(rendererDispatcherIn);
@@ -31,13 +32,15 @@ public class MinerRenderer extends TileEntityRenderer<TileMiner> {
 		model.rotate(state.get(BlockBasicGenerator.FACING).getOpposite().rotateYCCW());
 		
 		matrixStackIn.push();
-		IVertexBuilder ivertexbuilder = buffer.getBuffer(RenderType.func_239267_e_(TEXTURE));
+		IVertexBuilder ivertexbuilder = buffer.getBuffer(RenderType.func_239267_e_(TEXTURE_OFF));
 		matrixStackIn.translate(0.5D, 1.5D, 0.5D);
 		matrixStackIn.scale(1.0F, -1.0F, 1.0F);
 		
 		model.render(matrixStackIn, ivertexbuilder, combinedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 		
 		matrixStackIn.pop();
+
 	}
 
+	
 }

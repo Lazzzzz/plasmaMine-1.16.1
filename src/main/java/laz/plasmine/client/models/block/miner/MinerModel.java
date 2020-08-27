@@ -68,7 +68,7 @@ public class MinerModel extends Model implements ITileModel{
 
 	@Override
 	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
-		bone.render(matrixStack, buffer, 255, packedOverlay);
+		bone.render(matrixStack, buffer, packedLight, packedOverlay);
 	}
 
 	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {

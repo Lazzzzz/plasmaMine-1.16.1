@@ -1,5 +1,6 @@
 package laz.plasmine.util;
 
+import laz.plasmine.base.BlockRotationBase;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
@@ -55,4 +56,11 @@ public class DirectionUtils {
 
 	}
 
+	public static BlockPos getOffsetPos(BlockPos pos, int offsetX, int offsetY, int offsetZ, Direction dir) {
+		return getOffsetPos(pos, offsetX, offsetY, offsetZ, 0, 0, 0, dir);
+	}
+	
+	public static BlockPos getOffsetPos(BlockPos pos, int offsetX, int offsetY, int offsetZ, int x, int y, int z, Direction dir) {
+		return DirectionUtils.getPosDirection(pos.add(offsetX + x, offsetY + y, offsetZ + z), dir);
+	}
 }

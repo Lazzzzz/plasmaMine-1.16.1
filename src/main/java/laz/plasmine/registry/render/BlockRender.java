@@ -13,5 +13,8 @@ public class BlockRender {
 		
 		RenderTypeLookup.setRenderLayer(PMTilesInit.BASIC_PLASMA_CABLE.get(), cutout);
 		RenderTypeLookup.setRenderLayer(PMBlocksInit.RAPESEED_CROP.get(), cutout);
+		
+		RenderTypeLookup.setRenderLayer(PMTilesInit.MINER.get(), cutout);
+		RenderTypeLookup.setRenderLayer(PMTilesInit.STRUCTURE_BLOCK.get(), cutout);
 	}
 }
