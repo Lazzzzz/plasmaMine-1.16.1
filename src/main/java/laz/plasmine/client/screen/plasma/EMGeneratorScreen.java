@@ -22,35 +22,35 @@ public class EMGeneratorScreen extends ContainerScreen<ContainerEMGenerator> {
 	}
 
 	@Override
-	protected void func_230450_a_(MatrixStack p_230450_1_, float p_230450_2_, int p_230450_3_, int p_230450_4_) {
+	protected void drawGuiContainerBackgroundLayer(MatrixStack p_230450_1_, float p_230450_2_, int p_230450_3_, int p_230450_4_) {
+		
+		this.renderBackground(p_230450_1_);
+		
 		TileGeneratorBase tile = this.container.getTile();
 		PlasmaHelper helper = tile.getPlasmaHelper();
-		DrawBaseGui.drawGui(p_230450_1_, this.field_230712_o_, guiLeft, guiTop, " PU", (int) helper.getCapacity(),
+		DrawBaseGui.drawGui(p_230450_1_, this.font, guiLeft, guiTop, " PU", (int) helper.getCapacity(),
 				3833343);
 		PLASMA_LOGO.draw(guiLeft + 5, guiTop + 60, 9, 17);
 		if (helper.getCapacity() == -1) {
-			this.field_230712_o_.func_243248_b(p_230450_1_, new StringTextComponent("\u00A7nIncomplete Multi-block"),
+			this.font.func_243248_b(p_230450_1_, new StringTextComponent("\u00A7nIncomplete Multi-block"),
 					guiLeft + 40, guiTop + 39, 12976128);
 		} else {
 			PLASMA_BAR.drawPartial(guiLeft + 2, guiTop + 2, 16, 56, 0,
 					1 - ((float) helper.getCapacity() / helper.getMaxCapacity()), 1f, 1f);
 			if (tile.getWorld().getBlockState(tile.getPos()).get(BlockBasicGenerator.WORKING))
-				this.field_230712_o_.func_243248_b(p_230450_1_, new StringTextComponent("\u00A7nworking"), guiLeft + 75,
+				this.font.func_243248_b(p_230450_1_, new StringTextComponent("\u00A7nworking"), guiLeft + 75,
 						guiTop + 39, 50432);
 			else
-				this.field_230712_o_.func_243248_b(p_230450_1_, new StringTextComponent("\u00A7nnot working"),
+				this.font.func_243248_b(p_230450_1_, new StringTextComponent("\u00A7nnot working"),
 						guiLeft + 64, guiTop + 39, 12976128);
 		}
+		
+		func_230459_a_(p_230450_1_, p_230450_3_, p_230450_4_);
 	}
 
 	@Override
-	protected void func_230451_b_(MatrixStack p_230451_1_, int p_230451_2_, int p_230451_3_) {
+	protected void drawGuiContainerForegroundLayer(MatrixStack p_230451_1_, int p_230451_2_, int p_230451_3_) {
 	}
 
-	public void func_230430_a_(MatrixStack p_230430_1_, int p_230430_2_, int p_230430_3_, float p_230430_4_) {
-		this.func_230446_a_(p_230430_1_);
-		super.func_230430_a_(p_230430_1_, p_230430_2_, p_230430_3_, p_230430_4_);
-		this.func_230459_a_(p_230430_1_, p_230430_2_, p_230430_3_);
-	}
 
 }

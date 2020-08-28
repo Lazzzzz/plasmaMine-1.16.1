@@ -21,7 +21,10 @@ public class PlasmaStorageScreen extends ContainerScreen<ContainerPlasmaStorage>
 	}
 
 	@Override
-	protected void func_230450_a_(MatrixStack p_230450_1_, float p_230450_2_, int p_230450_3_, int p_230450_4_) {
+	protected void drawGuiContainerBackgroundLayer(MatrixStack p_230450_1_, float p_230450_2_, int p_230450_3_, int p_230450_4_) {
+		
+		this.renderBackground(p_230450_1_);
+		
 		TilePlasmaStorage tile = container.getTile();
 		PlasmaHelper plasma = tile.getHelper();
 
@@ -29,27 +32,23 @@ public class PlasmaStorageScreen extends ContainerScreen<ContainerPlasmaStorage>
 		PLASMA_STORAGE_EMPTY.draw(guiLeft + 4, guiTop + 4, 168, 63);
 		if (plasma != null) {
 			if (plasma.getMaxCapacity() == -1)
-				this.field_230712_o_.func_243248_b(p_230450_1_, new StringTextComponent("Incomplete Multi-block"),
+				this.font.func_243248_b(p_230450_1_, new StringTextComponent("Incomplete Multi-block"),
 						guiLeft + 3, guiTop + 69, 12976128);
 			else {
 				PLASMA_STORAGE_FULL.drawPartial(guiLeft + 4, guiTop + 4, 168, 63, 0,
 						1f - (float) plasma.getCapacity() / plasma.getMaxCapacity(), 1, 1);
-				this.field_230712_o_.func_243248_b(p_230450_1_,
+				this.font.func_243248_b(p_230450_1_,
 						new StringTextComponent(plasma.getCapacity() + "/" + plasma.getMaxCapacity() + "PU"),
 						guiLeft + 3, guiTop + 69, 3833343);
 			}
 		}
+		
+		func_230459_a_(p_230450_1_, p_230450_3_, p_230450_4_);
 
 	}
 
 	@Override
-	protected void func_230451_b_(MatrixStack p_230451_1_, int p_230451_2_, int p_230451_3_) {
-	}
-
-	public void func_230430_a_(MatrixStack p_230430_1_, int p_230430_2_, int p_230430_3_, float p_230430_4_) {
-		this.func_230446_a_(p_230430_1_);
-		super.func_230430_a_(p_230430_1_, p_230430_2_, p_230430_3_, p_230430_4_);
-		this.func_230459_a_(p_230430_1_, p_230430_2_, p_230430_3_);
+	protected void drawGuiContainerForegroundLayer(MatrixStack p_230451_1_, int p_230451_2_, int p_230451_3_) {
 	}
 
 }

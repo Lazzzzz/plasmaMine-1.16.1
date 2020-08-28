@@ -17,23 +17,23 @@ public class ItemStorageScreen extends ContainerScreen<ContainerItemInput> {
 	}
 
 	@Override
-	protected void func_230450_a_(MatrixStack p_230450_1_, float p_230450_2_, int p_230450_3_, int p_230450_4_) {
+	protected void drawGuiContainerBackgroundLayer(MatrixStack p_230450_1_, float p_230450_2_, int p_230450_3_, int p_230450_4_) {
+		
+		this.renderBackground(p_230450_1_);
+		
 		BASE_GUI_STORAGE.draw(guiLeft, guiTop, 176, 166);
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 				BASE_SLOT.draw(guiLeft + 53 + j * 18, guiTop + 5 + i * 18, 16, 16);
 			}
 		}
+		
+		func_230459_a_(p_230450_1_, p_230450_3_, p_230450_4_);
 	}
 
 	@Override
-	protected void func_230451_b_(MatrixStack p_230451_1_, int p_230451_2_, int p_230451_3_) {
+	protected void drawGuiContainerForegroundLayer(MatrixStack p_230451_1_, int p_230451_2_, int p_230451_3_) {
 	}
 
-	public void func_230430_a_(MatrixStack p_230430_1_, int p_230430_2_, int p_230430_3_, float p_230430_4_) {
-		this.func_230446_a_(p_230430_1_);
-		super.func_230430_a_(p_230430_1_, p_230430_2_, p_230430_3_, p_230430_4_);
-		this.func_230459_a_(p_230430_1_, p_230430_2_, p_230430_3_);
-	}
 
 }

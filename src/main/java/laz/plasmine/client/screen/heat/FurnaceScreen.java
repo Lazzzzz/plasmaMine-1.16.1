@@ -24,11 +24,13 @@ public class FurnaceScreen extends ContainerScreen<ContainerFurnace> {
 	}
 
 	@Override
-	protected void func_230450_a_(MatrixStack p_230450_1_, float p_230450_2_, int p_230450_3_, int p_230450_4_) {
+	protected void drawGuiContainerBackgroundLayer(MatrixStack p_230450_1_, float p_230450_2_, int p_230450_3_, int p_230450_4_) {
+		
+		this.renderBackground(p_230450_1_);
 		
 		TileHeatMachineBase tile = this.container.getTile();
 		HeatHelper helper = tile.getHeatHelper();
-		DrawBaseGui.drawGuiSpeed(p_230450_1_, this.field_230712_o_, guiLeft, guiTop, " °C", (int) helper.getCelcius(),tile.speedFactor(), 12976128);
+		DrawBaseGui.drawGuiSpeed(p_230450_1_, this.font, guiLeft, guiTop, " °C", (int) helper.getCelcius(),tile.speedFactor(), 12976128);
 		HEAT_LOGO.draw(guiLeft + 5, guiTop + 60, 9, 17);
 		HEAT_BAR.drawPartial(guiLeft + 2, guiTop + 2, 16, 56, 0,
 				1 - ((float) helper.getCelcius() / helper.getMaxCelcius()), 1f, 1f);
@@ -37,15 +39,11 @@ public class FurnaceScreen extends ContainerScreen<ContainerFurnace> {
 		BASE_SLOT.draw(guiLeft + 44, guiTop + 35, 16, 16);
 		BASE_SLOT.draw(guiLeft + 116, guiTop + 35, 16, 16);
 		
+		func_230459_a_(p_230450_1_, p_230450_3_, p_230450_4_);
+		
 }
 
-	public void func_230430_a_(MatrixStack p_230430_1_, int p_230430_2_, int p_230430_3_, float p_230430_4_) {
-		this.func_230446_a_(p_230430_1_);
-		super.func_230430_a_(p_230430_1_, p_230430_2_, p_230430_3_, p_230430_4_);
-		this.func_230459_a_(p_230430_1_, p_230430_2_, p_230430_3_);
-	}
-
 	@Override
-	protected void func_230451_b_(MatrixStack p_230451_1_, int p_230451_2_, int p_230451_3_) {}
+	protected void drawGuiContainerForegroundLayer(MatrixStack p_230451_1_, int p_230451_2_, int p_230451_3_) {}
 
 }
