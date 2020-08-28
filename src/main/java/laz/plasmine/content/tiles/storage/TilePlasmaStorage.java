@@ -75,7 +75,7 @@ public class TilePlasmaStorage extends TileEntity implements IMaster, ITickableT
 	}
 
 	@Override
-	public void func_230337_a_(BlockState p_230337_1_, CompoundNBT compound) {
+	public void read(BlockState p_230337_1_, CompoundNBT compound) {
 		isFormed = compound.getBoolean("isformed");
 		connectedBlock = BlockPosUtil.readListBlockPos(compound, "connected");
 
@@ -87,7 +87,7 @@ public class TilePlasmaStorage extends TileEntity implements IMaster, ITickableT
 		maxOutput = compound.getInt("maxOutput");
 		maxStorage = compound.getInt("maxStorage");
 
-		super.func_230337_a_(p_230337_1_, compound);
+		super.read(p_230337_1_, compound);
 	}
 
 	@Override

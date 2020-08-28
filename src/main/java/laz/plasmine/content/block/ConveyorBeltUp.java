@@ -96,7 +96,7 @@ public class ConveyorBeltUp extends BlockRotationBase implements ICanWrench {
 		}
 
 		if (goingUp) {
-			entityIn.func_230245_c_(false);
+			entityIn.setOnGround(false);
 			motion = new Vector3d(motion.x, Constante.CONVEYOR_SPEED, motion.z);
 		}
 		entityIn.setMotion(motion);

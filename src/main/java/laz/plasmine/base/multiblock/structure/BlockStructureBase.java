@@ -27,7 +27,7 @@ public class BlockStructureBase extends Block {
 	
 	public BlockStructureBase() {
 		super(Block.Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).hardnessAndResistance(3, 15)
-				.sound(SoundType.METAL).harvestLevel(0).func_235859_g_());
+				.sound(SoundType.METAL).harvestLevel(0));
 
 	}
 

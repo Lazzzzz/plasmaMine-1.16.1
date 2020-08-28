@@ -80,9 +80,9 @@ public class TileHupper extends TileEntity implements ITickableTileEntity, IInve
 	}
 	
 	@Override
-	public void func_230337_a_(BlockState p_230337_1_, CompoundNBT p_230337_2_) {
+	public void read(BlockState p_230337_1_, CompoundNBT p_230337_2_) {
 		content = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
-		super.func_230337_a_(p_230337_1_, p_230337_2_);
+		super.read(p_230337_1_, p_230337_2_);
 	}
 	
 	@Override

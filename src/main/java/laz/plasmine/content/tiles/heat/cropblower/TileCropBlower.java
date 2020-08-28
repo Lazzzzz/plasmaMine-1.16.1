@@ -63,7 +63,7 @@ public class TileCropBlower extends TileHeatMachineBase {
 		for (int i = 0; i < entitys.size(); i++) {
 			Entity entity = entitys.get(i);
 
-			if (entity.func_233570_aj_()) {
+			if (entity.isOnGround()) {
 				Vector3d speed = DirectionUtils.getMotion(dir, (float) (0.2f * speedFactor() / 2));
 				entity.setMotion(entity.getMotion().x + speed.x, entity.getMotion().y, entity.getMotion().z + speed.z);
 			}
