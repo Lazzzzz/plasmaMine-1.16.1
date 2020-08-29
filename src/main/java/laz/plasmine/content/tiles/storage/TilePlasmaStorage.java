@@ -92,6 +92,8 @@ public class TilePlasmaStorage extends TileEntity implements IMaster, ITickableT
 
 	@Override
 	public boolean checkIsFormed() {
+		if (world.getDayTime() % 50 != 0) return false;
+		
 		Direction dir = world.getBlockState(pos).get(BlockPlasmaStorage.FACING).getOpposite();
 		BlockPos p = DirectionUtils.getPosDirection(pos, dir);
 

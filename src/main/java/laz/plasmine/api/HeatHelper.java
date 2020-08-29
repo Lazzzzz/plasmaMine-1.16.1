@@ -71,7 +71,7 @@ public class HeatHelper {
 	}
 
 	public float getWorkingCelcius(World world, BlockPos pos) {
-		return PlasmaToHeatConvertion.getMinTemp(world, pos) + 20;
+		return PlasmaToHeatConvertion.getMinTemp(world, pos);
 	}
 
 	public float getCelcius() {

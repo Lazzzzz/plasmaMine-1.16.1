@@ -42,6 +42,8 @@ import laz.plasmine.content.tiles.generator.electromagneticgenerator.BlockEMGene
 import laz.plasmine.content.tiles.generator.electromagneticgenerator.TileEMGenerator;
 import laz.plasmine.content.tiles.heat.cropblower.BlockCropBlower;
 import laz.plasmine.content.tiles.heat.cropblower.TileCropBlower;
+import laz.plasmine.content.tiles.heat.cropheater.BlockCropHeater;
+import laz.plasmine.content.tiles.heat.cropheater.TileCropHeater;
 import laz.plasmine.content.tiles.heat.crusher.BlockCrusher;
 import laz.plasmine.content.tiles.heat.crusher.TileCrusher;
 import laz.plasmine.content.tiles.heat.furnace.BlockFurnace;
@@ -100,6 +102,7 @@ public class PMTilesInit {
 	public static BlockRegistryObjectGroup<BlockMagneticCoil, BlockItem, TileMagneticCoil> MAGNETIC_COIL;
 	
 	public static BlockRegistryObjectGroup<BlockCropBlower, BlockItem, TileCropBlower> CROP_BLOWER;
+	public static BlockRegistryObjectGroup<BlockCropHeater, BlockItem, TileCropHeater> CROP_HEATER;
 	public static BlockRegistryObjectGroup<BlockMiner, BlockItem, TileMiner> MINER;
 
 	public static BlockRegistryObjectGroup<BlockHupper, BlockItem, TileHupper> HUPPER;
@@ -169,6 +172,10 @@ public class PMTilesInit {
 		CROP_BLOWER = new BlockRegistryObjectGroup<>("crop_blower", BlockCropBlower::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
 				() -> new TileCropBlower(500, 0.4f)).register(BLOCKS, ITEMS, TILE_ENTITIES);
+		
+		CROP_HEATER = new BlockRegistryObjectGroup<>("crop_heater", BlockCropHeater::new,
+				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
+				() -> new TileCropHeater(500, 0.4f)).register(BLOCKS, ITEMS, TILE_ENTITIES);
 		
 		MINER = new BlockRegistryObjectGroup<>("miner", BlockMiner::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),

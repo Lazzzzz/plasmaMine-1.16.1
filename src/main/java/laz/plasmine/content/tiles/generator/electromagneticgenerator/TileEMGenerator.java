@@ -170,6 +170,8 @@ public class TileEMGenerator extends TileGeneratorBase implements IMaster {
 
 	@Override
 	public boolean checkIsFormed() {
+		if (livingtick % 50 != 0) return false;
+		
 		Direction dir = world.getBlockState(pos).get(BlockPlasmaStorage.FACING).getOpposite();
 		BlockPos p = DirectionUtils.getPosDirection(pos, dir, 2).down();
 
