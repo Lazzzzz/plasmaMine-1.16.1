@@ -19,7 +19,7 @@ import net.minecraft.util.text.StringTextComponent;
 
 public class TileSedimentExtractor extends TileHeatMachineBase implements ISidedInventory {
 
-	private int maxTime = 20 * 20;
+	private int currentMaxTimer = 0;
 	private double timer = 0;
 	private ItemStack result = ItemStack.EMPTY;
 
@@ -41,6 +41,7 @@ public class TileSedimentExtractor extends TileHeatMachineBase implements ISided
 	public CompoundNBT write(CompoundNBT compound) {
 		compound.put("result", result.serializeNBT());
 		compound.putDouble("recipetimer", timer);
+		compound.putInt("recipemaxtimer", currentMaxTimer);
 		return super.write(compound);
 	}
 
@@ -48,6 +49,7 @@ public class TileSedimentExtractor extends TileHeatMachineBase implements ISided
 	public void read(BlockState p_230337_1_, CompoundNBT compound) {
 		result.deserializeNBT(compound.getCompound("result"));
 		timer = compound.getDouble("recipetimer");
+		currentMaxTimer = compound.getInt("recipemaxtimer");
 		super.read(p_230337_1_, compound);
 	}
 
@@ -59,7 +61,7 @@ public class TileSedimentExtractor extends TileHeatMachineBase implements ISided
 					.forEach(e -> start((SedimentExtractorRecipe) e));
 		else {
 			timer += speedFactor();
-			if (timer >= maxTime) {
+			if (timer >= currentMaxTimer) {
 				ItemStack stack = getStackInSlot(2);
 				if (stack.isEmpty()) {
 					setInventorySlotContents(2, result);
@@ -92,6 +94,7 @@ public class TileSedimentExtractor extends TileHeatMachineBase implements ISided
 		in2.shrink(1);
 		result = recipe.getItemOut();
 		timer = 0;
+		currentMaxTimer = recipe.getCookTime();
 	}
 
 	@Override
@@ -102,6 +105,7 @@ public class TileSedimentExtractor extends TileHeatMachineBase implements ISided
 	private void reset() {
 		result = ItemStack.EMPTY;
 		timer = 0;
+		currentMaxTimer = 0;
 	}
 
 	@Override

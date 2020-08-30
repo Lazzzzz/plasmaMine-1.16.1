@@ -2,6 +2,9 @@ package laz.plasmine.base.multiblock.input;
 
 import laz.plasmine.base.BlockRotationBase;
 import laz.plasmine.registry.init.PMItemsInit;
+import laz.plasmine.util.interfaces.ICanWrench;
+import laz.plasmine.util.interfaces.IMaster;
+import laz.plasmine.util.interfaces.ISlave;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
@@ -18,7 +21,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class BlockItemInput extends BlockRotationBase {
+public class BlockItemInput extends BlockRotationBase implements ICanWrench {
 
 	public BlockItemInput() {
 		super(Block.Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).hardnessAndResistance(3, 15)
@@ -48,5 +51,20 @@ public class BlockItemInput extends BlockRotationBase {
 		return ActionResultType.FAIL;
 
 	}
+	
+	@Override
+	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+		if (!worldIn.isRemote) {
+			ISlave tile = (ISlave) worldIn.getTileEntity(pos);
+			if (tile != null && tile.isBind() && state.getBlock() != newState.getBlock()) {
+				TileEntity master = worldIn.getTileEntity(tile.getBlockPosMaster());
+				if (master instanceof IMaster) {
+					tile.sendMasterDestroy(pos, (IMaster) master);
+				}
+			}
+		}
+		super.onReplaced(state, worldIn, pos, newState, isMoving);
+	}
+	
 
 }

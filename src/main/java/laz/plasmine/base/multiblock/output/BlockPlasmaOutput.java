@@ -38,8 +38,9 @@ public class BlockPlasmaOutput extends BlockGeneratorBase {
 	@Override
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (!worldIn.isRemote) {
+			
 			ISlave tile = (ISlave) worldIn.getTileEntity(pos);
-			if (tile.isBind()) {
+			if (tile != null && tile.isBind() && state.getBlock() != newState.getBlock()) {
 				IMaster master = (IMaster) worldIn.getTileEntity(tile.getBlockPosMaster());
 				tile.sendMasterDestroy(pos, master);
 			}

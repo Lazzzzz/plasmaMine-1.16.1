@@ -29,26 +29,6 @@ public class CrusherRecipe extends AbstractPlasmineRecipe {
     }
 
     @Override
-    public boolean matches(IInventory inv, World worldIn) {
-        return false;
-    }
-
-    @Override
-    public ItemStack getCraftingResult(IInventory inv) {
-        return null;
-    }
-
-    @Override
-    public boolean canFit(int width, int height) {
-        return false;
-    }
-
-    @Override
-    public ItemStack getRecipeOutput() {
-        return null;
-    }
-
-    @Override
     public IRecipeSerializer<?> getSerializer() {
         return PMRecipesSerializer.CRUSHER_SERIALIZER.get();
     }

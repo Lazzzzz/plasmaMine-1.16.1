@@ -3,7 +3,7 @@ package laz.plasmine.datagen;
 import laz.plasmine.Plasmine;
 import laz.plasmine.datagen.lang.PMLang;
 import laz.plasmine.datagen.loot.PMLootsProvider;
-import laz.plasmine.datagen.recipes.TirphyRecipeProvider;
+import laz.plasmine.datagen.recipes.PMRecipeProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.client.model.generators.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -13,15 +13,12 @@ import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 @Mod.EventBusSubscriber(modid = Plasmine.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class PlasmineData {
 
-    @SubscribeEvent
-    public static void gatherData(GatherDataEvent event) {
-        final DataGenerator dataGenerator = event.getGenerator();
-        final ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+	@SubscribeEvent
+	public static void gatherData(GatherDataEvent event) {
 
-        if (event.includeClient()) {
-            dataGenerator.addProvider(new PMLootsProvider(dataGenerator));
-            dataGenerator.addProvider(new PMLang(dataGenerator));
-            dataGenerator.addProvider(new TirphyRecipeProvider(dataGenerator));
-        }
-    }
+		final DataGenerator dataGenerator = event.getGenerator();
+		final ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+
+		dataGenerator.addProvider(new PMRecipeProvider(dataGenerator));
+	}
 }

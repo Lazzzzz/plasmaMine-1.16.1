@@ -30,31 +30,10 @@ public class IonizerRecipe extends AbstractPlasmineRecipe {
     	return itemIn2.getMatchingStacks();
     }
     
-    
-
     public ItemStack getItemOut() {
         return itemOut.copy();
     }
 
-    @Override
-    public boolean matches(IInventory inv, World worldIn) {
-        return false;
-    }
-
-    @Override
-    public ItemStack getCraftingResult(IInventory inv) {
-        return null;
-    }
-
-    @Override
-    public boolean canFit(int width, int height) {
-        return false;
-    }
-
-    @Override
-    public ItemStack getRecipeOutput() {
-        return null;
-    }
 
     @Override
     public IRecipeSerializer<?> getSerializer() {

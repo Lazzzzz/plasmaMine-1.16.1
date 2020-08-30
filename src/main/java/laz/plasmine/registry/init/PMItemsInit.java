@@ -15,36 +15,48 @@ public class PMItemsInit {
 	public static RegistryObject<Item> MAGNETIC_WIRE;
 	public static RegistryObject<Item> PLASMA_PRODUCER_CORE;
 	public static RegistryObject<Item> PLASMA_CONSUMER_CORE;
-	
+	public static RegistryObject<Item> HEAT_CONSUMER_CORE;
+
 	public static RegistryObject<Item> RAPESEED_FRUIT;
-	public static RegistryObject<Item> IONIZED_RAPESEED;
+	public static RegistryObject<Item> RAPESEED_DUST;
 	
 	public static MaterialGroup IRON;
 	public static MaterialGroup GOLD;
-	
+
 	public static MaterialGroup LISIUM;
 	public static MaterialGroup KETIUM;
 	public static MaterialGroup ROSIUM;
-	
-	
+
+	public static RegistryObject<Item> IONIZED_RAPESEED;
+
+	public static RegistryObject<Item> IONIZED_LISIUM;
+	public static RegistryObject<Item> IONIZED_KETIUM;
+	public static RegistryObject<Item> IONIZED_ROSIUM;
 
 	public static void init() {
-		WRENCH 	   = addItemClass("wrench", () -> new ItemWithInformation(1, "Can rotate and remove machine"));
-		
+		WRENCH = addItemClass("wrench", () -> new ItemWithInformation(1, "Can rotate and remove machine"));
+
 		GOLD_WIRE = addSimpleItem("gold_wire", 64);
 		MAGNETIC_WIRE = addSimpleItem("magnetic_wire", 64);
 		RAPESEED_FRUIT = addSimpleItem("rapeseed_fruit", 64);
+		RAPESEED_DUST = addSimpleItem("rapeseed_dust", 64);
+		
 		PLASMA_PRODUCER_CORE = addSimpleItem("plasma_producer_core", 64);
 		PLASMA_CONSUMER_CORE = addSimpleItem("plasma_consumer_core", 64);
-		
-		IONIZED_RAPESEED = addSimpleItem("ionized_rapeseed", 64);
+		HEAT_CONSUMER_CORE = addSimpleItem("heat_consumer_core", 64);
 
 		IRON = initMaterialNoIngot("iron");
 		GOLD = initMaterialNoIngot("gold");
-		
+
 		LISIUM = initMaterialAll("lisium", 1);
 		KETIUM = initMaterialAll("ketium", 2);
 		ROSIUM = initMaterialAll("rosium", 3);
+		
+		IONIZED_RAPESEED = addSimpleItem("ionized_rapeseed", 64);
+		IONIZED_LISIUM = addSimpleItem("ionized_lisium", 64);
+		IONIZED_KETIUM = addSimpleItem("ionized_ketium", 64);
+		IONIZED_ROSIUM = addSimpleItem("ionized_rosium", 64);
+		
 
 	}
 
@@ -57,7 +69,7 @@ public class PMItemsInit {
 
 		return new MaterialGroup(true, true, true).setSediment(sediment).setChunk(chunk).setIngot(ingot);
 	}
-	
+
 	public static MaterialGroup initMaterialNoIngot(String name) {
 		RegistryObject<Item> sediment = addItemClass(name + "_sediment", () -> new ItemWithInformation(64, ""));
 		RegistryObject<Item> chunk = addItemClass(name + "_chunk", () -> new ItemWithInformation(64, ""));

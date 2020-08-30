@@ -11,6 +11,7 @@ import laz.plasmine.registry.render.BlockRender;
 import laz.plasmine.registry.render.GuiRender;
 import laz.plasmine.registry.render.TileEntityRender;
 import net.minecraft.block.Block;
+import net.minecraft.command.impl.ReloadCommand;
 import net.minecraft.item.ItemGroup;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -29,7 +30,7 @@ public class Plasmine {
 	
 	public static final String MOD_ID = "plasmine";
 	public static final ItemGroup ITEM_GROUP = new PMGroup(MOD_ID + "_group");
-	private static final Logger LOGGER = LogManager.getLogger();
+	public static final Logger LOGGER = LogManager.getLogger();
 
 	public Plasmine() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -37,7 +38,6 @@ public class Plasmine {
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
-
 		MinecraftForge.EVENT_BUS.register(this);
 		PMRegistry.init(bus);
 	}

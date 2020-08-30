@@ -8,7 +8,7 @@ import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.Direction;
 
-public class BlockRotationBase extends Block{
+public class BlockRotationBase extends Block {
 
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 	

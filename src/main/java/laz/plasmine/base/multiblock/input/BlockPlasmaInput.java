@@ -1,6 +1,7 @@
 package laz.plasmine.base.multiblock.input;
 
 import laz.plasmine.base.BlockRotationBase;
+import laz.plasmine.util.interfaces.ICanWrench;
 import laz.plasmine.util.interfaces.IMaster;
 import laz.plasmine.util.interfaces.ISlave;
 import net.minecraft.block.Block;
@@ -13,7 +14,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
-public class BlockPlasmaInput extends BlockRotationBase{
+public class BlockPlasmaInput extends BlockRotationBase implements ICanWrench {
 
 	public BlockPlasmaInput() {
 		super(Block.Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).hardnessAndResistance(3, 15)
@@ -34,7 +35,7 @@ public class BlockPlasmaInput extends BlockRotationBase{
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (!worldIn.isRemote) {
 			ISlave tile = (ISlave) worldIn.getTileEntity(pos);
-			if (tile.isBind()) {
+			if (tile != null && tile.isBind() && state.getBlock() != newState.getBlock()) {
 				IMaster master = (IMaster) worldIn.getTileEntity(tile.getBlockPosMaster());
 				tile.sendMasterDestroy(pos, master);
 			}

@@ -19,8 +19,14 @@ public interface ICanWrench {
 			world.addEntity(new ItemEntity(world, pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f,
 					new ItemStack(world.getBlockState(pos).getBlock(), 1)));
 			TileEntity tile = world.getTileEntity(pos);
-			if (tile instanceof IInventory)	InventoryHelper.dropInventoryItems(world, pos, ((IInventory) tile));
-			if (tile != null) tile.remove();
+			if (tile instanceof IInventory)
+				InventoryHelper.dropInventoryItems(world, pos, ((IInventory) tile));
+			if (tile instanceof ISlave && ((ISlave) tile).isBind()) {
+				IMaster master = (IMaster) world.getTileEntity(((ISlave) tile).getBlockPosMaster());
+				((ISlave) tile).sendMasterDestroy(pos, master);
+			}
+			if (tile != null)
+				tile.remove();
 			world.removeBlock(pos, false);
 		} else {
 			if (dir != Direction.UP && dir != Direction.DOWN && !(state.getBlock() instanceof ICable)) {
@@ -29,5 +35,5 @@ public interface ICanWrench {
 			}
 		}
 	}
-	
+
 }
