@@ -3,6 +3,8 @@ package laz.plasmine.registry.init;
 import static laz.plasmine.registry.PMRegistry.addItemClass;
 import static laz.plasmine.registry.PMRegistry.addSimpleItem;
 
+import java.util.Arrays;
+
 import laz.plasmine.api.MaterialGroup;
 import laz.plasmine.content.items.ItemWithInformation;
 import net.minecraft.item.Item;
@@ -19,7 +21,7 @@ public class PMItemsInit {
 
 	public static RegistryObject<Item> RAPESEED_FRUIT;
 	public static RegistryObject<Item> RAPESEED_DUST;
-	
+
 	public static MaterialGroup IRON;
 	public static MaterialGroup GOLD;
 
@@ -38,9 +40,10 @@ public class PMItemsInit {
 
 		GOLD_WIRE = addSimpleItem("gold_wire", 64);
 		MAGNETIC_WIRE = addSimpleItem("magnetic_wire", 64);
-		RAPESEED_FRUIT = addSimpleItem("rapeseed_fruit", 64);
+		RAPESEED_FRUIT = addItemClass("rapeseed_fruit", () -> new ItemWithInformation(64,
+				Arrays.asList("For some unknown reason, this fruit", "produces plasma in very low quantities ")));
 		RAPESEED_DUST = addSimpleItem("rapeseed_dust", 64);
-		
+
 		PLASMA_PRODUCER_CORE = addSimpleItem("plasma_producer_core", 64);
 		PLASMA_CONSUMER_CORE = addSimpleItem("plasma_consumer_core", 64);
 		HEAT_CONSUMER_CORE = addSimpleItem("heat_consumer_core", 64);
@@ -51,12 +54,11 @@ public class PMItemsInit {
 		LISIUM = initMaterialAll("lisium", 1);
 		KETIUM = initMaterialAll("ketium", 2);
 		ROSIUM = initMaterialAll("rosium", 3);
-		
+
 		IONIZED_RAPESEED = addSimpleItem("ionized_rapeseed", 64);
 		IONIZED_LISIUM = addSimpleItem("ionized_lisium", 64);
 		IONIZED_KETIUM = addSimpleItem("ionized_ketium", 64);
 		IONIZED_ROSIUM = addSimpleItem("ionized_rosium", 64);
-		
 
 	}
 

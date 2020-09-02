@@ -15,6 +15,7 @@ import laz.plasmine.content.tiles.heat.crusher.ContainerCrusher;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 
 public class CrusherScreen extends ContainerScreen<ContainerCrusher> {
 
@@ -23,8 +24,8 @@ public class CrusherScreen extends ContainerScreen<ContainerCrusher> {
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(MatrixStack p_230450_1_, float p_230450_2_, int p_230450_3_,
-			int p_230450_4_) {
+	protected void drawGuiContainerBackgroundLayer(MatrixStack p_230450_1_, float p_230450_2_, int mx,
+			int my) {
 		this.renderBackground(p_230450_1_);
 		
 		TileHeatMachineBase tile = this.container.getTile();
@@ -35,12 +36,11 @@ public class CrusherScreen extends ContainerScreen<ContainerCrusher> {
 		
 		DrawBaseGui.drawHeatBar(p_230450_1_, guiLeft, guiTop, helper, font);
 		
-		func_243308_b(p_230450_1_, new ArrayList<ITextComponent>(), p_230450_3_, p_230450_3_);
-		
+		func_243308_b(p_230450_1_, new ArrayList<ITextComponent>(), mx, my);
 		BASE_SLOT.draw(guiLeft + 44, guiTop + 35, 16, 16);
 		BASE_SLOT.draw(guiLeft + 116, guiTop + 35, 16, 16);
 		
-		func_230459_a_(p_230450_1_, p_230450_3_, p_230450_4_);
+		func_230459_a_(p_230450_1_, mx, my);
 	}
 
 	@Override
