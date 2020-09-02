@@ -1,0 +1,16 @@
+{
+	"type": "plasmine:crusher",
+	"input": 
+	{
+		"item": "plasmine:ionized_rapeseed"
+	},
+
+	"result": 
+	{
+		"item": "plasmine:rapeseed_dust",
+		"count" : 3
+	},
+
+	"temp": 200,
+	"time": 100
+}

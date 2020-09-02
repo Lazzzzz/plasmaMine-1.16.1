@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "plasmine",
+  "pattern": [
+    "CYC",
+    "CYC",
+    "XZX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:diamond"
+    },
+    "Y": {
+      "item": "plasmine:magnetic_coil"
+    },
+    "Z": {
+      "item": "plasmine:plasma_producer_core"
+    },
+    "C": {
+      "item": "plasmine:lisium_ingot"
+    }
+  },
+  "result": {
+    "item": "plasmine:em_generator"
+  }
+}

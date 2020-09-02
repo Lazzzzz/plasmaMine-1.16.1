@@ -19,9 +19,9 @@ public class ContainerSedimentExtractor extends ContainerHeat {
 
 	public ContainerSedimentExtractor(int id, PlayerInventory inv, final TileHeatMachineBase tile) {
 		super(PMContainersInit.SEDIMENT_EXTRACTOR_CONTAINER.get(), id, tile, inv);
-		this.addSlot(new Slot(tile, 0, 44, 21));
-		this.addSlot(new Slot(tile, 1, 44, 40));
-		this.addSlot(new OutputSlot(tile, 2, 116, 31));
+		this.addSlot(new Slot(tile, 0, 45, 22));
+		this.addSlot(new Slot(tile, 1, 45, 41));
+		this.addSlot(new OutputSlot(tile, 2, 117, 32));
 	}
 
 	@Override

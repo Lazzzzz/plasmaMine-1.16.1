@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "plasmine",
+  "pattern": [
+    "YYY",
+    "XAX",
+    "YYY"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:iron_ingot"
+    },
+    "A": {
+      "item": "plasmine:gold_wire"
+    },
+    "Y": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "plasmine:magnetic_wire",
+    "count": 2
+  }
+}

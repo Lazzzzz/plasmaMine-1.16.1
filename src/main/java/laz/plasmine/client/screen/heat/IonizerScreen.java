@@ -33,14 +33,13 @@ public class IonizerScreen extends ContainerScreen<ContainerIonizer> {
 		HeatHelper helper = tile.getHeatHelper();
 		DrawBaseGui.drawGuiSpeed(p_230450_1_, this.font, guiLeft, guiTop, " °C", (int) helper.getCelcius(),
 				tile.speedFactor(), 12976128);
-		HEAT_LOGO.draw(guiLeft + 5, guiTop + 60, 9, 17);
-		HEAT_BAR.drawPartial(guiLeft + 2, guiTop + 2, 16, 56, 0,
-				1 - ((float) helper.getCelcius() / helper.getMaxCelcius()), 1f, 1f);
+		DrawBaseGui.drawHeatBar(p_230450_1_, guiLeft, guiTop, helper, font);
+		
 		func_243308_b(p_230450_1_, new ArrayList<ITextComponent>(), p_230450_3_, p_230450_3_);
 
-		BASE_SLOT.draw(guiLeft + 44, guiTop + 13, 16, 16);
-		BASE_SLOT.draw(guiLeft + 44, guiTop + 49, 16, 16);
-		BASE_SLOT.draw(guiLeft + 116, guiTop + 31, 16, 16);
+		BASE_SLOT.draw(guiLeft + 44, guiTop + 16, 18, 18);
+		BASE_SLOT.draw(guiLeft + 44, guiTop + 46, 18, 18);
+		BASE_SLOT.draw(guiLeft + 116, guiTop + 31, 18, 18);
 		
 		func_230459_a_(p_230450_1_, p_230450_3_, p_230450_4_);
 	}

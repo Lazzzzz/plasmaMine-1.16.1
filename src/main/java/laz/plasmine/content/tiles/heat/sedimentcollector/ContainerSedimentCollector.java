@@ -22,7 +22,7 @@ public class ContainerSedimentCollector extends ContainerHeat {
 
 		for (int i = 0; i < 3; ++i) {
 			for (int j = 0; j < 8; ++j) {
-				this.addSlot(new OutputSlot(tile, j + i * 8, 26 + j * 18, 10 + i * 18));
+				this.addSlot(new OutputSlot(tile, j + i * 8, 27 + j * 18, 11 + i * 18));
 			}
 		}
 	}

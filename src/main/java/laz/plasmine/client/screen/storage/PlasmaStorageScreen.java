@@ -39,7 +39,7 @@ public class PlasmaStorageScreen extends ContainerScreen<ContainerPlasmaStorage>
 						1f - (float) plasma.getCapacity() / plasma.getMaxCapacity(), 1, 1);
 				this.font.func_243248_b(p_230450_1_,
 						new StringTextComponent(plasma.getCapacity() + "/" + plasma.getMaxCapacity() + "PU"),
-						guiLeft + 3, guiTop + 69, 3833343);
+						guiLeft + 8, guiTop + 71, 3833343);
 			}
 		}
 		

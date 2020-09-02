@@ -35,7 +35,7 @@ public class TileCrusher extends TileHeatMachineBase implements ISidedInventory 
 	public ITextComponent getDisplayName() {
 		return new StringTextComponent("crusher");
 	}
-	
+
 	@Override
 	public CompoundNBT write(CompoundNBT compound) {
 		compound.put("result", result.serializeNBT());
@@ -60,7 +60,7 @@ public class TileCrusher extends TileHeatMachineBase implements ISidedInventory 
 	@Override
 	public void onWorking() {
 		setWorkingState(world, pos, world.getBlockState(pos), true);
-		
+
 		if (result == ItemStack.EMPTY)
 			world.getRecipeManager().getRecipes().stream().filter(recipe -> recipe instanceof CrusherRecipe)
 					.forEach(e -> start((CrusherRecipe) e));
@@ -70,10 +70,11 @@ public class TileCrusher extends TileHeatMachineBase implements ISidedInventory 
 				ItemStack stack = getStackInSlot(1);
 				if (stack == ItemStack.EMPTY) {
 					setInventorySlotContents(1, result);
-				}
-				else if (stack.getCount() == stack.getMaxStackSize()) world.addEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), result));
-				else stack.grow(1);
-				
+				} else if (stack.getCount() + result.getCount() > stack.getMaxStackSize())
+					world.addEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), result));
+				else
+					stack.grow(result.getCount());
+
 				reset();
 			}
 		}
@@ -83,7 +84,7 @@ public class TileCrusher extends TileHeatMachineBase implements ISidedInventory 
 		ItemStack in = content.get(0);
 		ItemStack out = getStackInSlot(1);
 		if (RecipiesUtils.isSameTag(in, recipe.getItemIn()) && recipe.getTemp() < heatHelper.getCelcius()) {
-			if (out.isEmpty() || out.getCount() < out.getMaxStackSize()) {
+			if (out.isEmpty() || out.getCount() + recipe.getItemOut().getCount() < out.getMaxStackSize()) {
 				in.shrink(1);
 				result = recipe.getItemOut();
 				timer = 0;

@@ -10,6 +10,8 @@ import laz.plasmine.base.multiblock.output.TilePlasmaOutput;
 import laz.plasmine.content.tiles.storage.BlockPlasmaStorage;
 import laz.plasmine.network.PacketHandler;
 import laz.plasmine.network.helpers.PlasmaHelperPacket;
+import laz.plasmine.recipes.emgenerator.EmRecipe;
+import laz.plasmine.recipes.ionizer.IonizerRecipe;
 import laz.plasmine.registry.init.PMItemsInit;
 import laz.plasmine.registry.init.PMTilesInit;
 import laz.plasmine.util.BlockPosUtil;
@@ -33,7 +35,7 @@ import net.minecraftforge.fml.network.NetworkDirection;
 public class TileEMGenerator extends TileGeneratorBase implements IMaster {
 
 	private List<BlockPos> connectedBlock = new ArrayList<BlockPos>();
-	private int maxCooking = 20 * 4;
+	private int maxCooking = 0;
 	private int cooking = 0;
 	private boolean isFormed;
 	private BlockPos input;
@@ -76,11 +78,10 @@ public class TileEMGenerator extends TileGeneratorBase implements IMaster {
 			cooking --;
 			plasmaHelper.addPlasma(generation);
 		}else {
-			ItemStack stack = getItemFromInput();
-			if (stack != ItemStack.EMPTY) {
-				cooking = maxCooking;
-				setWorkingState(true);
-			}else {
+			if (getItemFromInput()) setWorkingState(true);
+			else {
+				cooking = 0;
+				maxCooking = 0;
 				setWorkingState(false);
 			}
 		}
@@ -91,26 +92,36 @@ public class TileEMGenerator extends TileGeneratorBase implements IMaster {
 		}
 	}
 	
-	private ItemStack getItemFromInput() {
-		if (plasmaHelper.getCapacityLeft() == 0) return ItemStack.EMPTY;
+	private boolean getItemFromInput() {
+		if (plasmaHelper.getCapacityLeft() == 0) return false;
 		
 		TileItemInput tile = (TileItemInput) world.getTileEntity(input);
 		if (tile != null) {
 			for (int i = 0; i < tile.getSizeInventory(); i++) {
-				ItemStack stack = tile.getStackInSlot(i);
-				if (!stack.isEmpty() && stack.getItem() == PMItemsInit.IONIZED_RAPESEED.get()) {
-					tile.decrStackSize(i, 1);
-					return stack;
-				}
+				int position = i;
+				maxCooking   = 0;
+				world.getRecipeManager().getRecipes().stream().filter(recipe -> recipe instanceof EmRecipe)
+				.forEach(e -> start((EmRecipe)e, position, tile));
+				if (maxCooking != 0) return true;
 			}
 		}		
-		return ItemStack.EMPTY;
+		return false;
+	}
+	
+	private void start(EmRecipe recipe, int i, TileItemInput tile) {
+		ItemStack stack = tile.getStackInSlot(i);
+		if (!stack.isEmpty() && stack.getItem() == recipe.getfuel().getItem()) {
+			tile.decrStackSize(i, 1);
+			maxCooking = recipe.getCookTime();
+			cooking = maxCooking;
+		}
 	}
 	
 	private void reset() {
 		input = null;
 		output = null;
 		cooking = 0;
+		maxCooking = 0;
 		
 		Direction dir = world.getBlockState(pos).get(BlockPlasmaStorage.FACING).getOpposite();
 		BlockPos p = DirectionUtils.getPosDirection(pos, dir, 2).down();
@@ -126,6 +137,7 @@ public class TileEMGenerator extends TileGeneratorBase implements IMaster {
 	@Override
 	public CompoundNBT write(CompoundNBT compound) {
 		compound.putInt("cooking", cooking);
+		compound.putInt("maxCooking", maxCooking);
 
 		compound.putBoolean("isformed", isFormed);
 		compound = BlockPosUtil.writeListBlockPos(compound, connectedBlock, "connected");
@@ -141,6 +153,7 @@ public class TileEMGenerator extends TileGeneratorBase implements IMaster {
 	@Override
 	public void read(BlockState p_230337_1_, CompoundNBT compound) {
 		cooking = compound.getInt("cooking");
+		maxCooking = compound.getInt("maxCooking");
 
 		isFormed = compound.getBoolean("isformed");
 		connectedBlock = BlockPosUtil.readListBlockPos(compound, "connected");

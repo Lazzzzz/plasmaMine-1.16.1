@@ -1,11 +1,9 @@
 package laz.plasmine.content.tiles.heat.cropheater;
 
-import laz.plasmine.base.heat.BlockHeatMachineBase;
 import laz.plasmine.base.heat.TileHeatMachineBase;
 import laz.plasmine.registry.init.PMTilesInit;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropsBlock;
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 
 public class TileCropHeater extends TileHeatMachineBase {

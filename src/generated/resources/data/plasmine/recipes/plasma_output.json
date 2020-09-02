@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "plasmine:machine_block"
+    },
+    {
+      "item": "plasmine:plasma_producer_core"
+    }
+  ],
+  "result": {
+    "item": "plasmine:plasma_output"
+  }
+}

@@ -1,0 +1,16 @@
+{
+	"type": "plasmine:crusher",
+	"input": 
+	{
+		"item": "minecraft:gold_ore"
+	},
+
+	"result": 
+	{
+		"item": "plasmine:gold_sediment",
+		"count": 5
+	},
+
+	"temp": 200,
+	"time": 100
+}

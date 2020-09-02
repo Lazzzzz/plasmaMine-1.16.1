@@ -1,0 +1,15 @@
+{
+	"type": "plasmine:sediment_crystalizer",
+	"input": 
+	{
+		"item": "minecraft:polished_diorite"
+	},
+
+	"result": 
+	{
+		"item": "minecraft:end_stone"
+	},
+
+	"temp": 80,
+	"time": 600
+}

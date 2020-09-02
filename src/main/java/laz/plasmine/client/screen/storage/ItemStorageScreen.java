@@ -24,7 +24,7 @@ public class ItemStorageScreen extends ContainerScreen<ContainerItemInput> {
 		BASE_GUI_STORAGE.draw(guiLeft, guiTop, 176, 166);
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
-				BASE_SLOT.draw(guiLeft + 53 + j * 18, guiTop + 5 + i * 18, 16, 16);
+				BASE_SLOT.draw(guiLeft + 53 + j * 18, guiTop + 5 + i * 18, 18, 18);
 			}
 		}
 		

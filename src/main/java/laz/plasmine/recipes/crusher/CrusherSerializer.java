@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
@@ -19,18 +20,16 @@ public class CrusherSerializer extends ForgeRegistryEntry<IRecipeSerializer<?>>
 
 	@Override
 	public CrusherRecipe read(ResourceLocation recipeId, JsonObject json) {
-		
+
 		JsonElement jsonelement1 = (JsonElement) (JSONUtils.isJsonArray(json, "input")
 				? JSONUtils.getJsonArray(json, "input")
 				: JSONUtils.getJsonObject(json, "input"));
-		
+
 		Ingredient itemIn = Ingredient.deserialize(jsonelement1);
-		
 		ItemStack itemOut = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
 		
 		int temp = JSONUtils.getInt(json, "temp");
 		int time = JSONUtils.getInt(json, "time");
-		
 
 		return new CrusherRecipe(recipeId, itemIn, itemOut, temp, time);
 	}
@@ -38,7 +37,7 @@ public class CrusherSerializer extends ForgeRegistryEntry<IRecipeSerializer<?>>
 	@Nullable
 	@Override
 	public CrusherRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
-	    Ingredient itemIn = Ingredient.read(buffer);
+		Ingredient itemIn = Ingredient.read(buffer);
 		ItemStack itemOut = buffer.readItemStack();
 
 		int temp = buffer.readInt();
@@ -49,9 +48,10 @@ public class CrusherSerializer extends ForgeRegistryEntry<IRecipeSerializer<?>>
 
 	@Override
 	public void write(PacketBuffer buffer, CrusherRecipe recipe) {
-		recipe.itemIn.write(buffer);	
-		buffer.writeItemStack(recipe.getItemOut());
-		
+		recipe.itemIn.write(buffer);
+
+		buffer.writeItemStack(recipe.getItemOut(), false);
+
 		buffer.writeInt(recipe.getTemp());
 		buffer.writeInt(recipe.getCookTime());
 	}

@@ -3,6 +3,7 @@ package laz.plasmine.jei;
 import static laz.plasmine.recipes.AllRecipies.*;
 
 import laz.plasmine.Plasmine;
+import laz.plasmine.jei.generator.EMCategorie;
 import laz.plasmine.jei.machine.CollectorCategorie;
 import laz.plasmine.jei.machine.CrusherCategorie;
 import laz.plasmine.jei.machine.CrystalizerCategorie;
@@ -41,6 +42,7 @@ public class JEIRegistry implements IModPlugin {
 		registry.addRecipeCategories(new CrystalizerCategorie(guiHelper));
 		registry.addRecipeCategories(new IonizerCategorie(guiHelper));
 		registry.addRecipeCategories(new CrusherCategorie(guiHelper));
+		registry.addRecipeCategories(new EMCategorie(guiHelper));
 	}
 
 	@Override
@@ -53,6 +55,7 @@ public class JEIRegistry implements IModPlugin {
 		registration.addRecipes(getRecipiesCrystalizer(recipeManager), CrystalizerCategorie.ID);
 		registration.addRecipes(getRecipiesIonizer(recipeManager), IonizerCategorie.ID);
 		registration.addRecipes(getRecipiesCrusher(recipeManager), CrusherCategorie.ID);	
+		registration.addRecipes(getRecipiesEM(recipeManager), EMCategorie.ID);	
 	
 		System.out.println("Plasmine JEI compat add");
 	}

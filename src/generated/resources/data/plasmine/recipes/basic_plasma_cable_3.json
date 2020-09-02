@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "plasmine",
+  "pattern": [
+    "XXX",
+    "ZYZ",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "plasmine:ketium_ingot"
+    },
+    "Y": {
+      "item": "minecraft:diamond"
+    },
+    "Z": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "plasmine:basic_plasma_cable",
+    "count": 12
+  }
+}

@@ -12,6 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 
 public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMachine {
 
@@ -50,15 +51,12 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 					if (helper.getCelcius() < maxTemp) {
 						helper.addCelcius(heat);
 					}
-				} else {
-					float cool = transformPlasmaToHeat(0, efficiency * 1.1f, helper.getCelcius(), helper.getMaxCelcius(), world, pos);
-					helper.coolDown(world, pos, cool);
 				}
 				if (isWorking) {
 					if (world.rand.nextInt(100) == 0)
 						world.playSound(null, pos, PMSoundInit.CONVERTOR_RUNNING.get(), SoundCategory.MASTER, 0.5f, 1f);
 				}
-			}
+			} 
 			markDirty();
 		}
 		super.tick();
@@ -66,8 +64,10 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 
 	public HeatHelper heatAround() {
 		Direction dir = heatInOut(world.getBlockState(pos));
-		TileEntity tile = world.getTileEntity(getPosDirection(pos, dir));
-		if (tile instanceof IHeatMachine)
+		BlockPos tilePos = getPosDirection(pos, dir);
+		TileEntity tile = world.getTileEntity(tilePos);
+		if (tile instanceof IHeatMachine
+				&& ((IHeatMachine) tile).heatInOut(world.getBlockState(tilePos)) == dir.getOpposite())
 			return ((IHeatMachine) tile).getHeatHelper();
 		return null;
 	}

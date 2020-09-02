@@ -1,0 +1,16 @@
+{
+	"type": "plasmine:crusher",
+	"input": 
+	{
+		"item": "minecraft:lapis_ore"
+	},
+
+	"result": 
+	{
+		"item": "minecraft:lapis_lazuli",
+		"count": 8
+	},
+
+	"temp": 200,
+	"time": 100
+}

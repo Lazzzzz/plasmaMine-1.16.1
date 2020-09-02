@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 public class CrusherRecipe extends AbstractPlasmineRecipe {
 
     public final Ingredient itemIn;
-    private final ItemStack itemOut;
+    public final ItemStack itemOut;
 
     public CrusherRecipe(ResourceLocation id, Ingredient itemIn, ItemStack itemOut, int temp, int time) {
         super(PMRecipesSerializer.CRUSHER_TYPE, id, temp, time);

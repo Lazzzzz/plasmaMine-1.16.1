@@ -1,6 +1,7 @@
 package laz.plasmine.util.interfaces;
 
 import laz.plasmine.api.HeatHelper;
+import laz.plasmine.base.BlockRotationBase;
 import laz.plasmine.base.generator.BlockGeneratorBase;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.Direction;
@@ -20,7 +21,7 @@ public interface IHeatMachine {
 	default void onWorking() {}
 
 	default Direction heatInOut(BlockState state) {
-		return Direction.NORTH;
+		return state.get(BlockRotationBase.FACING).getOpposite();
 	}
 
 	default void putHeat(float amount) {

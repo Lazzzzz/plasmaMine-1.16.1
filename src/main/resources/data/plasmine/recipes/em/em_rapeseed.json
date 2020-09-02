@@ -1,0 +1,9 @@
+{
+	"type": "plasmine:em",
+	"fuel": 
+	{
+		"item": "plasmine:ionized_rapeseed"
+	},
+
+	"time": 80
+}

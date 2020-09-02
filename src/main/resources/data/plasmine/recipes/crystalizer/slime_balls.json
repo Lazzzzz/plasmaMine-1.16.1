@@ -1,0 +1,15 @@
+{
+	"type": "plasmine:sediment_crystalizer",
+	"input": 
+	{
+		"item": "minecraft:snowball"
+	},
+
+	"result": 
+	{
+		"item": "minecraft:slime_ball"
+	},
+
+	"temp": 100,
+	"time": 800
+}

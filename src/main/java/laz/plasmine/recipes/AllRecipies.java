@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import laz.plasmine.recipes.crusher.CrusherRecipe;
+import laz.plasmine.recipes.emgenerator.EmRecipe;
 import laz.plasmine.recipes.ionizer.IonizerRecipe;
 import laz.plasmine.recipes.sediementextractor.SedimentExtractorRecipe;
 import laz.plasmine.recipes.sedimentcollector.SedimentCollectorRecipe;
@@ -57,6 +58,16 @@ public class AllRecipies {
 		List<IRecipe> l = new ArrayList<>();
 		for (IRecipe recipe : recipeManager.getRecipes()) {
 			if (recipe instanceof IonizerRecipe) {
+				l.add(recipe);
+			}
+		}
+		return l;
+	}
+	
+	public static List<IRecipe> getRecipiesEM(RecipeManager recipeManager) {
+		List<IRecipe> l = new ArrayList<>();
+		for (IRecipe recipe : recipeManager.getRecipes()) {
+			if (recipe instanceof EmRecipe) {
 				l.add(recipe);
 			}
 		}

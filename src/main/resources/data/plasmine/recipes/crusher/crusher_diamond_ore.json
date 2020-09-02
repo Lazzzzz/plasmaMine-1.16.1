@@ -1,0 +1,16 @@
+{
+	"type": "plasmine:crusher",
+	"input": 
+	{
+		"item": "minecraft:diamond_ore"
+	},
+
+	"result": 
+	{
+		"item": "minecraft:diamond",
+		"count": 3
+	},
+
+	"temp": 300,
+	"time": 200
+}

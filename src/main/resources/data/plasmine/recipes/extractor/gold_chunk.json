@@ -1,0 +1,20 @@
+{
+	"type": "plasmine:sediment_extractor",
+	"input1": 
+	{
+		"item": "plasmine:gold_sediment"
+	},
+
+	"input2": 
+	{
+		"item": "plasmine:gold_sediment"
+	},
+
+	"result": 
+	{
+		"item": "plasmine:gold_chunk"
+	},
+
+	"temp": 180,
+	"time": 400
+}

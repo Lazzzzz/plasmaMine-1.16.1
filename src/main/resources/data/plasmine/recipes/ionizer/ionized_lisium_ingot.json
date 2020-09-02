@@ -1,0 +1,20 @@
+{
+	"type": "plasmine:ionizer",
+	"input1": 
+	{
+		"item": "plasmine:rapeseed_dust"
+	},
+
+	"input2": 
+	{
+		"item": "plasmine:lisium_ingot"
+	},
+
+	"result": 
+	{
+		"item": "plasmine:ionized_lisium"
+	},
+
+	"temp": 130,
+	"time": 60
+}

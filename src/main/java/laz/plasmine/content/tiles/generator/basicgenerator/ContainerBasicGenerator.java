@@ -18,7 +18,7 @@ public class ContainerBasicGenerator extends ContainerPlasma {
 
 	public ContainerBasicGenerator(int id, PlayerInventory inv, final TileGeneratorBase tile) {
 		super(PMContainersInit.BASIC_GENERATOR_CONTAINER.get(), id, tile, inv);
-		this.addSlot(new Slot(tile, 0, 80, 35));
+		this.addSlot(new Slot(tile, 0, 81, 36));
 		
 	}
 	

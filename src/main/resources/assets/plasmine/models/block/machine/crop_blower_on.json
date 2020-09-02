@@ -6,7 +6,7 @@
         "up": "plasmine:blocks/machine/machine_side",
         "north": "plasmine:blocks/machine/cropblower/crop_blower_face_on",
         "east": "plasmine:blocks/machine/machine_side",
-		"south": "plasmine:blocks/machine/machine_side_heat",
-		"west": "plasmine:blocks/machine/machine_side"
+        "south": "plasmine:blocks/machine/machine_side_heat",
+        "west": "plasmine:blocks/machine/machine_side"
     }
 }

@@ -45,7 +45,7 @@ public class HeatHelper {
 
 	public void coolDown(World world, BlockPos pos) {
 		float minTemp = PlasmaToHeatConvertion.getMinTemp(world, pos);
-		removeHeat(thermoConductivity / 5);
+		removeHeat(thermoConductivity*2);
 		if (celcius < minTemp)
 			celcius = minTemp;
 	}

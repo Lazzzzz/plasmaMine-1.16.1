@@ -1,0 +1,20 @@
+{
+	"type": "plasmine:ionizer",
+	"input1": 
+	{
+		"item": "minecraft:diamond"
+	},
+
+	"input2": 
+	{
+		"item": "minecraft:diamond"
+	},
+
+	"result": 
+	{
+		"item": "minecraft:netherite_scrap"
+	},
+
+	"temp": 300,
+	"time": 1200
+}

@@ -1,0 +1,16 @@
+{
+	"type": "plasmine:crusher",
+	"input": 
+	{
+		"item": "minecraft:nether_quartz_ore"
+	},
+
+	"result": 
+	{
+		"item": "minecraft:quartz",
+		"count": 8
+	},
+
+	"temp": 300,
+	"time": 100
+}

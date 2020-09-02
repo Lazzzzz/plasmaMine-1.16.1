@@ -42,7 +42,7 @@ public class CrystalizerCategorie implements IRecipeCategory<SedimentCrystalizer
 
 	@Override
 	public String getTitle() {
-		return "Sediment Crystalizer";
+		return "Crystalizer";
 	}
 
 	@Override

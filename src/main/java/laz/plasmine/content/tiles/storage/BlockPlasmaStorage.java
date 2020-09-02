@@ -3,6 +3,7 @@ package laz.plasmine.content.tiles.storage;
 import laz.plasmine.base.BlockRotationBase;
 import laz.plasmine.registry.init.PMItemsInit;
 import laz.plasmine.util.DirectionUtils;
+import laz.plasmine.util.interfaces.ICanWrench;
 import laz.plasmine.util.interfaces.IMaster;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -22,7 +23,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class BlockPlasmaStorage extends BlockRotationBase {
+public class BlockPlasmaStorage extends BlockRotationBase implements ICanWrench {
 
 	public static final IntegerProperty STORAGE = IntegerProperty.create("storage", 0, 10);
 

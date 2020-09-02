@@ -1,0 +1,16 @@
+{
+	"type": "plasmine:crusher",
+	"input": 
+	{
+		"item": "minecraft:redstone_ore"
+	},
+
+	"result": 
+	{
+		"item": "minecraft:redstone",
+		"count": 8
+	},
+
+	"temp": 200,
+	"time": 100
+}

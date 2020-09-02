@@ -19,9 +19,9 @@ public class ContainerIonizer extends ContainerHeat {
 
 	public ContainerIonizer(int id, PlayerInventory inv, final TileHeatMachineBase tile) {
 		super(PMContainersInit.IONIZER_CONTAINER.get(), id, tile, inv);
-		this.addSlot(new Slot(tile, 0, 44, 13));
-		this.addSlot(new Slot(tile, 1, 44, 49));
-		this.addSlot(new OutputSlot(tile, 2, 116, 31));
+		this.addSlot(new Slot(tile, 0, 45, 17));
+		this.addSlot(new Slot(tile, 1, 45, 47));
+		this.addSlot(new OutputSlot(tile, 2, 117, 32));
 		
 	}
 

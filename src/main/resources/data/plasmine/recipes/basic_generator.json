@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "plasmine",
+  "pattern": [
+    " X ",
+    "XYX",
+    "XZX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:iron_ingot"
+    },
+    "Y": {
+      "item": "minecraft:gold_block"
+    },
+    "Z": {
+      "item": "plasmine:plasma_producer_core"
+    }
+  },
+  "result": {
+    "item": "plasmine:basic_generator"
+  }
+}

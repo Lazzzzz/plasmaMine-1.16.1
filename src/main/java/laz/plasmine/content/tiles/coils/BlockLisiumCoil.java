@@ -9,7 +9,7 @@ import net.minecraft.world.IBlockReader;
 public class BlockLisiumCoil extends BlockCoilBase {
 
 	public BlockLisiumCoil() {
-		super(Properties.from(Blocks.GOLD_BLOCK), 25000, 500);
+		super(Properties.from(Blocks.GOLD_BLOCK), 75000, 500);
 
 	}
 

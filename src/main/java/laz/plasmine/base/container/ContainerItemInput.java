@@ -32,7 +32,7 @@ public class ContainerItemInput extends Container {
 		
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
-				this.addSlot(new Slot(tile, i * 4 + j, 53 + j * 18, 5 + i * 18));
+				this.addSlot(new Slot(tile, i * 4 + j, 54 + j * 18, 6 + i * 18));
 			}
 		}
 	}

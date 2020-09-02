@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "plasmine",
+  "pattern": [
+    "AX ",
+    "ZBX",
+    "AX "
+  ],
+  "key": {
+    "X": {
+      "item": "plasmine:lisium_ingot"
+    },
+    "Z": {
+      "item": "plasmine:plasma_consumer_core"
+    },
+    "A": {
+      "item": "minecraft:iron_bars"
+    },
+    "B": {
+      "item": "minecraft:iron_block"
+    }
+  },
+  "result": {
+    "item": "plasmine:advanced_convertor"
+  }
+}

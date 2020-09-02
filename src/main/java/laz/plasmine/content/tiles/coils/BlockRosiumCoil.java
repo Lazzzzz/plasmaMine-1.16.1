@@ -9,7 +9,7 @@ import net.minecraft.world.IBlockReader;
 public class BlockRosiumCoil extends BlockCoilBase {
 
 	public BlockRosiumCoil() {
-		super(Properties.from(Blocks.GOLD_BLOCK), 150000, 1000);
+		super(Properties.from(Blocks.GOLD_BLOCK), 500000, 1000);
 
 	}
 

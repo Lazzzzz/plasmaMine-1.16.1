@@ -1,0 +1,15 @@
+{
+	"type": "plasmine:sediment_crystalizer",
+	"input": 
+	{
+		"item": "plasmine:gold_chunk"
+	},
+
+	"result": 
+	{
+		"item": "minecraft:gold_ingot"
+	},
+
+	"temp": 180,
+	"time": 250
+}

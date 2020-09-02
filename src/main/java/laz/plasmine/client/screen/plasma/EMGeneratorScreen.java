@@ -1,8 +1,5 @@
 package laz.plasmine.client.screen.plasma;
 
-import static laz.plasmine.client.draw.PMDrawable.PLASMA_BAR;
-import static laz.plasmine.client.draw.PMDrawable.PLASMA_LOGO;
-
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import laz.plasmine.api.PlasmaHelper;
@@ -28,15 +25,15 @@ public class EMGeneratorScreen extends ContainerScreen<ContainerEMGenerator> {
 		
 		TileGeneratorBase tile = this.container.getTile();
 		PlasmaHelper helper = tile.getPlasmaHelper();
-		DrawBaseGui.drawGui(p_230450_1_, this.font, guiLeft, guiTop, " PU", (int) helper.getCapacity(),
-				3833343);
-		PLASMA_LOGO.draw(guiLeft + 5, guiTop + 60, 9, 17);
+		
+		DrawBaseGui.drawGui(p_230450_1_, this.font, guiLeft, guiTop, " PU", (int) helper.getCapacity(), 3833343);
+		
 		if (helper.getCapacity() == -1) {
 			this.font.func_243248_b(p_230450_1_, new StringTextComponent("\u00A7nIncomplete Multi-block"),
 					guiLeft + 40, guiTop + 39, 12976128);
 		} else {
-			PLASMA_BAR.drawPartial(guiLeft + 2, guiTop + 2, 16, 56, 0,
-					1 - ((float) helper.getCapacity() / helper.getMaxCapacity()), 1f, 1f);
+			DrawBaseGui.drawPlasmaBar(p_230450_1_, guiLeft, guiTop, helper, font);
+			
 			if (tile.getWorld().getBlockState(tile.getPos()).get(BlockBasicGenerator.WORKING))
 				this.font.func_243248_b(p_230450_1_, new StringTextComponent("\u00A7nworking"), guiLeft + 75,
 						guiTop + 39, 50432);

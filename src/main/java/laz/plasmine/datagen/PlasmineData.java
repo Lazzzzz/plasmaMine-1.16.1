@@ -19,6 +19,8 @@ public class PlasmineData {
 		final DataGenerator dataGenerator = event.getGenerator();
 		final ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
+        dataGenerator.addProvider(new PMLootsProvider(dataGenerator));
 		dataGenerator.addProvider(new PMRecipeProvider(dataGenerator));
+		dataGenerator.addProvider(new PMLang(dataGenerator));
 	}
 }

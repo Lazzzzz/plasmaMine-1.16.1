@@ -19,8 +19,8 @@ public class ContainerSedimentCrystalizer extends ContainerHeat {
 
 	public ContainerSedimentCrystalizer(int id, PlayerInventory inv, final TileHeatMachineBase tile) {
 		super(PMContainersInit.SEDIMENT_CRYSTALIZER_CONTAINER.get(), id, tile, inv);
-		this.addSlot(new Slot(tile, 0, 44, 35));
-		this.addSlot(new OutputSlot(tile, 1, 116, 35));
+		this.addSlot(new Slot(tile, 0, 45, 36));
+		this.addSlot(new OutputSlot(tile, 1, 117, 36));
 	}
 
 	@Override

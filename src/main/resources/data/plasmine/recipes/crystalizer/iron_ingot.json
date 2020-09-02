@@ -1,0 +1,15 @@
+{
+	"type": "plasmine:sediment_crystalizer",
+	"input": 
+	{
+		"item": "plasmine:iron_chunk"
+	},
+
+	"result": 
+	{
+		"item": "minecraft:iron_ingot"
+	},
+
+	"temp": 100,
+	"time": 250
+}

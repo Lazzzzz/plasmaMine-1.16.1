@@ -1,6 +1,8 @@
 package laz.plasmine.util.interfaces;
 
+import laz.plasmine.base.BlockRotationBase;
 import laz.plasmine.base.convertor.BlockConvertorBase;
+import laz.plasmine.util.DirectionUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,6 +26,11 @@ public interface ICanWrench {
 			if (tile instanceof ISlave && ((ISlave) tile).isBind()) {
 				IMaster master = (IMaster) world.getTileEntity(((ISlave) tile).getBlockPosMaster());
 				((ISlave) tile).sendMasterDestroy(pos, master);
+			}
+			if (tile instanceof IMaster) {
+				Direction d = state.get(BlockRotationBase.FACING).getOpposite();
+				BlockPos p = DirectionUtils.getPosDirection(pos, dir, 2).down();
+				((IMaster) tile).sendStructureUnBind(p, d);
 			}
 			if (tile != null)
 				tile.remove();

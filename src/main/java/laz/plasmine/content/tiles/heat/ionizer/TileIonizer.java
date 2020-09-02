@@ -99,11 +99,12 @@ public class TileIonizer extends TileHeatMachineBase implements ISidedInventory 
 		in2.shrink(1);
 		result = recipe.getItemOut();
 		timer = 0;
+		currentMaxTimer = recipe.getCookTime();
 	}
 
 	@Override
 	public float consumeHeat() {
-		return heatHelper.getThermoConductivity();
+		return heatHelper.getThermoConductivity() / 5;
 	}
 
 	@Override

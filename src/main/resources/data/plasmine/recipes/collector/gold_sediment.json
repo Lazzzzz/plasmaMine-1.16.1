@@ -1,0 +1,11 @@
+{
+	"type": "plasmine:sediment_collector",
+	"chance": 0.35,
+	"result": 
+	{
+		"item": "plasmine:gold_sediment"
+	},
+
+	"temp": 100,
+	"time": 0
+}
