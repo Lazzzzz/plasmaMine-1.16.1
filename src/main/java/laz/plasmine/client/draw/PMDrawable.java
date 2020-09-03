@@ -23,6 +23,12 @@ public class PMDrawable {
 	public static final IDrawable PLASMA_BAR = new UiTexture(
 			new ResourceLocation(Plasmine.MOD_ID, "textures/gui/plasma_bar.png"), 18, 77).getArea(0, 0, 18, 77);
 	
+	public static final IDrawable LOADING_BAR_EMPTY = new UiTexture(
+			new ResourceLocation(Plasmine.MOD_ID, "textures/gui/loading_bar_empty.png"), 34, 12).getArea(0, 0, 34, 12);
+	public static final IDrawable LOADING_BAR_FULL = new UiTexture(
+			new ResourceLocation(Plasmine.MOD_ID, "textures/gui/loading_bar_full.png"), 34, 12).getArea(0, 0, 34, 12);
+	
+	
 	public static final IDrawable BASE_GUI_STORAGE = new UiTexture(
 			new ResourceLocation(Plasmine.MOD_ID, "textures/gui/plasma_gui_storage.png"), 176, 166).getArea(0, 0, 176, 166);
 	public static final IDrawable PLASMA_STORAGE_EMPTY = new UiTexture(

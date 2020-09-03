@@ -8,7 +8,7 @@ import laz.plasmine.base.multiblock.BlockCoilBase;
 import laz.plasmine.base.multiblock.input.TilePlasmaInput;
 import laz.plasmine.base.multiblock.output.TilePlasmaOutput;
 import laz.plasmine.network.PacketHandler;
-import laz.plasmine.network.helpers.PlasmaStorageHelperPacket;
+import laz.plasmine.network.packets.PlasmaStorageHelperPacket;
 import laz.plasmine.registry.init.PMTilesInit;
 import laz.plasmine.util.BlockPosUtil;
 import laz.plasmine.util.DirectionUtils;

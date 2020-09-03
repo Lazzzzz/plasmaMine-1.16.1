@@ -1,9 +1,10 @@
 package laz.plasmine.network;
 
 import laz.plasmine.Plasmine;
-import laz.plasmine.network.helpers.HeatHelperPacket;
-import laz.plasmine.network.helpers.PlasmaHelperPacket;
-import laz.plasmine.network.helpers.PlasmaStorageHelperPacket;
+import laz.plasmine.network.packets.HeatHelperPacket;
+import laz.plasmine.network.packets.PlasmaHelperPacket;
+import laz.plasmine.network.packets.PlasmaStorageHelperPacket;
+import laz.plasmine.network.packets.ProgressPacket;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
@@ -23,6 +24,7 @@ public class PacketHandler {
 		INSTANCE.registerMessage(nextID(), PlasmaHelperPacket.class, PlasmaHelperPacket::encode, PlasmaHelperPacket::decode, PlasmaHelperPacket::handle);
 		INSTANCE.registerMessage(nextID(), HeatHelperPacket.class, HeatHelperPacket::encode, HeatHelperPacket::decode, HeatHelperPacket::handle);
 		INSTANCE.registerMessage(nextID(), PlasmaStorageHelperPacket.class, PlasmaStorageHelperPacket::encode, PlasmaStorageHelperPacket::decode, PlasmaStorageHelperPacket::handle);
+		INSTANCE.registerMessage(nextID(), ProgressPacket.class, ProgressPacket::encode, ProgressPacket::decode, ProgressPacket::handle);
 		
 	}
 

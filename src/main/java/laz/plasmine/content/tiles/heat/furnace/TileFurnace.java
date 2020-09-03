@@ -2,6 +2,7 @@ package laz.plasmine.content.tiles.heat.furnace;
 
 import laz.plasmine.base.heat.TileHeatMachineBase;
 import laz.plasmine.registry.init.PMTilesInit;
+import laz.plasmine.util.interfaces.IProgress;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,7 +16,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 
-public class TileFurnace extends TileHeatMachineBase implements ISidedInventory {
+public class TileFurnace extends TileHeatMachineBase implements ISidedInventory, IProgress {
 
 	private ItemStack result = ItemStack.EMPTY;
 	private double timer = 0;
@@ -59,7 +60,7 @@ public class TileFurnace extends TileHeatMachineBase implements ISidedInventory 
 	@Override
 	public void onWorking() {
 		setWorkingState(world, pos, world.getBlockState(pos), true);
-		
+			
 		if (result == ItemStack.EMPTY)
 			world.getRecipeManager().getRecipes().stream().filter(recipe -> recipe instanceof FurnaceRecipe)
 					.forEach(e -> start((FurnaceRecipe) e));
@@ -76,6 +77,7 @@ public class TileFurnace extends TileHeatMachineBase implements ISidedInventory 
 
 				reset();
 			}
+			sendProgress(world, pos, timer, currentMaxTimer);
 		}
 	}
 
@@ -123,5 +125,28 @@ public class TileFurnace extends TileHeatMachineBase implements ISidedInventory 
 		if (index == 1)
 			return true;
 		return false;
+	}
+	
+	@Override
+	public boolean doPower() {
+		if (!getStackInSlot(0).isEmpty()) return true;
+		if (!result.isEmpty()) return true;
+		return false;
+	}
+	
+	@Override
+	public void receiveProgress(double amount, double maxAmount) {
+		timer = amount;
+		currentMaxTimer = (int) maxAmount;
+	}
+	
+	@Override
+	public double getProgress() {
+		return timer;
+	}
+	
+	@Override
+	public double getMaxProgress() {
+		return currentMaxTimer;
 	}
 }

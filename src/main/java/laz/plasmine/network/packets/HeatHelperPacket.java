@@ -1,4 +1,4 @@
-package laz.plasmine.network.helpers;
+package laz.plasmine.network.packets;
 
 import java.util.function.Supplier;
 

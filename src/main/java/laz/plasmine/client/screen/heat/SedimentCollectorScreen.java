@@ -2,8 +2,6 @@ package laz.plasmine.client.screen.heat;
 
 import static laz.plasmine.client.draw.PMDrawable.BASE_GUI;
 import static laz.plasmine.client.draw.PMDrawable.BASE_SLOT;
-import static laz.plasmine.client.draw.PMDrawable.HEAT_BAR;
-import static laz.plasmine.client.draw.PMDrawable.HEAT_LOGO;
 
 import java.util.ArrayList;
 
@@ -34,7 +32,7 @@ public class SedimentCollectorScreen extends ContainerScreen<ContainerSedimentCo
 		TileHeatMachineBase tile = this.container.getTile();
 		HeatHelper helper = tile.getHeatHelper();
 		BASE_GUI.draw(guiLeft, guiTop, 176, 166);
-		font.func_243248_b(p_230450_1_, new StringTextComponent(helper.getCelcius() + " °C"), guiLeft + 60, guiTop + 73.5f, 12976128);
+		font.func_243248_b(p_230450_1_, new StringTextComponent((int) helper.getCelcius() + " °C"), guiLeft + 60, guiTop + 73.5f, 12976128);
 		
 		DrawBaseGui.drawHeatBar(p_230450_1_, guiLeft, guiTop, helper, font);
 		func_243308_b(p_230450_1_, new ArrayList<ITextComponent>(), p_230450_3_, p_230450_3_);

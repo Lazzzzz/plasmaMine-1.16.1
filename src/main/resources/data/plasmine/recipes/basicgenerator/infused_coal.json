@@ -1,0 +1,9 @@
+{
+	"type": "plasmine:basic_generator",
+	"fuel": 
+	{
+		"item": "plasmine:infused_coal"
+	},
+
+	"time": 120
+}

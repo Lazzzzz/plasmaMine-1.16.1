@@ -1,8 +1,6 @@
 package laz.plasmine.client.screen.heat;
 
 import static laz.plasmine.client.draw.PMDrawable.BASE_SLOT;
-import static laz.plasmine.client.draw.PMDrawable.HEAT_BAR;
-import static laz.plasmine.client.draw.PMDrawable.HEAT_LOGO;
 
 import java.util.ArrayList;
 
@@ -13,8 +11,6 @@ import laz.plasmine.base.heat.TileHeatMachineBase;
 import laz.plasmine.client.screen.DrawBaseGui;
 import laz.plasmine.content.tiles.heat.ionizer.ContainerIonizer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.client.gui.screen.inventory.CraftingScreen;
-import net.minecraft.client.gui.screen.inventory.FurnaceScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.text.ITextComponent;
 
@@ -34,6 +30,7 @@ public class IonizerScreen extends ContainerScreen<ContainerIonizer> {
 		DrawBaseGui.drawGuiSpeed(p_230450_1_, this.font, guiLeft, guiTop, " °C", (int) helper.getCelcius(),
 				tile.speedFactor(), 12976128);
 		DrawBaseGui.drawHeatBar(p_230450_1_, guiLeft, guiTop, helper, font);
+		DrawBaseGui.drawProgressBar(p_230450_1_, guiLeft + 72, guiTop + 34, tile.getProgress(), tile.getMaxProgress());
 		
 		func_243308_b(p_230450_1_, new ArrayList<ITextComponent>(), p_230450_3_, p_230450_3_);
 

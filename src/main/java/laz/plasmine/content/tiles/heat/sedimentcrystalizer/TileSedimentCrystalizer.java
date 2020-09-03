@@ -4,6 +4,7 @@ import laz.plasmine.base.heat.TileHeatMachineBase;
 import laz.plasmine.recipes.sedimentcrystalizer.SedimentCrystalizerRecipe;
 import laz.plasmine.registry.init.PMTilesInit;
 import laz.plasmine.util.RecipiesUtils;
+import laz.plasmine.util.interfaces.IProgress;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,7 +17,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 
-public class TileSedimentCrystalizer extends TileHeatMachineBase implements ISidedInventory {
+public class TileSedimentCrystalizer extends TileHeatMachineBase implements ISidedInventory, IProgress {
 
 	private ItemStack result = ItemStack.EMPTY;
 	private double timer = 0;
@@ -60,7 +61,7 @@ public class TileSedimentCrystalizer extends TileHeatMachineBase implements ISid
 	@Override
 	public void onWorking() {
 		setWorkingState(world, pos, world.getBlockState(pos), true);
-		
+				
 		if (result == ItemStack.EMPTY)
 			world.getRecipeManager().getRecipes().stream().filter(recipe -> recipe instanceof SedimentCrystalizerRecipe)
 					.forEach(e -> start((SedimentCrystalizerRecipe) e));
@@ -76,6 +77,7 @@ public class TileSedimentCrystalizer extends TileHeatMachineBase implements ISid
 				
 				reset();
 			}
+			sendProgress(world, pos, timer, currentMaxTimer);
 		}
 	}
 
@@ -120,5 +122,28 @@ public class TileSedimentCrystalizer extends TileHeatMachineBase implements ISid
 		if (index == 1)
 			return true;
 		return false;
+	}
+	
+	@Override
+	public boolean doPower() {
+		if (!getStackInSlot(0).isEmpty()) return true;
+		if (!result.isEmpty()) return true;
+		return false;
+	}
+	
+	@Override
+	public void receiveProgress(double amount, double maxAmount) {
+		timer = amount;
+		currentMaxTimer = (int) maxAmount;
+	}
+	
+	@Override
+	public double getProgress() {
+		return timer;
+	}
+	
+	@Override
+	public double getMaxProgress() {
+		return currentMaxTimer;
 	}
 }

@@ -3,6 +3,7 @@ package laz.plasmine.recipes;
 import java.util.ArrayList;
 import java.util.List;
 
+import laz.plasmine.recipes.basicgenerator.BasicGeneratorRecipe;
 import laz.plasmine.recipes.crusher.CrusherRecipe;
 import laz.plasmine.recipes.emgenerator.EmRecipe;
 import laz.plasmine.recipes.ionizer.IonizerRecipe;
@@ -58,6 +59,16 @@ public class AllRecipies {
 		List<IRecipe> l = new ArrayList<>();
 		for (IRecipe recipe : recipeManager.getRecipes()) {
 			if (recipe instanceof IonizerRecipe) {
+				l.add(recipe);
+			}
+		}
+		return l;
+	}
+	
+	public static List<IRecipe> getRecipiesBG(RecipeManager recipeManager) {
+		List<IRecipe> l = new ArrayList<>();
+		for (IRecipe recipe : recipeManager.getRecipes()) {
+			if (recipe instanceof BasicGeneratorRecipe) {
 				l.add(recipe);
 			}
 		}

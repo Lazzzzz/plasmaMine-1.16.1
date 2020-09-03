@@ -11,7 +11,6 @@ import laz.plasmine.registry.render.BlockRender;
 import laz.plasmine.registry.render.GuiRender;
 import laz.plasmine.registry.render.TileEntityRender;
 import net.minecraft.block.Block;
-import net.minecraft.command.impl.ReloadCommand;
 import net.minecraft.item.ItemGroup;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;

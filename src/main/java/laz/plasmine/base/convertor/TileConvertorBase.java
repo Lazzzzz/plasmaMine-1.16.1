@@ -38,8 +38,7 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 		livingtick++;
 		if (!world.isRemote) {
 			HeatHelper helper = heatAround();
-			boolean isWorking = world.isBlockPowered(pos) && plasmaHelper.getCapacity() >= amountToConvertPerTick
-					&& helper != null;
+			boolean isWorking = world.isBlockPowered(pos) && plasmaHelper.getCapacity() >= amountToConvertPerTick && helper != null;
 			setWorkingState(world, pos, world.getBlockState(pos), isWorking);
 			float heat = 0;
 			if (helper != null) {
@@ -51,6 +50,11 @@ public class TileConvertorBase extends TilePlasmaMachineBase implements IHeatMac
 					if (helper.getCelcius() < maxTemp) {
 						helper.addCelcius(heat);
 					}
+				}else {
+					float cool = transformPlasmaToHeat(amountToConvertPerTick, efficiency * 1.1f,
+							helper.getCelcius(), Math.min(helper.getMaxCelcius(), maxTemp), world, pos);
+					helper.coolDown(world, pos, cool);
+					
 				}
 				if (isWorking) {
 					if (world.rand.nextInt(100) == 0)

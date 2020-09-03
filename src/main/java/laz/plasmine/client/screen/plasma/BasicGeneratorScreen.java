@@ -1,8 +1,6 @@
 package laz.plasmine.client.screen.plasma;
 
 import static laz.plasmine.client.draw.PMDrawable.BASE_SLOT;
-import static laz.plasmine.client.draw.PMDrawable.PLASMA_BAR;
-import static laz.plasmine.client.draw.PMDrawable.PLASMA_LOGO;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 

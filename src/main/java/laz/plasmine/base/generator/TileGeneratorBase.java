@@ -4,7 +4,7 @@ import java.util.List;
 
 import laz.plasmine.api.PlasmaHelper;
 import laz.plasmine.network.PacketHandler;
-import laz.plasmine.network.helpers.PlasmaHelperPacket;
+import laz.plasmine.network.packets.PlasmaHelperPacket;
 import laz.plasmine.util.interfaces.IConnection;
 import laz.plasmine.util.interfaces.IPlasmaGenerator;
 import net.minecraft.block.BlockState;

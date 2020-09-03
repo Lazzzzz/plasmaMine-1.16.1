@@ -2,6 +2,7 @@ package laz.plasmine.datagen.recipes;
 
 import java.util.function.Consumer;
 
+import laz.plasmine.registry.init.PMBlocksInit;
 import laz.plasmine.registry.init.PMItemsInit;
 import laz.plasmine.registry.init.PMTilesInit;
 import net.minecraft.block.Blocks;
@@ -11,7 +12,6 @@ import net.minecraft.data.RecipeProvider;
 import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.data.ShapelessRecipeBuilder;
 import net.minecraft.item.Items;
-import net.minecraft.util.ResourceLocation;
 
 public class PMRecipeProvider extends RecipeProvider {
 
@@ -255,7 +255,7 @@ public class PMRecipeProvider extends RecipeProvider {
 		.addCriterion("has_material", RecipeProvider.hasItem(PMItemsInit.ROSIUM.getIngot()))
 		.build(consumer);
 		
-		ShapedRecipeBuilder.shapedRecipe(PMItemsInit.GOLD_WIRE.get(), 4)
+		ShapedRecipeBuilder.shapedRecipe(PMItemsInit.GOLD_WIRE.get(), 8)
 		.key('X', Items.GOLD_INGOT)
 		.key('A', Items.STICK)
 		.patternLine(" X ")
@@ -264,7 +264,7 @@ public class PMRecipeProvider extends RecipeProvider {
 		.addCriterion("has_material", RecipeProvider.hasItem(Items.GOLD_INGOT))
 		.build(consumer);
 		
-		ShapedRecipeBuilder.shapedRecipe(PMItemsInit.MAGNETIC_WIRE.get(), 2)
+		ShapedRecipeBuilder.shapedRecipe(PMItemsInit.MAGNETIC_WIRE.get(), 6)
 		.key('X', Items.IRON_INGOT)
 		.key('A', PMItemsInit.GOLD_WIRE.get())
 		.key('Y', Items.REDSTONE)
@@ -386,6 +386,68 @@ public class PMRecipeProvider extends RecipeProvider {
 		.addCriterion("has_material", RecipeProvider.hasItem(PMItemsInit.LISIUM.getIngot()))
 		.build(consumer);
 		
+		ShapedRecipeBuilder.shapedRecipe(PMBlocksInit.CONVEYOR.get(), 6)
+		.key('X', Items.IRON_INGOT)
+		.key('Y', Blocks.BLACK_WOOL)
+		.patternLine("YYY")
+		.patternLine("XXX").setGroup("plasmine")
+		.addCriterion("has_material", RecipeProvider.hasItem(Items.IRON_INGOT))
+		.build(consumer);
+		
+		ShapedRecipeBuilder.shapedRecipe(PMBlocksInit.CONVEYOR.get(), 6)
+		.key('X', Items.IRON_INGOT)
+		.key('Y', Blocks.BLACK_WOOL)
+		.patternLine("YYY")
+		.patternLine("XXX").setGroup("plasmine")
+		.addCriterion("has_material", RecipeProvider.hasItem(Items.IRON_INGOT))
+		.build(consumer, PMBlocksInit.CONVEYOR.get().getRegistryName() + "_1");
+		
+		ShapedRecipeBuilder.shapedRecipe(PMBlocksInit.CONVEYOR.get(), 12)
+		.key('X', PMItemsInit.LISIUM.getIngot())
+		.key('Y', Blocks.BLACK_WOOL)
+		.patternLine("YYY")
+		.patternLine("XXX").setGroup("plasmine")
+		.addCriterion("has_material", RecipeProvider.hasItem(PMItemsInit.LISIUM.getIngot()))
+		.build(consumer, PMBlocksInit.CONVEYOR.get().getRegistryName() + "_2");
+		
+		ShapedRecipeBuilder.shapedRecipe(PMBlocksInit.CONVEYOR.get(), 18)
+		.key('X', PMItemsInit.KETIUM.getIngot())
+		.key('Y', Blocks.BLACK_WOOL)
+		.patternLine("YYY")
+		.patternLine("XXX").setGroup("plasmine")
+		.addCriterion("has_material", RecipeProvider.hasItem(PMItemsInit.KETIUM.getIngot()))
+		.build(consumer, PMBlocksInit.CONVEYOR.get().getRegistryName() + "_3");
+		
+		ShapedRecipeBuilder.shapedRecipe(PMBlocksInit.CONVEYOR.get(), 32)
+		.key('X', PMItemsInit.ROSIUM.getIngot())
+		.key('Y', Blocks.BLACK_WOOL)
+		.patternLine("YYY")
+		.patternLine("XXX").setGroup("plasmine")
+		.addCriterion("has_material", RecipeProvider.hasItem(PMItemsInit.ROSIUM.getIngot()))
+		.build(consumer, PMBlocksInit.CONVEYOR.get().getRegistryName() + "_4");
+		
+		ShapedRecipeBuilder.shapedRecipe(PMItemsInit.INFUSED_COAL.get(), 5)
+		.key('X', PMItemsInit.RAPESEED_FRUIT.get())
+		.key('Y', Items.COAL)
+		.patternLine("YYY")
+		.patternLine("YXY")
+		.patternLine("YYY").setGroup("plasmine")
+		.addCriterion("has_material", RecipeProvider.hasItem(Items.COAL))
+		.build(consumer, PMItemsInit.INFUSED_COAL.get().getRegistryName() + "_1");
+		
+		ShapedRecipeBuilder.shapedRecipe(PMItemsInit.INFUSED_COAL.get(), 8)
+		.key('X', PMItemsInit.IONIZED_RAPESEED.get())
+		.key('Y', Items.COAL)
+		.patternLine("YYY")
+		.patternLine("YXY")
+		.patternLine("YYY").setGroup("plasmine")
+		.addCriterion("has_material", RecipeProvider.hasItem(Items.COAL))
+		.build(consumer, PMItemsInit.INFUSED_COAL.get().getRegistryName() + "_2");
+		
+		ShapelessRecipeBuilder.shapelessRecipe(PMBlocksInit.CONVEYOR_UP.get())
+		.addIngredient(PMBlocksInit.CONVEYOR.get())	
+		.addCriterion("has_material", RecipeProvider.hasItem(PMBlocksInit.CONVEYOR.get()))
+		.build(consumer);
 	}
 
 }

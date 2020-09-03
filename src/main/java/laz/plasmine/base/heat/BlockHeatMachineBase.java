@@ -62,6 +62,12 @@ public class BlockHeatMachineBase extends BlockRotationBase implements ICanWrenc
 	}
 
 	@Override
+	public int getWeakPower(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
+		if (side == blockState.get(FACING) && blockState.get(POWER)) return 15;
+		return 0;
+	}
+	
+	@Override
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
 			TileEntity te = worldIn.getTileEntity(pos);

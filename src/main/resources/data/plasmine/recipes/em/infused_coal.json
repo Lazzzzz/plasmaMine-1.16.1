@@ -1,0 +1,9 @@
+{
+	"type": "plasmine:em",
+	"fuel": 
+	{
+		"item": "plasmine:infused_coal"
+	},
+
+	"time": 120
+}

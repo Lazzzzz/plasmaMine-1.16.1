@@ -1,18 +1,10 @@
 package laz.plasmine.recipes.sedimentcollector;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import laz.plasmine.recipes.AbstractPlasmineRecipe;
-import laz.plasmine.recipes.sedimentcrystalizer.SedimentCrystalizerRecipe;
 import laz.plasmine.registry.init.PMRecipesSerializer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.RecipeManager;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 
 public class SedimentCollectorRecipe extends AbstractPlasmineRecipe {
 

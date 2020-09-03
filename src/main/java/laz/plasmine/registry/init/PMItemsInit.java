@@ -21,6 +21,7 @@ public class PMItemsInit {
 
 	public static RegistryObject<Item> RAPESEED_FRUIT;
 	public static RegistryObject<Item> RAPESEED_DUST;
+	public static RegistryObject<Item> INFUSED_COAL;
 
 	public static MaterialGroup IRON;
 	public static MaterialGroup GOLD;
@@ -43,7 +44,8 @@ public class PMItemsInit {
 		RAPESEED_FRUIT = addItemClass("rapeseed_fruit", () -> new ItemWithInformation(64,
 				Arrays.asList("For some unknown reason, this fruit", "produces plasma in very low quantities ")));
 		RAPESEED_DUST = addSimpleItem("rapeseed_dust", 64);
-
+		INFUSED_COAL = addSimpleItem("infused_coal", 64);
+		
 		PLASMA_PRODUCER_CORE = addSimpleItem("plasma_producer_core", 64);
 		PLASMA_CONSUMER_CORE = addSimpleItem("plasma_consumer_core", 64);
 		HEAT_CONSUMER_CORE = addSimpleItem("heat_consumer_core", 64);

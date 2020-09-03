@@ -2,7 +2,6 @@ package laz.plasmine.content.items;
 
 import static laz.plasmine.Plasmine.ITEM_GROUP;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

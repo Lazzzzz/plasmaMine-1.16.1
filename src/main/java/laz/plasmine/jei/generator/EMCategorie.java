@@ -1,15 +1,10 @@
 package laz.plasmine.jei.generator;
 
-import java.awt.Color;
-import java.util.Arrays;
-
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import laz.plasmine.Plasmine;
 import laz.plasmine.jei.JEIScreenDraw;
 import laz.plasmine.recipes.emgenerator.EmRecipe;
-import laz.plasmine.recipes.sedimentcollector.SedimentCollectorRecipe;
-import laz.plasmine.recipes.sedimentcrystalizer.SedimentCrystalizerRecipe;
 import laz.plasmine.registry.init.PMTilesInit;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -18,7 +13,6 @@ import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;

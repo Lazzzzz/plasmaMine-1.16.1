@@ -1,8 +1,6 @@
 package laz.plasmine.client.screen.heat;
 
 import static laz.plasmine.client.draw.PMDrawable.BASE_SLOT;
-import static laz.plasmine.client.draw.PMDrawable.HEAT_BAR;
-import static laz.plasmine.client.draw.PMDrawable.HEAT_LOGO;
 
 import java.util.ArrayList;
 
@@ -15,7 +13,6 @@ import laz.plasmine.content.tiles.heat.crusher.ContainerCrusher;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
 
 public class CrusherScreen extends ContainerScreen<ContainerCrusher> {
 
@@ -33,12 +30,13 @@ public class CrusherScreen extends ContainerScreen<ContainerCrusher> {
 		
 		DrawBaseGui.drawGuiSpeed(p_230450_1_, this.font, guiLeft, guiTop, " °C", (int) helper.getCelcius(),
 				tile.speedFactor(), 12976128);
-		
 		DrawBaseGui.drawHeatBar(p_230450_1_, guiLeft, guiTop, helper, font);
+		DrawBaseGui.drawProgressBar(p_230450_1_, guiLeft + 72, guiTop + 38, tile.getProgress(), tile.getMaxProgress());
+		
 		
 		func_243308_b(p_230450_1_, new ArrayList<ITextComponent>(), mx, my);
-		BASE_SLOT.draw(guiLeft + 44, guiTop + 35, 16, 16);
-		BASE_SLOT.draw(guiLeft + 116, guiTop + 35, 16, 16);
+		BASE_SLOT.draw(guiLeft + 44, guiTop + 35, 18, 18);
+		BASE_SLOT.draw(guiLeft + 116, guiTop + 35, 18, 18);
 		
 		func_230459_a_(p_230450_1_, mx, my);
 	}

@@ -23,7 +23,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 public class BlockBasicGenerator extends BlockGeneratorBase {
 	
 	public BlockBasicGenerator() {
-		super(2000, 20, 1);
+		super(2000, 20, 3);
 	}
 
 	@Override

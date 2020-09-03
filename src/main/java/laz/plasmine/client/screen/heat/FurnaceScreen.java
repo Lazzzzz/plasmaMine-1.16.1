@@ -1,8 +1,6 @@
 package laz.plasmine.client.screen.heat;
 
 import static laz.plasmine.client.draw.PMDrawable.BASE_SLOT;
-import static laz.plasmine.client.draw.PMDrawable.HEAT_BAR;
-import static laz.plasmine.client.draw.PMDrawable.HEAT_LOGO;
 
 import java.util.ArrayList;
 
@@ -32,6 +30,8 @@ public class FurnaceScreen extends ContainerScreen<ContainerFurnace> {
 		HeatHelper helper = tile.getHeatHelper();
 		DrawBaseGui.drawGuiSpeed(p_230450_1_, this.font, guiLeft, guiTop, " °C", (int) helper.getCelcius(),tile.speedFactor(), 12976128);
 		DrawBaseGui.drawHeatBar(p_230450_1_, guiLeft, guiTop, helper, font);
+		DrawBaseGui.drawProgressBar(p_230450_1_, guiLeft + 72, guiTop + 38, tile.getProgress(), tile.getMaxProgress());
+		
 		func_243308_b(p_230450_1_, new ArrayList<ITextComponent>(), p_230450_3_, p_230450_3_);
 		
 		BASE_SLOT.draw(guiLeft + 44, guiTop + 35, 18, 18);

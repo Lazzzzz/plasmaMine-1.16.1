@@ -4,6 +4,7 @@ import laz.plasmine.base.heat.TileHeatMachineBase;
 import laz.plasmine.recipes.ionizer.IonizerRecipe;
 import laz.plasmine.registry.init.PMTilesInit;
 import laz.plasmine.util.RecipiesUtils;
+import laz.plasmine.util.interfaces.IProgress;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,7 +17,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 
-public class TileIonizer extends TileHeatMachineBase implements ISidedInventory {
+public class TileIonizer extends TileHeatMachineBase implements ISidedInventory, IProgress {
 
 	private ItemStack result = ItemStack.EMPTY;
 	private double timer = 0;
@@ -56,6 +57,8 @@ public class TileIonizer extends TileHeatMachineBase implements ISidedInventory 
 	public void onWorking() {
 		setWorkingState(world, pos, world.getBlockState(pos), true);
 
+		sendProgress(world, pos, timer, currentMaxTimer);
+		
 		if (result == ItemStack.EMPTY)
 			world.getRecipeManager().getRecipes().stream().filter(recipe -> recipe instanceof IonizerRecipe)
 					.forEach(e -> start((IonizerRecipe) e));
@@ -72,6 +75,7 @@ public class TileIonizer extends TileHeatMachineBase implements ISidedInventory 
 					stack.grow(1);
 				reset();
 			}
+			sendProgress(world, pos, timer, currentMaxTimer);
 		}
 	}
 
@@ -124,5 +128,28 @@ public class TileIonizer extends TileHeatMachineBase implements ISidedInventory 
 	@Override
 	public int[] getSlotsForFace(Direction arg0) {
 		return new int[] { 0, 1, 2 };
+	}
+	
+	@Override
+	public boolean doPower() {
+		if (!getStackInSlot(0).isEmpty() && !getStackInSlot(1).isEmpty()) return true;
+		if (!result.isEmpty()) return true;
+		return false;
+	}
+	
+	@Override
+	public void receiveProgress(double amount, double maxAmount) {
+		timer = amount;
+		currentMaxTimer = (int) maxAmount;
+	}
+	
+	@Override
+	public double getProgress() {
+		return timer;
+	}
+	
+	@Override
+	public double getMaxProgress() {
+		return currentMaxTimer;
 	}
 }

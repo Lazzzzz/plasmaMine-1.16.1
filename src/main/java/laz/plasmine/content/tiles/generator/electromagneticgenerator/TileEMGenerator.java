@@ -9,10 +9,8 @@ import laz.plasmine.base.multiblock.input.TileItemInput;
 import laz.plasmine.base.multiblock.output.TilePlasmaOutput;
 import laz.plasmine.content.tiles.storage.BlockPlasmaStorage;
 import laz.plasmine.network.PacketHandler;
-import laz.plasmine.network.helpers.PlasmaHelperPacket;
+import laz.plasmine.network.packets.PlasmaHelperPacket;
 import laz.plasmine.recipes.emgenerator.EmRecipe;
-import laz.plasmine.recipes.ionizer.IonizerRecipe;
-import laz.plasmine.registry.init.PMItemsInit;
 import laz.plasmine.registry.init.PMTilesInit;
 import laz.plasmine.util.BlockPosUtil;
 import laz.plasmine.util.DirectionUtils;
@@ -100,7 +98,7 @@ public class TileEMGenerator extends TileGeneratorBase implements IMaster {
 			for (int i = 0; i < tile.getSizeInventory(); i++) {
 				int position = i;
 				maxCooking   = 0;
-				world.getRecipeManager().getRecipes().stream().filter(recipe -> recipe instanceof EmRecipe)
+				if (!tile.getStackInSlot(i).isEmpty()) world.getRecipeManager().getRecipes().stream().filter(recipe -> recipe instanceof EmRecipe)
 				.forEach(e -> start((EmRecipe)e, position, tile));
 				if (maxCooking != 0) return true;
 			}
@@ -110,7 +108,7 @@ public class TileEMGenerator extends TileGeneratorBase implements IMaster {
 	
 	private void start(EmRecipe recipe, int i, TileItemInput tile) {
 		ItemStack stack = tile.getStackInSlot(i);
-		if (!stack.isEmpty() && stack.getItem() == recipe.getfuel().getItem()) {
+		if (stack.getItem() == recipe.getfuel().getItem()) {
 			tile.decrStackSize(i, 1);
 			maxCooking = recipe.getCookTime();
 			cooking = maxCooking;

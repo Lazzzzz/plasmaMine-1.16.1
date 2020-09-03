@@ -1,0 +1,9 @@
+{
+	"type": "plasmine:basic_generator",
+	"fuel": 
+	{
+		"item": "plasmine:rapeseed_fruit"
+	},
+
+	"time": 80
+}

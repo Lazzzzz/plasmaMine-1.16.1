@@ -1,17 +1,21 @@
 package laz.plasmine.jei;
 
-import static laz.plasmine.recipes.AllRecipies.*;
+import static laz.plasmine.recipes.AllRecipies.getRecipiesBG;
+import static laz.plasmine.recipes.AllRecipies.getRecipiesCollector;
+import static laz.plasmine.recipes.AllRecipies.getRecipiesCrusher;
+import static laz.plasmine.recipes.AllRecipies.getRecipiesCrystalizer;
+import static laz.plasmine.recipes.AllRecipies.getRecipiesEM;
+import static laz.plasmine.recipes.AllRecipies.getRecipiesExtractor;
+import static laz.plasmine.recipes.AllRecipies.getRecipiesIonizer;
 
 import laz.plasmine.Plasmine;
+import laz.plasmine.jei.generator.BGCategorie;
 import laz.plasmine.jei.generator.EMCategorie;
 import laz.plasmine.jei.machine.CollectorCategorie;
 import laz.plasmine.jei.machine.CrusherCategorie;
 import laz.plasmine.jei.machine.CrystalizerCategorie;
 import laz.plasmine.jei.machine.ExtractorCategorie;
 import laz.plasmine.jei.machine.IonizerCategorie;
-import laz.plasmine.recipes.sediementextractor.SedimentExtractorRecipe;
-import laz.plasmine.recipes.sedimentcollector.SedimentCollectorRecipe;
-import laz.plasmine.recipes.sedimentcrystalizer.SedimentCrystalizerRecipe;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -42,6 +46,7 @@ public class JEIRegistry implements IModPlugin {
 		registry.addRecipeCategories(new CrystalizerCategorie(guiHelper));
 		registry.addRecipeCategories(new IonizerCategorie(guiHelper));
 		registry.addRecipeCategories(new CrusherCategorie(guiHelper));
+		registry.addRecipeCategories(new BGCategorie(guiHelper));
 		registry.addRecipeCategories(new EMCategorie(guiHelper));
 	}
 
@@ -55,10 +60,10 @@ public class JEIRegistry implements IModPlugin {
 		registration.addRecipes(getRecipiesCrystalizer(recipeManager), CrystalizerCategorie.ID);
 		registration.addRecipes(getRecipiesIonizer(recipeManager), IonizerCategorie.ID);
 		registration.addRecipes(getRecipiesCrusher(recipeManager), CrusherCategorie.ID);	
+		registration.addRecipes(getRecipiesBG(recipeManager), BGCategorie.ID);
 		registration.addRecipes(getRecipiesEM(recipeManager), EMCategorie.ID);	
 	
 		System.out.println("Plasmine JEI compat add");
 	}
-	
 
 }

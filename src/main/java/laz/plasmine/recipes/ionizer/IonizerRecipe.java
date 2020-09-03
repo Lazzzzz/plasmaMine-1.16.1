@@ -2,12 +2,10 @@ package laz.plasmine.recipes.ionizer;
 
 import laz.plasmine.recipes.AbstractPlasmineRecipe;
 import laz.plasmine.registry.init.PMRecipesSerializer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 
 public class IonizerRecipe extends AbstractPlasmineRecipe {
 

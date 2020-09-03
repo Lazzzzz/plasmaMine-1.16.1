@@ -5,7 +5,7 @@ import java.util.List;
 import laz.plasmine.api.HeatHelper;
 import laz.plasmine.base.convertor.TileConvertorBase;
 import laz.plasmine.network.PacketHandler;
-import laz.plasmine.network.helpers.HeatHelperPacket;
+import laz.plasmine.network.packets.HeatHelperPacket;
 import laz.plasmine.util.DirectionUtils;
 import laz.plasmine.util.interfaces.IHeatMachine;
 import net.minecraft.block.BlockState;
@@ -48,6 +48,7 @@ public class TileHeatMachineBase extends TileEntity
 			sendData();
 			
 			setWorkingState(world, pos, world.getBlockState(pos), false);
+			updatePoweredState(doPower());
 			
 			if (heatHelper.isWorkingCelcius(world, pos)) onWorking();
 			
@@ -175,16 +176,27 @@ public class TileHeatMachineBase extends TileEntity
 		BlockState state = world.getBlockState(pos);
 		if (powered) {
 			if (state.get(BlockHeatMachineBase.POWER) == false)
-				world.setBlockState(pos, state.with(BlockHeatMachineBase.POWER, true), 1);
+				world.setBlockState(pos, state.with(BlockHeatMachineBase.POWER, true));
 		} else {
 			if (state.get(BlockHeatMachineBase.POWER) == true)
-				world.setBlockState(pos, state.with(BlockHeatMachineBase.POWER, false), 1);
+				world.setBlockState(pos, state.with(BlockHeatMachineBase.POWER, false));
 		}
 	}
 
 	@Override
 	public double speedFactor() {
-		if (!heatHelper.isWorkingCelcius(world, pos)) return 0;
-		return 1f + ((heatHelper.getCelcius() / heatHelper.getMaxCelcius()) * 2);
+		return ((heatHelper.getCelcius() / heatHelper.getMaxCelcius()) * 5);
+	}
+	
+	public boolean doPower() {
+		return false;
+	}
+	
+	public double getProgress() {
+		return 0;
+	}
+	
+	public double getMaxProgress() {
+		return 0;
 	}
 }

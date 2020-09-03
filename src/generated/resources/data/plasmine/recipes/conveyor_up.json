@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "plasmine:conveyor"
+    }
+  ],
+  "result": {
+    "item": "plasmine:conveyor_up"
+  }
+}

@@ -63,7 +63,6 @@ import laz.plasmine.content.tiles.other.TileHupper;
 import laz.plasmine.content.tiles.storage.BlockPlasmaStorage;
 import laz.plasmine.content.tiles.storage.TilePlasmaStorage;
 import laz.plasmine.registry.BlockRegistryObjectGroup;
-import laz.plasmine.registry.PMRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -117,7 +116,7 @@ public class PMTilesInit {
 
 		BASIC_GENERATOR = new BlockRegistryObjectGroup<>("basic_generator", BlockBasicGenerator::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
-				() -> new TileBasicGenerator(2000, 20, 1)).register(BLOCKS, ITEMS, TILE_ENTITIES);
+				() -> new TileBasicGenerator(2000, 20, 3)).register(BLOCKS, ITEMS, TILE_ENTITIES);
 		
 		EM_GENERATOR = new BlockRegistryObjectGroup<>("em_generator", BlockEMGenerator::new,
 				(block) -> new BlockItem(block, new Item.Properties().group(ITEM_GROUP)),
